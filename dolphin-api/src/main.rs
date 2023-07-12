@@ -71,12 +71,10 @@ async fn users(rb: web::Data<Arc<RBatis>>) -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let rb = DbConnectionFactory::builder(
-        "postgres://superset:superset@localhost:15432/dolphinscheduler",
-    )
-    .await
-    .build()
-    .await;
+    let rb = DbConnectionFactory::builder("postgres://superset:superset@tx:15432/dolphinscheduler")
+        .await
+        .build()
+        .await;
 
 
     let rb = Arc::new(rb);
