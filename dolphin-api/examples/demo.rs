@@ -158,8 +158,12 @@
 //     Ok(())
 // }
 
-use anyhow::Result;
-#[tokio::main]
-async fn main() -> Result<()> {
-    Ok(())
+// use anyhow::Result;
+// #[tokio::main]
+// async fn main() -> Result<()> {
+//     Ok(())
+// }
+
+fn main() {
+    println!("Hello, world!");
 }

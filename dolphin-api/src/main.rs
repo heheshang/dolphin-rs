@@ -1,48 +1,169 @@
-// #![feature(decl_macro)]
-#[macro_use]
-extern crate rocket;
-#[macro_use]
-extern crate rocket_sync_db_pools;
-use std::{borrow::Cow, net::Ipv4Addr};
+use actix_web::{web, App, Error, HttpResponse, HttpServer};
+use std::future::{ready, Ready};
 
-use rocket::{
-    launch,
+use actix_web::{
+    dev::{forward_ready, Service, ServiceRequest, ServiceResponse, Transform},
+    get,
     post,
-    routes,
-    serde::{json::Json, Deserialize, Serialize},
-    Config,
+    web::Json,
+    Responder,
+    Result,
 };
+use dolphin_db::User;
+use futures_util::future::LocalBoxFuture;
+use log::info;
+// use diesel::{r2d2, PgConnection, QueryDsl, Queryable, RunQueryDsl};
+use rbatis::RBatis;
+use serde::{Deserialize, Serialize};
+use std::sync::Arc;
+// use tokio_pg_mapper_derive::PostgresMapper;
+mod dto;
+// use crate::dto::NewUser;
+use dolphin_db::datasources::DbConnectionFactory;
 
-mod diesel_postgres;
 
-// use rocket_contrib::json::Json;
-#[derive(Serialize, Deserialize)]
-#[serde(crate = "rocket::serde")]
-struct Message<'r> {
-    id: i32,
-    contents: Cow<'r, String>,
+#[get("/")]
+async fn hello() -> impl Responder {
+    HttpResponse::Ok().body("Hello world!")
 }
 
-#[post("/message", format = "json", data = "<message>")]
-fn message(message: Json<Message>) -> Json<Message> {
-    format!("id: {}, contents: {}", message.id, message.contents);
-    let pass = md5::compute(message.contents.as_bytes());
-    Json(Message {
-        id: message.id,
-        contents: Cow::Owned(format!("{:x}", pass)),
-    })
+#[post("/echo")]
+async fn echo(req_body: String) -> impl Responder {
+    HttpResponse::Ok().body(req_body)
 }
 
-#[launch]
-async fn rocket() -> _ {
-    let config = Config {
-        port: 12345,
-        address: Ipv4Addr::new(0, 0, 0, 0).into(),
-        temp_dir: "/tmp/config-example".into(),
-        ..Config::debug_default()
+async fn manual_hello() -> impl Responder {
+    HttpResponse::Ok().body("Hey there!")
+}
+
+
+#[derive(Deserialize, Serialize)]
+struct Message {
+    id: u32,
+    contents: String,
+}
+
+/// extract `Info` using serde
+// async fn message(info: web::Json<Message>) -> Result<String> {
+//     Ok(format!("Welcome {}!", info.contents))
+// }
+async fn message(info: Json<Message>) -> Result<impl Responder> {
+    let obj = Message {
+        id: info.id,
+        contents: info.contents.clone(),
     };
 
-    rocket::custom(config)
-        .mount("/", routes![message])
-        .attach(diesel_postgres::stage())
+    Ok(web::Json(obj))
+}
+
+// #[crud_table(table_name:"t_ds_user")]
+// #[derive(Clone, Debug, Serialize, Deserialize)]
+// #[pg_mapper(table = "t_ds_user")] // singular 'user' is a keyword..
+
+async fn users(rb: web::Data<Arc<RBatis>>) -> impl Responder {
+    let mut executor: rbatis::executor::RBatisConnExecutor = rb.acquire().await.unwrap();
+    let user = User::select_all(&mut executor).await.unwrap();
+    // let users = User::query_all_general_user1(&mut executor).await;
+    info!("users: {:?}", user);
+    HttpResponse::Ok().json(user)
+}
+
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    let rb = DbConnectionFactory::builder(
+        "postgres://superset:superset@localhost:15432/dolphinscheduler",
+    )
+    .await
+    .build()
+    .await;
+
+
+    let rb = Arc::new(rb);
+    // env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
+
+    log4rs::init_file("./log4rs.yaml", Default::default()).expect("init log4rs.yaml failed");
+    HttpServer::new(move || {
+        App::new()
+            .app_data(web::Data::new(rb.to_owned()))
+            .service(hello)
+            .service(echo)
+            .route("/hey", web::get().to(manual_hello))
+            .route("/users", web::get().to(users))
+            .service(web::resource("/message").route(web::post().to(message)))
+            // .wrap(Logger::default())
+        // .wrap(Logging)
+        .wrap_fn(|req, srv| {
+            info!("Hi from start. You requested: {}", req.path());
+            info!("Hi from start. You requested: {:?}", req);
+            let fut = srv.call(req);
+            async {
+                let res = fut.await?;
+                info!("Hi from response: {:?}", res);
+                Ok(res)
+            }
+        })
+    })
+    .bind(("127.0.0.1", 12345))?
+    .run()
+    .await
+}
+
+#[derive(Clone, Debug)]
+pub struct Logging;
+
+// Middleware factory is `Transform` trait
+// `S` - type of the next service
+// `B` - type of response's body
+impl<S, B> Transform<S, ServiceRequest> for Logging
+where
+    S: Service<ServiceRequest, Response = ServiceResponse<B>, Error = Error>,
+    S::Future: 'static,
+    B: 'static,
+{
+    type Error = Error;
+    type Future = Ready<Result<Self::Transform, Self::InitError>>;
+    type InitError = ();
+    type Response = ServiceResponse<B>;
+    type Transform = LoggingMiddleware<S>;
+
+    fn new_transform(&self, service: S) -> Self::Future {
+        ready(Ok(LoggingMiddleware { service }))
+    }
+}
+
+pub struct LoggingMiddleware<S> {
+    service: S,
+}
+
+impl<S, B> Service<ServiceRequest> for LoggingMiddleware<S>
+where
+    S: Service<ServiceRequest, Response = ServiceResponse<B>, Error = Error>,
+    S::Future: 'static,
+    B: 'static,
+{
+    type Error = Error;
+    type Future = LocalBoxFuture<'static, Result<Self::Response, Self::Error>>;
+    type Response = ServiceResponse<B>;
+
+    forward_ready!(service);
+
+    fn call(&self, req: ServiceRequest) -> Self::Future {
+        info!("Hi from start. You requested: {}", req.path());
+        info!("Hi from start. You requested: {:?}", req);
+
+        let fut = self.service.call(req);
+
+
+        Box::pin(async move {
+            let res: ServiceResponse<B> = fut.await?;
+            info!("Hi from response status: {:?}", res.status());
+
+            for (header_name, header_value) in res.headers() {
+                info!("Header: {}: {:?}", header_name, header_value); // 打印头部信息
+            }
+
+            Ok(res)
+        })
+    }
 }

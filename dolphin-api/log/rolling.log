@@ -1,0 +1,527 @@
+2023-07-12 10:29:29 [actix_server::builder] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/builder.rs:200] PID:3604940-T:139931544187840 INFO starting 4 workers
+2023-07-12 10:29:29 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:196] PID:3604940-T:139931544187840 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 10:29:40 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931539977792 INFO [rbatis] [521513806514360320] query => `select * from t_ds_user ` []
+2023-07-12 10:29:40 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931539977792 INFO [rbatis] [521513806514360320] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:29:40 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931539977792 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:29:40 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931539977792 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:29:40 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931539977792 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.068597
+2023-07-12 10:29:59 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931537864256 INFO [rbatis] [521513885291778049] query => `select * from t_ds_user ` []
+2023-07-12 10:29:59 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931537864256 INFO [rbatis] [521513885291778049] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:29:59 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931537864256 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:29:59 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931537864256 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:29:59 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931537864256 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002936
+2023-07-12 10:30:00 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931535750720 INFO [rbatis] [521513888093573122] query => `select * from t_ds_user ` []
+2023-07-12 10:30:00 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931535750720 INFO [rbatis] [521513888093573122] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:00 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931535750720 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:00 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931535750720 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:00 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931535750720 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002437
+2023-07-12 10:30:00 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931533637184 INFO [rbatis] [521513888915656707] query => `select * from t_ds_user ` []
+2023-07-12 10:30:00 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931533637184 INFO [rbatis] [521513888915656707] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:00 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931533637184 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:00 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931533637184 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:00 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931533637184 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002081
+2023-07-12 10:30:00 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931539977792 INFO [rbatis] [521513889649659908] query => `select * from t_ds_user ` []
+2023-07-12 10:30:00 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931539977792 INFO [rbatis] [521513889649659908] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:00 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931539977792 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:00 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931539977792 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:00 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931539977792 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002851
+2023-07-12 10:30:00 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931537864256 INFO [rbatis] [521513890522075141] query => `select * from t_ds_user ` []
+2023-07-12 10:30:00 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931537864256 INFO [rbatis] [521513890522075141] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:00 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931537864256 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:00 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931537864256 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:00 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931537864256 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002258
+2023-07-12 10:30:00 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931535750720 INFO [rbatis] [521513890903756806] query => `select * from t_ds_user ` []
+2023-07-12 10:30:00 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931535750720 INFO [rbatis] [521513890903756806] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:00 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931535750720 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:00 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931535750720 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:00 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931535750720 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.003143
+2023-07-12 10:30:01 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931533637184 INFO [rbatis] [521513892136882183] query => `select * from t_ds_user ` []
+2023-07-12 10:30:01 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931533637184 INFO [rbatis] [521513892136882183] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:01 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931533637184 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:01 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931533637184 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:01 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931533637184 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.003903
+2023-07-12 10:30:01 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931539977792 INFO [rbatis] [521513892610838536] query => `select * from t_ds_user ` []
+2023-07-12 10:30:01 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931539977792 INFO [rbatis] [521513892610838536] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:01 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931539977792 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:01 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931539977792 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:01 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931539977792 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002247
+2023-07-12 10:30:01 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931537864256 INFO [rbatis] [521513893558751241] query => `select * from t_ds_user ` []
+2023-07-12 10:30:01 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931537864256 INFO [rbatis] [521513893558751241] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:01 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931537864256 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:01 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931537864256 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:01 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931537864256 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002276
+2023-07-12 10:30:01 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931535750720 INFO [rbatis] [521513893751689226] query => `select * from t_ds_user ` []
+2023-07-12 10:30:01 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931535750720 INFO [rbatis] [521513893751689226] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:01 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931535750720 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:01 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931535750720 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:01 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931535750720 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002772
+2023-07-12 10:30:01 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931533637184 INFO [rbatis] [521513894666047499] query => `select * from t_ds_user ` []
+2023-07-12 10:30:01 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931533637184 INFO [rbatis] [521513894666047499] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:01 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931533637184 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:01 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931533637184 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:01 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931533637184 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002109
+2023-07-12 10:30:01 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931539977792 INFO [rbatis] [521513895467159564] query => `select * from t_ds_user ` []
+2023-07-12 10:30:01 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931539977792 INFO [rbatis] [521513895467159564] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:01 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931539977792 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:01 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931539977792 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:01 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931539977792 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002298
+2023-07-12 10:30:02 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931537864256 INFO [rbatis] [521513895987253261] query => `select * from t_ds_user ` []
+2023-07-12 10:30:02 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931537864256 INFO [rbatis] [521513895987253261] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:02 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931537864256 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:02 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931537864256 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:02 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931537864256 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002057
+2023-07-12 10:30:02 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931535750720 INFO [rbatis] [521513897140686862] query => `select * from t_ds_user ` []
+2023-07-12 10:30:02 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931535750720 INFO [rbatis] [521513897140686862] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:02 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931535750720 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:02 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931535750720 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:02 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931535750720 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002727
+2023-07-12 10:30:02 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931533637184 INFO [rbatis] [521513897702723599] query => `select * from t_ds_user ` []
+2023-07-12 10:30:02 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931533637184 INFO [rbatis] [521513897702723599] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:02 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931533637184 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:02 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931533637184 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:02 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931533637184 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.003272
+2023-07-12 10:30:02 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931539977792 INFO [rbatis] [521513898453504016] query => `select * from t_ds_user ` []
+2023-07-12 10:30:02 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931539977792 INFO [rbatis] [521513898453504016] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:02 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931539977792 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:02 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931539977792 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:02 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931539977792 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002204
+2023-07-12 10:30:02 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931537864256 INFO [rbatis] [521513899321724945] query => `select * from t_ds_user ` []
+2023-07-12 10:30:02 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931537864256 INFO [rbatis] [521513899321724945] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:02 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931537864256 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:02 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931537864256 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:02 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931537864256 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.005253
+2023-07-12 10:30:03 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931535750720 INFO [rbatis] [521513900202528786] query => `select * from t_ds_user ` []
+2023-07-12 10:30:03 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931535750720 INFO [rbatis] [521513900202528786] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:03 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931535750720 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:03 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931535750720 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:03 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931535750720 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.003397
+2023-07-12 10:30:03 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931533637184 INFO [rbatis] [521513900567433235] query => `select * from t_ds_user ` []
+2023-07-12 10:30:03 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931533637184 INFO [rbatis] [521513900567433235] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:03 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931533637184 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:03 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931533637184 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:03 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931533637184 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.001901
+2023-07-12 10:30:03 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3604940-T:139931539977792 INFO [rbatis] [521513901913804820] query => `select * from t_ds_user ` []
+2023-07-12 10:30:03 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3604940-T:139931539977792 INFO [rbatis] [521513901913804820] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:30:03 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3604940-T:139931539977792 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:30:03 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931539977792 INFO 127.0.0.1 vscode-restclient
+2023-07-12 10:30:03 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3604940-T:139931539977792 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.009188
+2023-07-12 10:32:38 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:319] PID:3604940-T:139931544187840 INFO SIGINT received; starting forced shutdown
+2023-07-12 10:32:38 [actix_server::accept] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/accept.rs:143] PID:3604940-T:139931531523648 INFO accept thread stopped
+2023-07-12 10:32:38 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3604940-T:139931535750720 INFO shutting down idle worker
+2023-07-12 10:32:38 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3604940-T:139931539977792 INFO shutting down idle worker
+2023-07-12 10:32:38 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3604940-T:139931537864256 INFO shutting down idle worker
+2023-07-12 10:32:38 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3604940-T:139931533637184 INFO shutting down idle worker
+2023-07-12 10:32:53 [actix_server::builder] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/builder.rs:200] PID:3606925-T:140639504909248 INFO starting 4 workers
+2023-07-12 10:32:53 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:196] PID:3606925-T:140639504909248 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 10:33:39 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3606925-T:140639500699200 INFO [rbatis] [521514808353230848] query => `select * from t_ds_user ` []
+2023-07-12 10:33:39 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3606925-T:140639500699200 INFO [rbatis] [521514808353230848] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:33:39 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3606925-T:140639500699200 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:33:39 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3606925-T:140639500699200 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.011127
+2023-07-12 10:33:42 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3606925-T:140639498585664 INFO [rbatis] [521514821565288449] query => `select * from t_ds_user ` []
+2023-07-12 10:33:42 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3606925-T:140639498585664 INFO [rbatis] [521514821565288449] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:33:42 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3606925-T:140639498585664 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:33:42 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3606925-T:140639498585664 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002202
+2023-07-12 10:33:43 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3606925-T:140639496472128 INFO [rbatis] [521514826535538690] query => `select * from t_ds_user ` []
+2023-07-12 10:33:43 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3606925-T:140639496472128 INFO [rbatis] [521514826535538690] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:33:43 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3606925-T:140639496472128 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:33:43 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3606925-T:140639496472128 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.001999
+2023-07-12 10:33:44 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3606925-T:140639494358592 INFO [rbatis] [521514829110841347] query => `select * from t_ds_user ` []
+2023-07-12 10:33:44 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3606925-T:140639494358592 INFO [rbatis] [521514829110841347] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:33:44 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3606925-T:140639494358592 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:33:44 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3606925-T:140639494358592 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002202
+2023-07-12 10:33:45 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3606925-T:140639500699200 INFO [rbatis] [521514831476428804] query => `select * from t_ds_user ` []
+2023-07-12 10:33:45 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3606925-T:140639500699200 INFO [rbatis] [521514831476428804] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:33:45 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3606925-T:140639500699200 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:33:45 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3606925-T:140639500699200 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002118
+2023-07-12 10:33:45 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3606925-T:140639498585664 INFO [rbatis] [521514832810217477] query => `select * from t_ds_user ` []
+2023-07-12 10:33:45 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3606925-T:140639498585664 INFO [rbatis] [521514832810217477] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:33:45 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3606925-T:140639498585664 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:33:45 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3606925-T:140639498585664 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.003902
+2023-07-12 10:33:45 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3606925-T:140639496472128 INFO [rbatis] [521514833829433350] query => `select * from t_ds_user ` []
+2023-07-12 10:33:45 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3606925-T:140639496472128 INFO [rbatis] [521514833829433350] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:33:45 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3606925-T:140639496472128 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:33:45 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3606925-T:140639496472128 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002298
+2023-07-12 10:33:45 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3606925-T:140639494358592 INFO [rbatis] [521514834643128327] query => `select * from t_ds_user ` []
+2023-07-12 10:33:45 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3606925-T:140639494358592 INFO [rbatis] [521514834643128327] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:33:45 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3606925-T:140639494358592 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:33:45 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3606925-T:140639494358592 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.001500
+2023-07-12 10:34:11 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3606925-T:140639500699200 INFO [rbatis] [521514942965223432] query => `select * from t_ds_user ` []
+2023-07-12 10:34:11 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3606925-T:140639500699200 INFO [rbatis] [521514942965223432] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:34:11 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3606925-T:140639500699200 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:34:11 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3606925-T:140639500699200 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002109
+2023-07-12 10:54:28 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:319] PID:3606925-T:140639504909248 INFO SIGINT received; starting forced shutdown
+2023-07-12 10:54:28 [actix_server::accept] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/accept.rs:143] PID:3606925-T:140639492245056 INFO accept thread stopped
+2023-07-12 10:54:28 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3606925-T:140639494358592 INFO shutting down idle worker
+2023-07-12 10:54:28 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3606925-T:140639498585664 INFO shutting down idle worker
+2023-07-12 10:54:28 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3606925-T:140639496472128 INFO shutting down idle worker
+2023-07-12 10:54:28 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3606925-T:140639500699200 INFO shutting down idle worker
+2023-07-12 10:54:50 [actix_server::builder] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/builder.rs:200] PID:3614635-T:140426069066688 INFO starting 4 workers
+2023-07-12 10:54:50 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:196] PID:3614635-T:140426069066688 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 10:54:57 [dolphin_api] [dolphin-api/src/main.rs:99] PID:3614635-T:140426064856640 INFO Hi from start. You requested: /users
+2023-07-12 10:54:57 [dolphin_api] [dolphin-api/src/main.rs:100] PID:3614635-T:140426064856640 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 GET:/users
+  headers:
+    "accept-encoding": "gzip, deflate"
+    "connection": "close"
+    "host": "127.0.0.1:12345"
+    "user-agent": "vscode-restclient"
+
+2023-07-12 10:54:57 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3614635-T:140426064856640 INFO [rbatis] [521520167033769984] query => `select * from t_ds_user ` []
+2023-07-12 10:54:57 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3614635-T:140426064856640 INFO [rbatis] [521520167033769984] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:54:57 [dolphin_api] [dolphin-api/src/main.rs:69] PID:3614635-T:140426064856640 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:54:57 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3614635-T:140426064856640 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.025056
+2023-07-12 10:55:35 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:319] PID:3614635-T:140426069066688 INFO SIGINT received; starting forced shutdown
+2023-07-12 10:55:35 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3614635-T:140426064856640 INFO shutting down idle worker
+2023-07-12 10:55:35 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3614635-T:140426058516032 INFO shutting down idle worker
+2023-07-12 10:55:35 [actix_server::accept] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/accept.rs:143] PID:3614635-T:140426056402496 INFO accept thread stopped
+2023-07-12 10:55:35 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3614635-T:140426060629568 INFO shutting down idle worker
+2023-07-12 10:55:35 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3614635-T:140426062743104 INFO shutting down idle worker
+2023-07-12 10:55:50 [actix_server::builder] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/builder.rs:200] PID:3615554-T:140089099695040 INFO starting 4 workers
+2023-07-12 10:55:50 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:196] PID:3615554-T:140089099695040 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 10:55:56 [dolphin_api] [dolphin-api/src/main.rs:98] PID:3615554-T:140089095476800 INFO Hi from start. You requested: /users
+2023-07-12 10:55:56 [dolphin_api] [dolphin-api/src/main.rs:99] PID:3615554-T:140089095476800 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 GET:/users
+  headers:
+    "connection": "close"
+    "accept-encoding": "gzip, deflate"
+    "user-agent": "vscode-restclient"
+    "host": "127.0.0.1:12345"
+
+2023-07-12 10:55:56 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3615554-T:140089095476800 INFO [rbatis] [521520415785357312] query => `select * from t_ds_user ` []
+2023-07-12 10:55:56 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3615554-T:140089095476800 INFO [rbatis] [521520415785357312] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 10:55:56 [dolphin_api] [dolphin-api/src/main.rs:69] PID:3615554-T:140089095476800 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 10:55:56 [dolphin_api] [dolphin-api/src/main.rs:103] PID:3615554-T:140089095476800 INFO Hi from response
+ServiceResponse HTTP/1.1 200 OK
+  headers:
+    "content-type": "application/json"
+  body: Sized(253)
+
+2023-07-12 10:55:56 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3615554-T:140089095476800 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.005726
+2023-07-12 11:01:13 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:319] PID:3615554-T:140089099695040 INFO SIGINT received; starting forced shutdown
+2023-07-12 11:01:13 [actix_server::accept] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/accept.rs:143] PID:3615554-T:140089087022656 INFO accept thread stopped
+2023-07-12 11:01:13 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3615554-T:140089095476800 INFO shutting down idle worker
+2023-07-12 11:01:13 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3615554-T:140089091249728 INFO shutting down idle worker
+2023-07-12 11:01:13 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3615554-T:140089089136192 INFO shutting down idle worker
+2023-07-12 11:01:13 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3615554-T:140089093363264 INFO shutting down idle worker
+2023-07-12 11:01:25 [actix_server::builder] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/builder.rs:200] PID:3618708-T:140654148010944 INFO starting 4 workers
+2023-07-12 11:01:25 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:196] PID:3618708-T:140654148010944 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 11:01:32 [dolphin_api] [dolphin-api/src/main.rs:98] PID:3618708-T:140654143792704 INFO Hi from start. You requested: /users
+2023-07-12 11:01:32 [dolphin_api] [dolphin-api/src/main.rs:99] PID:3618708-T:140654143792704 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 GET:/users
+  headers:
+    "user-agent": "vscode-restclient"
+    "host": "127.0.0.1:12345"
+    "accept-encoding": "gzip, deflate"
+    "connection": "close"
+
+2023-07-12 11:01:32 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3618708-T:140654143792704 INFO [rbatis] [521521826883440640] query => `select * from t_ds_user ` []
+2023-07-12 11:01:32 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3618708-T:140654143792704 INFO [rbatis] [521521826883440640] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 11:01:32 [dolphin_api] [dolphin-api/src/main.rs:69] PID:3618708-T:140654143792704 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 11:01:32 [dolphin_api] [dolphin-api/src/main.rs:103] PID:3618708-T:140654143792704 INFO Hi from response headers:HeaderMap { inner: {"content-type": Value { inner: ["application/json"] }} } body:
+ServiceResponse HTTP/1.1 200 OK
+  headers:
+    "content-type": "application/json"
+  body: Sized(253)
+
+2023-07-12 11:01:32 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3618708-T:140654143792704 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002944
+2023-07-12 11:03:48 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:319] PID:3618708-T:140654148010944 INFO SIGINT received; starting forced shutdown
+2023-07-12 11:03:48 [actix_server::accept] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/accept.rs:143] PID:3618708-T:140653933614656 INFO accept thread stopped
+2023-07-12 11:03:48 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3618708-T:140654141679168 INFO shutting down idle worker
+2023-07-12 11:03:48 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3618708-T:140653937817152 INFO shutting down idle worker
+2023-07-12 11:03:48 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3618708-T:140654143792704 INFO shutting down idle worker
+2023-07-12 11:03:48 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3618708-T:140653935715904 INFO shutting down idle worker
+2023-07-12 11:04:01 [actix_server::builder] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/builder.rs:200] PID:3620159-T:139874598441920 INFO starting 4 workers
+2023-07-12 11:04:01 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:196] PID:3620159-T:139874598441920 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 11:04:05 [dolphin_api] [dolphin-api/src/main.rs:98] PID:3620159-T:139874594231872 INFO Hi from start. You requested: /users
+2023-07-12 11:04:05 [dolphin_api] [dolphin-api/src/main.rs:99] PID:3620159-T:139874594231872 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 GET:/users
+  headers:
+    "host": "127.0.0.1:12345"
+    "accept-encoding": "gzip, deflate"
+    "user-agent": "vscode-restclient"
+    "connection": "close"
+
+2023-07-12 11:04:05 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3620159-T:139874594231872 INFO [rbatis] [521522467127169024] query => `select * from t_ds_user ` []
+2023-07-12 11:04:05 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3620159-T:139874594231872 INFO [rbatis] [521522467127169024] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 11:04:05 [dolphin_api] [dolphin-api/src/main.rs:69] PID:3620159-T:139874594231872 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 11:04:05 [dolphin_api] [dolphin-api/src/main.rs:103] PID:3620159-T:139874594231872 INFO Hi from response headers:HeaderMap { inner: {"content-type": Value { inner: ["application/json"] }} }
+ body:HttpResponse { error: None, res:
+Response HTTP/1.1 200 OK
+  headers:
+    "content-type": "application/json"
+  body: Sized(253)
+ }
+2023-07-12 11:04:05 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3620159-T:139874594231872 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002583
+2023-07-12 11:04:13 [dolphin_api] [dolphin-api/src/main.rs:98] PID:3620159-T:139874592118336 INFO Hi from start. You requested: /users
+2023-07-12 11:04:13 [dolphin_api] [dolphin-api/src/main.rs:99] PID:3620159-T:139874592118336 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 GET:/users
+  headers:
+    "accept-encoding": "gzip, deflate"
+    "user-agent": "vscode-restclient"
+    "host": "127.0.0.1:12345"
+    "connection": "close"
+
+2023-07-12 11:04:13 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3620159-T:139874592118336 INFO [rbatis] [521522499020656641] query => `select * from t_ds_user ` []
+2023-07-12 11:04:13 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3620159-T:139874592118336 INFO [rbatis] [521522499020656641] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 11:04:13 [dolphin_api] [dolphin-api/src/main.rs:69] PID:3620159-T:139874592118336 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 11:04:13 [dolphin_api] [dolphin-api/src/main.rs:103] PID:3620159-T:139874592118336 INFO Hi from response headers:HeaderMap { inner: {"content-type": Value { inner: ["application/json"] }} }
+ body:HttpResponse { error: None, res:
+Response HTTP/1.1 200 OK
+  headers:
+    "content-type": "application/json"
+  body: Sized(253)
+ }
+2023-07-12 11:04:13 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3620159-T:139874592118336 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002601
+2023-07-12 11:11:13 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:319] PID:3620159-T:139874598441920 INFO SIGINT received; starting forced shutdown
+2023-07-12 11:11:13 [actix_server::accept] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/accept.rs:143] PID:3620159-T:139874585777728 INFO accept thread stopped
+2023-07-12 11:11:13 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3620159-T:139874590004800 INFO shutting down idle worker
+2023-07-12 11:11:13 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3620159-T:139874592118336 INFO shutting down idle worker
+2023-07-12 11:11:13 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3620159-T:139874594231872 INFO shutting down idle worker
+2023-07-12 11:11:13 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3620159-T:139874587891264 INFO shutting down idle worker
+2023-07-12 12:52:29 [actix_server::builder] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/builder.rs:200] PID:3661556-T:140356434047936 INFO starting 4 workers
+2023-07-12 12:52:29 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:196] PID:3661556-T:140356434047936 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 12:52:37 [dolphin_api] [dolphin-api/src/main.rs:143] PID:3661556-T:140356429829696 INFO Hi from start. You requested: /users
+2023-07-12 12:52:37 [dolphin_api] [dolphin-api/src/main.rs:144] PID:3661556-T:140356429829696 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 GET:/users
+  headers:
+    "host": "127.0.0.1:12345"
+    "accept-encoding": "gzip, deflate"
+    "connection": "close"
+    "user-agent": "vscode-restclient"
+
+2023-07-12 12:52:37 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3661556-T:140356429829696 INFO [rbatis] [521549778849370112] query => `select * from t_ds_user ` []
+2023-07-12 12:52:37 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3661556-T:140356429829696 INFO [rbatis] [521549778849370112] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 12:52:37 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3661556-T:140356429829696 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 12:52:37 [dolphin_api] [dolphin-api/src/main.rs:156] PID:3661556-T:140356429829696 INFO Hi from response
+2023-07-12 12:52:37 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3661556-T:140356429829696 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.033465
+2023-07-12 12:52:56 [dolphin_api] [dolphin-api/src/main.rs:143] PID:3661556-T:140356427716160 INFO Hi from start. You requested: /users
+2023-07-12 12:52:56 [dolphin_api] [dolphin-api/src/main.rs:144] PID:3661556-T:140356427716160 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 GET:/users
+  headers:
+    "accept-encoding": "gzip, deflate"
+    "host": "127.0.0.1:12345"
+    "user-agent": "vscode-restclient"
+    "connection": "close"
+
+2023-07-12 12:52:56 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3661556-T:140356427716160 INFO [rbatis] [521549857744228353] query => `select * from t_ds_user ` []
+2023-07-12 12:52:56 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3661556-T:140356427716160 INFO [rbatis] [521549857744228353] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 12:52:56 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3661556-T:140356427716160 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 12:52:56 [dolphin_api] [dolphin-api/src/main.rs:156] PID:3661556-T:140356427716160 INFO Hi from response
+2023-07-12 12:52:56 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3661556-T:140356427716160 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002563
+2023-07-12 13:07:24 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:319] PID:3661556-T:140356434047936 INFO SIGINT received; starting forced shutdown
+2023-07-12 13:07:24 [actix_server::accept] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/accept.rs:143] PID:3661556-T:140356421375552 INFO accept thread stopped
+2023-07-12 13:07:24 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3661556-T:140356423489088 INFO shutting down idle worker
+2023-07-12 13:07:24 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3661556-T:140356427716160 INFO shutting down idle worker
+2023-07-12 13:07:24 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3661556-T:140356429829696 INFO shutting down idle worker
+2023-07-12 13:07:24 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3661556-T:140356425602624 INFO shutting down idle worker
+2023-07-12 13:07:38 [actix_server::builder] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/builder.rs:200] PID:3669441-T:139881643070400 INFO starting 4 workers
+2023-07-12 13:07:38 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:196] PID:3669441-T:139881643070400 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 13:07:49 [dolphin_api] [dolphin-api/src/main.rs:98] PID:3669441-T:139881638860352 INFO Hi from start. You requested: /users
+2023-07-12 13:07:49 [dolphin_api] [dolphin-api/src/main.rs:153] PID:3669441-T:139881638860352 INFO Hi from start. You requested: /users
+2023-07-12 13:07:49 [dolphin_api] [dolphin-api/src/main.rs:154] PID:3669441-T:139881638860352 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 GET:/users
+  headers:
+    "user-agent": "vscode-restclient"
+    "accept-encoding": "gzip, deflate"
+    "host": "127.0.0.1:12345"
+    "connection": "close"
+
+2023-07-12 13:07:49 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3669441-T:139881638860352 INFO [rbatis] [521553605006725120] query => `select * from t_ds_user ` []
+2023-07-12 13:07:49 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3669441-T:139881638860352 INFO [rbatis] [521553605006725120] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 13:07:49 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3669441-T:139881638860352 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 13:07:49 [dolphin_api] [dolphin-api/src/main.rs:102] PID:3669441-T:139881638860352 INFO Hi from response:
+ServiceResponse HTTP/1.1 200 OK
+  headers:
+    "content-type": "application/json"
+  body: Sized(253)
+
+2023-07-12 13:07:49 [dolphin_api] [dolphin-api/src/main.rs:104] PID:3669441-T:139881638860352 INFO Hi from response: HttpResponse { error: None, res:
+Response HTTP/1.1 200 OK
+  headers:
+    "content-type": "application/json"
+  body: Sized(253)
+ }
+2023-07-12 13:07:49 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3669441-T:139881638860352 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.003876
+2023-07-12 13:18:23 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:319] PID:3669441-T:139881643070400 INFO SIGINT received; starting forced shutdown
+2023-07-12 13:18:23 [actix_server::accept] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/accept.rs:143] PID:3669441-T:139881630406208 INFO accept thread stopped
+2023-07-12 13:18:23 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3669441-T:139881636746816 INFO shutting down idle worker
+2023-07-12 13:18:23 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3669441-T:139881632519744 INFO shutting down idle worker
+2023-07-12 13:18:23 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3669441-T:139881638860352 INFO shutting down idle worker
+2023-07-12 13:18:23 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3669441-T:139881634633280 INFO shutting down idle worker
+2023-07-12 13:18:37 [actix_server::builder] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/builder.rs:200] PID:3676008-T:140474435523520 INFO starting 4 workers
+2023-07-12 13:18:37 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:196] PID:3676008-T:140474435523520 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 13:18:40 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:319] PID:3676008-T:140474435523520 INFO SIGINT received; starting forced shutdown
+2023-07-12 13:18:40 [actix_server::accept] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/accept.rs:143] PID:3676008-T:140474086061632 INFO accept thread stopped
+2023-07-12 13:18:40 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3676008-T:140474427086400 INFO shutting down idle worker
+2023-07-12 13:18:40 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3676008-T:140474424972864 INFO shutting down idle worker
+2023-07-12 13:18:40 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3676008-T:140474431313472 INFO shutting down idle worker
+2023-07-12 13:18:40 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3676008-T:140474429199936 INFO shutting down idle worker
+2023-07-12 13:18:54 [actix_server::builder] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/builder.rs:200] PID:3676474-T:140133732889536 INFO starting 4 workers
+2023-07-12 13:18:54 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:196] PID:3676474-T:140133732889536 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 13:18:59 [dolphin_api] [dolphin-api/src/main.rs:98] PID:3676474-T:140133728679488 INFO Hi from start. You requested: /users
+2023-07-12 13:18:59 [dolphin_api] [dolphin-api/src/main.rs:154] PID:3676474-T:140133728679488 INFO Hi from start. You requested: /users
+2023-07-12 13:18:59 [dolphin_api] [dolphin-api/src/main.rs:155] PID:3676474-T:140133728679488 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 GET:/users
+  headers:
+    "user-agent": "vscode-restclient"
+    "connection": "close"
+    "host": "127.0.0.1:12345"
+    "accept-encoding": "gzip, deflate"
+
+2023-07-12 13:18:59 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3676474-T:140133728679488 INFO [rbatis] [521556416742297600] query => `select * from t_ds_user ` []
+2023-07-12 13:18:59 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3676474-T:140133728679488 INFO [rbatis] [521556416742297600] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 13:18:59 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3676474-T:140133728679488 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 13:18:59 [dolphin_api] [dolphin-api/src/main.rs:102] PID:3676474-T:140133728679488 INFO Hi from response:
+ServiceResponse HTTP/1.1 200 OK
+  headers:
+    "content-type": "application/json"
+  body: Sized(253)
+
+2023-07-12 13:18:59 [dolphin_api] [dolphin-api/src/main.rs:104] PID:3676474-T:140133728679488 INFO Hi from response: HttpResponse { error: None, res:
+Response HTTP/1.1 200 OK
+  headers:
+    "content-type": "application/json"
+  body: Sized(253)
+ }
+2023-07-12 13:18:59 [dolphin_api] [dolphin-api/src/main.rs:105] PID:3676474-T:140133728679488 INFO Hi from response: HeaderMap { inner: {"content-type": Value { inner: ["application/json"] }} }
+2023-07-12 13:18:59 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3676474-T:140133728679488 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.004811
+2023-07-12 13:19:58 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:319] PID:3676474-T:140133732889536 INFO SIGINT received; starting forced shutdown
+2023-07-12 13:19:58 [actix_server::accept] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/accept.rs:143] PID:3676474-T:140133720225344 INFO accept thread stopped
+2023-07-12 13:19:58 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3676474-T:140133722338880 INFO shutting down idle worker
+2023-07-12 13:19:58 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3676474-T:140133726565952 INFO shutting down idle worker
+2023-07-12 13:19:58 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3676474-T:140133728679488 INFO shutting down idle worker
+2023-07-12 13:19:58 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3676474-T:140133724452416 INFO shutting down idle worker
+2023-07-12 13:20:10 [actix_server::builder] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/builder.rs:200] PID:3677260-T:140435019011008 INFO starting 4 workers
+2023-07-12 13:20:10 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:196] PID:3677260-T:140435019011008 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 13:20:16 [dolphin_api] [dolphin-api/src/main.rs:154] PID:3677260-T:140435014792768 INFO Hi from start. You requested: /users
+2023-07-12 13:20:16 [dolphin_api] [dolphin-api/src/main.rs:155] PID:3677260-T:140435014792768 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 GET:/users
+  headers:
+    "accept-encoding": "gzip, deflate"
+    "user-agent": "vscode-restclient"
+    "connection": "close"
+    "host": "127.0.0.1:12345"
+
+2023-07-12 13:20:16 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:114] PID:3677260-T:140435014792768 INFO [rbatis] [521556736717361152] query => `select * from t_ds_user ` []
+2023-07-12 13:20:16 [rbatis::plugin::intercept_log] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/rbatis-4.3.10/src/plugin/intercept_log.rs:158] PID:3677260-T:140435014792768 INFO [rbatis] [521556736717361152] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 13:20:16 [dolphin_api] [dolphin-api/src/main.rs:68] PID:3677260-T:140435014792768 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 13:20:16 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3677260-T:140435014792768 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002794
+2023-07-12 13:26:22 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:319] PID:3677260-T:140435019011008 INFO SIGINT received; starting forced shutdown
+2023-07-12 13:26:22 [actix_server::accept] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/accept.rs:143] PID:3677260-T:140435006338624 INFO accept thread stopped
+2023-07-12 13:26:22 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3677260-T:140435012679232 INFO shutting down idle worker
+2023-07-12 13:26:22 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3677260-T:140435010565696 INFO shutting down idle worker
+2023-07-12 13:26:22 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3677260-T:140435014792768 INFO shutting down idle worker
+2023-07-12 13:26:22 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3677260-T:140435008452160 INFO shutting down idle worker
+2023-07-12 13:26:32 [actix_server::builder] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/builder.rs:200] PID:3680521-T:140351277753280 INFO starting 4 workers
+2023-07-12 13:26:32 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:196] PID:3680521-T:140351277753280 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 13:26:38 [dolphin_api] [dolphin-api/src/main.rs:154] PID:3680521-T:140351273535040 INFO Hi from start. You requested: /message
+2023-07-12 13:26:38 [dolphin_api] [dolphin-api/src/main.rs:155] PID:3680521-T:140351273535040 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 POST:/message
+  headers:
+    "content-length": "55"
+    "user-agent": "vscode-restclient"
+    "host": "127.0.0.1:12345"
+    "connection": "close"
+    "accept-encoding": "gzip, deflate"
+    "content-type": "application/json"
+
+2023-07-12 13:26:38 [actix_web::middleware::logger] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-web-4.3.1/src/middleware/logger.rs:421] PID:3680521-T:140351273535040 INFO 127.0.0.1 "POST /message HTTP/1.1" 200 42 "-" "vscode-restclient" 0.000395
+2023-07-12 13:29:35 [actix_server::server] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/server.rs:319] PID:3680521-T:140351277753280 INFO SIGINT received; starting forced shutdown
+2023-07-12 13:29:35 [actix_server::accept] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/accept.rs:143] PID:3680521-T:140351265080896 INFO accept thread stopped
+2023-07-12 13:29:35 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3680521-T:140351269307968 INFO shutting down idle worker
+2023-07-12 13:29:35 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3680521-T:140351271421504 INFO shutting down idle worker
+2023-07-12 13:29:35 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3680521-T:140351273535040 INFO shutting down idle worker
+2023-07-12 13:29:35 [actix_server::worker] [/home/ssk/.cargo/registry/src/mirrors.sjtug.sjtu.edu.cn-7a04d2510079875b/actix-server-2.2.0/src/worker.rs:591] PID:3680521-T:140351267194432 INFO shutting down idle worker
+2023-07-12 13:29:47 [actix_server::builder] [ 200] PID:3681944-T:140480374449088 INFO starting 4 workers
+2023-07-12 13:29:47 [actix_server::server] [ 196] PID:3681944-T:140480374449088 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 13:30:21 [actix_server::server] [ 319] PID:3681944-T:140480374449088 INFO SIGINT received; starting forced shutdown
+2023-07-12 13:30:21 [actix_server::accept] [ 143] PID:3681944-T:140480361776704 INFO accept thread stopped
+2023-07-12 13:30:21 [actix_server::worker] [ 591] PID:3681944-T:140480366003776 INFO shutting down idle worker
+2023-07-12 13:30:21 [actix_server::worker] [ 591] PID:3681944-T:140480363890240 INFO shutting down idle worker
+2023-07-12 13:30:21 [actix_server::worker] [ 591] PID:3681944-T:140480370230848 INFO shutting down idle worker
+2023-07-12 13:30:21 [actix_server::worker] [ 591] PID:3681944-T:140480368117312 INFO shutting down idle worker
+2023-07-12 13:30:33 [actix_server::builder] : 200] PID:3682683-T:139727682954176 INFO starting 4 workers
+2023-07-12 13:30:33 [actix_server::server] : 196] PID:3682683-T:139727682954176 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 13:31:33 [actix_server::server] : 319] PID:3682683-T:139727682954176 INFO SIGINT received; starting forced shutdown
+2023-07-12 13:31:33 [actix_server::accept] : 143] PID:3682683-T:139727670281792 INFO accept thread stopped
+2023-07-12 13:31:33 [actix_server::worker] : 591] PID:3682683-T:139727674508864 INFO shutting down idle worker
+2023-07-12 13:31:33 [actix_server::worker] : 591] PID:3682683-T:139727678735936 INFO shutting down idle worker
+2023-07-12 13:31:33 [actix_server::worker] : 591] PID:3682683-T:139727672395328 INFO shutting down idle worker
+2023-07-12 13:31:33 [actix_server::worker] : 591] PID:3682683-T:139727676622400 INFO shutting down idle worker
+2023-07-12 13:31:35 [actix_server::builder:200] PID:3683047-T:139936788370368 INFO starting 4 workers
+2023-07-12 13:31:35 [actix_server::server:196] PID:3683047-T:139936788370368 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 14:40:24 [dolphin_api:154] PID:3683047-T:139936784152128 INFO Hi from start. You requested: /users
+2023-07-12 14:40:24 [dolphin_api:155] PID:3683047-T:139936784152128 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 GET:/users
+  headers:
+    "connection": "close"
+    "user-agent": "vscode-restclient"
+    "host": "127.0.0.1:12345"
+    "accept-encoding": "gzip, deflate"
+
+2023-07-12 14:40:25 [rbatis::plugin::intercept_log:114] PID:3683047-T:139936784152128 INFO [rbatis] [521576906752004096] query => `select * from t_ds_user ` []
+2023-07-12 14:40:25 [rbatis::plugin::intercept_log:158] PID:3683047-T:139936784152128 INFO [rbatis] [521576906752004096] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 14:40:25 [dolphin_api:68] PID:3683047-T:139936784152128 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 14:40:25 [dolphin_api:168] PID:3683047-T:139936784152128 INFO Header: content-type: "application/json"
+2023-07-12 14:40:25 [actix_web::middleware::logger:421] PID:3683047-T:139936784152128 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.002715
+2023-07-12 14:42:29 [actix_server::server:319] PID:3683047-T:139936788370368 INFO SIGINT received; starting forced shutdown
+2023-07-12 14:42:29 [actix_server::accept:143] PID:3683047-T:139936775697984 INFO accept thread stopped
+2023-07-12 14:42:29 [actix_server::worker:591] PID:3683047-T:139936784152128 INFO shutting down idle worker
+2023-07-12 14:42:29 [actix_server::worker:591] PID:3683047-T:139936782038592 INFO shutting down idle worker
+2023-07-12 14:42:29 [actix_server::worker:591] PID:3683047-T:139936779925056 INFO shutting down idle worker
+2023-07-12 14:42:29 [actix_server::worker:591] PID:3683047-T:139936777811520 INFO shutting down idle worker
+2023-07-12 15:09:11 [actix_server::builder:200] PID:3713791-T:140001160332224 INFO starting 4 workers
+2023-07-12 15:09:11 [actix_server::server:196] PID:3713791-T:140001160332224 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 15:09:20 [rbatis::plugin::intercept_log:114] PID:3713791-T:140001156122176 INFO [rbatis] [521584185920458752] query => `select * from t_ds_user ` []
+2023-07-12 15:09:20 [rbatis::plugin::intercept_log:158] PID:3713791-T:140001156122176 INFO [rbatis] [521584185920458752] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 15:09:20 [dolphin_api:68] PID:3713791-T:140001156122176 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 15:09:20 [actix_web::middleware::logger:421] PID:3713791-T:140001156122176 INFO 127.0.0.1 "GET /users HTTP/1.1" 200 253 "-" "vscode-restclient" 0.006174
+2023-07-12 15:53:24 [actix_server::server:319] PID:3713791-T:140001160332224 INFO SIGINT received; starting forced shutdown
+2023-07-12 15:53:24 [actix_server::accept:143] PID:3713791-T:140001147668032 INFO accept thread stopped
+2023-07-12 15:53:24 [actix_server::worker:591] PID:3713791-T:140001151895104 INFO shutting down idle worker
+2023-07-12 15:53:24 [actix_server::worker:591] PID:3713791-T:140001156122176 INFO shutting down idle worker
+2023-07-12 15:53:24 [actix_server::worker:591] PID:3713791-T:140001154008640 INFO shutting down idle worker
+2023-07-12 15:53:24 [actix_server::worker:591] PID:3713791-T:140001149781568 INFO shutting down idle worker
+2023-07-12 15:53:38 [actix_server::builder:200] PID:3728455-T:140456324461504 INFO starting 4 workers
+2023-07-12 15:53:38 [actix_server::server:196] PID:3728455-T:140456324461504 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 15:53:42 [dolphin_api:98] PID:3728455-T:140456320243264 INFO Hi from start. You requested: /users
+2023-07-12 15:53:42 [dolphin_api:99] PID:3728455-T:140456320243264 INFO Hi from start. You requested:
+ServiceRequest HTTP/1.1 GET:/users
+  headers:
+    "connection": "close"
+    "user-agent": "vscode-restclient"
+    "accept-encoding": "gzip, deflate"
+    "host": "127.0.0.1:12345"
+
+2023-07-12 15:53:42 [rbatis::plugin::intercept_log:114] PID:3728455-T:140456320243264 INFO [rbatis] [521595353141612544] query => `select * from t_ds_user ` []
+2023-07-12 15:53:42 [rbatis::plugin::intercept_log:158] PID:3728455-T:140456320243264 INFO [rbatis] [521595353141612544] query <= len=1,rows=[{"time_zone":null,"state":1,"queue":null,"update_time":1540402822000,"create_time":1522165730000,"tenant_id":0,"phone":"","email":"xxx@qq.com","user_type":0,"user_password":"7ad2410b2f4c074479a8937a28a22b8f","user_name":"admin","id":1}]
+2023-07-12 15:53:42 [dolphin_api:68] PID:3728455-T:140456320243264 INFO users: [User { id: Some(1), user_name: "admin", user_password: "7ad2410b2f4c074479a8937a28a22b8f", user_type: 0, email: Some("xxx@qq.com"), phone: Some(""), tenant_id: 0, create_time: DateTime(2018-03-27 15:48:50), update_time: DateTime(2018-10-24 17:40:22), queue: None, state: 1, time_zone: None }]
+2023-07-12 15:53:42 [dolphin_api:103] PID:3728455-T:140456320243264 INFO Hi from response:
+ServiceResponse HTTP/1.1 200 OK
+  headers:
+    "content-type": "application/json"
+  body: Sized(253)
+
+2023-07-12 15:53:42 [dolphin_api:105] PID:3728455-T:140456320243264 INFO Hi from response: HttpResponse { error: None, res:
+Response HTTP/1.1 200 OK
+  headers:
+    "content-type": "application/json"
+  body: Sized(253)
+ }
+2023-07-12 15:53:42 [dolphin_api:106] PID:3728455-T:140456320243264 INFO Hi from response: HeaderMap { inner: {"content-type": Value { inner: ["application/json"] }} }
+2023-07-12 16:53:25 [actix_server::server:319] PID:3728455-T:140456324461504 INFO SIGINT received; starting forced shutdown
+2023-07-12 16:53:25 [actix_server::accept:143] PID:3728455-T:140456311789120 INFO accept thread stopped
+2023-07-12 16:53:25 [actix_server::worker:591] PID:3728455-T:140456316016192 INFO shutting down idle worker
+2023-07-12 16:53:25 [actix_server::worker:591] PID:3728455-T:140456313902656 INFO shutting down idle worker
+2023-07-12 16:53:25 [actix_server::worker:591] PID:3728455-T:140456320243264 INFO shutting down idle worker
+2023-07-12 16:53:25 [actix_server::worker:591] PID:3728455-T:140456318129728 INFO shutting down idle worker
+2023-07-12 16:53:39 [actix_server::builder:200] PID:3745383-T:139942258381760 INFO starting 4 workers
+2023-07-12 16:53:39 [actix_server::server:196] PID:3745383-T:139942258381760 INFO Actix runtime found; starting in Actix runtime
+2023-07-12 16:53:59 [actix_server::server:319] PID:3745383-T:139942258381760 INFO SIGINT received; starting forced shutdown
+2023-07-12 16:53:59 [actix_server::worker:591] PID:3745383-T:139942044886592 INFO shutting down idle worker
+2023-07-12 16:53:59 [actix_server::accept:143] PID:3745383-T:139942042785344 INFO accept thread stopped
+2023-07-12 16:53:59 [actix_server::worker:591] PID:3745383-T:139942046987840 INFO shutting down idle worker
+2023-07-12 16:53:59 [actix_server::worker:591] PID:3745383-T:139942252058176 INFO shutting down idle worker
+2023-07-12 16:53:59 [actix_server::worker:591] PID:3745383-T:139942254171712 INFO shutting down idle worker
+2023-07-12 16:54:11 [actix_server::builder:200] PID:3746026-T:140254182478784 INFO starting 4 workers
+2023-07-12 16:54:11 [actix_server::server:196] PID:3746026-T:140254182478784 INFO Actix runtime found; starting in Actix runtime

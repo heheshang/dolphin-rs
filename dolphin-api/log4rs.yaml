@@ -1,0 +1,56 @@
+# log4rs.yaml
+# 检查配置文件变动的时间间隔
+refresh_rate: 300 seconds
+
+# appender 负责将日志收集到控制台或文件，可配置多个
+appenders:
+    # 可以自定义命名
+    console:
+        kind: console
+        encoder:
+            # pattern: "{d(%Y-%m-%d %H:%M:%S)} {M}:{m}{n}"
+            pattern: '{d(%Y-%m-%d %H:%M:%S)} [{M}:{L}] {h(PID:{P}-T:{I})} {h({l})} {m}{n}'
+
+    file:
+        kind: file
+        #日志保存路径
+        path: './log/logger.log'
+        encoder:
+            #log 信息格式
+            pattern: '{d(%Y-%m-%d %H:%M:%S)} [{M}:{L}] {h(PID:{P}-T:{I})} {h({l})} {m}{n}'
+    rolling_file:
+        kind: rolling_file
+        path: './log/rolling.log'
+        encoder:
+            #log 信息格式
+            pattern: '{d(%Y-%m-%d %H:%M:%S)} [{M}:{L}] {h(PID:{P}-T:{I})} {h({l})} {m}{n}'
+        policy:
+            trigger:
+                kind: size
+                #限制文件大小
+                limit: 5000kb
+            #新建文件并保存所有日志文件
+            roller:
+                kind: fixed_window
+                base: 1
+                count: 20
+                pattern: './log/rolling{}.log'
+    rolling_file_one:
+        kind: rolling_file
+        path: './log/rolling.log'
+        encoder:
+            #log 信息格式
+            pattern: '{d(%Y-%m-%d %H:%M:%S)} [{M}:{L}] {h(PID:{P}-T:{I})} {h({l})} {m}{n}'
+        policy:
+            trigger:
+                kind: size
+                limit: 5000kb
+            #删除旧日志，存储新日志
+            roller:
+                kind: delete
+# 对全局log进行配置
+root:
+    level: info
+    appenders:
+        - rolling_file
+        - console
