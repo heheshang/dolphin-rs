@@ -1,7 +1,8 @@
 /target
 /Cargo.lock
 /log
-*/*/log/*
-*/*/target/*
-*/*/Cargo.lock
-```
+/*/*/log/*
+/*/*/target/*
+/*/*/Cargo.lock
+/*/log/*
+/*/log

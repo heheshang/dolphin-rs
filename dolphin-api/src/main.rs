@@ -1,24 +1,26 @@
-use actix_web::{web, App, Error, HttpResponse, HttpServer};
-use std::future::{ready, Ready};
-
 use actix_web::{
     dev::{forward_ready, Service, ServiceRequest, ServiceResponse, Transform},
     get,
     post,
+    web,
     web::Json,
+    App,
+    Error,
+    HttpResponse,
+    HttpServer,
     Responder,
     Result,
 };
 use dolphin_db::User;
 use futures_util::future::LocalBoxFuture;
 use log::info;
-// use diesel::{r2d2, PgConnection, QueryDsl, Queryable, RunQueryDsl};
 use rbatis::RBatis;
 use serde::{Deserialize, Serialize};
-use std::sync::Arc;
-// use tokio_pg_mapper_derive::PostgresMapper;
+use std::{
+    future::{ready, Ready},
+    sync::Arc,
+};
 mod dto;
-// use crate::dto::NewUser;
 use dolphin_db::datasources::DbConnectionFactory;
 
 
