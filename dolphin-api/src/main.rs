@@ -20,9 +20,9 @@ use std::{
     future::{ready, Ready},
     sync::Arc,
 };
+mod aspect;
 mod dto;
 use dolphin_db::datasources::DbConnectionFactory;
-
 
 #[get("/")]
 async fn hello() -> impl Responder {
@@ -57,7 +57,6 @@ async fn message(info: Json<Message>) -> Result<impl Responder> {
 
     Ok(web::Json(obj))
 }
-
 // #[crud_table(table_name:"t_ds_user")]
 // #[derive(Clone, Debug, Serialize, Deserialize)]
 // #[pg_mapper(table = "t_ds_user")] // singular 'user' is a keyword..
@@ -65,8 +64,9 @@ async fn message(info: Json<Message>) -> Result<impl Responder> {
 async fn users(rb: web::Data<Arc<RBatis>>) -> impl Responder {
     let mut executor: rbatis::executor::RBatisConnExecutor = rb.acquire().await.unwrap();
     let user = User::select_all(&mut executor).await.unwrap();
-    // let users = User::query_all_general_user1(&mut executor).await;
+    let users = User::query_all_general_user1(&mut executor).await;
     info!("users: {:?}", user);
+    info!("users: {:?}", users);
     HttpResponse::Ok().json(user)
 }
 
@@ -81,7 +81,6 @@ async fn main() -> std::io::Result<()> {
 
     let rb = Arc::new(rb);
     // env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
-
     log4rs::init_file("./log4rs.yaml", Default::default()).expect("init log4rs.yaml failed");
     HttpServer::new(move || {
         App::new()
