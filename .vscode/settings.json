@@ -1,5 +1,6 @@
 {
-    "rust-analyzer.linkedProjects": [
-        "./dolphin-api/Cargo.toml"
-    ],
+	"rust-analyzer.linkedProjects": ["./dolphin-api/Cargo.toml"],
+	"terminal.integrated.defaultProfile.osx": "zsh",
+	"terminal.integrated.fontSize": 14,
+	"terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono"
 }
