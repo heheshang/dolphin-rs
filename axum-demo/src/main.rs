@@ -7,7 +7,10 @@ use axum::{
     http::{request::Parts, HeaderMap, Request, StatusCode},
     response::{IntoResponse, Response},
     routing::{get, post},
-    BoxError, Json, RequestPartsExt, Router,
+    BoxError,
+    Json,
+    RequestPartsExt,
+    Router,
 };
 use jsonwebtoken::{decode, encode, DecodingKey, EncodingKey, Header, Validation};
 use multiplex_service::MultiplexService;
@@ -249,8 +252,7 @@ impl Display for Claims {
 
 #[async_trait]
 impl<S> FromRequestParts<S> for Claims
-where
-    S: Send + Sync,
+where S: Send + Sync
 {
     type Rejection = AuthError;
 
