@@ -4,4 +4,7 @@
         "./axum-demo/Cargo.toml"
     ],
     "rust-analyzer.server.path": "~/.cargo/bin/rust-analyzer",
+	"terminal.integrated.defaultProfile.osx": "zsh",
+	"terminal.integrated.fontSize": 14,
+
 }
