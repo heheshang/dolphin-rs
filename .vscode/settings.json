@@ -3,6 +3,5 @@
         "./dolphin-api/Cargo.toml",
         "./axum-demo/Cargo.toml"
     ],
-    "rust-analyzer.showUnlinkedFileNotification": false,
-    "rust-analyzer.procMacro.attributes.enable": false,
+    "rust-analyzer.server.path": "~/.cargo/bin/rust-analyzer",
 }

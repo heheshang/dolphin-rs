@@ -1,5 +1,6 @@
 mod proto {
-    include!(concat!("../pb", "/helloworld.rs"));
+    // include!(concat!("../pb", "/helloworld.rs"));
+    tonic::include_proto!("hello_world");
 }
 use crate::proto::{greeter_client::GreeterClient, HelloRequest};
 // use once_cell::sync::Lazy;

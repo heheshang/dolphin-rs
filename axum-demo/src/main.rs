@@ -7,8 +7,13 @@ use axum::{
     http::{request::Parts, HeaderMap, Request, StatusCode},
     response::{IntoResponse, Response},
     routing::{get, post},
-    BoxError, Json, RequestPartsExt, Router,
+    BoxError,
+    Json,
+    RequestPartsExt,
+    Router,
 };
+
+
 use jsonwebtoken::{decode, encode, DecodingKey, EncodingKey, Header, Validation};
 use multiplex_service::MultiplexService;
 use once_cell::sync::Lazy;
@@ -25,9 +30,10 @@ use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 use crate::proto::greeter_server::GreeterServer;
 mod multiplex_service;
+/// to nic::include_proto!("helloworld");
 pub(crate) mod proto {
-    // tonic::include_proto!("helloworld");
-    include!(concat!("./pb", "/helloworld.rs"));
+    tonic::include_proto!("hello_world");
+    //  include!(concat!("./pb", "/hello_world.rs"));
     pub(crate) const FILE_DESCRIPTOR_SET: &[u8] =
         tonic::include_file_descriptor_set!("helloworld_descriptor");
 }
@@ -72,39 +78,43 @@ async fn main() {
 
     let governor_conf = Box::new(
         GovernorConfigBuilder::default()
-            .burst_size(1)
-            .per_second(1)
+            .burst_size(10)
+            .per_second(60)
             .finish()
             .unwrap(),
     );
+
+
     // build our application with a route
     let rest = Router::new()
+    .route("/", get(root))
         // `GET /` goes to `root`
-        .route("/", get(root))
+        // .route("/", service)
+        // .layer(GovernorLayer{config:Box::leak(governor_conf)}))
         // `POST /users` goes to `create_user`
         .route("/users", post(create_user))
     //     // `POST /authorize` goes to `authorize`
         .route("/authorize",post(authorize))
-          .route_layer(TraceLayer::new_for_http()
-           .make_span_with(|request:&Request<_>|{
+         .route_layer(TraceLayer::new_for_http()
+          .make_span_with(|request:&Request<_>|{
 
-               let match_path = request.extensions().get::<MatchedPath>().map(MatchedPath::as_str);
+              let match_path = request.extensions().get::<MatchedPath>().map(MatchedPath::as_str);
 
-               info_span!("http_request",method = ?request.method(),match_path,some_other_field = tracing::field::Empty)
-           })
-           .on_request(|_request:&Request<_>,_span:&Span|{
-               // do something with the request
-           })
-           .on_response(|_response:&Response<_>,_latency:Duration,_span:&Span|{
-               // do something with the response
-           })
-           .on_body_chunk(|_chunk:&Bytes,_latency:Duration,_span:&Span|{})
-           .on_eos(|_trailers:Option<&HeaderMap>,_stream_duration:Duration,_span:&Span|{
-               // do something with the trailers
-           },)
-           .on_failure(|_errors:ServerErrorsFailureClass,_latency:Duration,_span:&Span|{
-               // do something with the errors
-           }),
+              info_span!("http_request",method = ?request.method(),match_path,some_other_field = tracing::field::Empty)
+          })
+          .on_request(|_request:&Request<_>,_span:&Span|{
+              // do something with the request
+          })
+          .on_response(|_response:&Response<_>,_latency:Duration,_span:&Span|{
+              // do something with the response
+          })
+          .on_body_chunk(|_chunk:&Bytes,_latency:Duration,_span:&Span|{})
+          .on_eos(|_trailers:Option<&HeaderMap>,_stream_duration:Duration,_span:&Span|{
+              // do something with the trailers
+          },)
+          .on_failure(|_errors:ServerErrorsFailureClass,_latency:Duration,_span:&Span|{
+              // do something with the errors
+          }),
       )
       .layer(ServiceBuilder::new()
         .layer(HandleErrorLayer::new(|e:BoxError| async move{
@@ -121,24 +131,38 @@ async fn main() {
     let grpc = tonic::transport::Server::builder()
         .add_service(reflection_service)
         .add_service(GreeterServer::new(GrpcServiceImpl::default()))
+        // .add_service(ServiceBuilder::new().concurrency_limit(5).service(MakeSvc))
         .into_service();
 
     // combine them into one service
-    let service = MultiplexService::new(
-        // rest.into_make_service_with_connect_info::<SocketAddr>(),
-        rest, grpc,
-    );
-
+    //  let service = MultiplexService::new(
+    //      // rest.into_make_service_with_connect_info::<SocketAddr>(),
+    //      rest, grpc,
+    //  );
+    //  let grpc_into = grpc
+    //      .clone()
+    //      .into_make_service_with_connect_info::<SocketAddr>()
+    //      .make_service_with_connect_info(())
+    //      .await
+    //      .unwrap();
+    // let rest_into = rest
+    //     .clone()
+    //     .into_make_service_with_connect_info::<SocketAddr>();
+    let service = MultiplexService::new(rest, grpc);
     // run our app with hyper
     // `axum::Server` is a re-export of `hyper::Server`
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
     tracing::info!("listening on {}", addr);
+    let shared = tower::make::Shared::new(service);
+    //let shared = MakeService::<SocketAddr, _>::into_service(shared);
+
     axum::Server::bind(&addr)
-        // .serve(rest.into_make_service_with_connect_info::<SocketAddr>())
-        .serve(tower::make::Shared::new(service))
+    //    .serve(rest.into_make_service_with_connect_info::<SocketAddr>())
+         .serve(shared)
         .await
         .unwrap();
 }
+
 
 // basic handler that responds with a static string
 async fn root(ConnectInfo(_addr): ConnectInfo<SocketAddr>, _claims: Claims) -> String {
@@ -249,8 +273,7 @@ impl Display for Claims {
 
 #[async_trait]
 impl<S> FromRequestParts<S> for Claims
-where
-    S: Send + Sync,
+where S: Send + Sync
 {
     type Rejection = AuthError;
 
@@ -289,6 +312,7 @@ impl AuthBody {
         }
     }
 }
+
 
 #[cfg(test)]
 mod tests {

@@ -1,4 +1,14 @@
 [workspace]
 resolver = "2"
 
-members = ["dolphin-alert", "dolphin-api", "dolphin-db","axum-demo"]
+members = [
+
+    "dolphin-alert",
+    "dolphin-api",
+    "dolphin-db",
+    "axum-demo",
+    "tonic-example",
+    "celery-demo",
+    "yaml_demo",
+
+]

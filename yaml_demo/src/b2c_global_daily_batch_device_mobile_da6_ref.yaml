@@ -1,0 +1,29 @@
+adobe_config:
+    project_name: EPP
+    global_elements:
+        - lasttouchchannel: last_touch_channel
+        - mobiledevicetype: mobile_device_type
+        - evar11: product_category
+        - mobilemanufacturer: mobile_manufacturer
+        - mobiledevicename: mobile_device_name
+        - evar73: evar73
+
+    suite_configs:
+        - suite_ids:
+              - {
+                    suite_id: 'vrs_samsun0_p6webmstukcopy',
+                    country_cd: 'GBR',
+                    cust_type: 'B2C',
+                }
+
+          granularity: ['day']
+          params:
+              - {
+                    metrics: ['entries'],
+                    segments: ['a', 'a', 'x', 'x'],
+                    alias: 'x',
+                }
+
+    flatten_sql_file: /home/{user}/etl/common/ingest_lite/sql/omniture_global_hourly.sql
+    vertica_table: dwh.t_omniture_api_metrics_epp_ext_gbr_rsid_update
+    vertica_pk_cols: [id, country_cd]
