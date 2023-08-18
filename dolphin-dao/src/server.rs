@@ -3,8 +3,8 @@ use sea_orm::Database;
 use std::net::SocketAddr;
 use tonic::transport::Server;
 pub mod service;
-pub use service::*;
 use crate::users::UserServer;
+pub use service::*;
 #[tokio::main]
 async fn main() -> Result<()> {
     let addr: SocketAddr = "0.0.0.0:50051".parse()?;
@@ -23,4 +23,6 @@ async fn main() -> Result<()> {
         .await?;
 
     Ok(())
+
+
 }

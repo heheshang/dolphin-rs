@@ -1,0 +1,153 @@
+[2m2023-08-18T07:07:06.329199Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T07:07:33.982201Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T07:07:42.264641Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T07:07:43.488380Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T07:07:44.547975Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T07:07:45.458874Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T07:10:59.291859Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T09:08:02.860660Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T09:08:40.016059Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T09:09:23.640648Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 4 headers
+[2m2023-08-18T09:09:23.641065Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is empty
+[2m2023-08-18T09:09:23.641444Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 82 bytes
+[2m2023-08-18T09:10:06.422305Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:10:06.422512Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (55 bytes)
+[2m2023-08-18T09:10:06.422683Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:10:06.422883Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 82 bytes
+[2m2023-08-18T09:10:23.397605Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:10:23.397738Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (55 bytes)
+[2m2023-08-18T09:10:23.397848Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:10:23.398031Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 82 bytes
+[2m2023-08-18T09:12:09.776950Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T09:13:46.403940Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:13:46.404104Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (66 bytes)
+[2m2023-08-18T09:13:46.404290Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:13:46.404589Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 328 bytes
+[2m2023-08-18T09:14:38.543196Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:14:38.543351Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (66 bytes)
+[2m2023-08-18T09:14:38.543500Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:14:38.543785Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 328 bytes
+[2m2023-08-18T09:16:03.550667Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:16:03.550819Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (81 bytes)
+[2m2023-08-18T09:16:03.550978Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:16:03.551230Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 328 bytes
+[2m2023-08-18T09:16:39.763683Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:16:39.763829Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:16:39.763979Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:16:39.764268Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 328 bytes
+[2m2023-08-18T09:16:41.573741Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:16:41.573874Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:16:41.574059Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:16:41.574327Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 328 bytes
+[2m2023-08-18T09:21:30.056921Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T09:21:37.723432Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:21:37.723569Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:21:37.723680Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:21:37.723799Z[0m [31mERROR[0m [2mapi[0m[2m:[0m Unhandled error: Unable to extract key!
+[2m2023-08-18T09:21:37.723950Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 117 bytes
+[2m2023-08-18T09:23:41.686307Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T09:23:48.040596Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:23:48.041033Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:23:48.041430Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:23:48.041927Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 191 bytes
+[2m2023-08-18T09:24:23.260853Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:24:23.261054Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:24:23.261237Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:24:23.261636Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 191 bytes
+[2m2023-08-18T09:24:42.574401Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:24:42.574566Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:24:42.574717Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:24:42.575034Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 191 bytes
+[2m2023-08-18T09:25:16.348565Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:25:16.348711Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:25:16.348863Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:25:16.349172Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 191 bytes
+[2m2023-08-18T09:25:18.280161Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:25:18.280309Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:25:18.280458Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:25:18.280832Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 191 bytes
+[2m2023-08-18T09:26:22.606578Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:22.606994Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (55 bytes)
+[2m2023-08-18T09:26:22.607308Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:22.607815Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 238 bytes
+[2m2023-08-18T09:26:35.438882Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:35.439025Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (73 bytes)
+[2m2023-08-18T09:26:35.439188Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:35.439644Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 318 bytes
+[2m2023-08-18T09:26:45.374314Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:45.374514Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:45.374866Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:45.375332Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 318 bytes
+[2m2023-08-18T09:26:47.009558Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:47.009695Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:47.009839Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:47.010402Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 318 bytes
+[2m2023-08-18T09:26:47.225696Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:47.225843Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:47.226016Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:47.226422Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 318 bytes
+[2m2023-08-18T09:26:47.332324Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:47.332532Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:47.332700Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:47.333230Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 318 bytes
+[2m2023-08-18T09:26:47.508678Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:47.508814Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:47.508926Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:47.509264Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 318 bytes
+[2m2023-08-18T09:26:47.702061Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:47.702500Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:47.702850Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:47.703194Z[0m [32m INFO[0m [2mtower_governor[0m[2m:[0m Rate limit exceeded for peer IP [127.0.0.1], quota reset in 0s
+[2m2023-08-18T09:26:47.703539Z[0m [31mERROR[0m [2mapi[0m[2m:[0m Unhandled error: Too Many Requests! Wait for 0s
+[2m2023-08-18T09:26:47.703909Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 143 bytes
+[2m2023-08-18T09:26:47.783119Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:47.783246Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:47.783353Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:47.783475Z[0m [32m INFO[0m [2mtower_governor[0m[2m:[0m Rate limit exceeded for peer IP [127.0.0.1], quota reset in 0s
+[2m2023-08-18T09:26:47.783588Z[0m [31mERROR[0m [2mapi[0m[2m:[0m Unhandled error: Too Many Requests! Wait for 0s
+[2m2023-08-18T09:26:47.783734Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 143 bytes
+[2m2023-08-18T09:26:48.099447Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:48.099589Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:48.099698Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:48.100035Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 318 bytes
+[2m2023-08-18T09:26:48.194835Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:48.194977Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:48.195190Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:48.195360Z[0m [32m INFO[0m [2mtower_governor[0m[2m:[0m Rate limit exceeded for peer IP [127.0.0.1], quota reset in 59s
+[2m2023-08-18T09:26:48.195574Z[0m [31mERROR[0m [2mapi[0m[2m:[0m Unhandled error: Too Many Requests! Wait for 59s
+[2m2023-08-18T09:26:48.195819Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 145 bytes
+[2m2023-08-18T09:26:48.364598Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:48.364895Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:48.365309Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:48.365680Z[0m [32m INFO[0m [2mtower_governor[0m[2m:[0m Rate limit exceeded for peer IP [127.0.0.1], quota reset in 59s
+[2m2023-08-18T09:26:48.366032Z[0m [31mERROR[0m [2mapi[0m[2m:[0m Unhandled error: Too Many Requests! Wait for 59s
+[2m2023-08-18T09:26:48.366441Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 145 bytes
+[2m2023-08-18T09:26:48.451748Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:48.451888Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:48.452033Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:48.452191Z[0m [32m INFO[0m [2mtower_governor[0m[2m:[0m Rate limit exceeded for peer IP [127.0.0.1], quota reset in 59s
+[2m2023-08-18T09:26:48.452302Z[0m [31mERROR[0m [2mapi[0m[2m:[0m Unhandled error: Too Many Requests! Wait for 59s
+[2m2023-08-18T09:26:48.452492Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 145 bytes
+[2m2023-08-18T09:26:49.456087Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:49.456232Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:49.456410Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:49.456705Z[0m [32m INFO[0m [2mtower_governor[0m[2m:[0m Rate limit exceeded for peer IP [127.0.0.1], quota reset in 58s
+[2m2023-08-18T09:26:49.456934Z[0m [31mERROR[0m [2mapi[0m[2m:[0m Unhandled error: Too Many Requests! Wait for 58s
+[2m2023-08-18T09:26:49.457233Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 145 bytes
+[2m2023-08-18T09:26:51.119544Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:51.119863Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:51.120157Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:51.120472Z[0m [32m INFO[0m [2mtower_governor[0m[2m:[0m Rate limit exceeded for peer IP [127.0.0.1], quota reset in 56s
+[2m2023-08-18T09:26:51.120756Z[0m [31mERROR[0m [2mapi[0m[2m:[0m Unhandled error: Too Many Requests! Wait for 56s
+[2m2023-08-18T09:26:51.121091Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 145 bytes
+[2m2023-08-18T09:26:52.084927Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m parsed 6 headers
+[2m2023-08-18T09:26:52.085067Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body is content-length (72 bytes)
+[2m2023-08-18T09:26:52.085231Z[0m [34mDEBUG[0m [2mhyper::proto::h1::conn[0m[2m:[0m incoming body completed
+[2m2023-08-18T09:26:52.085400Z[0m [32m INFO[0m [2mtower_governor[0m[2m:[0m Rate limit exceeded for peer IP [127.0.0.1], quota reset in 55s
+[2m2023-08-18T09:26:52.085533Z[0m [31mERROR[0m [2mapi[0m[2m:[0m Unhandled error: Too Many Requests! Wait for 55s
+[2m2023-08-18T09:26:52.085753Z[0m [34mDEBUG[0m [2mhyper::proto::h1::io[0m[2m:[0m flushed 145 bytes
+[2m2023-08-18T09:27:21.558324Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T09:27:56.574444Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T09:28:40.974914Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
+[2m2023-08-18T09:28:44.408324Z[0m [32m INFO[0m [2mapi::user[0m[2m:[0m token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImNvbXBhbnkiOiJkb2xwaGluc2NoZWR1bGVyMTIzIiwiZXhwIjoyMDAwMDAwMDAwMH0.lmkD3eHBsCqO2xcqESJBi1GuRBA1uhtxh1jFlLTrciM
+[2m2023-08-18T09:33:54.664279Z[0m [32m INFO[0m [2mapi[0m[2m:[0m server is running on http://127.0.0.1:12345
