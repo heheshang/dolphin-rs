@@ -1,10 +1,11 @@
 use entity::t_ds_user::{self};
-pub mod user_mod {
-    tonic::include_proto!("users");
-}
 
+use proto::proto_mod::{
+    self,
+    user_service_server::{UserService, UserServiceServer},
+    GetUserRequest,
+};
 use sea_orm::{entity::prelude::*, DatabaseConnection};
-use user_mod::user_service_server::{UserService, UserServiceServer};
 #[derive(Default)]
 pub struct UserServer {
     conn: DatabaseConnection,
@@ -26,8 +27,8 @@ impl UserServer {
 impl UserService for UserServer {
     async fn get_user(
         &self,
-        _request: tonic::Request<user_mod::GetUserRequest>,
-    ) -> Result<tonic::Response<user_mod::User>, tonic::Status> {
+        _request: tonic::Request<GetUserRequest>,
+    ) -> Result<tonic::Response<proto_mod::User>, tonic::Status> {
         let conn = &self.conn;
         let db_user = t_ds_user::Entity::find()
            // .column(t_ds_user::Column::UserName)
@@ -35,7 +36,7 @@ impl UserService for UserServer {
                    .await
                    .map_err(|_| tonic::Status::not_found("User not found"))?;
 
-        let user = user_mod::User {
+        let user = proto_mod::User {
             id: "1".to_string(),
             name: db_user.unwrap().user_name.unwrap(),
             email: "3".to_string(),

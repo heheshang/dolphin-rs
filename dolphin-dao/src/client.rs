@@ -1,9 +1,5 @@
+use proto::proto_mod::{user_service_client::UserServiceClient, GetUserRequest};
 use tonic::{transport::Endpoint, Request};
-
-pub mod user_mod {
-    tonic::include_proto!("users");
-}
-use crate::user_mod::{user_service_client::UserServiceClient, GetUserRequest};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -11,11 +7,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     /*
     Client code is not implemented in completely
-     as it would just make the code base look too complicated ....
-     and interface requires a lot of boilerplate code to implement.
+    as it would just make the code base look too complicated ....
+    and interface requires a lot of boilerplate code to implement.
 
-     But a basic implementation is given below ....
-     please refer it to implement other ways to make your code pretty
+    But a basic implementation is given below ....
+    please refer it to implement other ways to make your code pretty
     */
 
     let mut client = UserServiceClient::connect(addr).await?;

@@ -13,4 +13,5 @@ members = [
     # "rust-simple-code-layout",
     # "dolphin-api-v1",
     "dolphin-entity",
+    "dolphin-proto",
 ]
