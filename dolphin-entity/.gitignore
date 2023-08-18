@@ -1,0 +1,8 @@
+/target
+/Cargo.lock
+/log
+/*/*/log/*
+/*/*/target/*
+/*/*/Cargo.lock
+/*/log/*
+/*/log

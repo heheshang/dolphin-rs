@@ -26,3 +26,4 @@ rbs = "4.3.2"
 serde = { version = "1.0.159", features = ["derive"] }
 serde_derive = "1.0.159"
 serde_json = "1.0.95"
+entity={version="0.1.0",path="../dolphin-entity/"}

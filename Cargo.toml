@@ -2,13 +2,15 @@
 resolver = "2"
 
 members = [
-
-    "dolphin-alert",
-    "dolphin-api",
-    "dolphin-db",
-    "axum-demo",
-    "tonic-example",
-    "celery-demo",
-    "yaml_demo",
-
+	".",
+    # "dolphin-alert",
+    # "dolphin-api",
+    # "dolphin-db",
+    # "axum-demo",
+    # "tonic-example",
+    # "celery-demo",
+    # "yaml_demo",
+    # "rust-simple-code-layout",
+    # "dolphin-api-v1",
+    "dolphin-entity",
 ]
