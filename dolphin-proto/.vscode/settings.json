@@ -2,12 +2,7 @@
     "rust-analyzer.linkedProjects": [
         "./Cargo.toml",
     ],
-    "editor.lineNumbers": "relative",
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": true
-    },
     "rust-analyzer.cargo.extraEnv": {
         "PROTOC": "/usr/local/protobuf/bin/protoc"
-    }
+    },
 }

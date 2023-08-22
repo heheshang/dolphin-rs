@@ -6,10 +6,23 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+chrono = "0.4.26"
+derive_builder = { version = "0.12.0" }
+# prost-build = "0.11.9"
+# proto-builder-trait = "0.5.1"
 prost = "0.11.9"
 prost-types = "0.11.9"
+# proto-builder-trait = "0.5.1"
+serde = { version = "1.0.183", features = ["derive"] }
+serde_with = "3.3.0"
+# serde_as = "0.0.1"
+# serde_with = "3.3.0"
+# sqlx = { version = "0.7.1", features = ["chrono"] }
+strum = { version = "0.25.0", features = ["derive"] }
 tonic = "0.9.2"
+# tonic-build = "0.9.2"
 
 [build-dependencies]
-prost-build = "0.11.9"
+prost-build = { version = "0.11.6" }
 tonic-build = "0.9.2"
+proto-builder-trait = "0.5.1"

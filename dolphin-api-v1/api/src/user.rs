@@ -1,3 +1,4 @@
+use api_core::user_service::{User, UserRes};
 use axum::{
     async_trait,
     extract::{ConnectInfo, FromRequestParts, TypedHeader},
@@ -30,7 +31,6 @@ pub async fn create_user(
 ) -> (StatusCode, Json<User>) {
     // insert your application logic here
     let user = User {
-        id: 1337,
         username: payload.username,
     };
 
@@ -38,7 +38,16 @@ pub async fn create_user(
     // with a status code of `201 Created`
     (StatusCode::CREATED, Json(user))
 }
-
+pub async fn get_user(
+    ConnectInfo(_addr): ConnectInfo<SocketAddr>,
+    // this argument tells axum to parse the request body
+    // as JSON into a `CreateUser` type
+    Json(payload): Json<User>,
+) -> Result<Json<UserRes>, AuthError> {
+    let u = payload.find().await;
+    info!("获取数据为{u:?}");
+    Ok(Json(u))
+}
 pub async fn authorize(
     ConnectInfo(_addr): ConnectInfo<SocketAddr>,
     // this argument tells axum to parse the request body
@@ -68,13 +77,6 @@ pub async fn authorize(
 // the input to our `create_user` handler
 #[derive(Deserialize)]
 pub struct CreateUser {
-    pub username: String,
-}
-
-// the output to our `create_user` handler
-#[derive(Serialize)]
-pub struct User {
-    pub id: u64,
     pub username: String,
 }
 

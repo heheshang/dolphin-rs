@@ -1,60 +1,71 @@
+// https://blog.csdn.net/weixin_43172991/article/details/130788303
+// 使用的版本为3.20.X 不然会报错 不支持 optional 关键字
+// 还需要吧googleapis 下面的文件导入到include目录下面或者参考tonic-build在github上面的例子
 syntax="proto3";
 
-package users;
+package ds_user;
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 
+// option java_multiple_files = true;
+// option java_package = "io.g";
+// option java_outer_classname = "HelloWorldProto";
 
-option java_multiple_files = true;
-option java_package = "io.grpc.examples.helloworld";
-option java_outer_classname = "HelloWorldProto";
+message DsUser{
+    int32 id=1;
+    optional string user_name=2;
+    optional string user_password=3;
+    optional int32 user_type=4;
+    optional string email=5;
+    optional string phone=6;
+    optional int32 tenant_id=7;
+    // google.protobuf.Timestamp create_time=8;
+    optional string create_time=8;
+    // optional google.protobuf.Timestamp update_time=9;
+     optional string update_time=9;
 
-message User{
-    string id = 1;
-    string name = 2;
-    string email = 3;
-    string password = 4;
-    string role = 5;
-    string status = 6;
-    string created_at = 7;
-    string updated_at = 8;
-    string deleted_at = 9;
+    optional string queue = 10;
+    optional int32 state = 11;
+    optional string time_zone = 12;
+
 }
+
 // Generated according to https://cloud.google.com/apis/design/standard_methods
 service UserService {
-  // rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
-  //   option (google.api.http) = {
-  //     get: "/v1alpha1/Users"
-  //   };
-  // }
+//  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
+//    option (google.api.http) = {
+//      get: "/v1alpha1/Users"
+//    };
+//  }
 
-  rpc GetUser(GetUserRequest) returns (User) {
+  rpc GetUser(GetUserRequest) returns (DsUser) {
     option (google.api.http) = {
       get: "/v1alpha1/{name=Users/*}"
     };
   }
 
-  // rpc CreateUser(CreateUserRequest) returns (User) {
-  //   option (google.api.http) = {
-  //     post: "/v1alpha1/Users"
-  //     body: "User"
-  //   };
-  // }
+//  rpc CreateUser(CreateUserRequest) returns (DsUser) {
+//    option (google.api.http) = {
+//      post: "/v1alpha1/Users"
+//      body: "User"
+//    };
+//  }
 
-  // rpc UpdateUser(UpdateUserRequest) returns (User) {
-  //   option (google.api.http) = {
-  //     patch: "/v1alpha1/{User.name=Users/*}"
-  //     body: "User"
-  //   };
-  // }
+  rpc UpdateUser(UpdateUserRequest) returns (DsUser) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{User.name=Users/*}"
+      body: "User"
+    };
+  }
 
-  // rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {
-  //   option (google.api.http) = {
-  //     delete: "/v1alpha1/{name=Users/*}"
-  //   };
-  // }
+//  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {
+//    option (google.api.http) = {
+//      delete: "/v1alpha1/{name=Users/*}"
+//    };
+//  }
 }
 
 // message User {
@@ -75,7 +86,7 @@ message ListUsersRequest {
 message ListUsersResponse {
   // The field name should match the noun "User" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated User Users = 1;
+  repeated DsUser Users = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
@@ -95,12 +106,12 @@ message CreateUserRequest {
 
   // The User resource to create.
   // The field name should match the Noun in the method name.
-  User User = 3;
+  DsUser User = 3;
 }
 
 message UpdateUserRequest {
   // The User resource which replaces the resource on the server.
-  User User = 1;
+  DsUser User = 1;
 
   // The update mask applies to the resource. For the `FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask

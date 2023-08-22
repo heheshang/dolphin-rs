@@ -62,3 +62,11 @@ content-type: application/json
      "client_id": "admin",
     "client_secret": "dolphinscheduler123"
 }
+
+###
+POST http://127.0.0.1:12345/get_user HTTP/1.1
+content-type: application/json
+
+{
+    "username": "admin111"
+}

@@ -10,7 +10,11 @@
     "terminal.integrated.fontSize": 14,
     "rust-analyzer.showUnlinkedFileNotification": false,
     "protoc": {
-        "compile_on_save": false,
-        "path": "/usr/local/protobuf/bin/protoc ",
-    }
+        "compile_on_save": true,
+        // "options": [
+        // "--proto_path=protos/v3",
+        // "--proto_path=protos/v2",
+        // "--proto_path=${workspaceFolder}/proto/",
+        // ]
+    },
 }

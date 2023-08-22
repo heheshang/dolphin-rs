@@ -53,7 +53,10 @@ async fn start_server() -> Result<()> {
     info!("server is running on http://{host}:{port}");
     let server_url = format!("{host}:{port}");
 
-    let app = Router::new().route("/authorize", post(authorize)).layer(
+    let app = Router::new()
+    .route("/authorize", post(authorize))
+    .route("/get_user", post(get_user))
+    .layer(
         ServiceBuilder::new()
             .layer(HandleErrorLayer::new(|e: BoxError| async move {
                 tracing::error!("Unhandled error: {}", e);
