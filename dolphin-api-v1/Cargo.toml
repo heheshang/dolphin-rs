@@ -15,3 +15,4 @@ members = ["api", "api-core", "utils"]
 # tokio = { version = "1.31.0", features = ["full"] }
 api = { path = "./api" }
 api-core = { path = "./api-core" }
+serde_json = "1.0.105"

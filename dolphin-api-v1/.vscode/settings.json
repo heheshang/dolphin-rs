@@ -1,6 +1,9 @@
 {
     "rust-analyzer.linkedProjects": [
         "./Cargo.toml",
+        "./api/Cargo.toml",
+        "./api-core/Cargo.toml",
+        "./api-core/Cargo.toml"
     ],
     "editor.lineNumbers": "relative",
     "editor.formatOnSave": true,

@@ -29,6 +29,27 @@ curl 'http://pt003:12345/dolphinscheduler/login' \
   --data-raw 'userName=admin&userPassword=dolphinscheduler123' \
   --compressed \
   --insecure
+## login
+curl 'http://pt003:12345/dolphinscheduler/login' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'sessionId;' \
+  -H 'Referrer: http://pt003:12345/dolphinscheduler/ui/login' \
+  -H 'language: zh_CN' \
+  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  --data-raw 'userName=admin&userPassword=dolphinscheduler123' \
+  --compressed \
+  --insecure
+
+  ## get user info
+  curl 'http://pt003:12345/dolphinscheduler/users/get-user-info' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'sessionId: 83c7571c-b88a-4229-9038-1b918e069de3' \
+  -H 'Referrer: http://pt003:12345/dolphinscheduler/ui/login' \
+  -H 'language: zh_CN' \
+  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36' \
+  --compressed \
+  --insecure
 
   ###
   curl 'http://pt003:12345/dolphinscheduler/users/get-user-info' \
@@ -69,4 +90,13 @@ content-type: application/json
 
 {
     "username": "admin111"
+}
+
+
+###
+POST http://127.0.0.1:12345/get_user HTTP/1.1
+content-type: application/json
+
+{
+    "username": "admin"
 }

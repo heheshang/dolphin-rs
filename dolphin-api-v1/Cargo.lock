@@ -71,10 +71,13 @@ dependencies = [
 name = "api-core"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
+ "axum",
  "dolphin-proto",
  "dotenvy",
  "lazy_static",
  "serde",
+ "serde_with",
  "tokio",
  "tonic",
 ]
@@ -416,6 +419,7 @@ version = "0.1.0"
 dependencies = [
  "api",
  "api-core",
+ "serde_json",
 ]
 
 [[package]]

@@ -1,10 +1,11 @@
-use std::env;
-
 use format as f;
 use proto::ds_user::{user_service_client::UserServiceClient, DsUser, GetUserRequest};
 use serde::{Deserialize, Serialize};
+use std::env;
 use tokio::sync::OnceCell;
 use tonic::transport::{Channel, Endpoint};
+
+use crate::{base::result::ApiResult, core_error::app_status::AppStatus};
 
 static USER_SERVICE_CLIENT: OnceCell<UserServiceClient<Channel>> = OnceCell::const_new();
 
@@ -28,7 +29,7 @@ pub async fn get_client() -> UserServiceClient<Channel> {
 }
 
 impl User {
-    pub async fn find(&self) -> UserRes {
+    pub async fn find(&self) -> ApiResult<UserRes> {
         let client = USER_SERVICE_CLIENT
             .get_or_init(|| {
                 let client = get_client();
@@ -39,9 +40,14 @@ impl User {
         let request = tonic::Request::new(GetUserRequest {
             name: self.username.clone(),
         });
-        let response = client.clone().get_user(request).await.unwrap();
-        let users = response.into_inner();
-        users.into()
+        let response = client.clone().get_user(request).await;
+        match response {
+            Ok(res) => {
+                let user = res.into_inner();
+                ApiResult::new(Some(user.into()))
+            }
+            Err(_) => ApiResult::new_with_err_status(None, AppStatus::RequestParamsNotValidError),
+        }
     }
 }
 impl From<DsUser> for UserRes {

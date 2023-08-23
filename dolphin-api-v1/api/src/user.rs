@@ -1,11 +1,12 @@
-use api_core::user_service::{User, UserRes};
+use api_core::user_service::User;
 use axum::{
     async_trait,
     extract::{ConnectInfo, FromRequestParts, TypedHeader},
     headers::{authorization::Bearer, Authorization},
     http::{request::Parts, StatusCode},
-    response::IntoResponse,
-    Json, RequestPartsExt,
+    response::{IntoResponse, Response},
+    Json,
+    RequestPartsExt,
 };
 use tracing::info;
 
@@ -43,10 +44,10 @@ pub async fn get_user(
     // this argument tells axum to parse the request body
     // as JSON into a `CreateUser` type
     Json(payload): Json<User>,
-) -> Result<Json<UserRes>, AuthError> {
-    let u = payload.find().await;
-    info!("获取数据为{u:?}");
-    Ok(Json(u))
+) -> Response {
+    payload.find().await.into_response()
+    // info!("获取数据为{u:?}");
+    // Ok(Json(u))
 }
 pub async fn authorize(
     ConnectInfo(_addr): ConnectInfo<SocketAddr>,
@@ -129,8 +130,7 @@ impl Display for Claims {
 
 #[async_trait]
 impl<S> FromRequestParts<S> for Claims
-where
-    S: Send + Sync,
+where S: Send + Sync
 {
     type Rejection = AuthError;
 

@@ -12,6 +12,7 @@ pub fn main() {
         eprintln!("server error: {}", err);
     }
 }
+
 pub mod user;
 pub use self::user::*;
 
@@ -54,18 +55,19 @@ async fn start_server() -> Result<()> {
     let server_url = format!("{host}:{port}");
 
     let app = Router::new()
-    .route("/authorize", post(authorize))
-    .route("/get_user", post(get_user))
-    .layer(
-        ServiceBuilder::new()
-            .layer(HandleErrorLayer::new(|e: BoxError| async move {
-                tracing::error!("Unhandled error: {}", e);
-                display_error(e)
-            }))
-            .layer(GovernorLayer {
-                config: Box::leak(governor_conf),
-            }),
-    );
+        .route("/authorize", post(authorize))
+        .route("/get_user", post(get_user))
+        .layer(
+            ServiceBuilder::new()
+                .layer(HandleErrorLayer::new(|e: BoxError| async move {
+                    tracing::error!("Unhandled error: {}", e);
+                    display_error(e)
+                }))
+                .layer(GovernorLayer {
+                    config: Box::leak(governor_conf),
+                }),
+        );
+
     // .route("/", get(list_posts).post(create_post))
     // .route("/:id", get(edit_post).post(update_post))
     // .route("/new", get(new_post))

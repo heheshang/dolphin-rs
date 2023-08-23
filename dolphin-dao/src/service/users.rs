@@ -42,9 +42,10 @@ impl UserService for UserServer {
             .one(conn)
                    .await
                    .map_err(|_| tonic::Status::not_found("User not found"))?;
-
-
-        Ok(tonic::Response::new(db_user.unwrap().into()))
+        match db_user {
+            Some(v) => Ok(tonic::Response::new(v.into())),
+            None => Err(tonic::Status::not_found("User not found")),
+        }
     }
 
     async fn update_user(
