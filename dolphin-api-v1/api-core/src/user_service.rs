@@ -1,3 +1,5 @@
+use crate::{base::result::ApiResult, core_error::app_status::AppStatus};
+use anyhow::Result;
 use format as f;
 use proto::ds_user::{user_service_client::UserServiceClient, DsUser, GetUserRequest};
 use serde::{Deserialize, Serialize};
@@ -5,16 +7,14 @@ use std::env;
 use tokio::sync::OnceCell;
 use tonic::transport::{Channel, Endpoint};
 
-use crate::{base::result::ApiResult, core_error::app_status::AppStatus};
-
-static USER_SERVICE_CLIENT: OnceCell<UserServiceClient<Channel>> = OnceCell::const_new();
+static USER_SERVICE_CLIENT: OnceCell<Result<UserServiceClient<Channel>>> = OnceCell::const_new();
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct User {
     pub username: String,
 }
 
-pub async fn get_client() -> UserServiceClient<Channel> {
+pub async fn get_client() -> Result<UserServiceClient<Channel>> {
     dotenvy::dotenv().ok();
     let host = env::var("DOLPHIN_DAO_CLIENT_HOST")
         .expect("HOST is not set in .env file")
@@ -24,19 +24,27 @@ pub async fn get_client() -> UserServiceClient<Channel> {
         .clone();
     let addr_str = f!("http://{host}:{port}").clone();
     let addr = Endpoint::from_shared(addr_str);
-    let client = UserServiceClient::connect(addr.unwrap()).await.unwrap();
-    client
+    match UserServiceClient::connect(addr.unwrap()).await {
+        Ok(client) => Ok(client),
+        Err(e) => Err(anyhow::Error::new(e)),
+    }
 }
 
 impl User {
     pub async fn find(&self) -> ApiResult<UserRes> {
         let client = USER_SERVICE_CLIENT
-            .get_or_init(|| {
-                let client = get_client();
+            .get_or_init(|| async {
+                let client = get_client().await;
                 client
             })
             .await
             .clone();
+        let client = match client {
+            Ok(client) => client,
+            Err(_) =>
+                return ApiResult::new_with_err_status(None, AppStatus::InternalServerErrorArgs),
+        };
+
         let request = tonic::Request::new(GetUserRequest {
             name: self.username.clone(),
         });

@@ -34,12 +34,6 @@ impl<T> ApiResult<T> {
 }
 
 
-impl Default for AppStatus {
-    fn default() -> Self {
-        Self::SUCCESS
-    }
-}
-
 impl<T> Default for ApiResult<T> {
     fn default() -> Self {
         Self {

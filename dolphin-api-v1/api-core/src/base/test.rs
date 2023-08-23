@@ -1,7 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_with::serde_as;
 
-use crate::core_error::app_status::{AppStatus, ErrorCode};
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 struct Rgb {
@@ -22,7 +21,18 @@ serde_with::serde_conv!(
         })
     }
 );
-
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct ErrorCode {
+    pub code: i32,
+    pub en_msg: String,
+    pub cn_msg: String,
+}
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub enum AppStatus {
+    SUCCESS,
+    InternalServerErrorArgs,
+    RequestParamsNotValidError,
+}
 #[serde_as]
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 struct Colors {
@@ -42,9 +52,13 @@ struct ColorsWith {
 mod tests {
     use super::*;
 
-    use serde_json::json;
     #[test]
     fn name() {
+        let pink = Rgb {
+            red: 255,
+            green: 0,
+            blue: 255,
+        };
         let data = ColorsWith { rgb_with: pink };
         let json = serde_json::json!({
             "rgb_with": [255, 0, 255]
@@ -67,10 +81,43 @@ pub struct ApiResult<T> {
     // #[serde_as(as = "ssss")]
     pub status: AppStatus,
 }
-
-serde_with::serde_conv!(
-    statusAsMsg,
-    AppStatus,
-    |status: &AppStatus| [status],
-    |value: AppStatus| -> Result<_, std::convert::Infallible> { Ok(value.into()) }
-);
+impl From<AppStatus> for ErrorCode {
+    fn from(status: AppStatus) -> Self {
+        match status {
+            AppStatus::SUCCESS => ErrorCode::new(0, "success".to_string(), "成功".to_string()),
+            AppStatus::InternalServerErrorArgs => ErrorCode::new(
+                10001,
+                "internal server error args".to_string(),
+                "内部服务器错误参数".to_string(),
+            ),
+            AppStatus::RequestParamsNotValidError => ErrorCode::new(
+                10002,
+                "request params not valid error".to_string(),
+                "请求参数不合法".to_string(),
+            ),
+        }
+    }
+}
+impl Default for AppStatus {
+    fn default() -> Self {
+        Self::SUCCESS
+    }
+}
+impl ErrorCode {
+    pub fn new(code: i32, en_msg: String, cn_msg: String) -> ErrorCode {
+        ErrorCode {
+            code,
+            en_msg,
+            cn_msg,
+        }
+    }
+}
+impl Default for ErrorCode {
+    fn default() -> Self {
+        Self {
+            code: 0,
+            en_msg: "success".to_string(),
+            cn_msg: "成功".to_string(),
+        }
+    }
+}

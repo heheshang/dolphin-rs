@@ -13,12 +13,7 @@ impl IntoResponse for AppError {
     fn into_response(self) -> Response {
         match self.0 {
             AppStatus::SUCCESS => Json(ApiResult::new(Some(()))).into_response(),
-            AppStatus::InternalServerErrorArgs => Json(ApiResult::new_with_err_status(
-                Some(()),
-                AppStatus::InternalServerErrorArgs,
-            ))
-            .into_response(),
-            AppStatus::RequestParamsNotValidError  => todo!(),
+            _ => Json(ApiResult::new_with_err_status(Some(()), self.0)).into_response(),
         }
     }
 }

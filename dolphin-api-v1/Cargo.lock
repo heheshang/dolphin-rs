@@ -77,6 +77,7 @@ dependencies = [
  "dotenvy",
  "lazy_static",
  "serde",
+ "serde_json",
  "serde_with",
  "tokio",
  "tonic",
