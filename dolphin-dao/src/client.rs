@@ -13,7 +13,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     please refer it to implement other ways to make your code pretty
     */
 
-    let mut client: UserServiceClient<tonic::transport::Channel> = UserServiceClient::connect(addr).await?;
+    let mut client: UserServiceClient<tonic::transport::Channel> =
+        UserServiceClient::connect(addr).await?;
     let request = Request::new(GetUserRequest {
         name: "admin".to_string(),
     });

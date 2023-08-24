@@ -95,9 +95,19 @@ fn main() {
         .out_dir("src/pb")
         .compile_with_config(
             config,
-            &["protos/ds_session.proto", "protos/ds_user.proto"],
-            &["protos"],
+            &[
+                "protos/googleapis/google/ds/v1/ds_session.proto",
+                "protos/googleapis/google/ds/v1/ds_user.proto",
+            ],
+            &["protos/googleapis"],
         )
+        .unwrap();
+    tonic_build::configure()
+        .build_server(false)
+        .out_dir("src/pb")
+        .compile(&["protos/googleapis/google/pubsub/v1/pubsub.proto"], &[
+            "protos/googleapis",
+        ])
         .unwrap();
     println!("cargo:rerun-if-changed=protos/ds_session.proto");
     println!("cargo:rerun-if-changed=protos/ds_user.proto");
