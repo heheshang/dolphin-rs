@@ -50,6 +50,8 @@ struct ColorsWith {
 
 #[cfg(test)]
 mod tests {
+    use std::path::Path;
+
     use super::*;
 
     #[test]
@@ -66,6 +68,31 @@ mod tests {
 
         assert_eq!(json, serde_json::to_value(&data).unwrap());
         assert_eq!(data, serde_json::from_value(json).unwrap());
+    }
+
+
+    #[test]
+    fn gen() {
+        let path = Path::new(
+            "/home/ssk/workspace/rust-work/dolphin-rs/dolphin-api-v1/api-core/src/base/test.txt",
+        );
+        if path.exists() {
+            // read the file content by lines
+            let lines = std::fs::read_to_string(path).unwrap();
+            for line in lines.lines() {
+                // println!("{}", line);
+                let l = line.split(",").collect::<Vec<&str>>();
+                let part1 = l.get(0).unwrap();
+                let part2 = l.get(1).unwrap();
+                let part3 = l.get(2).unwrap();
+                let part4 = l.get(3).unwrap();
+                let res2 = format!(
+                    "{}{}{},{}.to_string(),{}.to_string()),\n",
+                    part1, " => ErrorCode::new(", part2, part3, part4
+                );
+                print!("{}", res2);
+            }
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-use crate::core_error::app_status::{AppStatus, ErrorCode};
+use crate::core_error::app_status::{AppStatus, ErrorInfo};
 use axum::{response::IntoResponse, Json};
 use serde::{Deserialize, Serialize};
 
@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 pub struct ApiResult<T> {
     pub data: Option<T>,
     #[serde(flatten)]
-    pub errmsg: ErrorCode,
+    pub errmsg: ErrorInfo,
     // #[serde(flatten)]
     // #[serde_as(as = "ssss")]
     #[serde(skip)]
@@ -20,7 +20,7 @@ impl<T> ApiResult<T> {
         Self {
             data,
             status: AppStatus::SUCCESS,
-            errmsg: ErrorCode::default(),
+            errmsg: ErrorInfo::default(),
         }
     }
 
@@ -38,7 +38,7 @@ impl<T> Default for ApiResult<T> {
     fn default() -> Self {
         Self {
             data: None,
-            errmsg: ErrorCode::default(),
+            errmsg: ErrorInfo::default(),
             status: AppStatus::SUCCESS,
         }
     }

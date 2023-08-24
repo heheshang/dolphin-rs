@@ -1,19 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 use serde::{Deserialize, Serialize};
 
 /**
@@ -422,22 +406,22 @@ impl AppStatus {
 //     serializer.serialize_newtype_struct("errcode", &s)
 // }
 #[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct ErrorCode {
+pub struct ErrorInfo {
     pub code: i32,
     pub en_msg: String,
     pub cn_msg: String,
 }
 
-impl ErrorCode {
-    pub fn new(code: i32, en_msg: String, cn_msg: String) -> ErrorCode {
-        ErrorCode {
+impl ErrorInfo {
+    pub fn new(code: i32, en_msg: String, cn_msg: String) -> ErrorInfo {
+        ErrorInfo {
             code,
             en_msg,
             cn_msg,
         }
     }
 }
-impl Default for ErrorCode {
+impl Default for ErrorInfo {
     fn default() -> Self {
         Self {
             code: 0,
@@ -447,442 +431,1784 @@ impl Default for ErrorCode {
     }
 }
 
-impl From<AppStatus> for ErrorCode {
+impl From<AppStatus> for ErrorInfo {
     fn from(status: AppStatus) -> Self {
         match status {
-            AppStatus::SUCCESS => ErrorCode::new(0, "success".to_string(), "成功".to_string()),
-            AppStatus::InternalServerErrorArgs => ErrorCode::new(
+            AppStatus::SUCCESS => ErrorInfo::new(0, "success".to_string(), "成功".to_string()),
+            AppStatus::InternalServerErrorArgs => ErrorInfo::new(
+                10000,
+                "internal server error please check the log".to_string(),
+                "内部服务错误，请查看日志".to_string(),
+            ),
+            AppStatus::RequestParamsNotValidError => ErrorInfo::new(
                 10001,
-                "internal server error args".to_string(),
-                "内部服务器错误参数".to_string(),
+                "request parameter {0} is not valid".to_string(),
+                "请求参数[{0}]无效".to_string(),
             ),
-            AppStatus::RequestParamsNotValidError => ErrorCode::new(
+            AppStatus::TaskTimeoutParamsError => ErrorInfo::new(
                 10002,
-                "request params not valid error".to_string(),
-                "请求参数不合法".to_string(),
+                "task timeout parameter is not valid".to_string(),
+                "任务超时参数无效".to_string(),
             ),
-            AppStatus::TaskTimeoutParamsError => ErrorCode::new(
+            AppStatus::UserNameExist => ErrorInfo::new(
                 10003,
-                "task timeout params error".to_string(),
-                "任务超时参数错误".to_string(),
-            ),
-            AppStatus::UserNameExist => ErrorCode::new(
-                10004,
-                "user name exist".to_string(),
+                "user name already exists".to_string(),
                 "用户名已存在".to_string(),
             ),
-            AppStatus::UserNameNull => ErrorCode::new(
-                10005,
-                "user name null".to_string(),
-                "用户名为空".to_string(),
+            AppStatus::UserNameNull => ErrorInfo::new(
+                10004,
+                "user name is null".to_string(),
+                "用户名不能为空".to_string(),
             ),
-            AppStatus::HdfsOperationError => ErrorCode::new(
+            AppStatus::HdfsOperationError => ErrorInfo::new(
                 10006,
                 "hdfs operation error".to_string(),
                 "hdfs操作错误".to_string(),
             ),
-            AppStatus::TaskInstanceNotFound => ErrorCode::new(
-                10007,
-                "task instance not found".to_string(),
-                "任务实例未找到".to_string(),
-            ),
-            AppStatus::OsTenantCodeExist => ErrorCode::new(
+            AppStatus::TaskInstanceNotFound => ErrorInfo::new(
                 10008,
-                "os tenant code exist".to_string(),
-                "os租户编码已存在".to_string(),
-            ),
-            AppStatus::UserNotExist => ErrorCode::new(
-                10009,
-                "user not exist".to_string(),
-                "用户不存在".to_string(),
-            ),
-            AppStatus::AlertGroupNotExist => ErrorCode::new(
-                10010,
-                "alert group not exist".to_string(),
-                "告警组不存在".to_string(),
-            ),
-            AppStatus::AlertGroupExist => ErrorCode::new(
-                10011,
-                "alert group exist".to_string(),
-                "告警组已存在".to_string(),
-            ),
-            AppStatus::UserNamePasswdError => ErrorCode::new(
-                10012,
-                "user name passwd error".to_string(),
-                "用户名密码错误".to_string(),
-            ),
-            AppStatus::LoginSessionFailed => ErrorCode::new(
-                10013,
-                "login session failed".to_string(),
-                "登录会话失败".to_string(),
-            ),
-            AppStatus::DatasourceExist => ErrorCode::new(
-                10014,
-                "datasource exist".to_string(),
-                "数据源已存在".to_string(),
-            ),
-            AppStatus::DatasourceConnectFailed => ErrorCode::new(
-                10015,
-                "datasource connect failed".to_string(),
-                "数据源连接失败".to_string(),
-            ),
-            AppStatus::TenantNotExist => ErrorCode::new(
-                10016,
-                "tenant not exist".to_string(),
-                "租户不存在".to_string(),
-            ),
-            AppStatus::ProjectNotFound => ErrorCode::new(
-                10017,
-                "project not found".to_string(),
-                "项目未找到".to_string(),
-            ),
-            AppStatus::ProjectAlreadyExists => ErrorCode::new(
-                10018,
-                "project already exists".to_string(),
-                "项目已存在".to_string(),
-            ),
-            AppStatus::TaskInstanceNotExists => ErrorCode::new(
-                10019,
-                "task instance not exists".to_string(),
+                "task instance not found".to_string(),
                 "任务实例不存在".to_string(),
             ),
-            AppStatus::TaskInstanceNotSubWorkflowInstance => ErrorCode::new(
-                10020,
-                "task instance not sub workflow instance".to_string(),
-                "任务实例不是子工作流实例".to_string(),
+            AppStatus::OsTenantCodeExist => ErrorInfo::new(
+                10009,
+                "os tenant code {0} already exists".to_string(),
+                "操作系统租户[{0}]已存在".to_string(),
             ),
-            AppStatus::ScheduleCronNotExists => todo!(),
-            AppStatus::ScheduleCronOnlineForbidUpdate => todo!(),
-            AppStatus::ScheduleCronCheckFailed => todo!(),
-            AppStatus::MasterNotExists => todo!(),
-            AppStatus::ScheduleStatusUnknown => todo!(),
-            AppStatus::CreateAlertGroupError => todo!(),
-            AppStatus::QueryAllAlertgroupError => todo!(),
-            AppStatus::ListPagingAlertGroupError => todo!(),
-            AppStatus::UpdateAlertGroupError => todo!(),
-            AppStatus::DeleteAlertGroupError => todo!(),
-            AppStatus::AlertGroupGrantUserError => todo!(),
-            AppStatus::CreateDatasourceError => todo!(),
-            AppStatus::UpdateDatasourceError => todo!(),
-            AppStatus::QueryDatasourceError => todo!(),
-            AppStatus::ConnectDatasourceFailure => todo!(),
-            AppStatus::ConnectionTestFailure => todo!(),
-            AppStatus::DeleteDataSourceFailure => todo!(),
-            AppStatus::VerifyDatasourceNameFailure => todo!(),
-            AppStatus::UnauthorizedDatasource => todo!(),
-            AppStatus::AuthorizedDataSource => todo!(),
-            AppStatus::LoginSuccess => todo!(),
-            AppStatus::UserLoginFailure => todo!(),
-            AppStatus::ListWorkersError => todo!(),
-            AppStatus::ListMastersError => todo!(),
-            AppStatus::UpdateProjectError => todo!(),
-            AppStatus::QueryProjectDetailsByCodeError => todo!(),
-            AppStatus::CreateProjectError => todo!(),
-            AppStatus::LoginUserQueryProjectListPagingError => todo!(),
-            AppStatus::DeleteProjectError => todo!(),
-            AppStatus::QueryUnauthorizedProjectError => todo!(),
-            AppStatus::QueryAuthorizedProject => todo!(),
-            AppStatus::QueryQueueListError => todo!(),
-            AppStatus::CreateResourceError => todo!(),
-            AppStatus::UpdateResourceError => todo!(),
-            AppStatus::QueryResourcesListError => todo!(),
-            AppStatus::QueryResourcesListPaging => todo!(),
-            AppStatus::DeleteResourceError => todo!(),
-            AppStatus::VerifyResourceByNameAndTypeError => todo!(),
-            AppStatus::ViewResourceFileOnLineError => todo!(),
-            AppStatus::CreateResourceFileOnLineError => todo!(),
-            AppStatus::ResourceFileIsEmpty => todo!(),
-            AppStatus::EditResourceFileOnLineError => todo!(),
-            AppStatus::DownloadResourceFileError => todo!(),
-            AppStatus::CreateUdfFunctionError => todo!(),
-            AppStatus::ViewUdfFunctionError => todo!(),
-            AppStatus::UpdateUdfFunctionError => todo!(),
-            AppStatus::QueryUdfFunctionListPagingError => todo!(),
-            AppStatus::QueryDatasourceByTypeError => todo!(),
-            AppStatus::VerifyUdfFunctionNameError => todo!(),
-            AppStatus::DeleteUdfFunctionError => todo!(),
-            AppStatus::AuthorizedFileResourceError => todo!(),
-            AppStatus::AuthorizeResourceTree => todo!(),
-            AppStatus::UnauthorizedUdfFunctionError => todo!(),
-            AppStatus::AuthorizedUdfFunctionError => todo!(),
-            AppStatus::CreateScheduleError => todo!(),
-            AppStatus::UpdateScheduleError => todo!(),
-            AppStatus::PublishScheduleOnlineError => todo!(),
-            AppStatus::OfflineScheduleError => todo!(),
-            AppStatus::QueryScheduleListPagingError => todo!(),
-            AppStatus::QueryScheduleListError => todo!(),
-            AppStatus::QueryTaskListPagingError => todo!(),
-            AppStatus::QueryTaskRecordListPagingError => todo!(),
-            AppStatus::CreateTenantError => todo!(),
-            AppStatus::QueryTenantListPagingError => todo!(),
-            AppStatus::QueryTenantListError => todo!(),
-            AppStatus::UpdateTenantError => todo!(),
-            AppStatus::DeleteTenantByIdError => todo!(),
-            AppStatus::VerifyOsTenantCodeError => todo!(),
-            AppStatus::CreateUserError => todo!(),
-            AppStatus::QueryUserListPagingError => todo!(),
-            AppStatus::UpdateUserError => todo!(),
-            AppStatus::DeleteUserByIdError => todo!(),
-            AppStatus::GrantProjectError => todo!(),
-            AppStatus::GrantResourceError => todo!(),
-            AppStatus::GrantUdfFunctionError => todo!(),
-            AppStatus::GrantDatasourceError => todo!(),
-            AppStatus::GetUserInfoError => todo!(),
-            AppStatus::UserListError => todo!(),
-            AppStatus::VerifyUsernameError => todo!(),
-            AppStatus::UnauthorizedUserError => todo!(),
-            AppStatus::AuthorizedUserError => todo!(),
-            AppStatus::QueryTaskInstanceLogError => todo!(),
-            AppStatus::DownloadTaskInstanceLogFileError => todo!(),
-            AppStatus::CreateProcessDefinitionError => todo!(),
-            AppStatus::VerifyProcessDefinitionNameUniqueError => todo!(),
-            AppStatus::UpdateProcessDefinitionError => todo!(),
-            AppStatus::ReleaseProcessDefinitionError => todo!(),
-            AppStatus::QueryDetailOfProcessDefinitionError => todo!(),
-            AppStatus::QueryProcessDefinitionList => todo!(),
-            AppStatus::EncapsulationTreeviewStructureError => todo!(),
-            AppStatus::GetTasksListByProcessDefinitionIdError => todo!(),
-            AppStatus::QueryProcessInstanceListPagingError => todo!(),
-            AppStatus::QueryTaskListByProcessInstanceIdError => todo!(),
-            AppStatus::UpdateProcessInstanceError => todo!(),
-            AppStatus::QueryProcessInstanceByIdError => todo!(),
-            AppStatus::DeleteProcessInstanceByIdError => todo!(),
-            AppStatus::QuerySubProcessInstanceDetailInfoByTaskIdError => todo!(),
-            AppStatus::QueryParentProcessInstanceDetailInfoBySubProcessInstanceIdError => todo!(),
-            AppStatus::QueryProcessInstanceAllVariablesError => todo!(),
-            AppStatus::EncapsulationProcessInstanceGanttStructureError => todo!(),
-            AppStatus::QueryProcessDefinitionListPagingError => todo!(),
-            AppStatus::SignOutError => todo!(),
-            AppStatus::OsTenantCodeHasAlreadyExists => todo!(),
-            AppStatus::IpIsEmpty => todo!(),
-            AppStatus::ScheduleCronReleaseNeedNotChange => todo!(),
-            AppStatus::CreateQueueError => todo!(),
-            AppStatus::QueueNotExist => todo!(),
-            AppStatus::QueueValueExist => todo!(),
-            AppStatus::QueueNameExist => todo!(),
-            AppStatus::UpdateQueueError => todo!(),
-            AppStatus::NeedNotUpdateQueue => todo!(),
-            AppStatus::VerifyQueueError => todo!(),
-            AppStatus::NameNull => todo!(),
-            AppStatus::NameExist => todo!(),
-            AppStatus::SaveError => todo!(),
-            AppStatus::DeleteProjectErrorDefinesNotNull => todo!(),
-            AppStatus::BatchDeleteProcessInstanceByIdsError => todo!(),
-            AppStatus::PreviewScheduleError => todo!(),
-            AppStatus::ParseToCronExpressionError => todo!(),
-            AppStatus::ScheduleStartTimeEndTimeSame => todo!(),
-            AppStatus::DeleteTenantByIdFail => todo!(),
-            AppStatus::DeleteTenantByIdFailDefines => todo!(),
-            AppStatus::DeleteTenantByIdFailUsers => todo!(),
-            AppStatus::DeleteWorkerGroupByIdFail => todo!(),
-            AppStatus::QueryWorkerGroupFail => todo!(),
-            AppStatus::DeleteWorkerGroupFail => todo!(),
-            AppStatus::UserDisabled => todo!(),
-            AppStatus::CopyProcessDefinitionError => todo!(),
-            AppStatus::MoveProcessDefinitionError => todo!(),
-            AppStatus::SwitchProcessDefinitionVersionError => todo!(),
-            AppStatus::SwitchProcessDefinitionVersionNotExistProcessDefinitionError => todo!(),
+            AppStatus::UserNotExist => ErrorInfo::new(
+                10010,
+                "user {0} not exists".to_string(),
+                "用户[{0}]不存在".to_string(),
+            ),
+            AppStatus::AlertGroupNotExist => ErrorInfo::new(
+                10011,
+                "alarm group not found".to_string(),
+                "告警组不存在".to_string(),
+            ),
+            AppStatus::AlertGroupExist => ErrorInfo::new(
+                10012,
+                "alarm group already exists".to_string(),
+                "告警组名称已存在".to_string(),
+            ),
+            AppStatus::UserNamePasswdError => ErrorInfo::new(
+                10013,
+                "user name or password error".to_string(),
+                "用户名或密码错误".to_string(),
+            ),
+            AppStatus::LoginSessionFailed => ErrorInfo::new(
+                10014,
+                "create session failed!".to_string(),
+                "创建session失败".to_string(),
+            ),
+            AppStatus::DatasourceExist => ErrorInfo::new(
+                10015,
+                "data source name already exists".to_string(),
+                "数据源名称已存在".to_string(),
+            ),
+            AppStatus::DatasourceConnectFailed => ErrorInfo::new(
+                10016,
+                "data source connection failed".to_string(),
+                "建立数据源连接失败".to_string(),
+            ),
+            AppStatus::TenantNotExist => ErrorInfo::new(
+                10017,
+                "tenant not exists".to_string(),
+                "租户不存在".to_string(),
+            ),
+            AppStatus::ProjectNotFound => ErrorInfo::new(
+                10018,
+                "project {0} not found ".to_string(),
+                "项目[{0}]不存在".to_string(),
+            ),
+            AppStatus::ProjectAlreadyExists => ErrorInfo::new(
+                10019,
+                "project {0} already exists".to_string(),
+                "项目名称[{0}]已存在".to_string(),
+            ),
+            AppStatus::TaskInstanceNotExists => ErrorInfo::new(
+                10020,
+                "task instance {0} does not exist".to_string(),
+                "任务实例[{0}]不存在".to_string(),
+            ),
+            AppStatus::TaskInstanceNotSubWorkflowInstance => ErrorInfo::new(
+                10021,
+                "task instance {0} is not sub process instance".to_string(),
+                "任务实例[{0}]不是子流程实例".to_string(),
+            ),
+            AppStatus::ScheduleCronNotExists => ErrorInfo::new(
+                10022,
+                "scheduler crontab {0} does not exist".to_string(),
+                "调度配置定时表达式[{0}]不存在".to_string(),
+            ),
+            AppStatus::ScheduleCronOnlineForbidUpdate => ErrorInfo::new(
+                10023,
+                "online status does not allow update operations".to_string(),
+                "调度配置上线状态不允许修改".to_string(),
+            ),
+            AppStatus::ScheduleCronCheckFailed => ErrorInfo::new(
+                10024,
+                "scheduler crontab expression validation failure: {0}".to_string(),
+                "调度配置定时表达式验证失败: {0}".to_string(),
+            ),
+            AppStatus::MasterNotExists => ErrorInfo::new(
+                10025,
+                "master does not exist".to_string(),
+                "无可用master节点".to_string(),
+            ),
+            AppStatus::ScheduleStatusUnknown => ErrorInfo::new(
+                10026,
+                "unknown status: {0}".to_string(),
+                "未知状态: {0}".to_string(),
+            ),
+            AppStatus::CreateAlertGroupError => ErrorInfo::new(
+                10027,
+                "create alert group error".to_string(),
+                "创建告警组错误".to_string(),
+            ),
+            AppStatus::QueryAllAlertgroupError => ErrorInfo::new(
+                10028,
+                "query all alertgroup error".to_string(),
+                "查询告警组错误".to_string(),
+            ),
+            AppStatus::ListPagingAlertGroupError => ErrorInfo::new(
+                10029,
+                "list paging alert group error".to_string(),
+                "分页查询告警组错误".to_string(),
+            ),
+            AppStatus::UpdateAlertGroupError => ErrorInfo::new(
+                10030,
+                "update alert group error".to_string(),
+                "更新告警组错误".to_string(),
+            ),
+            AppStatus::DeleteAlertGroupError => ErrorInfo::new(
+                10031,
+                "delete alert group error".to_string(),
+                "删除告警组错误".to_string(),
+            ),
+            AppStatus::AlertGroupGrantUserError => ErrorInfo::new(
+                10032,
+                "alert group grant user error".to_string(),
+                "告警组授权用户错误".to_string(),
+            ),
+            AppStatus::CreateDatasourceError => ErrorInfo::new(
+                10033,
+                "create datasource error".to_string(),
+                "创建数据源错误".to_string(),
+            ),
+            AppStatus::UpdateDatasourceError => ErrorInfo::new(
+                10034,
+                "update datasource error".to_string(),
+                "更新数据源错误".to_string(),
+            ),
+            AppStatus::QueryDatasourceError => ErrorInfo::new(
+                10035,
+                "query datasource error".to_string(),
+                "查询数据源错误".to_string(),
+            ),
+            AppStatus::ConnectDatasourceFailure => ErrorInfo::new(
+                10036,
+                "connect datasource failure".to_string(),
+                "建立数据源连接失败".to_string(),
+            ),
+            AppStatus::ConnectionTestFailure => ErrorInfo::new(
+                10037,
+                "connection test failure".to_string(),
+                "测试数据源连接失败".to_string(),
+            ),
+            AppStatus::DeleteDataSourceFailure => ErrorInfo::new(
+                10038,
+                "delete data source failure".to_string(),
+                "删除数据源失败".to_string(),
+            ),
+            AppStatus::VerifyDatasourceNameFailure => ErrorInfo::new(
+                10039,
+                "verify datasource name failure".to_string(),
+                "验证数据源名称失败".to_string(),
+            ),
+            AppStatus::UnauthorizedDatasource => ErrorInfo::new(
+                10040,
+                "unauthorized datasource".to_string(),
+                "未经授权的数据源".to_string(),
+            ),
+            AppStatus::AuthorizedDataSource => ErrorInfo::new(
+                10041,
+                "authorized data source".to_string(),
+                "授权数据源失败".to_string(),
+            ),
+            AppStatus::LoginSuccess =>
+                ErrorInfo::new(10042, "login success".to_string(), "登录成功".to_string()),
+            AppStatus::UserLoginFailure => ErrorInfo::new(
+                10043,
+                "user login failure".to_string(),
+                "用户登录失败".to_string(),
+            ),
+            AppStatus::ListWorkersError => ErrorInfo::new(
+                10044,
+                "list workers error".to_string(),
+                "查询worker列表错误".to_string(),
+            ),
+            AppStatus::ListMastersError => ErrorInfo::new(
+                10045,
+                "list masters error".to_string(),
+                "查询master列表错误".to_string(),
+            ),
+            AppStatus::UpdateProjectError => ErrorInfo::new(
+                10046,
+                "update project error".to_string(),
+                "更新项目信息错误".to_string(),
+            ),
+            AppStatus::QueryProjectDetailsByCodeError => ErrorInfo::new(
+                10047,
+                "query project details by code error".to_string(),
+                "查询项目详细信息错误".to_string(),
+            ),
+            AppStatus::CreateProjectError => ErrorInfo::new(
+                10048,
+                "create project error".to_string(),
+                "创建项目错误".to_string(),
+            ),
+            AppStatus::LoginUserQueryProjectListPagingError => ErrorInfo::new(
+                10049,
+                "login user query project list paging error".to_string(),
+                "分页查询项目列表错误".to_string(),
+            ),
+            AppStatus::DeleteProjectError => ErrorInfo::new(
+                10050,
+                "delete project error".to_string(),
+                "删除项目错误".to_string(),
+            ),
+            AppStatus::QueryUnauthorizedProjectError => ErrorInfo::new(
+                10051,
+                "query unauthorized project error".to_string(),
+                "查询未授权项目错误".to_string(),
+            ),
+            AppStatus::QueryAuthorizedProject => ErrorInfo::new(
+                10052,
+                "query authorized project".to_string(),
+                "查询授权项目错误".to_string(),
+            ),
+            AppStatus::QueryQueueListError => ErrorInfo::new(
+                10053,
+                "query queue list error".to_string(),
+                "查询队列列表错误".to_string(),
+            ),
+            AppStatus::CreateResourceError => ErrorInfo::new(
+                10054,
+                "create resource error".to_string(),
+                "创建资源错误".to_string(),
+            ),
+            AppStatus::UpdateResourceError => ErrorInfo::new(
+                10055,
+                "update resource error".to_string(),
+                "更新资源错误".to_string(),
+            ),
+            AppStatus::QueryResourcesListError => ErrorInfo::new(
+                10056,
+                "query resources list error".to_string(),
+                "查询资源列表错误".to_string(),
+            ),
+            AppStatus::QueryResourcesListPaging => ErrorInfo::new(
+                10057,
+                "query resources list paging".to_string(),
+                "分页查询资源列表错误".to_string(),
+            ),
+            AppStatus::DeleteResourceError => ErrorInfo::new(
+                10058,
+                "delete resource error".to_string(),
+                "删除资源错误".to_string(),
+            ),
+            AppStatus::VerifyResourceByNameAndTypeError => ErrorInfo::new(
+                10059,
+                "verify resource by name and type error".to_string(),
+                "资源名称或类型验证错误".to_string(),
+            ),
+            AppStatus::ViewResourceFileOnLineError => ErrorInfo::new(
+                10060,
+                "view resource file online error".to_string(),
+                "查看资源文件错误".to_string(),
+            ),
+            AppStatus::CreateResourceFileOnLineError => ErrorInfo::new(
+                10061,
+                "create resource file online error".to_string(),
+                "创建资源文件错误".to_string(),
+            ),
+            AppStatus::ResourceFileIsEmpty => ErrorInfo::new(
+                10062,
+                "resource file is empty".to_string(),
+                "资源文件内容不能为空".to_string(),
+            ),
+            AppStatus::EditResourceFileOnLineError => ErrorInfo::new(
+                10063,
+                "edit resource file online error".to_string(),
+                "更新资源文件错误".to_string(),
+            ),
+            AppStatus::DownloadResourceFileError => ErrorInfo::new(
+                10064,
+                "download resource file error".to_string(),
+                "下载资源文件错误".to_string(),
+            ),
+            AppStatus::CreateUdfFunctionError => ErrorInfo::new(
+                10065,
+                "create udf function error".to_string(),
+                "创建UDF函数错误".to_string(),
+            ),
+            AppStatus::ViewUdfFunctionError => ErrorInfo::new(
+                10066,
+                "view udf function error".to_string(),
+                "查询UDF函数错误".to_string(),
+            ),
+            AppStatus::UpdateUdfFunctionError => ErrorInfo::new(
+                10067,
+                "update udf function error".to_string(),
+                "更新UDF函数错误".to_string(),
+            ),
+            AppStatus::QueryUdfFunctionListPagingError => ErrorInfo::new(
+                10068,
+                "query udf function list paging error".to_string(),
+                "分页查询UDF函数列表错误".to_string(),
+            ),
+            AppStatus::QueryDatasourceByTypeError => ErrorInfo::new(
+                10069,
+                "query datasource by type error".to_string(),
+                "查询数据源信息错误".to_string(),
+            ),
+            AppStatus::VerifyUdfFunctionNameError => ErrorInfo::new(
+                10070,
+                "verify udf function name error".to_string(),
+                "UDF函数名称验证错误".to_string(),
+            ),
+            AppStatus::DeleteUdfFunctionError => ErrorInfo::new(
+                10071,
+                "delete udf function error".to_string(),
+                "删除UDF函数错误".to_string(),
+            ),
+            AppStatus::AuthorizedFileResourceError => ErrorInfo::new(
+                10072,
+                "authorized file resource error".to_string(),
+                "授权资源文件错误".to_string(),
+            ),
+            AppStatus::AuthorizeResourceTree => ErrorInfo::new(
+                10073,
+                "authorize resource tree display error".to_string(),
+                "授权资源目录树错误".to_string(),
+            ),
+            AppStatus::UnauthorizedUdfFunctionError => ErrorInfo::new(
+                10074,
+                "unauthorized udf function error".to_string(),
+                "查询未授权UDF函数错误".to_string(),
+            ),
+            AppStatus::AuthorizedUdfFunctionError => ErrorInfo::new(
+                10075,
+                "authorized udf function error".to_string(),
+                "授权UDF函数错误".to_string(),
+            ),
+            AppStatus::CreateScheduleError => ErrorInfo::new(
+                10076,
+                "create schedule error".to_string(),
+                "创建调度配置错误".to_string(),
+            ),
+            AppStatus::UpdateScheduleError => ErrorInfo::new(
+                10077,
+                "update schedule error".to_string(),
+                "更新调度配置错误".to_string(),
+            ),
+            AppStatus::PublishScheduleOnlineError => ErrorInfo::new(
+                10078,
+                "publish schedule online error".to_string(),
+                "上线调度配置错误".to_string(),
+            ),
+            AppStatus::OfflineScheduleError => ErrorInfo::new(
+                10079,
+                "offline schedule error".to_string(),
+                "下线调度配置错误".to_string(),
+            ),
+            AppStatus::QueryScheduleListPagingError => ErrorInfo::new(
+                10080,
+                "query schedule list paging error".to_string(),
+                "分页查询调度配置列表错误".to_string(),
+            ),
+            AppStatus::QueryScheduleListError => ErrorInfo::new(
+                10081,
+                "query schedule list error".to_string(),
+                "查询调度配置列表错误".to_string(),
+            ),
+            AppStatus::QueryTaskListPagingError => ErrorInfo::new(
+                10082,
+                "query task list paging error".to_string(),
+                "分页查询任务列表错误".to_string(),
+            ),
+            AppStatus::QueryTaskRecordListPagingError => ErrorInfo::new(
+                10083,
+                "query task record list paging error".to_string(),
+                "分页查询任务记录错误".to_string(),
+            ),
+            AppStatus::CreateTenantError => ErrorInfo::new(
+                10084,
+                "create tenant error".to_string(),
+                "创建租户错误".to_string(),
+            ),
+            AppStatus::QueryTenantListPagingError => ErrorInfo::new(
+                10085,
+                "query tenant list paging error".to_string(),
+                "分页查询租户列表错误".to_string(),
+            ),
+            AppStatus::QueryTenantListError => ErrorInfo::new(
+                10086,
+                "query tenant list error".to_string(),
+                "查询租户列表错误".to_string(),
+            ),
+            AppStatus::UpdateTenantError => ErrorInfo::new(
+                10087,
+                "update tenant error".to_string(),
+                "更新租户错误".to_string(),
+            ),
+            AppStatus::DeleteTenantByIdError => ErrorInfo::new(
+                10088,
+                "delete tenant by id error".to_string(),
+                "删除租户错误".to_string(),
+            ),
+            AppStatus::VerifyOsTenantCodeError => ErrorInfo::new(
+                10089,
+                "verify os tenant code error".to_string(),
+                "操作系统租户验证错误".to_string(),
+            ),
+            AppStatus::CreateUserError => ErrorInfo::new(
+                10090,
+                "create user error".to_string(),
+                "创建用户错误".to_string(),
+            ),
+            AppStatus::QueryUserListPagingError => ErrorInfo::new(
+                10091,
+                "query user list paging error".to_string(),
+                "分页查询用户列表错误".to_string(),
+            ),
+            AppStatus::UpdateUserError => ErrorInfo::new(
+                10092,
+                "update user error".to_string(),
+                "更新用户错误".to_string(),
+            ),
+            AppStatus::DeleteUserByIdError => ErrorInfo::new(
+                10093,
+                "delete user by id error".to_string(),
+                "删除用户错误".to_string(),
+            ),
+            AppStatus::GrantProjectError => ErrorInfo::new(
+                10094,
+                "grant project error".to_string(),
+                "授权项目错误".to_string(),
+            ),
+            AppStatus::GrantResourceError => ErrorInfo::new(
+                10095,
+                "grant resource error".to_string(),
+                "授权资源错误".to_string(),
+            ),
+            AppStatus::GrantUdfFunctionError => ErrorInfo::new(
+                10096,
+                "grant udf function error".to_string(),
+                "授权UDF函数错误".to_string(),
+            ),
+            AppStatus::GrantDatasourceError => ErrorInfo::new(
+                10097,
+                "grant datasource error".to_string(),
+                "授权数据源错误".to_string(),
+            ),
+            AppStatus::GetUserInfoError => ErrorInfo::new(
+                10098,
+                "get user info error".to_string(),
+                "获取用户信息错误".to_string(),
+            ),
+            AppStatus::UserListError => ErrorInfo::new(
+                10099,
+                "user list error".to_string(),
+                "查询用户列表错误".to_string(),
+            ),
+            AppStatus::VerifyUsernameError => ErrorInfo::new(
+                10100,
+                "verify username error".to_string(),
+                "用户名验证错误".to_string(),
+            ),
+            AppStatus::UnauthorizedUserError => ErrorInfo::new(
+                10101,
+                "unauthorized user error".to_string(),
+                "查询未授权用户错误".to_string(),
+            ),
+            AppStatus::AuthorizedUserError => ErrorInfo::new(
+                10102,
+                "authorized user error".to_string(),
+                "查询授权用户错误".to_string(),
+            ),
+            AppStatus::QueryTaskInstanceLogError => ErrorInfo::new(
+                10103,
+                "view task instance log error".to_string(),
+                "查询任务实例日志错误".to_string(),
+            ),
+            AppStatus::DownloadTaskInstanceLogFileError => ErrorInfo::new(
+                10104,
+                "download task instance log file error".to_string(),
+                "下载任务日志文件错误".to_string(),
+            ),
+            AppStatus::CreateProcessDefinitionError => ErrorInfo::new(
+                10105,
+                "create process definition error".to_string(),
+                "创建工作流错误".to_string(),
+            ),
+            AppStatus::VerifyProcessDefinitionNameUniqueError => ErrorInfo::new(
+                10106,
+                "verify process definition name unique error".to_string(),
+                "工作流定义名称验证错误".to_string(),
+            ),
+            AppStatus::UpdateProcessDefinitionError => ErrorInfo::new(
+                10107,
+                "update process definition error".to_string(),
+                "更新工作流定义错误".to_string(),
+            ),
+            AppStatus::ReleaseProcessDefinitionError => ErrorInfo::new(
+                10108,
+                "release process definition error".to_string(),
+                "上线工作流错误".to_string(),
+            ),
+            AppStatus::QueryDetailOfProcessDefinitionError => ErrorInfo::new(
+                10109,
+                "query detail of process definition error".to_string(),
+                "查询工作流详细信息错误".to_string(),
+            ),
+            AppStatus::QueryProcessDefinitionList => ErrorInfo::new(
+                10110,
+                "query process definition list".to_string(),
+                "查询工作流列表错误".to_string(),
+            ),
+            AppStatus::EncapsulationTreeviewStructureError => ErrorInfo::new(
+                10111,
+                "encapsulation treeview structure error".to_string(),
+                "查询工作流树形图数据错误".to_string(),
+            ),
+            AppStatus::GetTasksListByProcessDefinitionIdError => ErrorInfo::new(
+                10112,
+                "get tasks list by process definition id error".to_string(),
+                "查询工作流定义节点信息错误".to_string(),
+            ),
+            AppStatus::QueryProcessInstanceListPagingError => ErrorInfo::new(
+                10113,
+                "query process instance list paging error".to_string(),
+                "分页查询工作流实例列表错误".to_string(),
+            ),
+            AppStatus::QueryTaskListByProcessInstanceIdError => ErrorInfo::new(
+                10114,
+                "query task list by process instance id error".to_string(),
+                "查询任务实例列表错误".to_string(),
+            ),
+            AppStatus::UpdateProcessInstanceError => ErrorInfo::new(
+                10115,
+                "update process instance error".to_string(),
+                "更新工作流实例错误".to_string(),
+            ),
+            AppStatus::QueryProcessInstanceByIdError => ErrorInfo::new(
+                10116,
+                "query process instance by id error".to_string(),
+                "查询工作流实例错误".to_string(),
+            ),
+            AppStatus::DeleteProcessInstanceByIdError => ErrorInfo::new(
+                10117,
+                "delete process instance by id error".to_string(),
+                "删除工作流实例错误".to_string(),
+            ),
+            AppStatus::QuerySubProcessInstanceDetailInfoByTaskIdError => ErrorInfo::new(
+                10118,
+                "query sub process instance detail info by task id error".to_string(),
+                "查询子流程任务实例错误".to_string(),
+            ),
+            AppStatus::QueryParentProcessInstanceDetailInfoBySubProcessInstanceIdError =>
+                ErrorInfo::new(
+                    10119,
+                    "query parent process instance detail info by sub process instance id error"
+                        .to_string(),
+                    "查询子流程该工作流实例错误".to_string(),
+                ),
+            AppStatus::QueryProcessInstanceAllVariablesError => ErrorInfo::new(
+                10120,
+                "query process instance all variables error".to_string(),
+                "查询工作流自定义变量信息错误".to_string(),
+            ),
+            AppStatus::EncapsulationProcessInstanceGanttStructureError => ErrorInfo::new(
+                10121,
+                "encapsulation process instance gantt structure error".to_string(),
+                "查询工作流实例甘特图数据错误".to_string(),
+            ),
+            AppStatus::QueryProcessDefinitionListPagingError => ErrorInfo::new(
+                10122,
+                "query process definition list paging error".to_string(),
+                "分页查询工作流定义列表错误".to_string(),
+            ),
+            AppStatus::SignOutError =>
+                ErrorInfo::new(10123, "sign out error".to_string(), "退出错误".to_string()),
+            AppStatus::OsTenantCodeHasAlreadyExists => ErrorInfo::new(
+                10124,
+                "os tenant code has already exists".to_string(),
+                "操作系统租户已存在".to_string(),
+            ),
+            AppStatus::IpIsEmpty => ErrorInfo::new(
+                10125,
+                "ip is empty".to_string(),
+                "IP地址不能为空".to_string(),
+            ),
+            AppStatus::ScheduleCronReleaseNeedNotChange => ErrorInfo::new(
+                10126,
+                "schedule release is already {0}".to_string(),
+                "调度配置上线错误[{0}]".to_string(),
+            ),
+            AppStatus::CreateQueueError => ErrorInfo::new(
+                10127,
+                "create queue error".to_string(),
+                "创建队列错误".to_string(),
+            ),
+            AppStatus::QueueNotExist => ErrorInfo::new(
+                10128,
+                "queue {0} not exists".to_string(),
+                "队列ID[{0}]不存在".to_string(),
+            ),
+            AppStatus::QueueValueExist => ErrorInfo::new(
+                10129,
+                "queue value {0} already exists".to_string(),
+                "队列值[{0}]已存在".to_string(),
+            ),
+            AppStatus::QueueNameExist => ErrorInfo::new(
+                10130,
+                "queue name {0} already exists".to_string(),
+                "队列名称[{0}]已存在".to_string(),
+            ),
+            AppStatus::UpdateQueueError => ErrorInfo::new(
+                10131,
+                "update queue error".to_string(),
+                "更新队列信息错误".to_string(),
+            ),
+            AppStatus::NeedNotUpdateQueue => ErrorInfo::new(
+                10132,
+                "need not update queue".to_string(),
+                "无需更新队列信息".to_string(),
+            ),
+            AppStatus::VerifyQueueError => ErrorInfo::new(
+                10133,
+                "verify queue error".to_string(),
+                "验证队列信息错误".to_string(),
+            ),
+            AppStatus::NameNull => ErrorInfo::new(
+                10134,
+                "name must be not null".to_string(),
+                "名称不能为空".to_string(),
+            ),
+            AppStatus::NameExist => ErrorInfo::new(
+                10135,
+                "name {0} already exists".to_string(),
+                "名称[{0}]已存在".to_string(),
+            ),
+            AppStatus::SaveError =>
+                ErrorInfo::new(10136, "save error".to_string(), "保存错误".to_string()),
+            AppStatus::DeleteProjectErrorDefinesNotNull => ErrorInfo::new(
+                10137,
+                "please delete the process definitions in project first!".to_string(),
+                "请先删除全部工作流定义".to_string(),
+            ),
+            AppStatus::BatchDeleteProcessInstanceByIdsError => ErrorInfo::new(
+                10117,
+                "batch delete process instance by ids {0} error".to_string(),
+                "批量删除工作流实例错误: {0}".to_string(),
+            ),
+            AppStatus::PreviewScheduleError => ErrorInfo::new(
+                10139,
+                "preview schedule error".to_string(),
+                "预览调度配置错误".to_string(),
+            ),
+            AppStatus::ParseToCronExpressionError => ErrorInfo::new(
+                10140,
+                "parse cron to cron expression error".to_string(),
+                "解析调度表达式错误".to_string(),
+            ),
+            AppStatus::ScheduleStartTimeEndTimeSame => ErrorInfo::new(
+                10141,
+                "The start time must not be the same as the end".to_string(),
+                "开始时间不能和结束时间一样".to_string(),
+            ),
+            AppStatus::DeleteTenantByIdFail => ErrorInfo::new(
+                10142,
+                "delete tenant by id fail:for there are {0} process instances in executing using \
+                 it"
+                .to_string(),
+                "删除租户失败，有[{0}]个运行中的工作流实例正在使用".to_string(),
+            ),
+            AppStatus::DeleteTenantByIdFailDefines => ErrorInfo::new(
+                10143,
+                "delete tenant by id fail:for there are {0} process definitions using it"
+                    .to_string(),
+                "删除租户失败，有[{0}]个工作流定义正在使用".to_string(),
+            ),
+            AppStatus::DeleteTenantByIdFailUsers => ErrorInfo::new(
+                10144,
+                "delete tenant by id fail: for there are {0} users using it".to_string(),
+                "删除租户失败，有[{0}]个用户正在使用".to_string(),
+            ),
+            AppStatus::DeleteWorkerGroupByIdFail => ErrorInfo::new(
+                10145,
+                "delete worker group by id failfor there are {0} process instances in executing \
+                 using it"
+                    .to_string(),
+                "删除Worker分组失败，有[{0}]个运行中的工作流实例正在使用".to_string(),
+            ),
+            AppStatus::QueryWorkerGroupFail => ErrorInfo::new(
+                10146,
+                "query worker group fail ".to_string(),
+                "查询worker分组失败".to_string(),
+            ),
+            AppStatus::DeleteWorkerGroupFail => ErrorInfo::new(
+                10147,
+                "delete worker group fail ".to_string(),
+                "删除worker分组失败".to_string(),
+            ),
+            AppStatus::UserDisabled => ErrorInfo::new(
+                10148,
+                "The current user is disabled".to_string(),
+                "当前用户已停用".to_string(),
+            ),
+            AppStatus::CopyProcessDefinitionError => ErrorInfo::new(
+                10149,
+                "copy process definition from {0} to {1} error : {2}".to_string(),
+                "从{0}复制工作流到{1}错误 : {2}".to_string(),
+            ),
+            AppStatus::MoveProcessDefinitionError => ErrorInfo::new(
+                10150,
+                "move process definition from {0} to {1} error : {2}".to_string(),
+                "从{0}移动工作流到{1}错误 : {2}".to_string(),
+            ),
+            AppStatus::SwitchProcessDefinitionVersionError => ErrorInfo::new(
+                10151,
+                "Switch process definition version error".to_string(),
+                "切换工作流版本出错".to_string(),
+            ),
+            AppStatus::SwitchProcessDefinitionVersionNotExistProcessDefinitionError =>
+                ErrorInfo::new(
+                    10152,
+                    "Switch process definition version error: not exists process definition: \
+                     [process definition id {0}]"
+                        .to_string(),
+                    "切换工作流版本出错：工作流不存在，[工作流id {0}]".to_string(),
+                ),
             AppStatus::SwitchProcessDefinitionVersionNotExistProcessDefinitionVersionError =>
-                todo!(),
-            AppStatus::QueryProcessDefinitionVersionsError => todo!(),
-            AppStatus::DeleteProcessDefinitionVersionError => todo!(),
-            AppStatus::QueryUserCreatedProjectError => todo!(),
-            AppStatus::ProcessDefinitionCodesIsEmpty => todo!(),
-            AppStatus::BatchCopyProcessDefinitionError => todo!(),
-            AppStatus::BatchMoveProcessDefinitionError => todo!(),
-            AppStatus::QueryWorkflowLineageError => todo!(),
-            AppStatus::QueryAuthorizedAndUserCreatedProjectError => todo!(),
-            AppStatus::DeleteProcessDefinitionByCodeFail => todo!(),
-            AppStatus::CheckOsTenantCodeError => todo!(),
-            AppStatus::ForceTaskSuccessError => todo!(),
-            AppStatus::TaskInstanceStateOperationError => todo!(),
-            AppStatus::DatasourceTypeNotExist => todo!(),
-            AppStatus::ProcessDefinitionNameExist => todo!(),
-            AppStatus::DatasourceDbTypeIllegal => todo!(),
-            AppStatus::DatasourcePortIllegal => todo!(),
-            AppStatus::DatasourceOtherParamsIllegal => todo!(),
-            AppStatus::DatasourceNameIllegal => todo!(),
-            AppStatus::DatasourceHostIllegal => todo!(),
-            AppStatus::DeleteWorkerGroupNotExist => todo!(),
-            AppStatus::CreateWorkerGroupForbiddenInDocker => todo!(),
-            AppStatus::DeleteWorkerGroupForbiddenInDocker => todo!(),
-            AppStatus::WorkerAddressInvalid => todo!(),
-            AppStatus::QueryWorkerAddressListFail => todo!(),
-            AppStatus::TransformProjectOwnership => todo!(),
-            AppStatus::QueryAlertGroupError => todo!(),
-            AppStatus::CurrentLoginUserTenantNotExist => todo!(),
-            AppStatus::RevokeProjectError => todo!(),
-            AppStatus::QueryAuthorizedUser => todo!(),
-            AppStatus::ProjectNotExist => todo!(),
-            AppStatus::TaskInstanceHostIsNull => todo!(),
-            AppStatus::QueryExecutingWorkflowError => todo!(),
-            AppStatus::UdfFunctionNotExist => todo!(),
-            AppStatus::UdfFunctionExists => todo!(),
-            AppStatus::ResourceNotExist => todo!(),
-            AppStatus::ResourceExist => todo!(),
-            AppStatus::ResourceSuffixNotSupportView => todo!(),
-            AppStatus::ResourceSizeExceedLimit => todo!(),
-            AppStatus::ResourceSuffixForbidChange => todo!(),
-            AppStatus::UdfResourceSuffixNotJar => todo!(),
-            AppStatus::HdfsCopyFail => todo!(),
-            AppStatus::ResourceFileExist => todo!(),
-            AppStatus::ResourceFileNotExist => todo!(),
-            AppStatus::UdfResourceIsBound => todo!(),
-            AppStatus::ResourceIsUsed => todo!(),
-            AppStatus::ParentResourceNotExist => todo!(),
-            AppStatus::ResourceNotExistOrNoPermission => todo!(),
-            AppStatus::ResourceIsAuthorized => todo!(),
-            AppStatus::UserNoOperationPerm => todo!(),
-            AppStatus::UserNoOperationProjectPerm => todo!(),
-            AppStatus::ProcessInstanceNotExist => todo!(),
-            AppStatus::ProcessInstanceExist => todo!(),
-            AppStatus::ProcessDefineNotExist => todo!(),
-            AppStatus::ProcessDefineNotRelease => todo!(),
-            AppStatus::SubProcessDefineNotRelease => todo!(),
-            AppStatus::ProcessInstanceAlreadyChanged => todo!(),
-            AppStatus::ProcessInstanceStateOperationError => todo!(),
-            AppStatus::SubProcessInstanceNotExist => todo!(),
-            AppStatus::ProcessDefineNotAllowedEdit => todo!(),
-            AppStatus::ProcessInstanceExecutingCommand => todo!(),
-            AppStatus::ProcessInstanceNotSubProcessInstance => todo!(),
-            AppStatus::TaskInstanceStateCountError => todo!(),
-            AppStatus::CountProcessInstanceStateError => todo!(),
-            AppStatus::CountProcessDefinitionUserError => todo!(),
-            AppStatus::StartProcessInstanceError => todo!(),
-            AppStatus::BatchStartProcessInstanceError => todo!(),
-            AppStatus::ProcessInstanceError => todo!(),
-            AppStatus::ExecuteProcessInstanceError => todo!(),
-            AppStatus::CheckProcessDefinitionError => todo!(),
-            AppStatus::QueryRecipientsAndCopyersByProcessDefinitionError => todo!(),
-            AppStatus::DataIsNotValid => todo!(),
-            AppStatus::DataIsNull => todo!(),
-            AppStatus::ProcessNodeHasCycle => todo!(),
-            AppStatus::ProcessNodeSParameterInvalid => todo!(),
-            AppStatus::ProcessDefineStateOnline => todo!(),
-            AppStatus::DeleteProcessDefineByCodeError => todo!(),
-            AppStatus::ScheduleCronStateOnline => todo!(),
-            AppStatus::DeleteScheduleCronByIdError => todo!(),
-            AppStatus::BatchDeleteProcessDefineError => todo!(),
-            AppStatus::BatchDeleteProcessDefineByCodesError => todo!(),
-            AppStatus::DeleteProcessDefineByCodesError => todo!(),
-            AppStatus::TenantNotSuitable => todo!(),
-            AppStatus::ExportProcessDefineByIdError => todo!(),
-            AppStatus::BatchExportProcessDefineByIdsError => todo!(),
-            AppStatus::ImportProcessDefineError => todo!(),
-            AppStatus::TaskDefineNotExist => todo!(),
-            AppStatus::CreateProcessTaskRelationError => todo!(),
-            AppStatus::ProcessTaskRelationNotExist => todo!(),
-            AppStatus::ProcessTaskRelationExist => todo!(),
-            AppStatus::ProcessDagIsEmpty => todo!(),
-            AppStatus::CheckProcessTaskRelationError => todo!(),
-            AppStatus::CreateTaskDefinitionError => todo!(),
-            AppStatus::UpdateTaskDefinitionError => todo!(),
-            AppStatus::QueryTaskDefinitionVersionsError => todo!(),
-            AppStatus::SwitchTaskDefinitionVersionError => todo!(),
-            AppStatus::DeleteTaskDefinitionVersionError => todo!(),
-            AppStatus::DeleteTaskDefineByCodeError => todo!(),
-            AppStatus::QueryDetailOfTaskDefinitionError => todo!(),
-            AppStatus::QueryTaskDefinitionListPagingError => todo!(),
-            AppStatus::TaskDefinitionNameExisted => todo!(),
-            AppStatus::ReleaseTaskDefinitionError => todo!(),
-            AppStatus::MoveProcessTaskRelationError => todo!(),
-            AppStatus::DeleteTaskProcessRelationError => todo!(),
-            AppStatus::QueryTaskProcessRelationError => todo!(),
-            AppStatus::TaskDefineStateOnline => todo!(),
-            AppStatus::TaskHasDownstream => todo!(),
-            AppStatus::TaskHasUpstream => todo!(),
-            AppStatus::MainTableUsingVersion => todo!(),
-            AppStatus::ProjectProcessNotMatch => todo!(),
-            AppStatus::DeleteEdgeError => todo!(),
-            AppStatus::NotSupportUpdateTaskDefinition => todo!(),
-            AppStatus::NotSupportCopyTaskType => todo!(),
-            AppStatus::HdfsNotStartup => todo!(),
-            AppStatus::StorageNotStartup => todo!(),
-            AppStatus::S3CannotRename => todo!(),
-            AppStatus::QueryDatabaseStateError => todo!(),
-            AppStatus::CreateAccessTokenError => todo!(),
-            AppStatus::GenerateTokenError => todo!(),
-            AppStatus::QueryAccesstokenListPagingError => todo!(),
-            AppStatus::UpdateAccessTokenError => todo!(),
-            AppStatus::DeleteAccessTokenError => todo!(),
-            AppStatus::AccessTokenNotExist => todo!(),
-            AppStatus::QueryAccesstokenByUserError => todo!(),
-            AppStatus::CommandStateCountError => todo!(),
-            AppStatus::NegativeSizeNumberError => todo!(),
-            AppStatus::StartTimeBiggerThanEndTimeError => todo!(),
-            AppStatus::QueueCountError => todo!(),
-            AppStatus::KerberosStartupState => todo!(),
-            AppStatus::QueryAuditLogListPaging => todo!(),
-            AppStatus::PluginNotAUiComponent => todo!(),
-            AppStatus::QueryPluginsResultIsNull => todo!(),
-            AppStatus::QueryPluginsError => todo!(),
-            AppStatus::QueryPluginDetailResultIsNull => todo!(),
-            AppStatus::UpdateAlertPluginInstanceError => todo!(),
-            AppStatus::DeleteAlertPluginInstanceError => todo!(),
-            AppStatus::GetAlertPluginInstanceError => todo!(),
-            AppStatus::CreateAlertPluginInstanceError => todo!(),
-            AppStatus::QueryAllAlertPluginInstanceError => todo!(),
-            AppStatus::PluginInstanceAlreadyExit => todo!(),
-            AppStatus::ListPagingAlertPluginInstanceError => todo!(),
-            AppStatus::DeleteAlertPluginInstanceErrorHasAlertGroupAssociated => todo!(),
-            AppStatus::ProcessDefinitionVersionIsUsed => todo!(),
-            AppStatus::CreateEnvironmentError => todo!(),
-            AppStatus::EnvironmentNameExists => todo!(),
-            AppStatus::EnvironmentNameIsNull => todo!(),
-            AppStatus::EnvironmentConfigIsNull => todo!(),
-            AppStatus::UpdateEnvironmentError => todo!(),
-            AppStatus::DeleteEnvironmentError => todo!(),
-            AppStatus::DeleteEnvironmentRelatedTaskExists => todo!(),
-            AppStatus::QueryEnvironmentByNameError => todo!(),
-            AppStatus::QueryEnvironmentByCodeError => todo!(),
-            AppStatus::QueryEnvironmentError => todo!(),
-            AppStatus::VerifyEnvironmentError => todo!(),
-            AppStatus::GetRuleFormCreateJsonError => todo!(),
-            AppStatus::QueryRuleListPagingError => todo!(),
-            AppStatus::QueryRuleListError => todo!(),
-            AppStatus::QueryRuleInputEntryListError => todo!(),
-            AppStatus::QueryExecuteResultListPagingError => todo!(),
-            AppStatus::GetDatasourceOptionsError => todo!(),
-            AppStatus::GetDatasourceTablesError => todo!(),
-            AppStatus::GetDatasourceTableColumnsError => todo!(),
-            AppStatus::TaskGroupNameExist => todo!(),
-            AppStatus::TaskGroupSizeError => todo!(),
-            AppStatus::TaskGroupStatusError => todo!(),
-            AppStatus::TaskGroupFull => todo!(),
-            AppStatus::TaskGroupUsedSizeError => todo!(),
-            AppStatus::TaskGroupQueueReleaseError => todo!(),
-            AppStatus::TaskGroupQueueAwakeError => todo!(),
-            AppStatus::CreateTaskGroupError => todo!(),
-            AppStatus::UpdateTaskGroupError => todo!(),
-            AppStatus::QueryTaskGroupListError => todo!(),
-            AppStatus::CloseTaskGroupError => todo!(),
-            AppStatus::StartTaskGroupError => todo!(),
-            AppStatus::QueryTaskGroupQueueListError => todo!(),
-            AppStatus::TaskGroupCacheStartFailed => todo!(),
-            AppStatus::EnvironmentWorkerGroupsIsInvalid => todo!(),
-            AppStatus::UpdateEnvironmentWorkerGroupRelationError => todo!(),
-            AppStatus::TaskGroupQueueAlreadyStart => todo!(),
-            AppStatus::TaskGroupStatusClosed => todo!(),
-            AppStatus::TaskGroupStatusOpened => todo!(),
-            AppStatus::NotAllowToDisableOwnAccount => todo!(),
-            AppStatus::NotAllowToDeleteDefaultAlarmGroup => todo!(),
-            AppStatus::TimeZoneIllegal => todo!(),
-            AppStatus::QueryK8sNamespaceListPagingError => todo!(),
-            AppStatus::K8sNamespaceExist => todo!(),
-            AppStatus::CreateK8sNamespaceError => todo!(),
-            AppStatus::UpdateK8sNamespaceError => todo!(),
-            AppStatus::K8sNamespaceNotExist => todo!(),
-            AppStatus::K8sClientOpsError => todo!(),
-            AppStatus::VerifyK8sNamespaceError => todo!(),
-            AppStatus::DeleteK8sNamespaceByIdError => todo!(),
-            AppStatus::VerifyParameterNameFailed => todo!(),
-            AppStatus::StoreOperateCreateError => todo!(),
-            AppStatus::GrantK8sNamespaceError => todo!(),
-            AppStatus::QueryUnauthorizedNamespaceError => todo!(),
-            AppStatus::QueryAuthorizedNamespaceError => todo!(),
-            AppStatus::QueryCanUseK8sClusterError => todo!(),
-            AppStatus::ResourceFullNameTooLongError => todo!(),
-            AppStatus::TenantFullNameTooLongError => todo!(),
+                ErrorInfo::new(
+                    10153,
+                    "Switch process defi:nition version error: not exists process definition \
+                     version: [process definition id {0}] [version number {1}]"
+                        .to_string(),
+                    "切换工作流版本出错：工作流版本信息不存在，[工作流id {0}] [版本号 {1}]"
+                        .to_string(),
+                ),
+            AppStatus::QueryProcessDefinitionVersionsError => ErrorInfo::new(
+                10154,
+                "query process definition versions error".to_string(),
+                "查询工作流历史版本信息出错".to_string(),
+            ),
+            AppStatus::DeleteProcessDefinitionVersionError => ErrorInfo::new(
+                10156,
+                "delete process definition version error".to_string(),
+                "删除工作流历史版本出错".to_string(),
+            ),
+            AppStatus::QueryUserCreatedProjectError => ErrorInfo::new(
+                10157,
+                "query user created project error error".to_string(),
+                "查询用户创建的项目错误".to_string(),
+            ),
+            AppStatus::ProcessDefinitionCodesIsEmpty => ErrorInfo::new(
+                10158,
+                "process definition codes is empty".to_string(),
+                "工作流CODES不能为空".to_string(),
+            ),
+            AppStatus::BatchCopyProcessDefinitionError => ErrorInfo::new(
+                10159,
+                "batch copy process definition error".to_string(),
+                "复制工作流错误".to_string(),
+            ),
+            AppStatus::BatchMoveProcessDefinitionError => ErrorInfo::new(
+                10160,
+                "batch move process definition error".to_string(),
+                "移动工作流错误".to_string(),
+            ),
+            AppStatus::QueryWorkflowLineageError => ErrorInfo::new(
+                10161,
+                "query workflow lineage error".to_string(),
+                "查询血缘失败".to_string(),
+            ),
+            AppStatus::QueryAuthorizedAndUserCreatedProjectError => ErrorInfo::new(
+                10162,
+                "query authorized and user created project error error".to_string(),
+                "查询授权的和用户创建的项目错误".to_string(),
+            ),
+            AppStatus::DeleteProcessDefinitionByCodeFail => ErrorInfo::new(
+                10163,
+                "delete process definition by code fail.to_string(), for there are {0} process \
+                 instances in executing using it"
+                    .to_string(),
+                "删除工作流定义失败，有[{0}]个运行中的工作流实例正在使用".to_string(),
+            ),
+            AppStatus::CheckOsTenantCodeError => ErrorInfo::new(
+                10164,
+                "Tenant code invalid.to_string(), should follow linux's users naming conventions"
+                    .to_string(),
+                "非法的租户名，需要遵守 Linux 用户命名规范".to_string(),
+            ),
+            AppStatus::ForceTaskSuccessError => ErrorInfo::new(
+                10165,
+                "force task success error".to_string(),
+                "强制成功任务实例错误".to_string(),
+            ),
+            AppStatus::TaskInstanceStateOperationError => ErrorInfo::new(
+                10166,
+                "the status of task instance {0} is {1}.to_string(),Cannot perform force success \
+                 operation"
+                    .to_string(),
+                "任务实例[{0}]的状态是[{1}]，无法执行强制成功操作".to_string(),
+            ),
+            AppStatus::DatasourceTypeNotExist => ErrorInfo::new(
+                10167,
+                "data source type not exist".to_string(),
+                "数据源类型不存在".to_string(),
+            ),
+            AppStatus::ProcessDefinitionNameExist => ErrorInfo::new(
+                10168,
+                "process definition name {0} already exists".to_string(),
+                "工作流定义名称[{0}]已存在".to_string(),
+            ),
+            AppStatus::DatasourceDbTypeIllegal => ErrorInfo::new(
+                10169,
+                "datasource type illegal".to_string(),
+                "数据源类型参数不合法".to_string(),
+            ),
+            AppStatus::DatasourcePortIllegal => ErrorInfo::new(
+                10170,
+                "datasource port illegal".to_string(),
+                "数据源端口参数不合法".to_string(),
+            ),
+            AppStatus::DatasourceOtherParamsIllegal => ErrorInfo::new(
+                10171,
+                "datasource other params illegal".to_string(),
+                "数据源其他参数不合法".to_string(),
+            ),
+            AppStatus::DatasourceNameIllegal => ErrorInfo::new(
+                10172,
+                "datasource name illegal".to_string(),
+                "数据源名称不合法".to_string(),
+            ),
+            AppStatus::DatasourceHostIllegal => ErrorInfo::new(
+                10173,
+                "datasource host illegal".to_string(),
+                "数据源HOST不合法".to_string(),
+            ),
+            AppStatus::DeleteWorkerGroupNotExist => ErrorInfo::new(
+                10174,
+                "delete worker group not exist ".to_string(),
+                "删除worker分组不存在".to_string(),
+            ),
+            AppStatus::CreateWorkerGroupForbiddenInDocker => ErrorInfo::new(
+                10175,
+                "create worker group forbidden in docker ".to_string(),
+                "创建worker分组在docker中禁止".to_string(),
+            ),
+            AppStatus::DeleteWorkerGroupForbiddenInDocker => ErrorInfo::new(
+                10176,
+                "delete worker group forbidden in docker ".to_string(),
+                "删除worker分组在docker中禁止".to_string(),
+            ),
+            AppStatus::WorkerAddressInvalid => ErrorInfo::new(
+                10177,
+                "worker address {0} invalid".to_string(),
+                "worker地址[{0}]无效".to_string(),
+            ),
+            AppStatus::QueryWorkerAddressListFail => ErrorInfo::new(
+                10178,
+                "query worker address list fail ".to_string(),
+                "查询worker地址列表失败".to_string(),
+            ),
+            AppStatus::TransformProjectOwnership => ErrorInfo::new(
+                10179,
+                "Please transform project ownership [{0}]".to_string(),
+                "请先转移项目所有权[{0}]".to_string(),
+            ),
+            AppStatus::QueryAlertGroupError => ErrorInfo::new(
+                10180,
+                "query alert group error".to_string(),
+                "查询告警组错误".to_string(),
+            ),
+            AppStatus::CurrentLoginUserTenantNotExist => ErrorInfo::new(
+                10181,
+                "the tenant of the currently login user is not specified".to_string(),
+                "未指定当前登录用户的租户".to_string(),
+            ),
+            AppStatus::RevokeProjectError => ErrorInfo::new(
+                10182,
+                "revoke project error".to_string(),
+                "撤销项目授权错误".to_string(),
+            ),
+            AppStatus::QueryAuthorizedUser => ErrorInfo::new(
+                10183,
+                "query authorized user error".to_string(),
+                "查询拥有项目权限的用户错误".to_string(),
+            ),
+            AppStatus::ProjectNotExist => ErrorInfo::new(
+                10190,
+                "This project was not found. Please refresh page.".to_string(),
+                "该项目不存在".to_string(),
+            ),
+
+            AppStatus::TaskInstanceHostIsNull => ErrorInfo::new(
+                10191,
+                "task instance host is null ".to_string(),
+                "任务实例host为空".to_string(),
+            ),
+            AppStatus::QueryExecutingWorkflowError => ErrorInfo::new(
+                10192,
+                "query executing workflow error".to_string(),
+                "查询运行的工作流实例错误".to_string(),
+            ),
+            AppStatus::UdfFunctionNotExist => ErrorInfo::new(
+                20001,
+                "UDF function not found".to_string(),
+                "UDF函数不存在".to_string(),
+            ),
+            AppStatus::UdfFunctionExists => ErrorInfo::new(
+                20002,
+                "UDF function already exists".to_string(),
+                "UDF函数已存在".to_string(),
+            ),
+            AppStatus::ResourceNotExist => ErrorInfo::new(
+                20004,
+                "resource not exist".to_string(),
+                "资源不存在".to_string(),
+            ),
+            AppStatus::ResourceExist => ErrorInfo::new(
+                20005,
+                "resource already exists".to_string(),
+                "资源已存在".to_string(),
+            ),
+            AppStatus::ResourceSuffixNotSupportView => ErrorInfo::new(
+                20006,
+                "resource suffix do not support online viewing".to_string(),
+                "资源文件后缀不支持查看".to_string(),
+            ),
+            AppStatus::ResourceSizeExceedLimit => ErrorInfo::new(
+                20007,
+                "upload resource file size exceeds limit".to_string(),
+                "上传资源文件大小超过限制".to_string(),
+            ),
+            AppStatus::ResourceSuffixForbidChange => ErrorInfo::new(
+                20008,
+                "resource suffix not allowed to be modified".to_string(),
+                "资源文件后缀不支持修改".to_string(),
+            ),
+            AppStatus::UdfResourceSuffixNotJar => ErrorInfo::new(
+                20009,
+                "UDF resource suffix name must be jar".to_string(),
+                "UDF资源文件后缀名只支持[jar]".to_string(),
+            ),
+            AppStatus::HdfsCopyFail => ErrorInfo::new(
+                20010,
+                "hdfs copy {0} -> {1} fail".to_string(),
+                "hdfs复制失败：[{0}] -> [{1}]".to_string(),
+            ),
+            AppStatus::ResourceFileExist => ErrorInfo::new(
+                20011,
+                "resource file {0} already exists !".to_string(),
+                "资源文件[{0}]已存在".to_string(),
+            ),
+            AppStatus::ResourceFileNotExist => ErrorInfo::new(
+                20012,
+                "resource file {0} not exists !".to_string(),
+                "资源文件[{0}]不存在".to_string(),
+            ),
+            AppStatus::UdfResourceIsBound => ErrorInfo::new(
+                20013,
+                "udf resource file is bound by UDF functions:{0}".to_string(),
+                "udf函数绑定了资源文件[{0}]".to_string(),
+            ),
+            AppStatus::ResourceIsUsed => ErrorInfo::new(
+                20014,
+                "resource file is used by process definition".to_string(),
+                "资源文件被上线的流程定义使用了".to_string(),
+            ),
+            AppStatus::ParentResourceNotExist => ErrorInfo::new(
+                20015,
+                "parent resource not exist".to_string(),
+                "父资源文件不存在".to_string(),
+            ),
+            AppStatus::ResourceNotExistOrNoPermission => ErrorInfo::new(
+                20016,
+                "resource not exist or no permission:please view the task node and remove error \
+                 resource"
+                    .to_string(),
+                "请检查任务节点并移除无权限或者已删除的资源".to_string(),
+            ),
+            AppStatus::ResourceIsAuthorized => ErrorInfo::new(
+                20017,
+                "resource is authorized to user {0}:suffix not allowed to be modified".to_string(),
+                "资源文件已授权其他用户[{0}]".to_string(),
+            ),
+            AppStatus::UserNoOperationPerm => ErrorInfo::new(
+                30001,
+                "user has no operation privilege".to_string(),
+                "当前用户没有操作权限".to_string(),
+            ),
+            AppStatus::UserNoOperationProjectPerm => ErrorInfo::new(
+                30002,
+                "user {0} is not has project {1} permission".to_string(),
+                "当前用户[{0}]没有[{1}]项目的操作权限".to_string(),
+            ),
+            AppStatus::ProcessInstanceNotExist => ErrorInfo::new(
+                50001,
+                "process instance {0} does not exist".to_string(),
+                "工作流实例[{0}]不存在".to_string(),
+            ),
+            AppStatus::ProcessInstanceExist => ErrorInfo::new(
+                50002,
+                "process instance {0} already exists".to_string(),
+                "工作流实例[{0}]已存在".to_string(),
+            ),
+            AppStatus::ProcessDefineNotExist => ErrorInfo::new(
+                50003,
+                "process definition {0} does not exist".to_string(),
+                "工作流定义[{0}]不存在".to_string(),
+            ),
+            AppStatus::ProcessDefineNotRelease => ErrorInfo::new(
+                50004,
+                "process definition {0} process version {1} not online".to_string(),
+                "工作流定义[{0}] 工作流版本[{1}]不是上线状态".to_string(),
+            ),
+            AppStatus::SubProcessDefineNotRelease => ErrorInfo::new(
+                50004,
+                "exist sub process definition not online".to_string(),
+                "存在子工作流定义不是上线状态".to_string(),
+            ),
+            AppStatus::ProcessInstanceAlreadyChanged => ErrorInfo::new(
+                50005,
+                "the status of process instance {0} is already {1}".to_string(),
+                "工作流实例[{0}]的状态已经是[{1}]".to_string(),
+            ),
+            AppStatus::ProcessInstanceStateOperationError => ErrorInfo::new(
+                50006,
+                "the status of process instance {0} is {1}.to_string(),Cannot perform the \
+                 operation"
+                    .to_string(),
+                "工作流实例[{0}]的状态是[{1}]，无法执行该操作".to_string(),
+            ),
+            AppStatus::SubProcessInstanceNotExist => ErrorInfo::new(
+                50007,
+                "the task belong to process instance does not exist".to_string(),
+                "子工作流实例不存在".to_string(),
+            ),
+            AppStatus::ProcessDefineNotAllowedEdit => ErrorInfo::new(
+                50008,
+                "process definition {0} does not allow edit".to_string(),
+                "工作流定义[{0}]不允许修改".to_string(),
+            ),
+            AppStatus::ProcessInstanceExecutingCommand => ErrorInfo::new(
+                50009,
+                "process instance {0} is executing command".to_string(),
+                "工作流实例[{0}]正在执行命令".to_string(),
+            ),
+            AppStatus::ProcessInstanceNotSubProcessInstance => ErrorInfo::new(
+                50010,
+                "process instance {0} is not sub process instance".to_string(),
+                "工作流实例[{0}]不是子工作流实例".to_string(),
+            ),
+            AppStatus::TaskInstanceStateCountError => ErrorInfo::new(
+                50011,
+                "task instance state count error".to_string(),
+                "查询各状态任务实例数错误".to_string(),
+            ),
+            AppStatus::CountProcessInstanceStateError => ErrorInfo::new(
+                50012,
+                "count process instance state error".to_string(),
+                "查询各状态流程实例数错误".to_string(),
+            ),
+            AppStatus::CountProcessDefinitionUserError => ErrorInfo::new(
+                50013,
+                "count process definition user error".to_string(),
+                "查询各用户流程定义数错误".to_string(),
+            ),
+            AppStatus::StartProcessInstanceError => ErrorInfo::new(
+                50014,
+                "start process instance error".to_string(),
+                "运行工作流实例错误".to_string(),
+            ),
+            AppStatus::BatchStartProcessInstanceError => ErrorInfo::new(
+                50014,
+                "batch start process instance error: {0}".to_string(),
+                "批量运行工作流实例错误: {0}".to_string(),
+            ),
+            AppStatus::ProcessInstanceError => ErrorInfo::new(
+                50014,
+                "process instance delete error: {0}".to_string(),
+                "工作流实例删除[{0}]错误".to_string(),
+            ),
+            AppStatus::ExecuteProcessInstanceError => ErrorInfo::new(
+                50015,
+                "execute process instance error".to_string(),
+                "操作工作流实例错误".to_string(),
+            ),
+            AppStatus::CheckProcessDefinitionError => ErrorInfo::new(
+                50016,
+                "check process definition error".to_string(),
+                "工作流定义错误".to_string(),
+            ),
+            AppStatus::QueryRecipientsAndCopyersByProcessDefinitionError => ErrorInfo::new(
+                50017,
+                "query recipients and copyers by process definition error".to_string(),
+                "查询收件人和抄送人错误".to_string(),
+            ),
+            AppStatus::DataIsNotValid => ErrorInfo::new(
+                50017,
+                "data {0} not valid".to_string(),
+                "数据[{0}]无效".to_string(),
+            ),
+            AppStatus::DataIsNull => ErrorInfo::new(
+                50018,
+                "data {0} is null".to_string(),
+                "数据[{0}]不能为空".to_string(),
+            ),
+            AppStatus::ProcessNodeHasCycle => ErrorInfo::new(
+                50019,
+                "process node has cycle".to_string(),
+                "流程节点间存在循环依赖".to_string(),
+            ),
+            AppStatus::ProcessNodeSParameterInvalid => ErrorInfo::new(
+                50020,
+                "process node {0} parameter invalid".to_string(),
+                "流程节点[{0}]参数无效".to_string(),
+            ),
+            AppStatus::ProcessDefineStateOnline => ErrorInfo::new(
+                50021,
+                "process definition [{0}] is already online".to_string(),
+                "工作流定义[{0}]已上线".to_string(),
+            ),
+            AppStatus::DeleteProcessDefineByCodeError => ErrorInfo::new(
+                50022,
+                "delete process definition by code error".to_string(),
+                "删除工作流定义错误".to_string(),
+            ),
+            AppStatus::ScheduleCronStateOnline => ErrorInfo::new(
+                50023,
+                "the status of schedule {0} is already online".to_string(),
+                "调度配置[{0}]已上线".to_string(),
+            ),
+            AppStatus::DeleteScheduleCronByIdError => ErrorInfo::new(
+                50024,
+                "delete schedule by id error".to_string(),
+                "删除调度配置错误".to_string(),
+            ),
+            AppStatus::BatchDeleteProcessDefineError => ErrorInfo::new(
+                50025,
+                "batch delete process definition error".to_string(),
+                "批量删除工作流定义错误".to_string(),
+            ),
+            AppStatus::BatchDeleteProcessDefineByCodesError => ErrorInfo::new(
+                50026,
+                "batch delete process definition by codes {0} error".to_string(),
+                "批量删除工作流定义[{0}]错误".to_string(),
+            ),
+            AppStatus::DeleteProcessDefineByCodesError => ErrorInfo::new(
+                50026,
+                "delete process definition by codes {0} error".to_string(),
+                "删除工作流定义[{0}]错误".to_string(),
+            ),
+            AppStatus::TenantNotSuitable => ErrorInfo::new(
+                50027,
+                "there is not any tenant suitable: please choose a tenant available.".to_string(),
+                "没有合适的租户，请选择可用的租户".to_string(),
+            ),
+            AppStatus::ExportProcessDefineByIdError => ErrorInfo::new(
+                50028,
+                "export process definition by id error".to_string(),
+                "导出工作流定义错误".to_string(),
+            ),
+            AppStatus::BatchExportProcessDefineByIdsError => ErrorInfo::new(
+                50028,
+                "batch export process definition by ids error".to_string(),
+                "批量导出工作流定义错误".to_string(),
+            ),
+            AppStatus::ImportProcessDefineError => ErrorInfo::new(
+                50029,
+                "import process definition error".to_string(),
+                "导入工作流定义错误".to_string(),
+            ),
+            AppStatus::TaskDefineNotExist => ErrorInfo::new(
+                50030,
+                "task definition [{0}] does not exist".to_string(),
+                "任务定义[{0}]不存在".to_string(),
+            ),
+            AppStatus::CreateProcessTaskRelationError => ErrorInfo::new(
+                50032,
+                "create process task relation error".to_string(),
+                "创建工作流任务关系错误".to_string(),
+            ),
+            AppStatus::ProcessTaskRelationNotExist => ErrorInfo::new(
+                50033,
+                "process task relation [{0}] does not exist".to_string(),
+                "工作流任务关系[{0}]不存在".to_string(),
+            ),
+            AppStatus::ProcessTaskRelationExist => ErrorInfo::new(
+                50034,
+                "process task relation is already exist  processCode:[{0}]".to_string(),
+                "工作流任务关系已存在".to_string(),
+            ),
+            AppStatus::ProcessDagIsEmpty => ErrorInfo::new(
+                50035,
+                "process dag is empty".to_string(),
+                "工作流dag是空".to_string(),
+            ),
+            AppStatus::CheckProcessTaskRelationError => ErrorInfo::new(
+                50036,
+                "check process task relation error".to_string(),
+                "工作流任务关系参数错误".to_string(),
+            ),
+            AppStatus::CreateTaskDefinitionError => ErrorInfo::new(
+                50037,
+                "create task definition error".to_string(),
+                "创建任务错误".to_string(),
+            ),
+            AppStatus::UpdateTaskDefinitionError => ErrorInfo::new(
+                50038,
+                "update task definition error".to_string(),
+                "更新任务定义错误".to_string(),
+            ),
+            AppStatus::QueryTaskDefinitionVersionsError => ErrorInfo::new(
+                50039,
+                "query task definition versions error".to_string(),
+                "查询任务历史版本信息出错".to_string(),
+            ),
+            AppStatus::SwitchTaskDefinitionVersionError => ErrorInfo::new(
+                50040,
+                "Switch task definition version error".to_string(),
+                "切换任务版本出错".to_string(),
+            ),
+            AppStatus::DeleteTaskDefinitionVersionError => ErrorInfo::new(
+                50041,
+                "delete task definition version error".to_string(),
+                "删除任务历史版本出错".to_string(),
+            ),
+            AppStatus::DeleteTaskDefineByCodeError => ErrorInfo::new(
+                50042,
+                "delete task definition by code error".to_string(),
+                "删除任务定义错误".to_string(),
+            ),
+            AppStatus::QueryDetailOfTaskDefinitionError => ErrorInfo::new(
+                50043,
+                "query detail of task definition error".to_string(),
+                "查询任务详细信息错误".to_string(),
+            ),
+            AppStatus::QueryTaskDefinitionListPagingError => ErrorInfo::new(
+                50044,
+                "query task definition list paging error".to_string(),
+                "分页查询任务定义列表错误".to_string(),
+            ),
+            AppStatus::TaskDefinitionNameExisted => ErrorInfo::new(
+                50045,
+                "task definition name [{0}] already exists".to_string(),
+                "任务定义名称[{0}]已经存在".to_string(),
+            ),
+            AppStatus::ReleaseTaskDefinitionError => ErrorInfo::new(
+                50046,
+                "release task definition error".to_string(),
+                "上线任务错误".to_string(),
+            ),
+            AppStatus::MoveProcessTaskRelationError => ErrorInfo::new(
+                50047,
+                "move process task relation error".to_string(),
+                "移动任务到其他工作流错误".to_string(),
+            ),
+            AppStatus::DeleteTaskProcessRelationError => ErrorInfo::new(
+                50048,
+                "delete process task relation error".to_string(),
+                "删除工作流任务关系错误".to_string(),
+            ),
+            AppStatus::QueryTaskProcessRelationError => ErrorInfo::new(
+                50049,
+                "query process task relation error".to_string(),
+                "查询工作流任务关系错误".to_string(),
+            ),
+            AppStatus::TaskDefineStateOnline => ErrorInfo::new(
+                50050,
+                "task definition [{0}] is already online".to_string(),
+                "任务定义[{0}]已上线".to_string(),
+            ),
+            AppStatus::TaskHasDownstream => ErrorInfo::new(
+                50051,
+                "Task exists downstream [{0}] dependence".to_string(),
+                "任务存在下游[{0}]依赖".to_string(),
+            ),
+            AppStatus::TaskHasUpstream => ErrorInfo::new(
+                50052,
+                "Task [{0}] exists upstream dependence".to_string(),
+                "任务[{0}]存在上游依赖".to_string(),
+            ),
+            AppStatus::MainTableUsingVersion => ErrorInfo::new(
+                50053,
+                "the version that the master table is using".to_string(),
+                "主表正在使用该版本".to_string(),
+            ),
+            AppStatus::ProjectProcessNotMatch => ErrorInfo::new(
+                50054,
+                "the project and the process is not match".to_string(),
+                "项目和工作流不匹配".to_string(),
+            ),
+            AppStatus::DeleteEdgeError => ErrorInfo::new(
+                50055,
+                "delete edge error".to_string(),
+                "删除工作流任务连接线错误".to_string(),
+            ),
+            AppStatus::NotSupportUpdateTaskDefinition => ErrorInfo::new(
+                50056,
+                "task state does not support modification".to_string(),
+                "当前任务不支持修改".to_string(),
+            ),
+            AppStatus::NotSupportCopyTaskType => ErrorInfo::new(
+                50057,
+                "task type [{0}] does not support copy".to_string(),
+                "不支持复制的任务类型[{0}]".to_string(),
+            ),
+            AppStatus::HdfsNotStartup => ErrorInfo::new(
+                60001,
+                "hdfs not startup".to_string(),
+                "hdfs未启用".to_string(),
+            ),
+            AppStatus::StorageNotStartup => ErrorInfo::new(
+                60002,
+                "storage not startup".to_string(),
+                "存储未启用".to_string(),
+            ),
+            AppStatus::S3CannotRename => ErrorInfo::new(
+                60003,
+                "directory cannot be renamed".to_string(),
+                "S3无法重命名文件夹".to_string(),
+            ),
+            AppStatus::QueryDatabaseStateError => ErrorInfo::new(
+                70001,
+                "query database state error".to_string(),
+                "查询数据库状态错误".to_string(),
+            ),
+            AppStatus::CreateAccessTokenError => ErrorInfo::new(
+                70010,
+                "create access token error".to_string(),
+                "创建访问token错误".to_string(),
+            ),
+            AppStatus::GenerateTokenError => ErrorInfo::new(
+                70011,
+                "generate token error".to_string(),
+                "生成token错误".to_string(),
+            ),
+            AppStatus::QueryAccesstokenListPagingError => ErrorInfo::new(
+                70012,
+                "query access token list paging error".to_string(),
+                "分页查询访问token列表错误".to_string(),
+            ),
+            AppStatus::UpdateAccessTokenError => ErrorInfo::new(
+                70013,
+                "update access token error".to_string(),
+                "更新访问token错误".to_string(),
+            ),
+            AppStatus::DeleteAccessTokenError => ErrorInfo::new(
+                70014,
+                "delete access token error".to_string(),
+                "删除访问token错误".to_string(),
+            ),
+            AppStatus::AccessTokenNotExist => ErrorInfo::new(
+                70015,
+                "access token not exist".to_string(),
+                "访问token不存在".to_string(),
+            ),
+            AppStatus::QueryAccesstokenByUserError => ErrorInfo::new(
+                70016,
+                "query access token by user error".to_string(),
+                "查询访问指定用户的token错误".to_string(),
+            ),
+            AppStatus::CommandStateCountError => ErrorInfo::new(
+                80001,
+                "task instance state count error".to_string(),
+                "查询各状态任务实例数错误".to_string(),
+            ),
+            AppStatus::NegativeSizeNumberError => ErrorInfo::new(
+                80002,
+                "query size number error".to_string(),
+                "查询size错误".to_string(),
+            ),
+            AppStatus::StartTimeBiggerThanEndTimeError => ErrorInfo::new(
+                80003,
+                "start time bigger than end time error".to_string(),
+                "开始时间在结束时间之后错误".to_string(),
+            ),
+            AppStatus::QueueCountError => ErrorInfo::new(
+                90001,
+                "queue count error".to_string(),
+                "查询队列数据错误".to_string(),
+            ),
+            AppStatus::KerberosStartupState => ErrorInfo::new(
+                100001,
+                "get kerberos startup state error".to_string(),
+                "获取kerberos启动状态错误".to_string(),
+            ),
+            AppStatus::QueryAuditLogListPaging => ErrorInfo::new(
+                10057,
+                "query resources list paging".to_string(),
+                "分页查询资源列表错误".to_string(),
+            ),
+            AppStatus::PluginNotAUiComponent => ErrorInfo::new(
+                110001,
+                "query plugin error: this plugin has no UI component".to_string(),
+                "查询插件错误，此插件无UI组件".to_string(),
+            ),
+            AppStatus::QueryPluginsResultIsNull => ErrorInfo::new(
+                110002,
+                "query alarm plugins result is empty:please check the startup status of the alarm \
+                 component and confirm that the relevant alarm plugin is successfully registered"
+                    .to_string(),
+                "查询告警插件为空".to_string(),
+            ),
+            AppStatus::QueryPluginsError => ErrorInfo::new(
+                110003,
+                "query plugins error".to_string(),
+                "查询插件错误".to_string(),
+            ),
+            AppStatus::QueryPluginDetailResultIsNull => ErrorInfo::new(
+                110004,
+                "query plugin detail result is null".to_string(),
+                "查询插件详情结果为空".to_string(),
+            ),
+            AppStatus::UpdateAlertPluginInstanceError => ErrorInfo::new(
+                110005,
+                "update alert plugin instance error".to_string(),
+                "更新告警组和告警组插件实例错误".to_string(),
+            ),
+            AppStatus::DeleteAlertPluginInstanceError => ErrorInfo::new(
+                110006,
+                "delete alert plugin instance error".to_string(),
+                "删除告警组和告警组插件实例错误".to_string(),
+            ),
+            AppStatus::GetAlertPluginInstanceError => ErrorInfo::new(
+                110007,
+                "get alert plugin instance error".to_string(),
+                "获取告警组和告警组插件实例错误".to_string(),
+            ),
+            AppStatus::CreateAlertPluginInstanceError => ErrorInfo::new(
+                110008,
+                "create alert plugin instance error".to_string(),
+                "创建告警组和告警组插件实例错误".to_string(),
+            ),
+            AppStatus::QueryAllAlertPluginInstanceError => ErrorInfo::new(
+                110009,
+                "query all alert plugin instance error".to_string(),
+                "查询所有告警实例失败".to_string(),
+            ),
+            AppStatus::PluginInstanceAlreadyExit => ErrorInfo::new(
+                110010,
+                "plugin instance already exit".to_string(),
+                "该告警插件实例已存在".to_string(),
+            ),
+            AppStatus::ListPagingAlertPluginInstanceError => ErrorInfo::new(
+                110011,
+                "query plugin instance page error".to_string(),
+                "分页查询告警实例失败".to_string(),
+            ),
+            AppStatus::DeleteAlertPluginInstanceErrorHasAlertGroupAssociated => ErrorInfo::new(
+                110012,
+                "failed to delete the alert instance there is an alarm group associated with this \
+                 alert instance"
+                    .to_string(),
+                "删除告警实例失败，存在与此告警实例关联的警报组".to_string(),
+            ),
+            AppStatus::ProcessDefinitionVersionIsUsed => ErrorInfo::new(
+                110013,
+                "this process definition version is used".to_string(),
+                "此工作流定义版本被使用".to_string(),
+            ),
+            AppStatus::CreateEnvironmentError => ErrorInfo::new(
+                120001,
+                "create environment error".to_string(),
+                "创建环境失败".to_string(),
+            ),
+            AppStatus::EnvironmentNameExists => ErrorInfo::new(
+                120002,
+                "this environment name [{0}] already exists".to_string(),
+                "环境名称[{0}]已经存在".to_string(),
+            ),
+            AppStatus::EnvironmentNameIsNull => ErrorInfo::new(
+                120003,
+                "this environment name shouldn't be empty.".to_string(),
+                "环境名称不能为空".to_string(),
+            ),
+            AppStatus::EnvironmentConfigIsNull => ErrorInfo::new(
+                120004,
+                "this environment config shouldn't be empty.".to_string(),
+                "环境配置信息不能为空".to_string(),
+            ),
+            AppStatus::UpdateEnvironmentError => ErrorInfo::new(
+                120005,
+                "update environment [{0}] info error".to_string(),
+                "更新环境[{0}]信息失败".to_string(),
+            ),
+            AppStatus::DeleteEnvironmentError => ErrorInfo::new(
+                120006,
+                "delete environment error".to_string(),
+                "删除环境信息失败".to_string(),
+            ),
+            AppStatus::DeleteEnvironmentRelatedTaskExists => ErrorInfo::new(
+                120007,
+                "delete environment error, related task exists".to_string(),
+                "删除环境信息失败，存在关联任务".to_string(),
+            ),
+            AppStatus::QueryEnvironmentByNameError => ErrorInfo::new(
+                1200008,
+                "not found environment [{0}] ".to_string(),
+                "查询环境名称[{0}]信息不存在".to_string(),
+            ),
+            AppStatus::QueryEnvironmentByCodeError => ErrorInfo::new(
+                1200009,
+                "not found environment [{0}] ".to_string(),
+                "查询环境编码[{0}]不存在".to_string(),
+            ),
+            AppStatus::QueryEnvironmentError => ErrorInfo::new(
+                1200010,
+                "login user query environment error".to_string(),
+                "分页查询环境列表错误".to_string(),
+            ),
+            AppStatus::VerifyEnvironmentError => ErrorInfo::new(
+                1200011,
+                "verify environment error".to_string(),
+                "验证环境信息错误".to_string(),
+            ),
+            AppStatus::GetRuleFormCreateJsonError => ErrorInfo::new(
+                1200012,
+                "get rule form create json error".to_string(),
+                "获取规则 FROM-CREATE-JSON 错误".to_string(),
+            ),
+            AppStatus::QueryRuleListPagingError => ErrorInfo::new(
+                1200013,
+                "query rule list paging error".to_string(),
+                "获取规则分页列表错误".to_string(),
+            ),
+            AppStatus::QueryRuleListError => ErrorInfo::new(
+                1200014,
+                "query rule list error".to_string(),
+                "获取规则列表错误".to_string(),
+            ),
+            AppStatus::QueryRuleInputEntryListError => ErrorInfo::new(
+                1200015,
+                "query rule list error".to_string(),
+                "获取规则列表错误".to_string(),
+            ),
+            AppStatus::QueryExecuteResultListPagingError => ErrorInfo::new(
+                1200016,
+                "query execute result list paging error".to_string(),
+                "获取数据质量任务结果分页错误".to_string(),
+            ),
+            AppStatus::GetDatasourceOptionsError => ErrorInfo::new(
+                1200017,
+                "get datasource options error".to_string(),
+                "获取数据源Options错误".to_string(),
+            ),
+            AppStatus::GetDatasourceTablesError => ErrorInfo::new(
+                1200018,
+                "get datasource tables error".to_string(),
+                "获取数据源表列表错误".to_string(),
+            ),
+            AppStatus::GetDatasourceTableColumnsError => ErrorInfo::new(
+                1200019,
+                "get datasource table columns error".to_string(),
+                "获取数据源表列名错误".to_string(),
+            ),
+            AppStatus::TaskGroupNameExist => ErrorInfo::new(
+                130001,
+                "this task group name is repeated in a project".to_string(),
+                "该任务组名称在一个项目中已经使用".to_string(),
+            ),
+            AppStatus::TaskGroupSizeError => ErrorInfo::new(
+                130002,
+                "task group size error".to_string(),
+                "任务组大小应该为大于1的整数".to_string(),
+            ),
+            AppStatus::TaskGroupStatusError => ErrorInfo::new(
+                130003,
+                "task group status error".to_string(),
+                "任务组已经被关闭".to_string(),
+            ),
+            AppStatus::TaskGroupFull => ErrorInfo::new(
+                130004,
+                "task group is full".to_string(),
+                "任务组已经满了".to_string(),
+            ),
+            AppStatus::TaskGroupUsedSizeError => ErrorInfo::new(
+                130005,
+                "the used size number of task group is dirty".to_string(),
+                "任务组使用的容量发生了变化".to_string(),
+            ),
+            AppStatus::TaskGroupQueueReleaseError => ErrorInfo::new(
+                130006,
+                "failed to release task group queue".to_string(),
+                "任务组资源释放时出现了错误".to_string(),
+            ),
+            AppStatus::TaskGroupQueueAwakeError => ErrorInfo::new(
+                130007,
+                "awake waiting task failed".to_string(),
+                "任务组使唤醒等待任务时发生了错误".to_string(),
+            ),
+            AppStatus::CreateTaskGroupError => ErrorInfo::new(
+                130008,
+                "create task group error".to_string(),
+                "创建任务组错误".to_string(),
+            ),
+            AppStatus::UpdateTaskGroupError => ErrorInfo::new(
+                130009,
+                "update task group list error".to_string(),
+                "更新任务组错误".to_string(),
+            ),
+            AppStatus::QueryTaskGroupListError => ErrorInfo::new(
+                130010,
+                "query task group list error".to_string(),
+                "查询任务组列表错误".to_string(),
+            ),
+            AppStatus::CloseTaskGroupError => ErrorInfo::new(
+                130011,
+                "close task group error".to_string(),
+                "关闭任务组错误".to_string(),
+            ),
+            AppStatus::StartTaskGroupError => ErrorInfo::new(
+                130012,
+                "start task group error".to_string(),
+                "启动任务组错误".to_string(),
+            ),
+            AppStatus::QueryTaskGroupQueueListError => ErrorInfo::new(
+                130013,
+                "query task group queue list error".to_string(),
+                "查询任务组队列列表错误".to_string(),
+            ),
+            AppStatus::TaskGroupCacheStartFailed => ErrorInfo::new(
+                130014,
+                "cache start failed".to_string(),
+                "任务组相关的缓存启动失败".to_string(),
+            ),
+            AppStatus::EnvironmentWorkerGroupsIsInvalid => ErrorInfo::new(
+                130015,
+                "environment worker groups is invalid format".to_string(),
+                "环境关联的工作组参数解析错误".to_string(),
+            ),
+            AppStatus::UpdateEnvironmentWorkerGroupRelationError => ErrorInfo::new(
+                130016,
+                "update environment worker group relation error".to_string(),
+                "更新环境关联的工作组错误".to_string(),
+            ),
+            AppStatus::TaskGroupQueueAlreadyStart => ErrorInfo::new(
+                130017,
+                "task group queue already start".to_string(),
+                "节点已经获取任务组资源".to_string(),
+            ),
+            AppStatus::TaskGroupStatusClosed => ErrorInfo::new(
+                130018,
+                "The task group has been closed.".to_string(),
+                "任务组已经被关闭".to_string(),
+            ),
+            AppStatus::TaskGroupStatusOpened => ErrorInfo::new(
+                130019,
+                "The task group has been opened.".to_string(),
+                "任务组已经被开启".to_string(),
+            ),
+            AppStatus::NotAllowToDisableOwnAccount => ErrorInfo::new(
+                130020,
+                "Not allow to disable your own account".to_string(),
+                "不能停用自己的账号".to_string(),
+            ),
+            AppStatus::NotAllowToDeleteDefaultAlarmGroup => ErrorInfo::new(
+                130030,
+                "Not allow to delete the default alarm group ".to_string(),
+                "不能删除默认告警组".to_string(),
+            ),
+            AppStatus::TimeZoneIllegal => ErrorInfo::new(
+                130031,
+                "time zone [{0}] is illegal".to_string(),
+                "时区参数 [{0}] 不合法".to_string(),
+            ),
+            AppStatus::QueryK8sNamespaceListPagingError => ErrorInfo::new(
+                1300001,
+                "login user query k8s namespace list paging error".to_string(),
+                "分页查询k8s名称空间列表错误".to_string(),
+            ),
+            AppStatus::K8sNamespaceExist => ErrorInfo::new(
+                1300002,
+                "k8s namespace {0} already exists".to_string(),
+                "k8s命名空间[{0}]已存在".to_string(),
+            ),
+            AppStatus::CreateK8sNamespaceError => ErrorInfo::new(
+                1300003,
+                "create k8s namespace error".to_string(),
+                "创建k8s命名空间错误".to_string(),
+            ),
+            AppStatus::UpdateK8sNamespaceError => ErrorInfo::new(
+                1300004,
+                "update k8s namespace error".to_string(),
+                "更新k8s命名空间信息错误".to_string(),
+            ),
+            AppStatus::K8sNamespaceNotExist => ErrorInfo::new(
+                1300005,
+                "k8s namespace {0} not exists".to_string(),
+                "命名空间ID[{0}]不存在".to_string(),
+            ),
+            AppStatus::K8sClientOpsError => ErrorInfo::new(
+                1300006,
+                "k8s error with exception {0}".to_string(),
+                "k8s操作报错[{0}]".to_string(),
+            ),
+            AppStatus::VerifyK8sNamespaceError => ErrorInfo::new(
+                1300007,
+                "verify k8s and namespace error".to_string(),
+                "验证k8s命名空间信息错误".to_string(),
+            ),
+            AppStatus::DeleteK8sNamespaceByIdError => ErrorInfo::new(
+                1300008,
+                "delete k8s namespace by id error".to_string(),
+                "删除命名空间错误".to_string(),
+            ),
+            AppStatus::VerifyParameterNameFailed => ErrorInfo::new(
+                1300009,
+                "The file name verify failed".to_string(),
+                "文件命名校验失败".to_string(),
+            ),
+            AppStatus::StoreOperateCreateError => ErrorInfo::new(
+                1300010,
+                "create the resource failed".to_string(),
+                "存储操作失败".to_string(),
+            ),
+            AppStatus::GrantK8sNamespaceError => ErrorInfo::new(
+                1300011,
+                "grant namespace error".to_string(),
+                "授权资源错误".to_string(),
+            ),
+            AppStatus::QueryUnauthorizedNamespaceError => ErrorInfo::new(
+                1300012,
+                "query unauthorized namespace error".to_string(),
+                "查询未授权命名空间错误".to_string(),
+            ),
+            AppStatus::QueryAuthorizedNamespaceError => ErrorInfo::new(
+                1300013,
+                "query authorized namespace error".to_string(),
+                "查询授权命名空间错误".to_string(),
+            ),
+            AppStatus::QueryCanUseK8sClusterError => ErrorInfo::new(
+                1300014,
+                "login user query can used k8s cluster list error".to_string(),
+                "查询可用k8s集群错误".to_string(),
+            ),
+            AppStatus::ResourceFullNameTooLongError => ErrorInfo::new(
+                1300015,
+                "resource's fullname is too long error".to_string(),
+                "资源文件名过长".to_string(),
+            ),
+            AppStatus::TenantFullNameTooLongError => ErrorInfo::new(
+                1300016,
+                "tenant's fullname is too long error".to_string(),
+                "租户名过长".to_string(),
+            ),
         }
     }
 }
