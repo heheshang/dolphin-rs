@@ -1,22 +1,22 @@
 {
-    "rust-analyzer.linkedProjects": [
-        "./dolphin-dao/Cargo.toml"
-    ],
-    "rust-analyzer.server.path": "~/.cargo/bin/rust-analyzer",
-    "rust-analyzer.cargo.extraEnv": {
-        // "PROTOC": "/usr/local/protobuf/bin/protoc"
-        "PROTOC": "/usr/local/bin/protoc"
-    },
-    "terminal.integrated.defaultProfile.osx": "zsh",
-    "terminal.integrated.fontSize": 14,
-    "rust-analyzer.showUnlinkedFileNotification": false,
-    "protoc": {
-    // 	"compile_on_save": true,
-        // "options": [
-        // "--proto_path=protos/v3",
-        // "--proto_path=protos/v2",
-        // "--proto_path=${workspaceFolder}/proto/",
-        // ]
-    },
-    "editor.fontFamily": "JetBrainsMono Nerd Font",
+	"rust-analyzer.linkedProjects": [
+		"./dolphin-dao/Cargo.toml"
+	],
+	"rust-analyzer.server.path": "~/.cargo/bin/rust-analyzer",
+	"rust-analyzer.cargo.extraEnv": {
+		"PROTOC": "/usr/local/protobuf/bin/protoc"
+		// "PROTOC": "/usr/local/bin/protoc"
+	},
+	"terminal.integrated.defaultProfile.osx": "zsh",
+	"terminal.integrated.fontSize": 14,
+	"rust-analyzer.showUnlinkedFileNotification": false,
+	"protoc": {
+		// 	"compile_on_save": true,
+		// "options": [
+		// "--proto_path=protos/v3",
+		// "--proto_path=protos/v2",
+		// "--proto_path=${workspaceFolder}/proto/",
+		// ]
+	},
+	"editor.fontFamily": "JetBrainsMono Nerd Font",
 }
