@@ -37,8 +37,7 @@ impl User {
                 let client = get_client().await;
                 client
             })
-            .await
-            .clone();
+            .await;
         let client = match client {
             Ok(client) => client,
             Err(_) =>

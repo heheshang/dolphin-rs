@@ -40,7 +40,7 @@ async fn start_server() -> Result<()> {
             let file = OpenOptions::new()
                 .create(true)
                 .append(true)
-                .open("/home/ssk/workspace/rust-work/dolphin-rs/dolphin-api-v1/log_output.log")
+                .open("log_output.log")
                 .expect("Failed to open log file");
             Box::new(file) as Box<dyn Write + Send>
         })
