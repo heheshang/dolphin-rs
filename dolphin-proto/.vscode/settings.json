@@ -3,6 +3,6 @@
         "./Cargo.toml",
     ],
     "rust-analyzer.cargo.extraEnv": {
-        "PROTOC": "/usr/local/protobuf/bin/protoc"
+        "PROTOC": "/usr/local/bin/protoc"
     },
 }
