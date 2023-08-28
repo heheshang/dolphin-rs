@@ -98,6 +98,11 @@ fn main() {
             &[
                 "protos/googleapis/google/ds/v1/ds_session.proto",
                 "protos/googleapis/google/ds/v1/ds_user.proto",
+                "protos/googleapis/google/ds/v1/ds_udfs.proto",
+                "protos/googleapis/google/ds/v1/qrtz_blob_triggers.proto",
+                "protos/googleapis/google/ds/v1/qrtz_calendars.proto",
+                "protos/googleapis/google/ds/v1/qrtz_cron_triggers.proto",
+                "protos/googleapis/google/ds/v1/qrtz_fired_triggers.proto",
             ],
             &["protos/googleapis"],
         )
