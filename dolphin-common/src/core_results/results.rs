@@ -1,6 +1,9 @@
-use crate::core_error::app_status::{AppStatus, ErrorInfo};
+use crate::{core_error::error::DolphinErrorInfo, core_status::app_status::AppStatus};
 use axum::{response::IntoResponse, Json};
 use serde::{Deserialize, Serialize};
+
+pub type GrpcResponse<T> = Result<tonic::Response<T>, tonic::Status>;
+
 
 #[warn(dead_code)]
 #[serde_with::serde_as]
@@ -8,7 +11,7 @@ use serde::{Deserialize, Serialize};
 pub struct ApiResult<T> {
     pub data: Option<T>,
     #[serde(flatten)]
-    pub errmsg: ErrorInfo,
+    pub errmsg: DolphinErrorInfo,
     // #[serde(flatten)]
     // #[serde_as(as = "ssss")]
     #[serde(skip)]
@@ -20,7 +23,7 @@ impl<T> ApiResult<T> {
         Self {
             data,
             status: AppStatus::SUCCESS,
-            errmsg: ErrorInfo::default(),
+            errmsg: DolphinErrorInfo::default(),
         }
     }
 
@@ -38,7 +41,7 @@ impl<T> Default for ApiResult<T> {
     fn default() -> Self {
         Self {
             data: None,
-            errmsg: ErrorInfo::default(),
+            errmsg: DolphinErrorInfo::default(),
             status: AppStatus::SUCCESS,
         }
     }

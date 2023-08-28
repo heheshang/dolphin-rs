@@ -1,5 +1,5 @@
-use crate::{base::result::ApiResult, core_error::app_status::AppStatus};
 use anyhow::Result;
+use dolphin_common::{results::results::ApiResult, status::app_status::AppStatus};
 use format as f;
 use proto::ds_user::{user_service_client::UserServiceClient, DsUser, GetUserRequest};
 use serde::{Deserialize, Serialize};

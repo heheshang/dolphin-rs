@@ -1,3 +1,2 @@
-pub mod base;
-pub mod core_error;
+pub use dolphin_common::*;
 pub mod user_service;

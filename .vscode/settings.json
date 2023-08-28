@@ -1,8 +1,7 @@
 {
 	"rust-analyzer.linkedProjects": [
 		"./dolphin-dao/Cargo.toml"
-	],
-	"rust-analyzer.server.path": "~/.cargo/bin/rust-analyzer",
+	],	"rust-analyzer.server.path": "~/.cargo/bin/rust-analyzer",
 	"rust-analyzer.cargo.extraEnv": {
 		// "PROTOC": "/usr/local/protobuf/bin/protoc"
 		"PROTOC": "/usr/local/bin/protoc"
@@ -19,4 +18,5 @@
 		// ]
 	},
 	"editor.fontFamily": "JetBrainsMono Nerd Font",
+	"terminal.integrated.fontFamily": "monospace"
 }

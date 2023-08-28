@@ -2,7 +2,7 @@
 resolver = "2"
 
 members = [
-	".",
+    # ".",
     # "dolphin-alert",
     # "dolphin-api",
     # "dolphin-db",
@@ -15,4 +15,5 @@ members = [
     "dolphin-entity",
     "dolphin-proto",
     "dolphin-common",
+    # "dolphin-dao",
 ]

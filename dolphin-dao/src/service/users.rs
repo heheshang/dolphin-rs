@@ -9,6 +9,7 @@ use proto::{
         UpdateUserRequest,
     },
 };
+use dolphin_common::core_results::results::GrpcResponse;
 use sea_orm::{entity::prelude::*, DatabaseConnection};
 #[derive(Default)]
 pub struct UserServer {
@@ -29,10 +30,7 @@ impl UserServer {
 
 #[tonic::async_trait]
 impl UserService for UserServer {
-    async fn get_user(
-        &self,
-        request: tonic::Request<GetUserRequest>,
-    ) -> Result<tonic::Response<DsUser>, tonic::Status> {
+    async fn get_user(&self, request: tonic::Request<GetUserRequest>) -> GrpcResponse<DsUser> {
         let conn = &self.conn;
         let name = request.into_inner().name;
         let db_user: Option<t_ds_user::Model> = t_ds_user::Entity::find()
