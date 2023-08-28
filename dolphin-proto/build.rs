@@ -103,6 +103,12 @@ fn main() {
                 "protos/googleapis/google/ds/v1/qrtz_calendars.proto",
                 "protos/googleapis/google/ds/v1/qrtz_cron_triggers.proto",
                 "protos/googleapis/google/ds/v1/qrtz_fired_triggers.proto",
+                "protos/googleapis/google/ds/v1/qrtz_job_details.proto",
+                "protos/googleapis/google/ds/v1/qrtz_locks.proto",
+                "protos/googleapis/google/ds/v1/qrtz_paused_trigger_grps.proto",
+                "protos/googleapis/google/ds/v1/qrtz_scheduler_state.proto",
+                "protos/googleapis/google/ds/v1/qrtz_simple_triggers.proto",
+                "protos/googleapis/google/ds/v1/qrtz_simprop_triggers.proto",
             ],
             &["protos/googleapis"],
         )
