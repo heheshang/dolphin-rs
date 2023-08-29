@@ -9,53 +9,52 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 
-message QrtzPausedTriggerGrps {
+message QrtzPausedTriggerGrpsBean {
 
     string sched_name=1;
     string trigger_group=2;
 }
 
-
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service QrtzPausedTriggerGrpsService {
-  rpc ListQrtzPausedTriggerGrpss(ListQrtzPausedTriggerGrpssRequest) returns (ListQrtzPausedTriggerGrpssResponse) {
+service QrtzPausedTriggerGrpsBeanService {
+  rpc ListQrtzPausedTriggerGrpsBeans(ListQrtzPausedTriggerGrpsBeansRequest) returns (ListQrtzPausedTriggerGrpsBeansResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/QrtzPausedTriggerGrpss"
+      get: "/v1alpha1/QrtzPausedTriggerGrpsBeans"
     };
   }
 
-  rpc GetQrtzPausedTriggerGrps(GetQrtzPausedTriggerGrpsRequest) returns (QrtzPausedTriggerGrps) {
+  rpc GetQrtzPausedTriggerGrpsBean(GetQrtzPausedTriggerGrpsBeanRequest) returns (QrtzPausedTriggerGrpsBean) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=QrtzPausedTriggerGrpss/*}"
+      get: "/v1alpha1/{name=QrtzPausedTriggerGrpsBeans/*}"
     };
   }
 
-  rpc CreateQrtzPausedTriggerGrps(CreateQrtzPausedTriggerGrpsRequest) returns (QrtzPausedTriggerGrps) {
+  rpc CreateQrtzPausedTriggerGrpsBean(CreateQrtzPausedTriggerGrpsBeanRequest) returns (QrtzPausedTriggerGrpsBean) {
     option (google.api.http) = {
-      post: "/v1alpha1/QrtzPausedTriggerGrpss"
-      body: "QrtzPausedTriggerGrps"
+      post: "/v1alpha1/QrtzPausedTriggerGrpsBeans"
+      body: "QrtzPausedTriggerGrpsBean"
     };
   }
 
-  rpc UpdateQrtzPausedTriggerGrps(UpdateQrtzPausedTriggerGrpsRequest) returns (QrtzPausedTriggerGrps) {
+  rpc UpdateQrtzPausedTriggerGrpsBean(UpdateQrtzPausedTriggerGrpsBeanRequest) returns (QrtzPausedTriggerGrpsBean) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{QrtzPausedTriggerGrps.name=QrtzPausedTriggerGrpss/*}"
-      body: "QrtzPausedTriggerGrps"
+      patch: "/v1alpha1/{QrtzPausedTriggerGrpsBean.name=QrtzPausedTriggerGrpsBeans/*}"
+      body: "QrtzPausedTriggerGrpsBean"
     };
   }
 
-  rpc DeleteQrtzPausedTriggerGrps(DeleteQrtzPausedTriggerGrpsRequest) returns (google.protobuf.Empty) {
+  rpc DeleteQrtzPausedTriggerGrpsBean(DeleteQrtzPausedTriggerGrpsBeanRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=QrtzPausedTriggerGrpss/*}"
+      delete: "/v1alpha1/{name=QrtzPausedTriggerGrpsBeans/*}"
     };
   }
 }
 
-// message QrtzPausedTriggerGrps {
+// message QrtzPausedTriggerGrpsBean {
 // ! This should be defined elsewhere
 // }
 
-message ListQrtzPausedTriggerGrpssRequest {
+message ListQrtzPausedTriggerGrpsBeansRequest {
   // The parent resource name, for example, "shelves/shelf1"
   string parent = 1;
 
@@ -66,42 +65,42 @@ message ListQrtzPausedTriggerGrpssRequest {
   string page_token = 3;
 }
 
-message ListQrtzPausedTriggerGrpssResponse {
-  // The field name should match the noun "QrtzPausedTriggerGrps" in the method name.
+message ListQrtzPausedTriggerGrpsBeansResponse {
+  // The field name should match the noun "QrtzPausedTriggerGrpsBean" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated QrtzPausedTriggerGrps QrtzPausedTriggerGrpss = 1;
+  repeated QrtzPausedTriggerGrpsBean QrtzPausedTriggerGrpsBeans = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetQrtzPausedTriggerGrpsRequest {
+message GetQrtzPausedTriggerGrpsBeanRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateQrtzPausedTriggerGrpsRequest {
-  // The parent resource name where the QrtzPausedTriggerGrps is to be created.
+message CreateQrtzPausedTriggerGrpsBeanRequest {
+  // The parent resource name where the QrtzPausedTriggerGrpsBean is to be created.
   string parent = 1;
 
-  // The QrtzPausedTriggerGrps id to use for this QrtzPausedTriggerGrps.
-  string QrtzPausedTriggerGrps_id = 2;
+  // The QrtzPausedTriggerGrpsBean id to use for this QrtzPausedTriggerGrpsBean.
+  string QrtzPausedTriggerGrpsBean_id = 2;
 
-  // The QrtzPausedTriggerGrps resource to create.
+  // The QrtzPausedTriggerGrpsBean resource to create.
   // The field name should match the Noun in the method name.
-  QrtzPausedTriggerGrps QrtzPausedTriggerGrps = 3;
+  QrtzPausedTriggerGrpsBean QrtzPausedTriggerGrpsBean = 3;
 }
 
-message UpdateQrtzPausedTriggerGrpsRequest {
-  // The QrtzPausedTriggerGrps resource which replaces the resource on the server.
-  QrtzPausedTriggerGrps QrtzPausedTriggerGrps = 1;
+message UpdateQrtzPausedTriggerGrpsBeanRequest {
+  // The QrtzPausedTriggerGrpsBean resource which replaces the resource on the server.
+  QrtzPausedTriggerGrpsBean QrtzPausedTriggerGrpsBean = 1;
 
-  // The update mask applies to the resource. For the `FieldMask` definition,
-  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteQrtzPausedTriggerGrpsRequest {
-  // The resource name of the QrtzPausedTriggerGrps to be deleted.
+message DeleteQrtzPausedTriggerGrpsBeanRequest {
+  // The resource name of the QrtzPausedTriggerGrpsBean to be deleted.
   string name = 1;
 }

@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+
+package ds_plugin_define;
+
+message DsPluginDefineBean {
+
+     int32 id=1 ;
+     string  plugin_name= 2;
+     string  plugin_type=3 ;
+     optional string   plugin_params=4 ;
+     optional string  create_time=5 ;
+     optional string  update_time=6 ;
+}
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsPluginDefineBeanService {
+  rpc ListDsPluginDefineBeans(ListDsPluginDefineBeansRequest) returns (ListDsPluginDefineBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsPluginDefineBeans"
+    };
+  }
+
+  rpc GetDsPluginDefineBean(GetDsPluginDefineBeanRequest) returns (DsPluginDefineBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsPluginDefineBeans/*}"
+    };
+  }
+
+  rpc CreateDsPluginDefineBean(CreateDsPluginDefineBeanRequest) returns (DsPluginDefineBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsPluginDefineBeans"
+      body: "DsPluginDefineBean"
+    };
+  }
+
+  rpc UpdateDsPluginDefineBean(UpdateDsPluginDefineBeanRequest) returns (DsPluginDefineBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsPluginDefineBean.name=DsPluginDefineBeans/*}"
+      body: "DsPluginDefineBean"
+    };
+  }
+
+  rpc DeleteDsPluginDefineBean(DeleteDsPluginDefineBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsPluginDefineBeans/*}"
+    };
+  }
+}
+
+// message DsPluginDefineBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsPluginDefineBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsPluginDefineBeansResponse {
+  // The field name should match the noun "DsPluginDefineBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsPluginDefineBean DsPluginDefineBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsPluginDefineBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsPluginDefineBeanRequest {
+  // The parent resource name where the DsPluginDefineBean is to be created.
+  string parent = 1;
+
+  // The DsPluginDefineBean id to use for this DsPluginDefineBean.
+  string DsPluginDefineBean_id = 2;
+
+  // The DsPluginDefineBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsPluginDefineBean DsPluginDefineBean = 3;
+}
+
+message UpdateDsPluginDefineBeanRequest {
+  // The DsPluginDefineBean resource which replaces the resource on the server.
+  DsPluginDefineBean DsPluginDefineBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsPluginDefineBeanRequest {
+  // The resource name of the DsPluginDefineBean to be deleted.
+  string name = 1;
+}

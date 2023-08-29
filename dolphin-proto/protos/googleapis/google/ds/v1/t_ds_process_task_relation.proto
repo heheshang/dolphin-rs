@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_process_task_relation;
+
+
+message DsProcessTaskRelationBean {
+
+     int32 id=1 ;
+     optional string name=2 ;
+     optional int64  project_code= 3;
+     optional int64 process_definition_code=4 ;
+     optional int32 process_definition_version=5 ;
+     optional int64 pre_task_code=6 ;
+     optional int32   pre_task_version=7 ;
+     optional int64  post_task_code=8 ;
+     optional int32  post_task_version=9 ;
+     optional int32  condition_type=10 ;
+     optional string  condition_params=11 ;
+     optional string    create_time=12 ;
+     optional string  update_time=13 ;
+}
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsProcessTaskRelationBeanService {
+  rpc ListDsProcessTaskRelationBeans(ListDsProcessTaskRelationBeansRequest) returns (ListDsProcessTaskRelationBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsProcessTaskRelationBeans"
+    };
+  }
+
+  rpc GetDsProcessTaskRelationBean(GetDsProcessTaskRelationBeanRequest) returns (DsProcessTaskRelationBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsProcessTaskRelationBeans/*}"
+    };
+  }
+
+  rpc CreateDsProcessTaskRelationBean(CreateDsProcessTaskRelationBeanRequest) returns (DsProcessTaskRelationBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsProcessTaskRelationBeans"
+      body: "DsProcessTaskRelationBean"
+    };
+  }
+
+  rpc UpdateDsProcessTaskRelationBean(UpdateDsProcessTaskRelationBeanRequest) returns (DsProcessTaskRelationBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsProcessTaskRelationBean.name=DsProcessTaskRelationBeans/*}"
+      body: "DsProcessTaskRelationBean"
+    };
+  }
+
+  rpc DeleteDsProcessTaskRelationBean(DeleteDsProcessTaskRelationBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsProcessTaskRelationBeans/*}"
+    };
+  }
+}
+
+// message DsProcessTaskRelationBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsProcessTaskRelationBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsProcessTaskRelationBeansResponse {
+  // The field name should match the noun "DsProcessTaskRelationBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsProcessTaskRelationBean DsProcessTaskRelationBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsProcessTaskRelationBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsProcessTaskRelationBeanRequest {
+  // The parent resource name where the DsProcessTaskRelationBean is to be created.
+  string parent = 1;
+
+  // The DsProcessTaskRelationBean id to use for this DsProcessTaskRelationBean.
+  string DsProcessTaskRelationBean_id = 2;
+
+  // The DsProcessTaskRelationBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsProcessTaskRelationBean DsProcessTaskRelationBean = 3;
+}
+
+message UpdateDsProcessTaskRelationBeanRequest {
+  // The DsProcessTaskRelationBean resource which replaces the resource on the server.
+  DsProcessTaskRelationBean DsProcessTaskRelationBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsProcessTaskRelationBeanRequest {
+  // The resource name of the DsProcessTaskRelationBean to be deleted.
+  string name = 1;
+}

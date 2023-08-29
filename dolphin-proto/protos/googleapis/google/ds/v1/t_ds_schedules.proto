@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_schedules;
+
+message DsSchedulesBean {
+
+     int32 id=1 ;
+     int64 process_definition_code=2 ;
+     string  start_time=3 ;
+     string end_time=4 ;
+     optional string   timezone_id= 5;
+     string   crontab= 6;
+     int32  failure_strategy=7 ;
+     int32  user_id=8 ;
+     int32  release_state=9 ;
+     int32    warning_type=10 ;
+     optional int32   warning_group_id=11 ;
+     optional int32   process_instance_priority=12 ;
+     optional string worker_group=13 ;
+     optional int64 environment_code=14 ;
+     string create_time=15 ;
+     string update_time=16 ;
+}
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsSchedulesBeanService {
+  rpc ListDsSchedulesBeans(ListDsSchedulesBeansRequest) returns (ListDsSchedulesBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsSchedulesBeans"
+    };
+  }
+
+  rpc GetDsSchedulesBean(GetDsSchedulesBeanRequest) returns (DsSchedulesBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsSchedulesBeans/*}"
+    };
+  }
+
+  rpc CreateDsSchedulesBean(CreateDsSchedulesBeanRequest) returns (DsSchedulesBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsSchedulesBeans"
+      body: "DsSchedulesBean"
+    };
+  }
+
+  rpc UpdateDsSchedulesBean(UpdateDsSchedulesBeanRequest) returns (DsSchedulesBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsSchedulesBean.name=DsSchedulesBeans/*}"
+      body: "DsSchedulesBean"
+    };
+  }
+
+  rpc DeleteDsSchedulesBean(DeleteDsSchedulesBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsSchedulesBeans/*}"
+    };
+  }
+}
+
+// message DsSchedulesBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsSchedulesBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsSchedulesBeansResponse {
+  // The field name should match the noun "DsSchedulesBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsSchedulesBean DsSchedulesBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsSchedulesBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsSchedulesBeanRequest {
+  // The parent resource name where the DsSchedulesBean is to be created.
+  string parent = 1;
+
+  // The DsSchedulesBean id to use for this DsSchedulesBean.
+  string DsSchedulesBean_id = 2;
+
+  // The DsSchedulesBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsSchedulesBean DsSchedulesBean = 3;
+}
+
+message UpdateDsSchedulesBeanRequest {
+  // The DsSchedulesBean resource which replaces the resource on the server.
+  DsSchedulesBean DsSchedulesBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsSchedulesBeanRequest {
+  // The resource name of the DsSchedulesBean to be deleted.
+  string name = 1;
+}

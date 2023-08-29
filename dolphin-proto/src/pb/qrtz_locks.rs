@@ -1,6 +1,8 @@
+#[derive(serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "camelCase")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct QrtzLocks {
+pub struct QrtzLocksBean {
     #[prost(string, tag = "1")]
     pub sched_name: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
@@ -8,7 +10,7 @@ pub struct QrtzLocks {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQrtzLockssRequest {
+pub struct ListQrtzLocksBeansRequest {
     /// The parent resource name, for example, "shelves/shelf1"
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
@@ -21,65 +23,64 @@ pub struct ListQrtzLockssRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQrtzLockssResponse {
-    /// The field name should match the noun "QrtzLocks" in the method name.
+pub struct ListQrtzLocksBeansResponse {
+    /// The field name should match the noun "QrtzLocksBean" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub qrtz_lockss: ::prost::alloc::vec::Vec<QrtzLocks>,
+    pub qrtz_locks_beans: ::prost::alloc::vec::Vec<QrtzLocksBean>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetQrtzLocksRequest {
+pub struct GetQrtzLocksBeanRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateQrtzLocksRequest {
-    /// The parent resource name where the QrtzLocks is to be created.
+pub struct CreateQrtzLocksBeanRequest {
+    /// The parent resource name where the QrtzLocksBean is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The QrtzLocks id to use for this QrtzLocks.
+    /// The QrtzLocksBean id to use for this QrtzLocksBean.
     #[prost(string, tag = "2")]
-    pub qrtz_locks_id: ::prost::alloc::string::String,
-    /// The QrtzLocks resource to create.
+    pub qrtz_locks_bean_id: ::prost::alloc::string::String,
+    /// The QrtzLocksBean resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub qrtz_locks: ::core::option::Option<QrtzLocks>,
+    pub qrtz_locks_bean: ::core::option::Option<QrtzLocksBean>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateQrtzLocksRequest {
-    /// The QrtzLocks resource which replaces the resource on the server.
+pub struct UpdateQrtzLocksBeanRequest {
+    /// The QrtzLocksBean resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub qrtz_locks: ::core::option::Option<QrtzLocks>,
-    /// The update mask applies to the resource. For the `FieldMask` definition,
-    /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask>
+    pub qrtz_locks_bean: ::core::option::Option<QrtzLocksBean>,
+    /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+    /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteQrtzLocksRequest {
-    /// The resource name of the QrtzLocks to be deleted.
+pub struct DeleteQrtzLocksBeanRequest {
+    /// The resource name of the QrtzLocksBean to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod qrtz_locks_service_client {
+pub mod qrtz_locks_bean_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::*;
-    use tonic::codegen::http::Uri;
+    use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct QrtzLocksServiceClient<T> {
+    pub struct QrtzLocksBeanServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl QrtzLocksServiceClient<tonic::transport::Channel> {
+    impl QrtzLocksBeanServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -90,7 +91,7 @@ pub mod qrtz_locks_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> QrtzLocksServiceClient<T>
+    impl<T> QrtzLocksBeanServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -101,14 +102,16 @@ pub mod qrtz_locks_service_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+
         pub fn with_origin(inner: T, origin: Uri) -> Self {
             let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
+
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> QrtzLocksServiceClient<InterceptedService<T, F>>
+        ) -> QrtzLocksBeanServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -118,12 +121,12 @@ pub mod qrtz_locks_service_client {
                     <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
                 >,
             >,
-            <T as tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
+                Into<StdError> + Send + Sync,
         {
-            QrtzLocksServiceClient::new(InterceptedService::new(inner, interceptor))
+            QrtzLocksBeanServiceClient::new(InterceptedService::new(inner, interceptor))
         }
+
         /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
@@ -133,12 +136,14 @@ pub mod qrtz_locks_service_client {
             self.inner = self.inner.send_compressed(encoding);
             self
         }
+
         /// Enable decompressing responses.
         #[must_use]
         pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
             self.inner = self.inner.accept_compressed(encoding);
             self
         }
+
         /// Limits the maximum size of a decoded message.
         ///
         /// Default: `4MB`
@@ -147,6 +152,7 @@ pub mod qrtz_locks_service_client {
             self.inner = self.inner.max_decoding_message_size(limit);
             self
         }
+
         /// Limits the maximum size of an encoded message.
         ///
         /// Default: `usize::MAX`
@@ -155,163 +161,150 @@ pub mod qrtz_locks_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        pub async fn list_qrtz_lockss(
+
+        pub async fn list_qrtz_locks_beans(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListQrtzLockssRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListQrtzLockssResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+            request: impl tonic::IntoRequest<super::ListQrtzLocksBeansRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListQrtzLocksBeansResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_locks.QrtzLocksService/ListQrtzLockss",
+                "/qrtz_locks.QrtzLocksBeanService/ListQrtzLocksBeans",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("qrtz_locks.QrtzLocksService", "ListQrtzLockss"),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "qrtz_locks.QrtzLocksBeanService",
+                "ListQrtzLocksBeans",
+            ));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn get_qrtz_locks(
+
+        pub async fn get_qrtz_locks_bean(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetQrtzLocksRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzLocks>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+            request: impl tonic::IntoRequest<super::GetQrtzLocksBeanRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzLocksBean>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_locks.QrtzLocksService/GetQrtzLocks",
+                "/qrtz_locks.QrtzLocksBeanService/GetQrtzLocksBean",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("qrtz_locks.QrtzLocksService", "GetQrtzLocks"));
+            req.extensions_mut().insert(GrpcMethod::new(
+                "qrtz_locks.QrtzLocksBeanService",
+                "GetQrtzLocksBean",
+            ));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn create_qrtz_locks(
+
+        pub async fn create_qrtz_locks_bean(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateQrtzLocksRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzLocks>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+            request: impl tonic::IntoRequest<super::CreateQrtzLocksBeanRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzLocksBean>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_locks.QrtzLocksService/CreateQrtzLocks",
+                "/qrtz_locks.QrtzLocksBeanService/CreateQrtzLocksBean",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("qrtz_locks.QrtzLocksService", "CreateQrtzLocks"),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "qrtz_locks.QrtzLocksBeanService",
+                "CreateQrtzLocksBean",
+            ));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn update_qrtz_locks(
+
+        pub async fn update_qrtz_locks_bean(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateQrtzLocksRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzLocks>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+            request: impl tonic::IntoRequest<super::UpdateQrtzLocksBeanRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzLocksBean>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_locks.QrtzLocksService/UpdateQrtzLocks",
+                "/qrtz_locks.QrtzLocksBeanService/UpdateQrtzLocksBean",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("qrtz_locks.QrtzLocksService", "UpdateQrtzLocks"),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "qrtz_locks.QrtzLocksBeanService",
+                "UpdateQrtzLocksBean",
+            ));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn delete_qrtz_locks(
+
+        pub async fn delete_qrtz_locks_bean(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteQrtzLocksRequest>,
+            request: impl tonic::IntoRequest<super::DeleteQrtzLocksBeanRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_locks.QrtzLocksService/DeleteQrtzLocks",
+                "/qrtz_locks.QrtzLocksBeanService/DeleteQrtzLocksBean",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("qrtz_locks.QrtzLocksService", "DeleteQrtzLocks"),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "qrtz_locks.QrtzLocksBeanService",
+                "DeleteQrtzLocksBean",
+            ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod qrtz_locks_service_server {
+pub mod qrtz_locks_bean_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with QrtzLocksServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with QrtzLocksBeanServiceServer.
     #[async_trait]
-    pub trait QrtzLocksService: Send + Sync + 'static {
-        async fn list_qrtz_lockss(
+    pub trait QrtzLocksBeanService: Send + Sync + 'static {
+        async fn list_qrtz_locks_beans(
             &self,
-            request: tonic::Request<super::ListQrtzLockssRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListQrtzLockssResponse>,
-            tonic::Status,
-        >;
-        async fn get_qrtz_locks(
+            request: tonic::Request<super::ListQrtzLocksBeansRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListQrtzLocksBeansResponse>, tonic::Status>;
+        async fn get_qrtz_locks_bean(
             &self,
-            request: tonic::Request<super::GetQrtzLocksRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzLocks>, tonic::Status>;
-        async fn create_qrtz_locks(
+            request: tonic::Request<super::GetQrtzLocksBeanRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzLocksBean>, tonic::Status>;
+        async fn create_qrtz_locks_bean(
             &self,
-            request: tonic::Request<super::CreateQrtzLocksRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzLocks>, tonic::Status>;
-        async fn update_qrtz_locks(
+            request: tonic::Request<super::CreateQrtzLocksBeanRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzLocksBean>, tonic::Status>;
+        async fn update_qrtz_locks_bean(
             &self,
-            request: tonic::Request<super::UpdateQrtzLocksRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzLocks>, tonic::Status>;
-        async fn delete_qrtz_locks(
+            request: tonic::Request<super::UpdateQrtzLocksBeanRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzLocksBean>, tonic::Status>;
+        async fn delete_qrtz_locks_bean(
             &self,
-            request: tonic::Request<super::DeleteQrtzLocksRequest>,
+            request: tonic::Request<super::DeleteQrtzLocksBeanRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct QrtzLocksServiceServer<T: QrtzLocksService> {
+    pub struct QrtzLocksBeanServiceServer<T: QrtzLocksBeanService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -319,10 +312,11 @@ pub mod qrtz_locks_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: QrtzLocksService> QrtzLocksServiceServer<T> {
+    impl<T: QrtzLocksBeanService> QrtzLocksBeanServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
+
         pub fn from_arc(inner: Arc<T>) -> Self {
             let inner = _Inner(inner);
             Self {
@@ -333,27 +327,26 @@ pub mod qrtz_locks_service_server {
                 max_encoding_message_size: None,
             }
         }
-        pub fn with_interceptor<F>(
-            inner: T,
-            interceptor: F,
-        ) -> InterceptedService<Self, F>
-        where
-            F: tonic::service::Interceptor,
-        {
+
+        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        where F: tonic::service::Interceptor {
             InterceptedService::new(Self::new(inner), interceptor)
         }
+
         /// Enable decompressing requests with the given encoding.
         #[must_use]
         pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
             self.accept_compression_encodings.enable(encoding);
             self
         }
+
         /// Compress responses with the given encoding, if the client supports it.
         #[must_use]
         pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
             self.send_compression_encodings.enable(encoding);
             self
         }
+
         /// Limits the maximum size of a decoded message.
         ///
         /// Default: `4MB`
@@ -362,6 +355,7 @@ pub mod qrtz_locks_service_server {
             self.max_decoding_message_size = Some(limit);
             self
         }
+
         /// Limits the maximum size of an encoded message.
         ///
         /// Default: `usize::MAX`
@@ -371,44 +365,42 @@ pub mod qrtz_locks_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for QrtzLocksServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for QrtzLocksBeanServiceServer<T>
     where
-        T: QrtzLocksService,
+        T: QrtzLocksBeanService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
-        type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
         type Future = BoxFuture<Self::Response, Self::Error>;
+        type Response = http::Response<tonic::body::BoxBody>;
+
         fn poll_ready(
             &mut self,
             _cx: &mut Context<'_>,
         ) -> Poll<std::result::Result<(), Self::Error>> {
             Poll::Ready(Ok(()))
         }
+
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/qrtz_locks.QrtzLocksService/ListQrtzLockss" => {
+                "/qrtz_locks.QrtzLocksBeanService/ListQrtzLocksBeans" => {
                     #[allow(non_camel_case_types)]
-                    struct ListQrtzLockssSvc<T: QrtzLocksService>(pub Arc<T>);
-                    impl<
-                        T: QrtzLocksService,
-                    > tonic::server::UnaryService<super::ListQrtzLockssRequest>
-                    for ListQrtzLockssSvc<T> {
-                        type Response = super::ListQrtzLockssResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                    struct ListQrtzLocksBeansSvc<T: QrtzLocksBeanService>(pub Arc<T>);
+                    impl<T: QrtzLocksBeanService>
+                        tonic::server::UnaryService<super::ListQrtzLocksBeansRequest>
+                        for ListQrtzLocksBeansSvc<T>
+                    {
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::ListQrtzLocksBeansResponse;
+
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListQrtzLockssRequest>,
+                            request: tonic::Request<super::ListQrtzLocksBeansRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).list_qrtz_lockss(request).await
-                            };
+                            let fut = async move { (*inner).list_qrtz_locks_beans(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -419,7 +411,7 @@ pub mod qrtz_locks_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListQrtzLockssSvc(inner);
+                        let method = ListQrtzLocksBeansSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -435,26 +427,22 @@ pub mod qrtz_locks_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_locks.QrtzLocksService/GetQrtzLocks" => {
+                "/qrtz_locks.QrtzLocksBeanService/GetQrtzLocksBean" => {
                     #[allow(non_camel_case_types)]
-                    struct GetQrtzLocksSvc<T: QrtzLocksService>(pub Arc<T>);
-                    impl<
-                        T: QrtzLocksService,
-                    > tonic::server::UnaryService<super::GetQrtzLocksRequest>
-                    for GetQrtzLocksSvc<T> {
-                        type Response = super::QrtzLocks;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                    struct GetQrtzLocksBeanSvc<T: QrtzLocksBeanService>(pub Arc<T>);
+                    impl<T: QrtzLocksBeanService>
+                        tonic::server::UnaryService<super::GetQrtzLocksBeanRequest>
+                        for GetQrtzLocksBeanSvc<T>
+                    {
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::QrtzLocksBean;
+
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetQrtzLocksRequest>,
+                            request: tonic::Request<super::GetQrtzLocksBeanRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_qrtz_locks(request).await
-                            };
+                            let fut = async move { (*inner).get_qrtz_locks_bean(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -465,7 +453,7 @@ pub mod qrtz_locks_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetQrtzLocksSvc(inner);
+                        let method = GetQrtzLocksBeanSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -481,26 +469,22 @@ pub mod qrtz_locks_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_locks.QrtzLocksService/CreateQrtzLocks" => {
+                "/qrtz_locks.QrtzLocksBeanService/CreateQrtzLocksBean" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateQrtzLocksSvc<T: QrtzLocksService>(pub Arc<T>);
-                    impl<
-                        T: QrtzLocksService,
-                    > tonic::server::UnaryService<super::CreateQrtzLocksRequest>
-                    for CreateQrtzLocksSvc<T> {
-                        type Response = super::QrtzLocks;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                    struct CreateQrtzLocksBeanSvc<T: QrtzLocksBeanService>(pub Arc<T>);
+                    impl<T: QrtzLocksBeanService>
+                        tonic::server::UnaryService<super::CreateQrtzLocksBeanRequest>
+                        for CreateQrtzLocksBeanSvc<T>
+                    {
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::QrtzLocksBean;
+
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateQrtzLocksRequest>,
+                            request: tonic::Request<super::CreateQrtzLocksBeanRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).create_qrtz_locks(request).await
-                            };
+                            let fut = async move { (*inner).create_qrtz_locks_bean(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -511,7 +495,7 @@ pub mod qrtz_locks_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateQrtzLocksSvc(inner);
+                        let method = CreateQrtzLocksBeanSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -527,26 +511,22 @@ pub mod qrtz_locks_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_locks.QrtzLocksService/UpdateQrtzLocks" => {
+                "/qrtz_locks.QrtzLocksBeanService/UpdateQrtzLocksBean" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateQrtzLocksSvc<T: QrtzLocksService>(pub Arc<T>);
-                    impl<
-                        T: QrtzLocksService,
-                    > tonic::server::UnaryService<super::UpdateQrtzLocksRequest>
-                    for UpdateQrtzLocksSvc<T> {
-                        type Response = super::QrtzLocks;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+                    struct UpdateQrtzLocksBeanSvc<T: QrtzLocksBeanService>(pub Arc<T>);
+                    impl<T: QrtzLocksBeanService>
+                        tonic::server::UnaryService<super::UpdateQrtzLocksBeanRequest>
+                        for UpdateQrtzLocksBeanSvc<T>
+                    {
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::QrtzLocksBean;
+
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateQrtzLocksRequest>,
+                            request: tonic::Request<super::UpdateQrtzLocksBeanRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).update_qrtz_locks(request).await
-                            };
+                            let fut = async move { (*inner).update_qrtz_locks_bean(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -557,7 +537,7 @@ pub mod qrtz_locks_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateQrtzLocksSvc(inner);
+                        let method = UpdateQrtzLocksBeanSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -573,26 +553,22 @@ pub mod qrtz_locks_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_locks.QrtzLocksService/DeleteQrtzLocks" => {
+                "/qrtz_locks.QrtzLocksBeanService/DeleteQrtzLocksBean" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteQrtzLocksSvc<T: QrtzLocksService>(pub Arc<T>);
-                    impl<
-                        T: QrtzLocksService,
-                    > tonic::server::UnaryService<super::DeleteQrtzLocksRequest>
-                    for DeleteQrtzLocksSvc<T> {
+                    struct DeleteQrtzLocksBeanSvc<T: QrtzLocksBeanService>(pub Arc<T>);
+                    impl<T: QrtzLocksBeanService>
+                        tonic::server::UnaryService<super::DeleteQrtzLocksBeanRequest>
+                        for DeleteQrtzLocksBeanSvc<T>
+                    {
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
+
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteQrtzLocksRequest>,
+                            request: tonic::Request<super::DeleteQrtzLocksBeanRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).delete_qrtz_locks(request).await
-                            };
+                            let fut = async move { (*inner).delete_qrtz_locks_bean(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -603,7 +579,7 @@ pub mod qrtz_locks_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteQrtzLocksSvc(inner);
+                        let method = DeleteQrtzLocksBeanSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -619,22 +595,18 @@ pub mod qrtz_locks_service_server {
                     };
                     Box::pin(fut)
                 }
-                _ => {
-                    Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
-                    })
-                }
+                _ => Box::pin(async move {
+                    Ok(http::Response::builder()
+                        .status(200)
+                        .header("grpc-status", "12")
+                        .header("content-type", "application/grpc")
+                        .body(empty_body())
+                        .unwrap())
+                }),
             }
         }
     }
-    impl<T: QrtzLocksService> Clone for QrtzLocksServiceServer<T> {
+    impl<T: QrtzLocksBeanService> Clone for QrtzLocksBeanServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -646,7 +618,7 @@ pub mod qrtz_locks_service_server {
             }
         }
     }
-    impl<T: QrtzLocksService> Clone for _Inner<T> {
+    impl<T: QrtzLocksBeanService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -656,7 +628,7 @@ pub mod qrtz_locks_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: QrtzLocksService> tonic::server::NamedService for QrtzLocksServiceServer<T> {
-        const NAME: &'static str = "qrtz_locks.QrtzLocksService";
+    impl<T: QrtzLocksBeanService> tonic::server::NamedService for QrtzLocksBeanServiceServer<T> {
+        const NAME: &'static str = "qrtz_locks.QrtzLocksBeanService";
     }
 }

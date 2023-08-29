@@ -8,7 +8,7 @@ import "google/protobuf/field_mask.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
-message QrtzFiredTriggers{
+message QrtzFiredTriggersBean{
 
 
   string sched_name=1;
@@ -27,45 +27,45 @@ message QrtzFiredTriggers{
 }
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service QrtzFiredTriggersService {
-  rpc ListQrtzFiredTriggerss(ListQrtzFiredTriggerssRequest) returns (ListQrtzFiredTriggerssResponse) {
+service QrtzFiredTriggersBeanService {
+  rpc ListQrtzFiredTriggersBeans(ListQrtzFiredTriggersBeansRequest) returns (ListQrtzFiredTriggersBeansResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/QrtzFiredTriggerss"
+      get: "/v1alpha1/QrtzFiredTriggersBeans"
     };
   }
 
-  rpc GetQrtzFiredTriggers(GetQrtzFiredTriggersRequest) returns (QrtzFiredTriggers) {
+  rpc GetQrtzFiredTriggersBean(GetQrtzFiredTriggersBeanRequest) returns (QrtzFiredTriggersBean) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=QrtzFiredTriggerss/*}"
+      get: "/v1alpha1/{name=QrtzFiredTriggersBeans/*}"
     };
   }
 
-  rpc CreateQrtzFiredTriggers(CreateQrtzFiredTriggersRequest) returns (QrtzFiredTriggers) {
+  rpc CreateQrtzFiredTriggersBean(CreateQrtzFiredTriggersBeanRequest) returns (QrtzFiredTriggersBean) {
     option (google.api.http) = {
-      post: "/v1alpha1/QrtzFiredTriggerss"
-      body: "QrtzFiredTriggers"
+      post: "/v1alpha1/QrtzFiredTriggersBeans"
+      body: "QrtzFiredTriggersBean"
     };
   }
 
-  rpc UpdateQrtzFiredTriggers(UpdateQrtzFiredTriggersRequest) returns (QrtzFiredTriggers) {
+  rpc UpdateQrtzFiredTriggersBean(UpdateQrtzFiredTriggersBeanRequest) returns (QrtzFiredTriggersBean) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{QrtzFiredTriggers.name=QrtzFiredTriggerss/*}"
-      body: "QrtzFiredTriggers"
+      patch: "/v1alpha1/{QrtzFiredTriggersBean.name=QrtzFiredTriggersBeans/*}"
+      body: "QrtzFiredTriggersBean"
     };
   }
 
-  rpc DeleteQrtzFiredTriggers(DeleteQrtzFiredTriggersRequest) returns (google.protobuf.Empty) {
+  rpc DeleteQrtzFiredTriggersBean(DeleteQrtzFiredTriggersBeanRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=QrtzFiredTriggerss/*}"
+      delete: "/v1alpha1/{name=QrtzFiredTriggersBeans/*}"
     };
   }
 }
 
-// message QrtzFiredTriggers {
+// message QrtzFiredTriggersBean {
 // ! This should be defined elsewhere
 // }
 
-message ListQrtzFiredTriggerssRequest {
+message ListQrtzFiredTriggersBeansRequest {
   // The parent resource name, for example, "shelves/shelf1"
   string parent = 1;
 
@@ -76,42 +76,42 @@ message ListQrtzFiredTriggerssRequest {
   string page_token = 3;
 }
 
-message ListQrtzFiredTriggerssResponse {
-  // The field name should match the noun "QrtzFiredTriggers" in the method name.
+message ListQrtzFiredTriggersBeansResponse {
+  // The field name should match the noun "QrtzFiredTriggersBean" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated QrtzFiredTriggers QrtzFiredTriggerss = 1;
+  repeated QrtzFiredTriggersBean QrtzFiredTriggersBeans = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetQrtzFiredTriggersRequest {
+message GetQrtzFiredTriggersBeanRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateQrtzFiredTriggersRequest {
-  // The parent resource name where the QrtzFiredTriggers is to be created.
+message CreateQrtzFiredTriggersBeanRequest {
+  // The parent resource name where the QrtzFiredTriggersBean is to be created.
   string parent = 1;
 
-  // The QrtzFiredTriggers id to use for this QrtzFiredTriggers.
-  string QrtzFiredTriggers_id = 2;
+  // The QrtzFiredTriggersBean id to use for this QrtzFiredTriggersBean.
+  string QrtzFiredTriggersBean_id = 2;
 
-  // The QrtzFiredTriggers resource to create.
+  // The QrtzFiredTriggersBean resource to create.
   // The field name should match the Noun in the method name.
-  QrtzFiredTriggers QrtzFiredTriggers = 3;
+  QrtzFiredTriggersBean QrtzFiredTriggersBean = 3;
 }
 
-message UpdateQrtzFiredTriggersRequest {
-  // The QrtzFiredTriggers resource which replaces the resource on the server.
-  QrtzFiredTriggers QrtzFiredTriggers = 1;
+message UpdateQrtzFiredTriggersBeanRequest {
+  // The QrtzFiredTriggersBean resource which replaces the resource on the server.
+  QrtzFiredTriggersBean QrtzFiredTriggersBean = 1;
 
-  // The update mask applies to the resource. For the `FieldMask` definition,
-  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteQrtzFiredTriggersRequest {
-  // The resource name of the QrtzFiredTriggers to be deleted.
+message DeleteQrtzFiredTriggersBeanRequest {
+  // The resource name of the QrtzFiredTriggersBean to be deleted.
   string name = 1;
 }

@@ -1,0 +1,109 @@
+
+syntax = "proto3";
+
+package ds_access_token;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+message DsAccessTokenBean {
+
+    int32 id=1;
+    optional int32 user_id=2;
+    optional string token=3;
+    optional string expire_time=4;
+    optional string create_time=5;
+    optional string update_time=6;
+}
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsAccessTokenBeanService {
+  rpc ListDsAccessTokenBeans(ListDsAccessTokenBeansRequest) returns (ListDsAccessTokenBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsAccessTokenBeans"
+    };
+  }
+
+  rpc GetDsAccessTokenBean(GetDsAccessTokenBeanRequest) returns (DsAccessTokenBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsAccessTokenBeans/*}"
+    };
+  }
+
+  rpc CreateDsAccessTokenBean(CreateDsAccessTokenBeanRequest) returns (DsAccessTokenBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsAccessTokenBeans"
+      body: "DsAccessTokenBean"
+    };
+  }
+
+  rpc UpdateDsAccessTokenBean(UpdateDsAccessTokenBeanRequest) returns (DsAccessTokenBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsAccessTokenBean.name=DsAccessTokenBeans/*}"
+      body: "DsAccessTokenBean"
+    };
+  }
+
+  rpc DeleteDsAccessTokenBean(DeleteDsAccessTokenBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsAccessTokenBeans/*}"
+    };
+  }
+}
+
+// message DsAccessTokenBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsAccessTokenBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsAccessTokenBeansResponse {
+  // The field name should match the noun "DsAccessTokenBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsAccessTokenBean DsAccessTokenBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsAccessTokenBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsAccessTokenBeanRequest {
+  // The parent resource name where the DsAccessTokenBean is to be created.
+  string parent = 1;
+
+  // The DsAccessTokenBean id to use for this DsAccessTokenBean.
+  string DsAccessTokenBean_id = 2;
+
+  // The DsAccessTokenBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsAccessTokenBean DsAccessTokenBean = 3;
+}
+
+message UpdateDsAccessTokenBeanRequest {
+  // The DsAccessTokenBean resource which replaces the resource on the server.
+  DsAccessTokenBean DsAccessTokenBean = 1;
+
+  // The update mask applies to the resource. For the `FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsAccessTokenBeanRequest {
+  // The resource name of the DsAccessTokenBean to be deleted.
+  string name = 1;
+}

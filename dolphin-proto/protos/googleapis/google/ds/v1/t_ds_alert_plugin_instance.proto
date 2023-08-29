@@ -1,0 +1,109 @@
+
+syntax = "proto3";
+
+package ds_alert_plugin_instance;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+message DsAlertPluginInstanceBean {
+
+    int32 id=1;
+    int32 plugin_define_id=2;
+    optional string plugin_instance_params=3;
+    optional string create_time=4;
+    optional string update_time=5;
+    optional string instance_name=6;
+}
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsAlertPluginInstanceBeanService {
+  rpc ListDsAlertPluginInstanceBeans(ListDsAlertPluginInstanceBeansRequest) returns (ListDsAlertPluginInstanceBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsAlertPluginInstanceBeans"
+    };
+  }
+
+  rpc GetDsAlertPluginInstanceBean(GetDsAlertPluginInstanceBeanRequest) returns (DsAlertPluginInstanceBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsAlertPluginInstanceBeans/*}"
+    };
+  }
+
+  rpc CreateDsAlertPluginInstanceBean(CreateDsAlertPluginInstanceBeanRequest) returns (DsAlertPluginInstanceBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsAlertPluginInstanceBeans"
+      body: "DsAlertPluginInstanceBean"
+    };
+  }
+
+  rpc UpdateDsAlertPluginInstanceBean(UpdateDsAlertPluginInstanceBeanRequest) returns (DsAlertPluginInstanceBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsAlertPluginInstanceBean.name=DsAlertPluginInstanceBeans/*}"
+      body: "DsAlertPluginInstanceBean"
+    };
+  }
+
+  rpc DeleteDsAlertPluginInstanceBean(DeleteDsAlertPluginInstanceBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsAlertPluginInstanceBeans/*}"
+    };
+  }
+}
+
+// message DsAlertPluginInstanceBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsAlertPluginInstanceBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsAlertPluginInstanceBeansResponse {
+  // The field name should match the noun "DsAlertPluginInstanceBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsAlertPluginInstanceBean DsAlertPluginInstanceBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsAlertPluginInstanceBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsAlertPluginInstanceBeanRequest {
+  // The parent resource name where the DsAlertPluginInstanceBean is to be created.
+  string parent = 1;
+
+  // The DsAlertPluginInstanceBean id to use for this DsAlertPluginInstanceBean.
+  string DsAlertPluginInstanceBean_id = 2;
+
+  // The DsAlertPluginInstanceBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsAlertPluginInstanceBean DsAlertPluginInstanceBean = 3;
+}
+
+message UpdateDsAlertPluginInstanceBeanRequest {
+  // The DsAlertPluginInstanceBean resource which replaces the resource on the server.
+  DsAlertPluginInstanceBean DsAlertPluginInstanceBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsAlertPluginInstanceBeanRequest {
+  // The resource name of the DsAlertPluginInstanceBean to be deleted.
+  string name = 1;
+}

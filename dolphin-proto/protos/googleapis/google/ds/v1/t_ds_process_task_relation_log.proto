@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_process_task_relation_log;
+
+
+message DsProcessTaskRelationLogBean {
+
+     int32   id=1 ;
+     optional string    name=2 ;
+     optional int64    project_code=3 ;
+     optional int64    process_definition_code= 4;
+     optional int32    process_definition_version=5 ;
+     optional int64    pre_task_code= 6;
+     optional int32    pre_task_version=7 ;
+     optional int64    post_task_code= 8;
+     optional int32    post_task_version= 9;
+     optional int32    condition_type=10 ;
+     optional string    condition_params=11 ;
+     optional int32    operator=12 ;
+     optional string    operate_time=13 ;
+     optional string    create_time=14 ;
+     optional string     update_time=15 ;
+}
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsProcessTaskRelationLogBeanService {
+  rpc ListDsProcessTaskRelationLogBeans(ListDsProcessTaskRelationLogBeansRequest) returns (ListDsProcessTaskRelationLogBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsProcessTaskRelationLogBeans"
+    };
+  }
+
+  rpc GetDsProcessTaskRelationLogBean(GetDsProcessTaskRelationLogBeanRequest) returns (DsProcessTaskRelationLogBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsProcessTaskRelationLogBeans/*}"
+    };
+  }
+
+  rpc CreateDsProcessTaskRelationLogBean(CreateDsProcessTaskRelationLogBeanRequest) returns (DsProcessTaskRelationLogBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsProcessTaskRelationLogBeans"
+      body: "DsProcessTaskRelationLogBean"
+    };
+  }
+
+  rpc UpdateDsProcessTaskRelationLogBean(UpdateDsProcessTaskRelationLogBeanRequest) returns (DsProcessTaskRelationLogBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsProcessTaskRelationLogBean.name=DsProcessTaskRelationLogBeans/*}"
+      body: "DsProcessTaskRelationLogBean"
+    };
+  }
+
+  rpc DeleteDsProcessTaskRelationLogBean(DeleteDsProcessTaskRelationLogBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsProcessTaskRelationLogBeans/*}"
+    };
+  }
+}
+
+// message DsProcessTaskRelationLogBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsProcessTaskRelationLogBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsProcessTaskRelationLogBeansResponse {
+  // The field name should match the noun "DsProcessTaskRelationLogBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsProcessTaskRelationLogBean DsProcessTaskRelationLogBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsProcessTaskRelationLogBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsProcessTaskRelationLogBeanRequest {
+  // The parent resource name where the DsProcessTaskRelationLogBean is to be created.
+  string parent = 1;
+
+  // The DsProcessTaskRelationLogBean id to use for this DsProcessTaskRelationLogBean.
+  string DsProcessTaskRelationLogBean_id = 2;
+
+  // The DsProcessTaskRelationLogBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsProcessTaskRelationLogBean DsProcessTaskRelationLogBean = 3;
+}
+
+message UpdateDsProcessTaskRelationLogBeanRequest {
+  // The DsProcessTaskRelationLogBean resource which replaces the resource on the server.
+  DsProcessTaskRelationLogBean DsProcessTaskRelationLogBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsProcessTaskRelationLogBeanRequest {
+  // The resource name of the DsProcessTaskRelationLogBean to be deleted.
+  string name = 1;
+}

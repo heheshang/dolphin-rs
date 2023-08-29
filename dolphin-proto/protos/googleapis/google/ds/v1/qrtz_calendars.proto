@@ -7,52 +7,53 @@ import "google/protobuf/field_mask.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
-message QrtzCalendars{
+message QrtzCalendarBean{
     string sched_name=1;
     string calendar_name=2;
     bytes calendar=3;
 }
 
+
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service QrtzCalendarsService {
-  rpc ListQrtzCalendarss(ListQrtzCalendarssRequest) returns (ListQrtzCalendarssResponse) {
+service QrtzCalendarBeanService {
+  rpc ListQrtzCalendarBeans(ListQrtzCalendarBeansRequest) returns (ListQrtzCalendarBeansResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/qrtzcalendarss"
+      get: "/v1alpha1/QrtzCalendarBeans"
     };
   }
 
-  rpc GetQrtzCalendars(GetQrtzCalendarsRequest) returns (QrtzCalendars) {
+  rpc GetQrtzCalendarBean(GetQrtzCalendarBeanRequest) returns (QrtzCalendarBean) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=qrtzcalendarss/*}"
+      get: "/v1alpha1/{name=QrtzCalendarBeans/*}"
     };
   }
 
-  rpc CreateQrtzCalendars(CreateQrtzCalendarsRequest) returns (QrtzCalendars) {
+  rpc CreateQrtzCalendarBean(CreateQrtzCalendarBeanRequest) returns (QrtzCalendarBean) {
     option (google.api.http) = {
-      post: "/v1alpha1/qrtzcalendarss"
-      body: "qrtzcalendars"
+      post: "/v1alpha1/QrtzCalendarBeans"
+      body: "QrtzCalendarBean"
     };
   }
 
-  rpc UpdateQrtzCalendars(UpdateQrtzCalendarsRequest) returns (QrtzCalendars) {
+  rpc UpdateQrtzCalendarBean(UpdateQrtzCalendarBeanRequest) returns (QrtzCalendarBean) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{qrtzcalendars.name=qrtzcalendarss/*}"
-      body: "qrtzcalendars"
+      patch: "/v1alpha1/{QrtzCalendarBean.name=QrtzCalendarBeans/*}"
+      body: "QrtzCalendarBean"
     };
   }
 
-  rpc DeleteQrtzCalendars(DeleteQrtzCalendarsRequest) returns (google.protobuf.Empty) {
+  rpc DeleteQrtzCalendarBean(DeleteQrtzCalendarBeanRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=qrtzcalendarss/*}"
+      delete: "/v1alpha1/{name=QrtzCalendarBeans/*}"
     };
   }
 }
 
-// message QrtzCalendars {
+// message QrtzCalendarBean {
 // ! This should be defined elsewhere
 // }
 
-message ListQrtzCalendarssRequest {
+message ListQrtzCalendarBeansRequest {
   // The parent resource name, for example, "shelves/shelf1"
   string parent = 1;
 
@@ -63,42 +64,42 @@ message ListQrtzCalendarssRequest {
   string page_token = 3;
 }
 
-message ListQrtzCalendarssResponse {
-  // The field name should match the noun "qrtzcalendars" in the method name.
+message ListQrtzCalendarBeansResponse {
+  // The field name should match the noun "QrtzCalendarBean" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated QrtzCalendars qrtzcalendarss = 1;
+  repeated QrtzCalendarBean QrtzCalendarBeans = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetQrtzCalendarsRequest {
+message GetQrtzCalendarBeanRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateQrtzCalendarsRequest {
-  // The parent resource name where the qrtzcalendars is to be created.
+message CreateQrtzCalendarBeanRequest {
+  // The parent resource name where the QrtzCalendarBean is to be created.
   string parent = 1;
 
-  // The qrtzcalendars id to use for this qrtzcalendars.
-  string qrtzcalendars_id = 2;
+  // The QrtzCalendarBean id to use for this QrtzCalendarBean.
+  string QrtzCalendarBean_id = 2;
 
-  // The qrtzcalendars resource to create.
+  // The QrtzCalendarBean resource to create.
   // The field name should match the Noun in the method name.
-  QrtzCalendars qrtzcalendars = 3;
+  QrtzCalendarBean QrtzCalendarBean = 3;
 }
 
-message UpdateQrtzCalendarsRequest {
-  // The qrtzcalendars resource which replaces the resource on the server.
-  QrtzCalendars qrtzcalendars = 1;
+message UpdateQrtzCalendarBeanRequest {
+  // The QrtzCalendarBean resource which replaces the resource on the server.
+  QrtzCalendarBean QrtzCalendarBean = 1;
 
-  // The update mask applies to the resource. For the `FieldMask` definition,
-  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteQrtzCalendarsRequest {
-  // The resource name of the qrtzcalendars to be deleted.
+message DeleteQrtzCalendarBeanRequest {
+  // The resource name of the QrtzCalendarBean to be deleted.
   string name = 1;
 }

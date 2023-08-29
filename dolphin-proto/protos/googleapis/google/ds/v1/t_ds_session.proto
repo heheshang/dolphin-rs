@@ -1,0 +1,107 @@
+
+syntax="proto3";
+
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+//import "google/protobuf/timestamp.proto";
+package ds_session;
+
+message DsSessionBean{
+    string id=1;
+    int32 user_id=2;
+    optional int32 ip=3;
+    // google.protobuf.Timestamp last_login_time=4 ;
+    optional string last_login_time=4 ;
+}
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsSessionBeanService {
+  rpc ListDsSessionBeans(ListDsSessionBeansRequest) returns (ListDsSessionBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsSessionBeans"
+    };
+  }
+
+  rpc GetDsSessionBean(GetDsSessionBeanRequest) returns (DsSessionBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsSessionBeans/*}"
+    };
+  }
+
+  rpc CreateDsSessionBean(CreateDsSessionBeanRequest) returns (DsSessionBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsSessionBeans"
+      body: "DsSessionBean"
+    };
+  }
+
+  rpc UpdateDsSessionBean(UpdateDsSessionBeanRequest) returns (DsSessionBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsSessionBean.name=DsSessionBeans/*}"
+      body: "DsSessionBean"
+    };
+  }
+
+  rpc DeleteDsSessionBean(DeleteDsSessionBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsSessionBeans/*}"
+    };
+  }
+}
+
+// message DsSessionBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsSessionBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsSessionBeansResponse {
+  // The field name should match the noun "DsSessionBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsSessionBean DsSessionBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsSessionBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsSessionBeanRequest {
+  // The parent resource name where the DsSessionBean is to be created.
+  string parent = 1;
+
+  // The DsSessionBean id to use for this DsSessionBean.
+  string DsSessionBean_id = 2;
+
+  // The DsSessionBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsSessionBean DsSessionBean = 3;
+}
+
+message UpdateDsSessionBeanRequest {
+  // The DsSessionBean resource which replaces the resource on the server.
+  DsSessionBean DsSessionBean = 1;
+
+  // The update mask applies to the resource. For the `FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsSessionBeanRequest {
+  // The resource name of the DsSessionBean to be deleted.
+  string name = 1;
+}

@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_task_group;
+
+message DsTaskGroupBean {
+
+     int32 id=1 ;
+     optional string  name=2 ;
+     optional string   description=3 ;
+     int32  group_size=4 ;
+     optional int64   project_code=5 ;
+     optional int32  use_size=6 ;
+     optional int32 user_id=7 ;
+     optional int32 status=8 ;
+     optional string create_time=9 ;
+     optional string update_time=10 ;
+}
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsTaskGroupBeanService {
+  rpc ListDsTaskGroupBeans(ListDsTaskGroupBeansRequest) returns (ListDsTaskGroupBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsTaskGroupBeans"
+    };
+  }
+
+  rpc GetDsTaskGroupBean(GetDsTaskGroupBeanRequest) returns (DsTaskGroupBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsTaskGroupBeans/*}"
+    };
+  }
+
+  rpc CreateDsTaskGroupBean(CreateDsTaskGroupBeanRequest) returns (DsTaskGroupBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsTaskGroupBeans"
+      body: "DsTaskGroupBean"
+    };
+  }
+
+  rpc UpdateDsTaskGroupBean(UpdateDsTaskGroupBeanRequest) returns (DsTaskGroupBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsTaskGroupBean.name=DsTaskGroupBeans/*}"
+      body: "DsTaskGroupBean"
+    };
+  }
+
+  rpc DeleteDsTaskGroupBean(DeleteDsTaskGroupBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsTaskGroupBeans/*}"
+    };
+  }
+}
+
+// message DsTaskGroupBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsTaskGroupBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsTaskGroupBeansResponse {
+  // The field name should match the noun "DsTaskGroupBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsTaskGroupBean DsTaskGroupBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsTaskGroupBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsTaskGroupBeanRequest {
+  // The parent resource name where the DsTaskGroupBean is to be created.
+  string parent = 1;
+
+  // The DsTaskGroupBean id to use for this DsTaskGroupBean.
+  string DsTaskGroupBean_id = 2;
+
+  // The DsTaskGroupBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsTaskGroupBean DsTaskGroupBean = 3;
+}
+
+message UpdateDsTaskGroupBeanRequest {
+  // The DsTaskGroupBean resource which replaces the resource on the server.
+  DsTaskGroupBean DsTaskGroupBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsTaskGroupBeanRequest {
+  // The resource name of the DsTaskGroupBean to be deleted.
+  string name = 1;
+}

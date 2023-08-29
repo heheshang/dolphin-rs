@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_version;
+
+message DsVersionBean {
+
+   int32  id=1 ;
+   string  version=2 ;
+}
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsVersionBeanService {
+  rpc ListDsVersionBeans(ListDsVersionBeansRequest) returns (ListDsVersionBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsVersionBeans"
+    };
+  }
+
+  rpc GetDsVersionBean(GetDsVersionBeanRequest) returns (DsVersionBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsVersionBeans/*}"
+    };
+  }
+
+  rpc CreateDsVersionBean(CreateDsVersionBeanRequest) returns (DsVersionBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsVersionBeans"
+      body: "DsVersionBean"
+    };
+  }
+
+  rpc UpdateDsVersionBean(UpdateDsVersionBeanRequest) returns (DsVersionBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsVersionBean.name=DsVersionBeans/*}"
+      body: "DsVersionBean"
+    };
+  }
+
+  rpc DeleteDsVersionBean(DeleteDsVersionBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsVersionBeans/*}"
+    };
+  }
+}
+
+// message DsVersionBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsVersionBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsVersionBeansResponse {
+  // The field name should match the noun "DsVersionBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsVersionBean DsVersionBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsVersionBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsVersionBeanRequest {
+  // The parent resource name where the DsVersionBean is to be created.
+  string parent = 1;
+
+  // The DsVersionBean id to use for this DsVersionBean.
+  string DsVersionBean_id = 2;
+
+  // The DsVersionBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsVersionBean DsVersionBean = 3;
+}
+
+message UpdateDsVersionBeanRequest {
+  // The DsVersionBean resource which replaces the resource on the server.
+  DsVersionBean DsVersionBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsVersionBeanRequest {
+  // The resource name of the DsVersionBean to be deleted.
+  string name = 1;
+}

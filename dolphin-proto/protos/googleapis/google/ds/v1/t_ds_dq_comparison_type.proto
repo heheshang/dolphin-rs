@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_dq_comparison_type;
+
+
+message DsDqComparisonTypeBean {
+
+     int32 id=1 ;
+     string type=2 ;
+     optional string execute_sql=3 ;
+     optional string output_table=4 ;
+     optional string name=5 ;
+     optional string create_time=6 ;
+     optional string update_time=7 ;
+     optional bool is_inner_source=8 ;
+}
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsDqComparisonTypeBeanService {
+  rpc ListDsDqComparisonTypeBeans(ListDsDqComparisonTypeBeansRequest) returns (ListDsDqComparisonTypeBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsDqComparisonTypeBeans"
+    };
+  }
+
+  rpc GetDsDqComparisonTypeBean(GetDsDqComparisonTypeBeanRequest) returns (DsDqComparisonTypeBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsDqComparisonTypeBeans/*}"
+    };
+  }
+
+  rpc CreateDsDqComparisonTypeBean(CreateDsDqComparisonTypeBeanRequest) returns (DsDqComparisonTypeBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsDqComparisonTypeBeans"
+      body: "DsDqComparisonTypeBean"
+    };
+  }
+
+  rpc UpdateDsDqComparisonTypeBean(UpdateDsDqComparisonTypeBeanRequest) returns (DsDqComparisonTypeBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsDqComparisonTypeBean.name=DsDqComparisonTypeBeans/*}"
+      body: "DsDqComparisonTypeBean"
+    };
+  }
+
+  rpc DeleteDsDqComparisonTypeBean(DeleteDsDqComparisonTypeBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsDqComparisonTypeBeans/*}"
+    };
+  }
+}
+
+// message DsDqComparisonTypeBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsDqComparisonTypeBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsDqComparisonTypeBeansResponse {
+  // The field name should match the noun "DsDqComparisonTypeBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsDqComparisonTypeBean DsDqComparisonTypeBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsDqComparisonTypeBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsDqComparisonTypeBeanRequest {
+  // The parent resource name where the DsDqComparisonTypeBean is to be created.
+  string parent = 1;
+
+  // The DsDqComparisonTypeBean id to use for this DsDqComparisonTypeBean.
+  string DsDqComparisonTypeBean_id = 2;
+
+  // The DsDqComparisonTypeBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsDqComparisonTypeBean DsDqComparisonTypeBean = 3;
+}
+
+message UpdateDsDqComparisonTypeBeanRequest {
+  // The DsDqComparisonTypeBean resource which replaces the resource on the server.
+  DsDqComparisonTypeBean DsDqComparisonTypeBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsDqComparisonTypeBeanRequest {
+  // The resource name of the DsDqComparisonTypeBean to be deleted.
+  string name = 1;
+}

@@ -9,3 +9,4 @@ edition = "2021"
 sea-orm = { version = "0.12.2", features = ["sqlx-postgres"] }
 serde = { version = "1.0.183", features = ["derive"] }
 proto = { version = "0.1.0", path = "../dolphin-proto", package = "dolphin-proto" }
+serde_json = "1.0.105"

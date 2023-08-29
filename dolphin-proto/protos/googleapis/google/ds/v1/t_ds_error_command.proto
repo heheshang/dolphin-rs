@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_error_command;
+
+
+message DsErrorCommandBean {
+
+    int32 id=1 ;
+    optional int32 command_type=2 ;
+    int64 process_definition_code=3 ;
+    optional string command_param=4 ;
+    optional int32 task_depend_type=5 ;
+    optional int32  failure_strategy=6 ;
+    optional int32 warning_type=7 ;
+    optional int32 warning_group_id=8 ;
+    optional string schedule_time=9 ;
+    optional string start_time=10 ;
+    optional int32 executor_id=11 ;
+    optional string update_time=12 ;
+    optional int32 process_instance_priority=13 ;
+    optional string worker_group=14 ;
+    optional int64 environment_code=15 ;
+    optional int32 dry_run=16 ;
+    optional string message=17 ;
+    optional int32 process_instance_id=18 ;
+    optional int32 process_definition_version=19 ;
+}
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsErrorCommandBeanService {
+  rpc ListDsErrorCommandBeans(ListDsErrorCommandBeansRequest) returns (ListDsErrorCommandBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsErrorCommandBeans"
+    };
+  }
+
+  rpc GetDsErrorCommandBean(GetDsErrorCommandBeanRequest) returns (DsErrorCommandBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsErrorCommandBeans/*}"
+    };
+  }
+
+  rpc CreateDsErrorCommandBean(CreateDsErrorCommandBeanRequest) returns (DsErrorCommandBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsErrorCommandBeans"
+      body: "DsErrorCommandBean"
+    };
+  }
+
+  rpc UpdateDsErrorCommandBean(UpdateDsErrorCommandBeanRequest) returns (DsErrorCommandBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsErrorCommandBean.name=DsErrorCommandBeans/*}"
+      body: "DsErrorCommandBean"
+    };
+  }
+
+  rpc DeleteDsErrorCommandBean(DeleteDsErrorCommandBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsErrorCommandBeans/*}"
+    };
+  }
+}
+
+// message DsErrorCommandBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsErrorCommandBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsErrorCommandBeansResponse {
+  // The field name should match the noun "DsErrorCommandBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsErrorCommandBean DsErrorCommandBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsErrorCommandBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsErrorCommandBeanRequest {
+  // The parent resource name where the DsErrorCommandBean is to be created.
+  string parent = 1;
+
+  // The DsErrorCommandBean id to use for this DsErrorCommandBean.
+  string DsErrorCommandBean_id = 2;
+
+  // The DsErrorCommandBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsErrorCommandBean DsErrorCommandBean = 3;
+}
+
+message UpdateDsErrorCommandBeanRequest {
+  // The DsErrorCommandBean resource which replaces the resource on the server.
+  DsErrorCommandBean DsErrorCommandBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsErrorCommandBeanRequest {
+  // The resource name of the DsErrorCommandBean to be deleted.
+  string name = 1;
+}

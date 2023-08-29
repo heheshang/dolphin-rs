@@ -6,7 +6,7 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
-message QrtzJobDetails{
+message QrtzJobDetailsBean{
 
     string sched_name = 1;
     string  job_name=2;
@@ -21,49 +21,46 @@ message QrtzJobDetails{
 
 }
 
-
-// the service crud operation with google api annotations
-
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service QrtzJobDetailsService {
-  rpc ListQrtzJobDetailss(ListQrtzJobDetailssRequest) returns (ListQrtzJobDetailssResponse) {
+service QrtzJobDetailsBeanService {
+  rpc ListQrtzJobDetailsBeans(ListQrtzJobDetailsBeansRequest) returns (ListQrtzJobDetailsBeansResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/QrtzJobDetailss"
+      get: "/v1alpha1/QrtzJobDetailsBeans"
     };
   }
 
-  rpc GetQrtzJobDetails(GetQrtzJobDetailsRequest) returns (QrtzJobDetails) {
+  rpc GetQrtzJobDetailsBean(GetQrtzJobDetailsBeanRequest) returns (QrtzJobDetailsBean) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=QrtzJobDetailss/*}"
+      get: "/v1alpha1/{name=QrtzJobDetailsBeans/*}"
     };
   }
 
-  rpc CreateQrtzJobDetails(CreateQrtzJobDetailsRequest) returns (QrtzJobDetails) {
+  rpc CreateQrtzJobDetailsBean(CreateQrtzJobDetailsBeanRequest) returns (QrtzJobDetailsBean) {
     option (google.api.http) = {
-      post: "/v1alpha1/QrtzJobDetailss"
-      body: "QrtzJobDetails"
+      post: "/v1alpha1/QrtzJobDetailsBeans"
+      body: "QrtzJobDetailsBean"
     };
   }
 
-  rpc UpdateQrtzJobDetails(UpdateQrtzJobDetailsRequest) returns (QrtzJobDetails) {
+  rpc UpdateQrtzJobDetailsBean(UpdateQrtzJobDetailsBeanRequest) returns (QrtzJobDetailsBean) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{QrtzJobDetails.name=QrtzJobDetailss/*}"
-      body: "QrtzJobDetails"
+      patch: "/v1alpha1/{QrtzJobDetailsBean.name=QrtzJobDetailsBeans/*}"
+      body: "QrtzJobDetailsBean"
     };
   }
 
-  rpc DeleteQrtzJobDetails(DeleteQrtzJobDetailsRequest) returns (google.protobuf.Empty) {
+  rpc DeleteQrtzJobDetailsBean(DeleteQrtzJobDetailsBeanRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=QrtzJobDetailss/*}"
+      delete: "/v1alpha1/{name=QrtzJobDetailsBeans/*}"
     };
   }
 }
 
-// message QrtzJobDetails {
+// message QrtzJobDetailsBean {
 // ! This should be defined elsewhere
 // }
 
-message ListQrtzJobDetailssRequest {
+message ListQrtzJobDetailsBeansRequest {
   // The parent resource name, for example, "shelves/shelf1"
   string parent = 1;
 
@@ -74,42 +71,42 @@ message ListQrtzJobDetailssRequest {
   string page_token = 3;
 }
 
-message ListQrtzJobDetailssResponse {
-  // The field name should match the noun "QrtzJobDetails" in the method name.
+message ListQrtzJobDetailsBeansResponse {
+  // The field name should match the noun "QrtzJobDetailsBean" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated QrtzJobDetails QrtzJobDetailss = 1;
+  repeated QrtzJobDetailsBean QrtzJobDetailsBeans = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetQrtzJobDetailsRequest {
+message GetQrtzJobDetailsBeanRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateQrtzJobDetailsRequest {
-  // The parent resource name where the QrtzJobDetails is to be created.
+message CreateQrtzJobDetailsBeanRequest {
+  // The parent resource name where the QrtzJobDetailsBean is to be created.
   string parent = 1;
 
-  // The QrtzJobDetails id to use for this QrtzJobDetails.
-  string QrtzJobDetails_id = 2;
+  // The QrtzJobDetailsBean id to use for this QrtzJobDetailsBean.
+  string QrtzJobDetailsBean_id = 2;
 
-  // The QrtzJobDetails resource to create.
+  // The QrtzJobDetailsBean resource to create.
   // The field name should match the Noun in the method name.
-  QrtzJobDetails QrtzJobDetails = 3;
+  QrtzJobDetailsBean QrtzJobDetailsBean = 3;
 }
 
-message UpdateQrtzJobDetailsRequest {
-  // The QrtzJobDetails resource which replaces the resource on the server.
-  QrtzJobDetails QrtzJobDetails = 1;
+message UpdateQrtzJobDetailsBeanRequest {
+  // The QrtzJobDetailsBean resource which replaces the resource on the server.
+  QrtzJobDetailsBean QrtzJobDetailsBean = 1;
 
-  // The update mask applies to the resource. For the `FieldMask` definition,
-  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteQrtzJobDetailsRequest {
-  // The resource name of the QrtzJobDetails to be deleted.
+message DeleteQrtzJobDetailsBeanRequest {
+  // The resource name of the QrtzJobDetailsBean to be deleted.
   string name = 1;
 }

@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_alert;
+
+
+message DsAlertBean {
+
+    int32 id=1;
+    optional string title=2;
+    string sign=3;
+    optional string content=4;
+    optional int32 alert_status=5;
+    optional int32 warning_DsAlertBean=6;
+    optional string log=7;
+    optional int32 alertgroup_id=8;
+    optional string create_time=9;
+    optional string update_time=10;
+    optional int64 project_code=11;
+    optional int64 process_definition_code=12;
+    optional int32 process_instance_id=13;
+    optional int32 alert_DsAlertBean=14;
+}
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsAlertBeanService {
+  rpc ListDsAlertBeans(ListDsAlertBeansRequest) returns (ListDsAlertBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsAlertBeans"
+    };
+  }
+
+  rpc GetDsAlertBean(GetDsAlertBeanRequest) returns (DsAlertBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsAlertBeans/*}"
+    };
+  }
+
+  rpc CreateDsAlertBean(CreateDsAlertBeanRequest) returns (DsAlertBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsAlertBeans"
+      body: "DsAlertBean"
+    };
+  }
+
+  rpc UpdateDsAlertBean(UpdateDsAlertBeanRequest) returns (DsAlertBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsAlertBean.name=DsAlertBeans/*}"
+      body: "DsAlertBean"
+    };
+  }
+
+  rpc DeleteDsAlertBean(DeleteDsAlertBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsAlertBeans/*}"
+    };
+  }
+}
+
+// message DsAlertBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsAlertBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsAlertBeansResponse {
+  // The field name should match the noun "DsAlertBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsAlertBean DsAlertBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsAlertBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsAlertBeanRequest {
+  // The parent resource name where the DsAlertBean is to be created.
+  string parent = 1;
+
+  // The DsAlertBean id to use for this DsAlertBean.
+  string DsAlertBean_id = 2;
+
+  // The DsAlertBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsAlertBean DsAlertBean = 3;
+}
+
+message UpdateDsAlertBeanRequest {
+  // The DsAlertBean resource which replaces the resource on the server.
+  DsAlertBean DsAlertBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsAlertBeanRequest {
+  // The resource name of the DsAlertBean to be deleted.
+  string name = 1;
+}

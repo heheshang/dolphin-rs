@@ -1,0 +1,118 @@
+
+syntax = "proto3";
+
+package qrtz_triggers;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+message QrtzTriggerBean {
+    string sched_name=1;
+    string trigger_name=2;
+    string trigger_group=3;
+    string job_name=4;
+    string job_group=5;
+    optional string description=6;
+    optional int64 next_fire_time=7;
+    optional int64 prev_fire_time=8;
+    optional int32 priority=9;
+    string trigger_state=10;
+    string trigger_QrtzTriggerBean=11;
+    int64 start_time=12;
+    optional int64 end_time=13;
+    optional string calendar_name=14;
+    optional int32 misfire_instr=15;
+    optional bytes job_data=16;
+}
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service QrtzTriggerBeanService {
+  rpc ListQrtzTriggerBeans(ListQrtzTriggerBeansRequest) returns (ListQrtzTriggerBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/QrtzTriggerBeans"
+    };
+  }
+
+  rpc GetQrtzTriggerBean(GetQrtzTriggerBeanRequest) returns (QrtzTriggerBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=QrtzTriggerBeans/*}"
+    };
+  }
+
+  rpc CreateQrtzTriggerBean(CreateQrtzTriggerBeanRequest) returns (QrtzTriggerBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/QrtzTriggerBeans"
+      body: "QrtzTriggerBean"
+    };
+  }
+
+  rpc UpdateQrtzTriggerBean(UpdateQrtzTriggerBeanRequest) returns (QrtzTriggerBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{QrtzTriggerBean.name=QrtzTriggerBeans/*}"
+      body: "QrtzTriggerBean"
+    };
+  }
+
+  rpc DeleteQrtzTriggerBean(DeleteQrtzTriggerBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=QrtzTriggerBeans/*}"
+    };
+  }
+}
+
+// message QrtzTriggerBean {
+// ! This should be defined elsewhere
+// }
+
+message ListQrtzTriggerBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListQrtzTriggerBeansResponse {
+  // The field name should match the noun "QrtzTriggerBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated QrtzTriggerBean QrtzTriggerBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetQrtzTriggerBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateQrtzTriggerBeanRequest {
+  // The parent resource name where the QrtzTriggerBean is to be created.
+  string parent = 1;
+
+  // The QrtzTriggerBean id to use for this QrtzTriggerBean.
+  string QrtzTriggerBean_id = 2;
+
+  // The QrtzTriggerBean resource to create.
+  // The field name should match the Noun in the method name.
+  QrtzTriggerBean QrtzTriggerBean = 3;
+}
+
+message UpdateQrtzTriggerBeanRequest {
+  // The QrtzTriggerBean resource which replaces the resource on the server.
+  QrtzTriggerBean QrtzTriggerBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteQrtzTriggerBeanRequest {
+  // The resource name of the QrtzTriggerBean to be deleted.
+  string name = 1;
+}

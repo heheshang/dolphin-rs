@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_environment_worker_group_relation;
+
+message DsEnvironmentWorkerGroupRelationBean {
+
+     int32 id= 1;
+     int64  environment_code= 2;
+     string  worker_group=3 ;
+     optional int32  operator=4 ;
+     optional string create_time=5 ;
+     optional string  update_time=6 ;
+}
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsEnvironmentWorkerGroupRelationBeanService {
+  rpc ListDsEnvironmentWorkerGroupRelationBeans(ListDsEnvironmentWorkerGroupRelationBeansRequest) returns (ListDsEnvironmentWorkerGroupRelationBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsEnvironmentWorkerGroupRelationBeans"
+    };
+  }
+
+  rpc GetDsEnvironmentWorkerGroupRelationBean(GetDsEnvironmentWorkerGroupRelationBeanRequest) returns (DsEnvironmentWorkerGroupRelationBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsEnvironmentWorkerGroupRelationBeans/*}"
+    };
+  }
+
+  rpc CreateDsEnvironmentWorkerGroupRelationBean(CreateDsEnvironmentWorkerGroupRelationBeanRequest) returns (DsEnvironmentWorkerGroupRelationBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsEnvironmentWorkerGroupRelationBeans"
+      body: "DsEnvironmentWorkerGroupRelationBean"
+    };
+  }
+
+  rpc UpdateDsEnvironmentWorkerGroupRelationBean(UpdateDsEnvironmentWorkerGroupRelationBeanRequest) returns (DsEnvironmentWorkerGroupRelationBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsEnvironmentWorkerGroupRelationBean.name=DsEnvironmentWorkerGroupRelationBeans/*}"
+      body: "DsEnvironmentWorkerGroupRelationBean"
+    };
+  }
+
+  rpc DeleteDsEnvironmentWorkerGroupRelationBean(DeleteDsEnvironmentWorkerGroupRelationBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsEnvironmentWorkerGroupRelationBeans/*}"
+    };
+  }
+}
+
+// message DsEnvironmentWorkerGroupRelationBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsEnvironmentWorkerGroupRelationBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsEnvironmentWorkerGroupRelationBeansResponse {
+  // The field name should match the noun "DsEnvironmentWorkerGroupRelationBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsEnvironmentWorkerGroupRelationBean DsEnvironmentWorkerGroupRelationBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsEnvironmentWorkerGroupRelationBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsEnvironmentWorkerGroupRelationBeanRequest {
+  // The parent resource name where the DsEnvironmentWorkerGroupRelationBean is to be created.
+  string parent = 1;
+
+  // The DsEnvironmentWorkerGroupRelationBean id to use for this DsEnvironmentWorkerGroupRelationBean.
+  string DsEnvironmentWorkerGroupRelationBean_id = 2;
+
+  // The DsEnvironmentWorkerGroupRelationBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsEnvironmentWorkerGroupRelationBean DsEnvironmentWorkerGroupRelationBean = 3;
+}
+
+message UpdateDsEnvironmentWorkerGroupRelationBeanRequest {
+  // The DsEnvironmentWorkerGroupRelationBean resource which replaces the resource on the server.
+  DsEnvironmentWorkerGroupRelationBean DsEnvironmentWorkerGroupRelationBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsEnvironmentWorkerGroupRelationBeanRequest {
+  // The resource name of the DsEnvironmentWorkerGroupRelationBean to be deleted.
+  string name = 1;
+}

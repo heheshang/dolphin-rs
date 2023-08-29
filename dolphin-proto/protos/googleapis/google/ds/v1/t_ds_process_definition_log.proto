@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_process_definition_log;
+
+
+message DsProcessDefinitionLogBean {
+
+int32 id= 1;
+int64 code= 2;
+optional string  name= 3;
+int32  version= 4;
+optional string  description= 5;
+optional int64 project_code= 6;
+optional int32  release_state= 7;
+optional int32  user_id= 8;
+optional string  global_params= 9;
+optional string locations= 10;
+optional int32  warning_group_id= 11;
+optional int32  flag=12 ;
+optional int32   timeout=13 ;
+optional int32   tenant_id=14 ;
+optional int32   execution_type=15 ;
+optional int32    operator=16 ;
+optional string   operate_time=17 ;
+optional string   create_time=18 ;
+optional string   update_time=19 ;
+}
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsProcessDefinitionLogBeanService {
+  rpc ListDsProcessDefinitionLogBeans(ListDsProcessDefinitionLogBeansRequest) returns (ListDsProcessDefinitionLogBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsProcessDefinitionLogBeans"
+    };
+  }
+
+  rpc GetDsProcessDefinitionLogBean(GetDsProcessDefinitionLogBeanRequest) returns (DsProcessDefinitionLogBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsProcessDefinitionLogBeans/*}"
+    };
+  }
+
+  rpc CreateDsProcessDefinitionLogBean(CreateDsProcessDefinitionLogBeanRequest) returns (DsProcessDefinitionLogBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsProcessDefinitionLogBeans"
+      body: "DsProcessDefinitionLogBean"
+    };
+  }
+
+  rpc UpdateDsProcessDefinitionLogBean(UpdateDsProcessDefinitionLogBeanRequest) returns (DsProcessDefinitionLogBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsProcessDefinitionLogBean.name=DsProcessDefinitionLogBeans/*}"
+      body: "DsProcessDefinitionLogBean"
+    };
+  }
+
+  rpc DeleteDsProcessDefinitionLogBean(DeleteDsProcessDefinitionLogBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsProcessDefinitionLogBeans/*}"
+    };
+  }
+}
+
+// message DsProcessDefinitionLogBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsProcessDefinitionLogBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsProcessDefinitionLogBeansResponse {
+  // The field name should match the noun "DsProcessDefinitionLogBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsProcessDefinitionLogBean DsProcessDefinitionLogBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsProcessDefinitionLogBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsProcessDefinitionLogBeanRequest {
+  // The parent resource name where the DsProcessDefinitionLogBean is to be created.
+  string parent = 1;
+
+  // The DsProcessDefinitionLogBean id to use for this DsProcessDefinitionLogBean.
+  string DsProcessDefinitionLogBean_id = 2;
+
+  // The DsProcessDefinitionLogBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsProcessDefinitionLogBean DsProcessDefinitionLogBean = 3;
+}
+
+message UpdateDsProcessDefinitionLogBeanRequest {
+  // The DsProcessDefinitionLogBean resource which replaces the resource on the server.
+  DsProcessDefinitionLogBean DsProcessDefinitionLogBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsProcessDefinitionLogBeanRequest {
+  // The resource name of the DsProcessDefinitionLogBean to be deleted.
+  string name = 1;
+}

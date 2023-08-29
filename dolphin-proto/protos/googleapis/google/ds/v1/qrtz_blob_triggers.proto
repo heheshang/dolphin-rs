@@ -8,7 +8,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 
-message QrtzBlobTriggers{
+message QrtzBlobTriggerBean{
 
 string sched_name=1;
     string trigger_name=2;
@@ -18,45 +18,45 @@ string sched_name=1;
 }
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service QrtzBlobTriggersService {
-  rpc ListQrtzBlobTriggerss(ListQrtzBlobTriggerssRequest) returns (ListQrtzBlobTriggerssResponse) {
+service QrtzBlobTriggerBeanService {
+  rpc ListQrtzBlobTriggerBeans(ListQrtzBlobTriggerBeansRequest) returns (ListQrtzBlobTriggerBeansResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/qrtzblobtriggerss"
+      get: "/v1alpha1/QrtzBlobTriggerBeans"
     };
   }
 
-  rpc GetQrtzBlobTriggers(GetQrtzBlobTriggersRequest) returns (QrtzBlobTriggers) {
+  rpc GetQrtzBlobTriggerBean(GetQrtzBlobTriggerBeanRequest) returns (QrtzBlobTriggerBean) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=qrtzblobtriggerss/*}"
+      get: "/v1alpha1/{name=QrtzBlobTriggerBeans/*}"
     };
   }
 
-  rpc CreateQrtzBlobTriggers(CreateQrtzBlobTriggersRequest) returns (QrtzBlobTriggers) {
+  rpc CreateQrtzBlobTriggerBean(CreateQrtzBlobTriggerBeanRequest) returns (QrtzBlobTriggerBean) {
     option (google.api.http) = {
-      post: "/v1alpha1/qrtzblobtriggerss"
-      body: "qrtzblobtriggers"
+      post: "/v1alpha1/QrtzBlobTriggerBeans"
+      body: "QrtzBlobTriggerBean"
     };
   }
 
-  rpc UpdateQrtzBlobTriggers(UpdateQrtzBlobTriggersRequest) returns (QrtzBlobTriggers) {
+  rpc UpdateQrtzBlobTriggerBean(UpdateQrtzBlobTriggerBeanRequest) returns (QrtzBlobTriggerBean) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{qrtzblobtriggers.name=qrtzblobtriggerss/*}"
-      body: "qrtzblobtriggers"
+      patch: "/v1alpha1/{QrtzBlobTriggerBean.name=QrtzBlobTriggerBeans/*}"
+      body: "QrtzBlobTriggerBean"
     };
   }
 
-  rpc DeleteQrtzBlobTriggers(DeleteQrtzBlobTriggersRequest) returns (google.protobuf.Empty) {
+  rpc DeleteQrtzBlobTriggerBean(DeleteQrtzBlobTriggerBeanRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=qrtzblobtriggerss/*}"
+      delete: "/v1alpha1/{name=QrtzBlobTriggerBeans/*}"
     };
   }
 }
 
-// message QrtzBlobTriggers {
+// message QrtzBlobTriggerBean {
 // ! This should be defined elsewhere
 // }
 
-message ListQrtzBlobTriggerssRequest {
+message ListQrtzBlobTriggerBeansRequest {
   // The parent resource name, for example, "shelves/shelf1"
   string parent = 1;
 
@@ -67,42 +67,42 @@ message ListQrtzBlobTriggerssRequest {
   string page_token = 3;
 }
 
-message ListQrtzBlobTriggerssResponse {
-  // The field name should match the noun "qrtzblobtriggers" in the method name.
+message ListQrtzBlobTriggerBeansResponse {
+  // The field name should match the noun "QrtzBlobTriggerBean" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated QrtzBlobTriggers qrtzblobtriggerss = 1;
+  repeated QrtzBlobTriggerBean QrtzBlobTriggerBeans = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetQrtzBlobTriggersRequest {
+message GetQrtzBlobTriggerBeanRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateQrtzBlobTriggersRequest {
-  // The parent resource name where the qrtzblobtriggers is to be created.
+message CreateQrtzBlobTriggerBeanRequest {
+  // The parent resource name where the QrtzBlobTriggerBean is to be created.
   string parent = 1;
 
-  // The qrtzblobtriggers id to use for this qrtzblobtriggers.
-  string qrtzblobtriggers_id = 2;
+  // The QrtzBlobTriggerBean id to use for this QrtzBlobTriggerBean.
+  string QrtzBlobTriggerBean_id = 2;
 
-  // The qrtzblobtriggers resource to create.
+  // The QrtzBlobTriggerBean resource to create.
   // The field name should match the Noun in the method name.
-  QrtzBlobTriggers qrtzblobtriggers = 3;
+  QrtzBlobTriggerBean QrtzBlobTriggerBean = 3;
 }
 
-message UpdateQrtzBlobTriggersRequest {
-  // The qrtzblobtriggers resource which replaces the resource on the server.
-  QrtzBlobTriggers qrtzblobtriggers = 1;
+message UpdateQrtzBlobTriggerBeanRequest {
+  // The QrtzBlobTriggerBean resource which replaces the resource on the server.
+  QrtzBlobTriggerBean QrtzBlobTriggerBean = 1;
 
-  // The update mask applies to the resource. For the `FieldMask` definition,
-  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteQrtzBlobTriggersRequest {
-  // The resource name of the qrtzblobtriggers to be deleted.
+message DeleteQrtzBlobTriggerBeanRequest {
+  // The resource name of the QrtzBlobTriggerBean to be deleted.
   string name = 1;
 }

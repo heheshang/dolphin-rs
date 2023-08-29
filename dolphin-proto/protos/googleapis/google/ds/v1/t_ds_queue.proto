@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_queue;
+
+
+message DsQueueBean {
+
+     int32 id=1 ;
+     optional string queue_name=2 ;
+     optional string  queue=3 ;
+     optional string create_time=4 ;
+     optional string update_time=5 ;
+}
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsQueueBeanService {
+  rpc ListDsQueueBeans(ListDsQueueBeansRequest) returns (ListDsQueueBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsQueueBeans"
+    };
+  }
+
+  rpc GetDsQueueBean(GetDsQueueBeanRequest) returns (DsQueueBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsQueueBeans/*}"
+    };
+  }
+
+  rpc CreateDsQueueBean(CreateDsQueueBeanRequest) returns (DsQueueBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsQueueBeans"
+      body: "DsQueueBean"
+    };
+  }
+
+  rpc UpdateDsQueueBean(UpdateDsQueueBeanRequest) returns (DsQueueBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsQueueBean.name=DsQueueBeans/*}"
+      body: "DsQueueBean"
+    };
+  }
+
+  rpc DeleteDsQueueBean(DeleteDsQueueBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsQueueBeans/*}"
+    };
+  }
+}
+
+// message DsQueueBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsQueueBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsQueueBeansResponse {
+  // The field name should match the noun "DsQueueBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsQueueBean DsQueueBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsQueueBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsQueueBeanRequest {
+  // The parent resource name where the DsQueueBean is to be created.
+  string parent = 1;
+
+  // The DsQueueBean id to use for this DsQueueBean.
+  string DsQueueBean_id = 2;
+
+  // The DsQueueBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsQueueBean DsQueueBean = 3;
+}
+
+message UpdateDsQueueBeanRequest {
+  // The DsQueueBean resource which replaces the resource on the server.
+  DsQueueBean DsQueueBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsQueueBeanRequest {
+  // The resource name of the DsQueueBean to be deleted.
+  string name = 1;
+}

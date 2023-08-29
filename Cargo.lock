@@ -591,6 +591,7 @@ dependencies = [
  "dolphin-proto",
  "sea-orm",
  "serde",
+ "serde_json",
 ]
 
 [[package]]

@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_dq_rule_input_entry;
+
+
+message DsDqRuleInputEntryBean {
+
+     int32 id=1 ;
+     optional string field=2 ;
+     optional string type=3 ;
+     optional string title=4 ;
+     optional string value=5 ;
+     optional string options=6 ;
+     optional string placeholder=7 ;
+     optional int32 option_source_type=8 ;
+     optional int32 value_type= 9;
+     optional int32 input_type= 10;
+     optional int32 is_show= 11;
+     optional int32 can_edit=12 ;
+     optional int32 is_emit= 13;
+     optional int32 is_validate= 14;
+     optional string create_time= 15;
+     optional string update_time= 16;
+}
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsDqRuleInputEntryBeanService {
+  rpc ListDsDqRuleInputEntryBeans(ListDsDqRuleInputEntryBeansRequest) returns (ListDsDqRuleInputEntryBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsDqRuleInputEntryBeans"
+    };
+  }
+
+  rpc GetDsDqRuleInputEntryBean(GetDsDqRuleInputEntryBeanRequest) returns (DsDqRuleInputEntryBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsDqRuleInputEntryBeans/*}"
+    };
+  }
+
+  rpc CreateDsDqRuleInputEntryBean(CreateDsDqRuleInputEntryBeanRequest) returns (DsDqRuleInputEntryBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsDqRuleInputEntryBeans"
+      body: "DsDqRuleInputEntryBean"
+    };
+  }
+
+  rpc UpdateDsDqRuleInputEntryBean(UpdateDsDqRuleInputEntryBeanRequest) returns (DsDqRuleInputEntryBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsDqRuleInputEntryBean.name=DsDqRuleInputEntryBeans/*}"
+      body: "DsDqRuleInputEntryBean"
+    };
+  }
+
+  rpc DeleteDsDqRuleInputEntryBean(DeleteDsDqRuleInputEntryBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsDqRuleInputEntryBeans/*}"
+    };
+  }
+}
+
+// message DsDqRuleInputEntryBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsDqRuleInputEntryBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsDqRuleInputEntryBeansResponse {
+  // The field name should match the noun "DsDqRuleInputEntryBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsDqRuleInputEntryBean DsDqRuleInputEntryBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsDqRuleInputEntryBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsDqRuleInputEntryBeanRequest {
+  // The parent resource name where the DsDqRuleInputEntryBean is to be created.
+  string parent = 1;
+
+  // The DsDqRuleInputEntryBean id to use for this DsDqRuleInputEntryBean.
+  string DsDqRuleInputEntryBean_id = 2;
+
+  // The DsDqRuleInputEntryBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsDqRuleInputEntryBean DsDqRuleInputEntryBean = 3;
+}
+
+message UpdateDsDqRuleInputEntryBeanRequest {
+  // The DsDqRuleInputEntryBean resource which replaces the resource on the server.
+  DsDqRuleInputEntryBean DsDqRuleInputEntryBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsDqRuleInputEntryBeanRequest {
+  // The resource name of the DsDqRuleInputEntryBean to be deleted.
+  string name = 1;
+}

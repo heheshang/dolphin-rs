@@ -6,52 +6,51 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
-message QrtzLocks {
-   string  sched_name=1;
-    string   lock_name=2;
+message QrtzLocksBean {
+  string  sched_name=1;
+  string  lock_name=2;
 }
-
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service QrtzLocksService {
-  rpc ListQrtzLockss(ListQrtzLockssRequest) returns (ListQrtzLockssResponse) {
+service QrtzLocksBeanService {
+  rpc ListQrtzLocksBeans(ListQrtzLocksBeansRequest) returns (ListQrtzLocksBeansResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/QrtzLockss"
+      get: "/v1alpha1/QrtzLocksBeans"
     };
   }
 
-  rpc GetQrtzLocks(GetQrtzLocksRequest) returns (QrtzLocks) {
+  rpc GetQrtzLocksBean(GetQrtzLocksBeanRequest) returns (QrtzLocksBean) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=QrtzLockss/*}"
+      get: "/v1alpha1/{name=QrtzLocksBeans/*}"
     };
   }
 
-  rpc CreateQrtzLocks(CreateQrtzLocksRequest) returns (QrtzLocks) {
+  rpc CreateQrtzLocksBean(CreateQrtzLocksBeanRequest) returns (QrtzLocksBean) {
     option (google.api.http) = {
-      post: "/v1alpha1/QrtzLockss"
-      body: "QrtzLocks"
+      post: "/v1alpha1/QrtzLocksBeans"
+      body: "QrtzLocksBean"
     };
   }
 
-  rpc UpdateQrtzLocks(UpdateQrtzLocksRequest) returns (QrtzLocks) {
+  rpc UpdateQrtzLocksBean(UpdateQrtzLocksBeanRequest) returns (QrtzLocksBean) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{QrtzLocks.name=QrtzLockss/*}"
-      body: "QrtzLocks"
+      patch: "/v1alpha1/{QrtzLocksBean.name=QrtzLocksBeans/*}"
+      body: "QrtzLocksBean"
     };
   }
 
-  rpc DeleteQrtzLocks(DeleteQrtzLocksRequest) returns (google.protobuf.Empty) {
+  rpc DeleteQrtzLocksBean(DeleteQrtzLocksBeanRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=QrtzLockss/*}"
+      delete: "/v1alpha1/{name=QrtzLocksBeans/*}"
     };
   }
 }
 
-// message QrtzLocks {
+// message QrtzLocksBean {
 // ! This should be defined elsewhere
 // }
 
-message ListQrtzLockssRequest {
+message ListQrtzLocksBeansRequest {
   // The parent resource name, for example, "shelves/shelf1"
   string parent = 1;
 
@@ -62,42 +61,42 @@ message ListQrtzLockssRequest {
   string page_token = 3;
 }
 
-message ListQrtzLockssResponse {
-  // The field name should match the noun "QrtzLocks" in the method name.
+message ListQrtzLocksBeansResponse {
+  // The field name should match the noun "QrtzLocksBean" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated QrtzLocks QrtzLockss = 1;
+  repeated QrtzLocksBean QrtzLocksBeans = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetQrtzLocksRequest {
+message GetQrtzLocksBeanRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateQrtzLocksRequest {
-  // The parent resource name where the QrtzLocks is to be created.
+message CreateQrtzLocksBeanRequest {
+  // The parent resource name where the QrtzLocksBean is to be created.
   string parent = 1;
 
-  // The QrtzLocks id to use for this QrtzLocks.
-  string QrtzLocks_id = 2;
+  // The QrtzLocksBean id to use for this QrtzLocksBean.
+  string QrtzLocksBean_id = 2;
 
-  // The QrtzLocks resource to create.
+  // The QrtzLocksBean resource to create.
   // The field name should match the Noun in the method name.
-  QrtzLocks QrtzLocks = 3;
+  QrtzLocksBean QrtzLocksBean = 3;
 }
 
-message UpdateQrtzLocksRequest {
-  // The QrtzLocks resource which replaces the resource on the server.
-  QrtzLocks QrtzLocks = 1;
+message UpdateQrtzLocksBeanRequest {
+  // The QrtzLocksBean resource which replaces the resource on the server.
+  QrtzLocksBean QrtzLocksBean = 1;
 
-  // The update mask applies to the resource. For the `FieldMask` definition,
-  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteQrtzLocksRequest {
-  // The resource name of the QrtzLocks to be deleted.
+message DeleteQrtzLocksBeanRequest {
+  // The resource name of the QrtzLocksBean to be deleted.
   string name = 1;
 }

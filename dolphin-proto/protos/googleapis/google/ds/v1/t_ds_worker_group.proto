@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_worker_group;
+
+message DsWorkerGroupBean {
+
+    int64 id=1 ;
+    string name=2 ;
+    optional string addr_list=3 ;
+    optional string create_time=4 ;
+    optional string update_time=5 ;
+}
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsWorkerGroupBeanService {
+  rpc ListDsWorkerGroupBeans(ListDsWorkerGroupBeansRequest) returns (ListDsWorkerGroupBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsWorkerGroupBeans"
+    };
+  }
+
+  rpc GetDsWorkerGroupBean(GetDsWorkerGroupBeanRequest) returns (DsWorkerGroupBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsWorkerGroupBeans/*}"
+    };
+  }
+
+  rpc CreateDsWorkerGroupBean(CreateDsWorkerGroupBeanRequest) returns (DsWorkerGroupBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsWorkerGroupBeans"
+      body: "DsWorkerGroupBean"
+    };
+  }
+
+  rpc UpdateDsWorkerGroupBean(UpdateDsWorkerGroupBeanRequest) returns (DsWorkerGroupBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsWorkerGroupBean.name=DsWorkerGroupBeans/*}"
+      body: "DsWorkerGroupBean"
+    };
+  }
+
+  rpc DeleteDsWorkerGroupBean(DeleteDsWorkerGroupBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsWorkerGroupBeans/*}"
+    };
+  }
+}
+
+// message DsWorkerGroupBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsWorkerGroupBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsWorkerGroupBeansResponse {
+  // The field name should match the noun "DsWorkerGroupBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsWorkerGroupBean DsWorkerGroupBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsWorkerGroupBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsWorkerGroupBeanRequest {
+  // The parent resource name where the DsWorkerGroupBean is to be created.
+  string parent = 1;
+
+  // The DsWorkerGroupBean id to use for this DsWorkerGroupBean.
+  string DsWorkerGroupBean_id = 2;
+
+  // The DsWorkerGroupBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsWorkerGroupBean DsWorkerGroupBean = 3;
+}
+
+message UpdateDsWorkerGroupBeanRequest {
+  // The DsWorkerGroupBean resource which replaces the resource on the server.
+  DsWorkerGroupBean DsWorkerGroupBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsWorkerGroupBeanRequest {
+  // The resource name of the DsWorkerGroupBean to be deleted.
+  string name = 1;
+}

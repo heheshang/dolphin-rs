@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package ds_dq_task_statistics_value;
+
+
+
+message DsDqTaskStatisticsValueBean {
+
+     int32 id=1 ;
+     int32 process_definition_id=2 ;
+     optional int32 task_instance_id=3 ;
+     int32 rule_id=4 ;
+     string unique_code=5 ;
+     optional string statistics_name=6 ;
+     optional float statistics_value=7 ;
+     optional string data_time=8 ;
+     optional string create_time=9 ;
+     optional string update_time=10 ;
+}
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DsDqTaskStatisticsValueBeanService {
+  rpc ListDsDqTaskStatisticsValueBeans(ListDsDqTaskStatisticsValueBeansRequest) returns (ListDsDqTaskStatisticsValueBeansResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/DsDqTaskStatisticsValueBeans"
+    };
+  }
+
+  rpc GetDsDqTaskStatisticsValueBean(GetDsDqTaskStatisticsValueBeanRequest) returns (DsDqTaskStatisticsValueBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=DsDqTaskStatisticsValueBeans/*}"
+    };
+  }
+
+  rpc CreateDsDqTaskStatisticsValueBean(CreateDsDqTaskStatisticsValueBeanRequest) returns (DsDqTaskStatisticsValueBean) {
+    option (google.api.http) = {
+      post: "/v1alpha1/DsDqTaskStatisticsValueBeans"
+      body: "DsDqTaskStatisticsValueBean"
+    };
+  }
+
+  rpc UpdateDsDqTaskStatisticsValueBean(UpdateDsDqTaskStatisticsValueBeanRequest) returns (DsDqTaskStatisticsValueBean) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{DsDqTaskStatisticsValueBean.name=DsDqTaskStatisticsValueBeans/*}"
+      body: "DsDqTaskStatisticsValueBean"
+    };
+  }
+
+  rpc DeleteDsDqTaskStatisticsValueBean(DeleteDsDqTaskStatisticsValueBeanRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=DsDqTaskStatisticsValueBeans/*}"
+    };
+  }
+}
+
+// message DsDqTaskStatisticsValueBean {
+// ! This should be defined elsewhere
+// }
+
+message ListDsDqTaskStatisticsValueBeansRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDsDqTaskStatisticsValueBeansResponse {
+  // The field name should match the noun "DsDqTaskStatisticsValueBean" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated DsDqTaskStatisticsValueBean DsDqTaskStatisticsValueBeans = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDsDqTaskStatisticsValueBeanRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDsDqTaskStatisticsValueBeanRequest {
+  // The parent resource name where the DsDqTaskStatisticsValueBean is to be created.
+  string parent = 1;
+
+  // The DsDqTaskStatisticsValueBean id to use for this DsDqTaskStatisticsValueBean.
+  string DsDqTaskStatisticsValueBean_id = 2;
+
+  // The DsDqTaskStatisticsValueBean resource to create.
+  // The field name should match the Noun in the method name.
+  DsDqTaskStatisticsValueBean DsDqTaskStatisticsValueBean = 3;
+}
+
+message UpdateDsDqTaskStatisticsValueBeanRequest {
+  // The DsDqTaskStatisticsValueBean resource which replaces the resource on the server.
+  DsDqTaskStatisticsValueBean DsDqTaskStatisticsValueBean = 1;
+
+  // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteDsDqTaskStatisticsValueBeanRequest {
+  // The resource name of the DsDqTaskStatisticsValueBean to be deleted.
+  string name = 1;
+}
