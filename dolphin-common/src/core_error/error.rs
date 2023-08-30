@@ -28,9 +28,37 @@ where E: Into<AppStatus>
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DolphinErrorInfo {
     pub code: i32,
+    // #[cfg(feature = "en_msg")]
     pub en_msg: String,
+    // #[cfg(feature = "cn_msg")]
     pub cn_msg: String,
 }
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct DisplayErrorInfo {
+    pub code: i32,
+    // #[cfg(feature = "en_msg")]
+    pub msg: String,
+}
+#[cfg(feature = "cn_msg")]
+impl From<DolphinErrorInfo> for DisplayErrorInfo {
+    fn from(value: DolphinErrorInfo) -> Self {
+        Self {
+            code: value.code,
+            msg: value.cn_msg,
+        }
+    }
+}
+#[cfg(feature = "en_msg")]
+impl From<DolphinErrorInfo> for DisplayErrorInfo {
+    fn from(value: DolphinErrorInfo) -> Self {
+        Self {
+            code: value.code,
+            msg: value.en_msg,
+        }
+    }
+}
+
 
 impl DolphinErrorInfo {
     pub fn new(code: i32, en_msg: String, cn_msg: String) -> DolphinErrorInfo {

@@ -14,7 +14,7 @@ use serde::{Deserialize, Serialize};
 use std::env;
 use tokio::sync::OnceCell;
 use tonic::transport::{Channel, Endpoint};
-
+use tracing::error;
 static USER_SERVICE_CLIENT: OnceCell<Result<DsUserBeanServiceClient<Channel>>> =
     OnceCell::const_new();
 
@@ -66,10 +66,16 @@ impl User {
                 tonic::Code::Unknown => {
                     let msg = e.message();
                     let err_info: DolphinErrorInfo = msg.parse().unwrap();
-                    eprintln!("err_info: {:?}", err_info);
+                    // eprintln!("err_info: {:?}", err_info);
                     // let r: AppStatus = err_info.into();
 
-                    return ApiResult::new_with_err_status(None, err_info.into());
+                    let res = ApiResult::new_with_err_extra(
+                        None,
+                        err_info.into(),
+                        Some(vec![self.username.clone()]),
+                    );
+                    error!("res: {:?}", res);
+                    res
                 }
                 _ => {
                     return ApiResult::new_with_err_status(

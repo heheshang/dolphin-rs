@@ -139,7 +139,7 @@ fn main() {
         ],
         true,
         true,
-        Some(&[r#"#[serde(rename_all = "camelCase")]"#]),
+        Some(&[r#"#[serde(rename_all = "snake_case")]"#]),
         // None,
     );
     config.with_serde_as("ds_user.DsUser", &[(
