@@ -1,4 +1,4 @@
-use proto::ds_user::{user_service_client::UserServiceClient, GetUserRequest};
+use proto::ds_user::{ds_user_bean_service_client::DsUserBeanServiceClient, GetDsUserBeanRequest};
 use tonic::{transport::Endpoint, Request};
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -13,12 +13,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     please refer it to implement other ways to make your code pretty
     */
 
-    let mut client: UserServiceClient<tonic::transport::Channel> =
-        UserServiceClient::connect(addr).await?;
-    let request = Request::new(GetUserRequest {
+    let mut client: DsUserBeanServiceClient<tonic::transport::Channel> =
+        DsUserBeanServiceClient::connect(addr).await?;
+    let request = Request::new(GetDsUserBeanRequest {
         name: "admin".to_string(),
     });
-    let response = client.get_user(request).await?;
+    let response = client.get_ds_user_bean(request).await?;
 
     eprintln!("RESPONSE={:?}", response);
 

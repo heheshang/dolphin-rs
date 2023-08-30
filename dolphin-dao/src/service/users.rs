@@ -1,15 +1,19 @@
-use entity::t_ds_user::{self};
-
-use proto::{
-    self,
-    ds_user::{
-        user_service_server::{UserService, UserServiceServer},
-        DsUser,
-        GetUserRequest,
-        UpdateUserRequest,
-    },
+use dolphin_common::{
+    core_error::error::DolphinErrorInfo,
+    core_results::results::{GrpcRequest, GrpcResponse},
+    core_status::app_status::AppStatus,
 };
-use dolphin_common::core_results::results::GrpcResponse;
+use entity::t_ds_user::{self};
+use proto::ds_user::{
+    ds_user_bean_service_server::{DsUserBeanService, DsUserBeanServiceServer},
+    CreateDsUserBeanRequest,
+    DeleteDsUserBeanRequest,
+    DsUserBean,
+    GetDsUserBeanRequest,
+    ListDsUserBeansRequest,
+    ListDsUserBeansResponse,
+    UpdateDsUserBeanRequest,
+};
 use sea_orm::{entity::prelude::*, DatabaseConnection};
 #[derive(Default)]
 pub struct UserServer {
@@ -22,15 +26,18 @@ impl UserServer {
         Self { conn }
     }
 
-    pub fn into_service(self) -> UserServiceServer<Self> {
-        UserServiceServer::new(self)
+    pub fn into_service(self) -> DsUserBeanServiceServer<Self> {
+        DsUserBeanServiceServer::new(self)
     }
 }
 
 
 #[tonic::async_trait]
-impl UserService for UserServer {
-    async fn get_user(&self, request: tonic::Request<GetUserRequest>) -> GrpcResponse<DsUser> {
+impl DsUserBeanService for UserServer {
+    async fn get_ds_user_bean(
+        &self,
+        request: GrpcRequest<GetDsUserBeanRequest>,
+    ) -> GrpcResponse<DsUserBean> {
         let conn = &self.conn;
         let name = request.into_inner().name;
         let db_user: Option<t_ds_user::Model> = t_ds_user::Entity::find()
@@ -42,16 +49,18 @@ impl UserService for UserServer {
                    .map_err(|_| tonic::Status::not_found("User not found"))?;
         match db_user {
             Some(v) => Ok(tonic::Response::new(v.into())),
-            None => Err(tonic::Status::not_found("User not found")),
+            None => Err(tonic::Status::from_error(Box::<DolphinErrorInfo>::new(
+                AppStatus::UserNotExist.into(),
+            ))),
         }
     }
 
-    async fn update_user(
+    async fn update_ds_user_bean(
         &self,
-        request: tonic::Request<UpdateUserRequest>,
-    ) -> Result<tonic::Response<DsUser>, tonic::Status> {
+        request: GrpcRequest<UpdateDsUserBeanRequest>,
+    ) -> GrpcResponse<DsUserBean> {
         let conn = &self.conn;
-        if let Some(user) = request.into_inner().user {
+        if let Some(user) = request.into_inner().ds_user_bean {
             let db_user = t_ds_user::Entity::find_by_id(user.id)
                 .one(conn)
                 .await
@@ -63,7 +72,29 @@ impl UserService for UserServer {
             db_user.user_type = user.user_type;
             Ok(tonic::Response::new(db_user.into()))
         } else {
-            Ok(tonic::Response::new(DsUser::default()))
+            Err(tonic::Status::not_found("User not found"))
+            // Ok(tonic::Response::new(DsUserBean::default()))
         }
+    }
+
+    async fn list_ds_user_beans(
+        &self,
+        _request: GrpcRequest<ListDsUserBeansRequest>,
+    ) -> GrpcResponse<ListDsUserBeansResponse> {
+        todo!()
+    }
+
+    async fn create_ds_user_bean(
+        &self,
+        _request: GrpcRequest<CreateDsUserBeanRequest>,
+    ) -> GrpcResponse<DsUserBean> {
+        todo!()
+    }
+
+    async fn delete_ds_user_bean(
+        &self,
+        _request: GrpcRequest<DeleteDsUserBeanRequest>,
+    ) -> GrpcResponse<()> {
+        todo!()
     }
 }

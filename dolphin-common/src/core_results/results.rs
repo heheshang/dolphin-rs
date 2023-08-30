@@ -3,7 +3,7 @@ use axum::{response::IntoResponse, Json};
 use serde::{Deserialize, Serialize};
 
 pub type GrpcResponse<T> = Result<tonic::Response<T>, tonic::Status>;
-
+pub type GrpcRequest<T> = tonic::Request<T>;
 
 #[warn(dead_code)]
 #[serde_with::serde_as]
@@ -35,7 +35,6 @@ impl<T> ApiResult<T> {
         }
     }
 }
-
 
 impl<T> Default for ApiResult<T> {
     fn default() -> Self {

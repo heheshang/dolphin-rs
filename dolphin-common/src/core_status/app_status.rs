@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 
+
 /**
  * status enum      // todo #4855 One category one interval
  */
@@ -401,3 +402,8 @@ impl Default for AppStatus {
         Self::SUCCESS
     }
 }
+// impl From<DolphinErrorInfo> for AppStatus {
+//     fn from(value: DolphinErrorInfo) -> Self {
+//         todo!()
+//     }
+// }
