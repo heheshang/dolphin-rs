@@ -5,7 +5,7 @@ use dolphin_common::{
 };
 use entity::t_ds_user::{self};
 use proto::ds_user::{
-    ds_user_bean_service_server::{DsUserBeanService, DsUserBeanServiceServer},
+    ds_user_bean_service_server::DsUserBeanService,
     CreateDsUserBeanRequest,
     DeleteDsUserBeanRequest,
     DsUserBean,
@@ -14,32 +14,18 @@ use proto::ds_user::{
     ListDsUserBeansResponse,
     UpdateDsUserBeanRequest,
 };
-use sea_orm::{entity::prelude::*, DatabaseConnection};
-#[derive(Default)]
-pub struct UserServer {
-    conn: DatabaseConnection,
-}
+use sea_orm::entity::prelude::*;
 
-
-impl UserServer {
-    pub fn new(conn: DatabaseConnection) -> Self {
-        Self { conn }
-    }
-
-    pub fn into_service(self) -> DsUserBeanServiceServer<Self> {
-        DsUserBeanServiceServer::new(self)
-    }
-}
-
+use super::service::DolphinRpcServer;
 
 #[tonic::async_trait]
-impl DsUserBeanService for UserServer {
+impl DsUserBeanService for DolphinRpcServer {
     async fn get_ds_user_bean(
         &self,
-        request: GrpcRequest<GetDsUserBeanRequest>,
+        req: GrpcRequest<GetDsUserBeanRequest>,
     ) -> GrpcResponse<DsUserBean> {
         let conn = &self.conn;
-        let name = request.into_inner().name;
+        let name = req.into_inner().name;
         let db_user: Option<t_ds_user::Model> = t_ds_user::Entity::find()
            // .column(t_ds_user::Column::UserName)
            .filter(t_ds_user::Column::UserName.eq(name))
@@ -57,10 +43,10 @@ impl DsUserBeanService for UserServer {
 
     async fn update_ds_user_bean(
         &self,
-        request: GrpcRequest<UpdateDsUserBeanRequest>,
+        req: GrpcRequest<UpdateDsUserBeanRequest>,
     ) -> GrpcResponse<DsUserBean> {
         let conn = &self.conn;
-        if let Some(user) = request.into_inner().ds_user_bean {
+        if let Some(user) = req.into_inner().ds_user_bean {
             let db_user = t_ds_user::Entity::find_by_id(user.id)
                 .one(conn)
                 .await
@@ -79,7 +65,7 @@ impl DsUserBeanService for UserServer {
 
     async fn list_ds_user_beans(
         &self,
-        _request: GrpcRequest<ListDsUserBeansRequest>,
+        _req: GrpcRequest<ListDsUserBeansRequest>,
     ) -> GrpcResponse<ListDsUserBeansResponse> {
         todo!()
     }

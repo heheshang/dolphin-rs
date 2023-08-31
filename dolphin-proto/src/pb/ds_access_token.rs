@@ -19,15 +19,11 @@ pub struct DsAccessTokenBean {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDsAccessTokenBeansRequest {
-    /// The parent resource name, for example, "shelves/shelf1"
-    #[prost(string, tag = "1")]
-    pub parent: ::prost::alloc::string::String,
     /// The maximum number of items to return.
-    #[prost(int32, tag = "2")]
-    pub page_size: i32,
-    /// The next_page_token value returned from a previous List request, if any.
-    #[prost(string, tag = "3")]
-    pub page_token: ::prost::alloc::string::String,
+    #[prost(uint64, tag = "1")]
+    pub page_size: u64,
+    #[prost(uint64, tag = "2")]
+    pub page_num: u64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
