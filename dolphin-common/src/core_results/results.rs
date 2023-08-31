@@ -17,8 +17,6 @@ pub struct ApiResult<T> {
     pub errmsg: DolphinErrorInfo,
     #[serde(flatten)]
     pub display: DisplayErrorInfo,
-    // #[serde(flatten)]
-    // #[serde_as(as = "ssss")]
     #[serde(skip)]
     pub status: AppStatus,
     #[serde(skip)]
@@ -103,29 +101,7 @@ impl<T> IntoResponse for ApiResult<T>
 where T: Serialize
 {
     fn into_response(self) -> axum::response::Response {
-        // let error_info: DolphinErrorInfo = self.status.clone().into();
-        // let extra = &self.extra;
-        // let code = error_info.code;
-        // let cn_msg = match extra {
-        //     Some(extra) => format_args(&error_info.cn_msg, extra.clone()),
-        //     None => error_info.cn_msg,
-        // };
-
-        // let en_msg = match extra {
-        //     Some(extra) => format_args(&error_info.en_msg, extra.clone()),
-        //     None => error_info.en_msg,
-        // };
-        // let error = DolphinErrorInfo {
-        //     code,
-        //     cn_msg,
-        //     en_msg,
-        // };
-        // if let Some(extra) = self.extra {
-        //     err_msg = format!("{}: {}", err_msg, extra.join(","));
-        // }
         let body = Json(self);
-        // body.0.errmsg = error;
-        // body.0.status = self.status;
         body.into_response()
     }
 }

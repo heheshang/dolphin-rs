@@ -378,32 +378,8 @@ pub enum AppStatus {
 }
 
 
-// pub fn serialize_status<S>(value: &AppStatus, serializer: S) -> Result<S::Ok, S::Error>
-// where S: Serializer {
-//     let s = match value {
-//         AppStatus::SUCCESS => ErrorCode::new(0, "success".to_string(), "成功".to_string()),
-//         AppStatus::InternalServerErrorArgs => ErrorCode {
-//             code: 500,
-//             en_msg: "ssss".to_string(),
-//             cn_msg: "sssss".to_string(),
-//         },
-//         AppStatus::RequestParamsNotValidError => ErrorCode {
-//             code: 500,
-//             en_msg: "ssss".to_string(),
-//             cn_msg: "sssss".to_string(),
-//         },
-
-//     };
-//     serializer.serialize_newtype_struct("errcode", &s)
-// }
-
 impl Default for AppStatus {
     fn default() -> Self {
         Self::SUCCESS
     }
 }
-// impl From<DolphinErrorInfo> for AppStatus {
-//     fn from(value: DolphinErrorInfo) -> Self {
-//         todo!()
-//     }
-// }
