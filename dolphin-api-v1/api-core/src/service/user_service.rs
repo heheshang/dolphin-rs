@@ -1,3 +1,5 @@
+use std::env;
+
 use anyhow::Result;
 use dolphin_common::{
     core_error::error::DolphinErrorInfo,
@@ -5,22 +7,25 @@ use dolphin_common::{
     core_status::app_status::AppStatus,
 };
 use format as f;
-use proto::ds_user::{
-    ds_user_bean_service_client::DsUserBeanServiceClient,
-    DsUserBean,
-    GetDsUserBeanRequest,
-};
+use proto::ds_user::{ds_user_bean_service_client::DsUserBeanServiceClient, GetDsUserBeanRequest};
 use serde::{Deserialize, Serialize};
-use std::env;
+
 use tokio::sync::OnceCell;
 use tonic::transport::{Channel, Endpoint};
 use tracing::error;
+
+use crate::bean::{
+    request::ds_user_req::{UserInfoReq, UserLoginInfoReq},
+    response::ds_user_res::{UserInfoRes, UserLoginInfoRes},
+};
+
 static USER_SERVICE_CLIENT: OnceCell<Result<DsUserBeanServiceClient<Channel>>> =
     OnceCell::const_new();
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct User {
     pub username: String,
+    pub password: String,
 }
 
 pub async fn get_client() -> Result<DsUserBeanServiceClient<Channel>> {
@@ -39,22 +44,21 @@ pub async fn get_client() -> Result<DsUserBeanServiceClient<Channel>> {
     }
 }
 
-impl User {
-    pub async fn find(&self) -> ApiResult<UserRes> {
-        let client = USER_SERVICE_CLIENT
-            .get_or_init(|| async {
-                let client = get_client().await;
-                client
-            })
-            .await;
-        let client = match client {
+impl UserInfoReq {
+    pub async fn user_info(&self) -> ApiResult<UserInfoRes> {
+        let client = match USER_SERVICE_CLIENT
+            .get_or_init(|| async { get_client().await })
+            .await
+        {
             Ok(client) => client,
-            Err(_) =>
-                return ApiResult::new_with_err_status(None, AppStatus::InternalServerErrorArgs),
+            Err(_) => {
+                return ApiResult::new_with_err_status(None, AppStatus::InternalServerErrorArgs);
+            }
         };
 
+
         let request = tonic::Request::new(GetDsUserBeanRequest {
-            name: self.username.clone(),
+            name: self.user_name.clone(),
         });
         let response = client.clone().get_ds_user_bean(request).await;
         match response {
@@ -72,7 +76,7 @@ impl User {
                     let res = ApiResult::new_with_err_extra(
                         None,
                         err_info.into(),
-                        Some(vec![self.username.clone()]),
+                        Some(vec![self.user_name.clone()]),
                     );
                     error!("res: {:?}", res);
                     res
@@ -87,39 +91,9 @@ impl User {
         }
     }
 }
-impl From<DsUserBean> for UserRes {
-    fn from(user: DsUserBean) -> Self {
-        Self {
-            id: user.id,
-            user_name: user.user_name,
-            user_password: user.user_password,
-            user_type: user.user_type,
-            email: user.email,
-            phone: user.phone,
-            tenant_id: user.tenant_id,
-            create_time: user.create_time,
-            update_time: user.update_time,
-            queue: user.queue,
-            state: user.state,
-            time_zone: user.time_zone,
-        }
-    }
-}
-#[derive(Debug, Serialize, Deserialize)]
-pub struct UserRes {
-    pub id: i32,
-    pub user_name: Option<String>,
-    pub user_password: Option<String>,
-    pub user_type: Option<i32>,
-    pub email: Option<String>,
-    pub phone: Option<String>,
-    pub tenant_id: Option<i32>,
-    /// google.protobuf.Timestamp create_time=8
-    pub create_time: Option<String>,
-    /// optional google.protobuf.Timestamp update_time=9;
-    pub update_time: Option<String>,
 
-    pub queue: Option<String>,
-    pub state: Option<i32>,
-    pub time_zone: Option<String>,
+impl UserLoginInfoReq {
+    pub async fn login(&self) -> ApiResult<UserLoginInfoRes> {
+        todo!()
+    }
 }

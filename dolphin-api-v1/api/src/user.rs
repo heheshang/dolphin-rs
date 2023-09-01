@@ -1,4 +1,7 @@
-use api_core::user_service::User;
+use api_core::{
+    bean::request::ds_user_req::{UserInfoReq, UserLoginInfoReq},
+    service::user_service::User,
+};
 use axum::{
     async_trait,
     extract::{ConnectInfo, FromRequestParts, TypedHeader},
@@ -33,6 +36,7 @@ pub async fn create_user(
     // insert your application logic here
     let user = User {
         username: payload.username,
+        password: "".to_string(),
     };
 
     // this will be converted into a JSON response
@@ -43,12 +47,24 @@ pub async fn get_user(
     ConnectInfo(_addr): ConnectInfo<SocketAddr>,
     // this argument tells axum to parse the request body
     // as JSON into a `CreateUser` type
-    Json(payload): Json<User>,
+    Json(payload): Json<UserInfoReq>,
 ) -> Response {
-    payload.find().await.into_response()
+    payload.user_info().await.into_response()
+
     // info!("获取数据为{u:?}");
     // Ok(Json(u))
 }
+
+pub async fn login(
+    ConnectInfo(_addr): ConnectInfo<SocketAddr>,
+    Json(payload): Json<UserLoginInfoReq>,
+) -> Response {
+    payload.login().await.into_response()
+    // info!("获取数据为{u:?}");
+    // Ok(Json(u))
+}
+
+
 pub async fn authorize(
     ConnectInfo(_addr): ConnectInfo<SocketAddr>,
     // this argument tells axum to parse the request body

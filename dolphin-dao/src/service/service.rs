@@ -93,15 +93,15 @@ impl DolphinRpcServer {
 
     create_service!(ds_command, DsCommandBeanServiceServer);
 
-    create_service!(ds_database, DsDatasourceBeanServiceServer);
+    create_service!(ds_datasource, DsDatasourceBeanServiceServer);
 
     create_service!(ds_dq_comparison_type, DsDqComparisonTypeBeanServiceServer);
 
     create_service!(ds_dq_execute_result, DsDqExecuteResultBeanServiceServer);
 
-    create_service!(ds_dq_rule_service, DsDqRuleBeanServiceServer);
+    create_service!(ds_dq_rule, DsDqRuleBeanServiceServer);
 
-    create_service!(dq_rule_execute_sql, DsDqRuleExecuteSqlBeanServiceServer);
+    create_service!(ds_dq_rule_execute_sql, DsDqRuleExecuteSqlBeanServiceServer);
 
     create_service!(ds_dq_rule_input_entry, DsDqRuleInputEntryBeanServiceServer);
 
