@@ -10,7 +10,7 @@ use tracing::error;
 
 use crate::{
     bean::{request::ds_user_req::UserInfoReq, response::ds_user_res::UserInfoRes},
-    client::client::{get_user_client, USER_SERVICE_CLIENT},
+    client::client::{user_client, USER_SERVICE},
 };
 
 
@@ -23,8 +23,8 @@ pub struct User {
 
 impl UserInfoReq {
     pub async fn user_info(&self) -> ApiResult<UserInfoRes> {
-        let client = match USER_SERVICE_CLIENT
-            .get_or_init(|| async { get_user_client().await })
+        let client = match USER_SERVICE
+            .get_or_init(|| async { user_client().await })
             .await
         {
             Ok(client) => client,
