@@ -3,6 +3,7 @@ use std::{env, net::SocketAddr, str::FromStr};
 use anyhow::Result;
 use axum::{error_handling::HandleErrorLayer, routing::post, BoxError, Router, Server};
 use tower::ServiceBuilder;
+use tower_cookies::CookieManagerLayer;
 use tower_governor::{errors::display_error, governor::GovernorConfigBuilder, GovernorLayer};
 use tracing::info;
 use tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt;
@@ -15,6 +16,8 @@ pub fn main() {
 
 pub mod user;
 pub use self::user::*;
+pub mod login;
+pub use self::login::*;
 
 #[tokio::main]
 async fn start_server() -> Result<()> {
@@ -55,8 +58,15 @@ async fn start_server() -> Result<()> {
     let server_url = format!("{host}:{port}");
 
     let app = Router::new()
-        .route("/authorize", post(authorize))
-        .route("/get_user", post(get_user))
+        .nest(
+            "/dolphinscheduler",
+            Router::new()
+                .route("/login", post(login)).route_layer(
+                    CookieManagerLayer::new(),
+                )
+                .route("/authorize", post(authorize))
+                .route("/get_user", post(get_user)),
+        )
         .layer(
             ServiceBuilder::new()
                 .layer(HandleErrorLayer::new(|e: BoxError| async move {
@@ -66,7 +76,9 @@ async fn start_server() -> Result<()> {
                 .layer(GovernorLayer {
                     config: Box::leak(governor_conf),
                 }),
-        );
+        )
+        // .layer(CookieManagerLayer::new())
+        ;
 
     // .route("/", get(list_posts).post(create_post))
     // .route("/:id", get(edit_post).post(update_post))

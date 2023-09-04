@@ -1,5 +1,5 @@
 use api_core::{
-    bean::request::ds_user_req::{UserInfoReq, UserLoginInfoReq},
+    bean::request::ds_user_req::UserInfoReq,
     service::user_service::User,
 };
 use axum::{
@@ -51,15 +51,6 @@ pub async fn get_user(
 ) -> Response {
     payload.user_info().await.into_response()
 
-    // info!("获取数据为{u:?}");
-    // Ok(Json(u))
-}
-
-pub async fn login(
-    ConnectInfo(_addr): ConnectInfo<SocketAddr>,
-    Json(payload): Json<UserLoginInfoReq>,
-) -> Response {
-    payload.login().await.into_response()
     // info!("获取数据为{u:?}");
     // Ok(Json(u))
 }

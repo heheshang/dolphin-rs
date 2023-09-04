@@ -1,26 +1,18 @@
-use std::env;
-
-use anyhow::Result;
 use dolphin_common::{
     core_error::error::DolphinErrorInfo,
     core_results::results::ApiResult,
     core_status::app_status::AppStatus,
 };
-use format as f;
-use proto::ds_user::{ds_user_bean_service_client::DsUserBeanServiceClient, GetDsUserBeanRequest};
+use proto::ds_user::GetDsUserBeanRequest;
 use serde::{Deserialize, Serialize};
 
-use tokio::sync::OnceCell;
-use tonic::transport::{Channel, Endpoint};
 use tracing::error;
 
-use crate::bean::{
-    request::ds_user_req::{UserInfoReq, UserLoginInfoReq},
-    response::ds_user_res::{UserInfoRes, UserLoginInfoRes},
+use crate::{
+    bean::{request::ds_user_req::UserInfoReq, response::ds_user_res::UserInfoRes},
+    client::client::{get_user_client, USER_SERVICE_CLIENT},
 };
 
-static USER_SERVICE_CLIENT: OnceCell<Result<DsUserBeanServiceClient<Channel>>> =
-    OnceCell::const_new();
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct User {
@@ -28,26 +20,11 @@ pub struct User {
     pub password: String,
 }
 
-pub async fn get_client() -> Result<DsUserBeanServiceClient<Channel>> {
-    dotenvy::dotenv().ok();
-    let host = env::var("DOLPHIN_DAO_CLIENT_HOST")
-        .expect("HOST is not set in .env file")
-        .clone();
-    let port = env::var("DOLPHIN_DAO_CLIENT_PORT")
-        .expect("PORT is not set in .env file")
-        .clone();
-    let addr_str = f!("http://{host}:{port}").clone();
-    let addr = Endpoint::from_shared(addr_str);
-    match DsUserBeanServiceClient::connect(addr.unwrap()).await {
-        Ok(client) => Ok(client),
-        Err(e) => Err(anyhow::Error::new(e)),
-    }
-}
 
 impl UserInfoReq {
     pub async fn user_info(&self) -> ApiResult<UserInfoRes> {
         let client = match USER_SERVICE_CLIENT
-            .get_or_init(|| async { get_client().await })
+            .get_or_init(|| async { get_user_client().await })
             .await
         {
             Ok(client) => client,
@@ -89,11 +66,5 @@ impl UserInfoReq {
                 }
             },
         }
-    }
-}
-
-impl UserLoginInfoReq {
-    pub async fn login(&self) -> ApiResult<UserLoginInfoRes> {
-        todo!()
     }
 }

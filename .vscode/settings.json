@@ -2,6 +2,7 @@
 	"rust-analyzer.linkedProjects": [
 		"./Cargo.toml"
 	],
+	"files.autoSave": "off",
 	"rust-analyzer.server.path": "~/.cargo/bin/rust-analyzer",
 	"rust-analyzer.cargo.extraEnv": {
 		// "PROTOC": "/usr/local/protobuf/bin/protoc"
