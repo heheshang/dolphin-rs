@@ -1,0 +1,15 @@
+
+[database]
+url = "postgres://superset:superset@tx:15432/dolphinscheduler"
+
+[server]
+host = "0.0.0.0"
+port = 50051
+[twitter]
+consumer_token = "twitter-dev-consumer-key"
+consumer_secret = "twitter-dev-consumer-secret"
+
+[braintree]
+merchant_id = "braintree-merchant-id"
+public_key = "braintree-dev-public-key"
+private_key = "braintree-dev-private-key"

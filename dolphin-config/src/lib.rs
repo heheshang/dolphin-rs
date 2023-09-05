@@ -7,6 +7,13 @@ pub fn get_api_config_path() -> PathBuf {
     Path::new(&value).join("api-config")
 }
 
+
+pub fn get_dao_config_path() -> PathBuf {
+    let value = dotenvy::var("CURRENT_DIR").expect("CURRENT_DIR must be set");
+
+    Path::new(&value).join("dao-config")
+}
+
 #[cfg(test)]
 mod tests {
     #[test]
