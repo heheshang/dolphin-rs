@@ -87,10 +87,12 @@ dependencies = [
  "axum",
  "config",
  "dolphin-common",
+ "dolphin-config",
  "dolphin-proto",
  "dotenvy",
  "lazy_static",
  "serde",
+ "serde_derive",
  "serde_json",
  "serde_with",
  "struct-convert",
@@ -499,6 +501,13 @@ dependencies = [
  "serde_with",
  "tokio",
  "tonic",
+]
+
+[[package]]
+name = "dolphin-config"
+version = "0.1.0"
+dependencies = [
+ "dotenvy",
 ]
 
 [[package]]

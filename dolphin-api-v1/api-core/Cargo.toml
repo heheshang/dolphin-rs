@@ -24,3 +24,5 @@ tracing = { version = "0.1.37" }
 tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
 struct-convert = "1.2.9"
 config = "0.13.3"
+serde_derive = "1.0.188"
+dolphin_config = { path = "../../dolphin-config", package = "dolphin-config" }

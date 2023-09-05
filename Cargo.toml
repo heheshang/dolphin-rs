@@ -15,5 +15,5 @@ members = [
     "dolphin-entity",
     "dolphin-proto",
     "dolphin-common",
-    # "dolphin-dao",
+    "dolphin-config",
 ]
