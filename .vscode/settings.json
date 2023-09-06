@@ -1,5 +1,7 @@
 {
-  "rust-analyzer.linkedProjects": ["./Cargo.toml"],
+  "rust-analyzer.linkedProjects": [
+    "./Cargo.toml"
+  ],
   "files.autoSave": "afterDelay",
   "rust-analyzer.server.path": "~/.cargo/bin/rust-analyzer",
   "rust-analyzer.cargo.extraEnv": {
@@ -18,5 +20,5 @@
     // ]
   },
   "editor.fontFamily": "JetBrainsMono Nerd Font",
-  "terminal.integrated.fontFamily": "monospace"
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font"
 }

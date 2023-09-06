@@ -12,5 +12,5 @@
     "rust-analyzer.cargo.extraEnv": {
         "PROTOC": "/usr/local/bin/protoc"
     },
-    "terminal.integrated.fontFamily": "Consolas"
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font"
 }
