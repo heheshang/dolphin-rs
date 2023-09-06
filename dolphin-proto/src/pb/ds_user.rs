@@ -25,10 +25,18 @@ pub struct DsUserBean {
     pub update_time: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(string, optional, tag = "10")]
     pub queue: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(int32, optional, tag = "11")]
+    #[prost(enumeration = "Flag", optional, tag = "11")]
     pub state: ::core::option::Option<i32>,
     #[prost(string, optional, tag = "12")]
     pub time_zone: ::core::option::Option<::prost::alloc::string::String>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct QueryUserByNamePasswordRequest {
+    #[prost(string, tag = "1")]
+    pub user_name: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub user_password: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -49,6 +57,19 @@ pub struct ListDsUserBeansResponse {
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetDsUserByIdResponse {
+    #[prost(message, optional, tag = "1")]
+    pub ds_user_bean: ::core::option::Option<DsUserBean>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetDsUserByIdRequest {
+    /// The field will contain name of the resource requested.
+    #[prost(int32, tag = "1")]
+    pub id: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -88,6 +109,35 @@ pub struct DeleteDsUserBeanRequest {
     /// The resource name of the DsUserBean to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "snake_case")]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum Flag {
+    No = 0,
+    Yes = 1,
+}
+impl Flag {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Flag::No => "NO",
+            Flag::Yes => "YES",
+        }
+    }
+
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "NO" => Some(Self::No),
+            "YES" => Some(Self::Yes),
+            _ => None,
+        }
+    }
 }
 /// Generated client implementations.
 pub mod ds_user_bean_service_client {
@@ -223,6 +273,50 @@ pub mod ds_user_bean_service_client {
             self.inner.unary(req, path, codec).await
         }
 
+        pub async fn get_ds_user_by_id(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetDsUserByIdRequest>,
+        ) -> std::result::Result<tonic::Response<super::GetDsUserByIdResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/ds_user.DsUserBeanService/GetDsUserById");
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new(
+                "ds_user.DsUserBeanService",
+                "GetDsUserById",
+            ));
+            self.inner.unary(req, path, codec).await
+        }
+
+        pub async fn query_user_by_name_password(
+            &mut self,
+            request: impl tonic::IntoRequest<super::QueryUserByNamePasswordRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsUserBean>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/ds_user.DsUserBeanService/QueryUserByNamePassword",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new(
+                "ds_user.DsUserBeanService",
+                "QueryUserByNamePassword",
+            ));
+            self.inner.unary(req, path, codec).await
+        }
+
         pub async fn create_ds_user_bean(
             &mut self,
             request: impl tonic::IntoRequest<super::CreateDsUserBeanRequest>,
@@ -301,6 +395,14 @@ pub mod ds_user_bean_service_server {
         async fn get_ds_user_bean(
             &self,
             request: tonic::Request<super::GetDsUserBeanRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsUserBean>, tonic::Status>;
+        async fn get_ds_user_by_id(
+            &self,
+            request: tonic::Request<super::GetDsUserByIdRequest>,
+        ) -> std::result::Result<tonic::Response<super::GetDsUserByIdResponse>, tonic::Status>;
+        async fn query_user_by_name_password(
+            &self,
+            request: tonic::Request<super::QueryUserByNamePasswordRequest>,
         ) -> std::result::Result<tonic::Response<super::DsUserBean>, tonic::Status>;
         async fn create_ds_user_bean(
             &self,
@@ -467,6 +569,91 @@ pub mod ds_user_bean_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = GetDsUserBeanSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/ds_user.DsUserBeanService/GetDsUserById" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetDsUserByIdSvc<T: DsUserBeanService>(pub Arc<T>);
+                    impl<T: DsUserBeanService>
+                        tonic::server::UnaryService<super::GetDsUserByIdRequest>
+                        for GetDsUserByIdSvc<T>
+                    {
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::GetDsUserByIdResponse;
+
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetDsUserByIdRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move { (*inner).get_ds_user_by_id(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetDsUserByIdSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/ds_user.DsUserBeanService/QueryUserByNamePassword" => {
+                    #[allow(non_camel_case_types)]
+                    struct QueryUserByNamePasswordSvc<T: DsUserBeanService>(pub Arc<T>);
+                    impl<T: DsUserBeanService>
+                        tonic::server::UnaryService<super::QueryUserByNamePasswordRequest>
+                        for QueryUserByNamePasswordSvc<T>
+                    {
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::DsUserBean;
+
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::QueryUserByNamePasswordRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut =
+                                async move { (*inner).query_user_by_name_password(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = QueryUserByNamePasswordSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

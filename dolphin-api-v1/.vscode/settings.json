@@ -3,8 +3,6 @@
         "./Cargo.toml",
         "./api/Cargo.toml",
         "./api-core/Cargo.toml",
-        "./api-core/Cargo.toml",
-        "./api-core/Cargo.toml"
     ],
     "editor.lineNumbers": "relative",
     "editor.formatOnSave": true,
@@ -13,5 +11,6 @@
     },
     "rust-analyzer.cargo.extraEnv": {
         "PROTOC": "/usr/local/bin/protoc"
-    }
+    },
+    "terminal.integrated.fontFamily": "Consolas"
 }

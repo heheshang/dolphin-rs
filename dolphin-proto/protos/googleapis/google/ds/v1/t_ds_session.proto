@@ -29,6 +29,11 @@ service DsSessionBeanService {
       get: "/v1alpha1/{name=DsSessionBeans/*}"
     };
   }
+    rpc GetDsSessionById(GetDsSessionBeanByIdRequest) returns (DsSessionBean) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=GetDsSessionById/*}"
+    };
+  }
 
   rpc CreateDsSessionBean(CreateDsSessionBeanRequest) returns (DsSessionBean) {
     option (google.api.http) = {
@@ -76,6 +81,11 @@ message ListDsSessionBeansResponse {
 message GetDsSessionBeanRequest {
   // The field will contain name of the resource requested.
   string name = 1;
+}
+
+message GetDsSessionBeanByIdRequest {
+  // The field will contain name of the resource requested.
+  string id = 1;
 }
 
 message CreateDsSessionBeanRequest {
