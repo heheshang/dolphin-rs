@@ -26,3 +26,4 @@ struct-convert = "1.2.9"
 
 dolphin_config = { path = "../../dolphin-config", package = "dolphin-config" }
 async-trait = "0.1.73"
+md5 = "0.7.0"

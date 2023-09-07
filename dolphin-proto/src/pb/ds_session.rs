@@ -7,8 +7,8 @@ pub struct DsSessionBean {
     pub id: ::prost::alloc::string::String,
     #[prost(int32, tag = "2")]
     pub user_id: i32,
-    #[prost(int32, optional, tag = "3")]
-    pub ip: ::core::option::Option<i32>,
+    #[prost(string, optional, tag = "3")]
+    pub ip: ::core::option::Option<::prost::alloc::string::String>,
     /// google.protobuf.Timestamp last_login_time=4 ;
     #[prost(string, optional, tag = "4")]
     pub last_login_time: ::core::option::Option<::prost::alloc::string::String>,
@@ -35,10 +35,10 @@ pub struct ListDsSessionBeansResponse {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsSessionBeanRequest {
+pub struct GetDsSessionByIRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
-    pub name: ::prost::alloc::string::String,
+    pub id: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -46,6 +46,20 @@ pub struct GetDsSessionBeanByIdRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetDsSessionBeanUserIdRequest {
+    /// The field will contain name of the resource requested.
+    #[prost(int32, tag = "1")]
+    pub user_id: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetDsSessionBeanUserIdResponse {
+    /// The field will contain name of the resource requested.
+    #[prost(message, repeated, tag = "1")]
+    pub ds_session_beans: ::prost::alloc::vec::Vec<DsSessionBean>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -77,7 +91,7 @@ pub struct UpdateDsSessionBeanRequest {
 pub struct DeleteDsSessionBeanRequest {
     /// The resource name of the DsSessionBean to be deleted.
     #[prost(string, tag = "1")]
-    pub name: ::prost::alloc::string::String,
+    pub id: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
 pub mod ds_session_bean_service_client {
@@ -195,7 +209,7 @@ pub mod ds_session_bean_service_client {
 
         pub async fn get_ds_session_bean(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsSessionBeanRequest>,
+            request: impl tonic::IntoRequest<super::GetDsSessionByIRequest>,
         ) -> std::result::Result<tonic::Response<super::DsSessionBean>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -233,6 +247,31 @@ pub mod ds_session_bean_service_client {
             req.extensions_mut().insert(GrpcMethod::new(
                 "ds_session.DsSessionBeanService",
                 "GetDsSessionById",
+            ));
+            self.inner.unary(req, path, codec).await
+        }
+
+        pub async fn get_ds_session_by_user_id(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetDsSessionBeanUserIdRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetDsSessionBeanUserIdResponse>,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/ds_session.DsSessionBeanService/GetDsSessionByUserId",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new(
+                "ds_session.DsSessionBeanService",
+                "GetDsSessionByUserId",
             ));
             self.inner.unary(req, path, codec).await
         }
@@ -317,12 +356,19 @@ pub mod ds_session_bean_service_server {
         ) -> std::result::Result<tonic::Response<super::ListDsSessionBeansResponse>, tonic::Status>;
         async fn get_ds_session_bean(
             &self,
-            request: tonic::Request<super::GetDsSessionBeanRequest>,
+            request: tonic::Request<super::GetDsSessionByIRequest>,
         ) -> std::result::Result<tonic::Response<super::DsSessionBean>, tonic::Status>;
         async fn get_ds_session_by_id(
             &self,
             request: tonic::Request<super::GetDsSessionBeanByIdRequest>,
         ) -> std::result::Result<tonic::Response<super::DsSessionBean>, tonic::Status>;
+        async fn get_ds_session_by_user_id(
+            &self,
+            request: tonic::Request<super::GetDsSessionBeanUserIdRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetDsSessionBeanUserIdResponse>,
+            tonic::Status,
+        >;
         async fn create_ds_session_bean(
             &self,
             request: tonic::Request<super::CreateDsSessionBeanRequest>,
@@ -465,7 +511,7 @@ pub mod ds_session_bean_service_server {
                     #[allow(non_camel_case_types)]
                     struct GetDsSessionBeanSvc<T: DsSessionBeanService>(pub Arc<T>);
                     impl<T: DsSessionBeanService>
-                        tonic::server::UnaryService<super::GetDsSessionBeanRequest>
+                        tonic::server::UnaryService<super::GetDsSessionByIRequest>
                         for GetDsSessionBeanSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
@@ -473,7 +519,7 @@ pub mod ds_session_bean_service_server {
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsSessionBeanRequest>,
+                            request: tonic::Request<super::GetDsSessionByIRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move { (*inner).get_ds_session_bean(request).await };
@@ -530,6 +576,49 @@ pub mod ds_session_bean_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = GetDsSessionByIdSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/ds_session.DsSessionBeanService/GetDsSessionByUserId" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetDsSessionByUserIdSvc<T: DsSessionBeanService>(pub Arc<T>);
+                    impl<T: DsSessionBeanService>
+                        tonic::server::UnaryService<super::GetDsSessionBeanUserIdRequest>
+                        for GetDsSessionByUserIdSvc<T>
+                    {
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::GetDsSessionBeanUserIdResponse;
+
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetDsSessionBeanUserIdRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut =
+                                async move { (*inner).get_ds_session_by_user_id(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetDsSessionByUserIdSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

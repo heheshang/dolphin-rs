@@ -1,3 +1,7 @@
+use crate::{
+    bean::{request::ds_user_req::UserInfoReq, response::ds_user_res::UserInfoRes},
+    client::service::{user_client, USER_SERVICE},
+};
 use dolphin_common::{
     core_error::error::DolphinErrorInfo,
     core_results::results::ApiResult,
@@ -10,13 +14,7 @@ use proto::ds_user::{
     QueryUserByNamePasswordRequest,
 };
 use serde::{Deserialize, Serialize};
-
 use tracing::{error, info};
-
-use crate::{
-    bean::{request::ds_user_req::UserInfoReq, response::ds_user_res::UserInfoRes},
-    client::client::{user_client, USER_SERVICE},
-};
 
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -41,7 +39,7 @@ impl UserInfoReq {
         match response {
             Ok(res) => {
                 let user = res.into_inner();
-                ApiResult::new(Some(user.into()))
+                ApiResult::build(Some(user.into()))
             }
             Err(e) => match e.code() {
                 tonic::Code::Unknown => {
@@ -58,12 +56,7 @@ impl UserInfoReq {
                     error!("res: {:?}", res);
                     res
                 }
-                _ => {
-                    return ApiResult::new_with_err_status(
-                        None,
-                        AppStatus::InternalServerErrorArgs,
-                    );
-                }
+                _ => ApiResult::new_with_err_status(None, AppStatus::InternalServerErrorArgs),
             },
         }
     }
@@ -75,18 +68,16 @@ pub async fn get_user_by_id(id: i32) -> ApiResult<DsUserBean> {
         Err(value) => return value,
     };
     let request = tonic::Request::new(GetDsUserByIdRequest { id });
-    let res = client
+    client
         .clone()
         .get_ds_user_by_id(request)
         .await
-        .map(|res| ApiResult::new(Some(res.into_inner().ds_user_bean)))
+        .map(|res| ApiResult::build(Some(res.into_inner().ds_user_bean)))
         .map_err(|e| {
             error!("get_user_by_id error: {:?}", e);
             ApiResult::new_with_err_status(None, AppStatus::InternalServerErrorArgs)
         })
-        .unwrap_err();
-
-    res
+        .unwrap_err()
 }
 pub async fn query_user_by_name_password(
     user_name: String,
@@ -101,21 +92,21 @@ pub async fn query_user_by_name_password(
         Ok(value) => value,
         Err(value) => return value,
     };
+    let digest = md5::compute(user_password);
     let request = tonic::Request::new(QueryUserByNamePasswordRequest {
         user_name,
-        user_password,
+        user_password: format!("{:x}", digest),
     });
-    let res = client
+    client
         .clone()
         .query_user_by_name_password(request)
         .await
-        .map(|res| ApiResult::new(Some(res.into_inner())))
+        .map(|res| ApiResult::build(Some(res.into_inner())))
         .map_err(|e| {
             error!("query_user_by_name_password error: {:?}", e);
             ApiResult::new_with_err_status(None, AppStatus::UserNamePasswdError)
         })
-        .unwrap_err();
-    res
+        .unwrap_err()
 }
 
 

@@ -26,15 +26,16 @@ pub struct ApiResult<T> {
 }
 
 impl<T> ApiResult<T> {
-    pub fn new(data: Option<T>) -> Self {
+    pub fn build(data: Option<T>) -> Self {
+        let errmsg = DolphinErrorInfo::default();
         Self {
             data,
             status: AppStatus::SUCCESS,
-            errmsg: DolphinErrorInfo::default(),
-            display: DolphinErrorInfo::default().into(),
+            errmsg,
             extra: None,
             failed: false,
             success: true,
+            ..Default::default()
         }
     }
 
@@ -122,7 +123,7 @@ fn format_args(text: &str, args: Vec<String>) -> String {
 
 #[cfg(test)]
 mod tests {
-    // use super::*;
+
     #[test]
     fn regex_is_work() {
         let text = "copy process definition from {0} to {2} error : {1}";

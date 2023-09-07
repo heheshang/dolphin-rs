@@ -11,7 +11,7 @@ package ds_session;
 message DsSessionBean{
     string id=1;
     int32 user_id=2;
-    optional int32 ip=3;
+    optional string ip=3;
     // google.protobuf.Timestamp last_login_time=4 ;
     optional string last_login_time=4 ;
 }
@@ -24,7 +24,7 @@ service DsSessionBeanService {
     };
   }
 
-  rpc GetDsSessionBean(GetDsSessionBeanRequest) returns (DsSessionBean) {
+  rpc GetDsSessionBean(GetDsSessionByIRequest) returns (DsSessionBean) {
     option (google.api.http) = {
       get: "/v1alpha1/{name=DsSessionBeans/*}"
     };
@@ -32,6 +32,11 @@ service DsSessionBeanService {
     rpc GetDsSessionById(GetDsSessionBeanByIdRequest) returns (DsSessionBean) {
     option (google.api.http) = {
       get: "/v1alpha1/{name=GetDsSessionById/*}"
+    };
+  }
+  rpc GetDsSessionByUserId(GetDsSessionBeanUserIdRequest) returns (GetDsSessionBeanUserIdResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=GetDsSessionBeanUserId/*}"
     };
   }
 
@@ -78,15 +83,26 @@ message ListDsSessionBeansResponse {
   string next_page_token = 2;
 }
 
-message GetDsSessionBeanRequest {
+message GetDsSessionByIRequest {
   // The field will contain name of the resource requested.
-  string name = 1;
+  string id = 1;
 }
 
 message GetDsSessionBeanByIdRequest {
   // The field will contain name of the resource requested.
   string id = 1;
 }
+message GetDsSessionBeanUserIdRequest {
+  // The field will contain name of the resource requested.
+  int32 userId = 1;
+}
+
+message GetDsSessionBeanUserIdResponse {
+  // The field will contain name of the resource requested.
+  repeated DsSessionBean  DsSessionBeans= 1;
+}
+
+
 
 message CreateDsSessionBeanRequest {
   // The parent resource name where the DsSessionBean is to be created.
@@ -111,5 +127,5 @@ message UpdateDsSessionBeanRequest {
 
 message DeleteDsSessionBeanRequest {
   // The resource name of the DsSessionBean to be deleted.
-  string name = 1;
+  string id = 1;
 }

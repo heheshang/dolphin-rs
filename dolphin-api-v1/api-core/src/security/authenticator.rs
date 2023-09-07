@@ -1,22 +1,25 @@
-use std::collections::HashMap;
-
-use crate::client::client::{session_client, user_client, SESSION_SERVICE, USER_SERVICE};
-
-use crate::service::user_service;
+use crate::service::{session_service, user_service};
 use async_trait::async_trait;
 use dolphin_common::{core_results::results::ApiResult, core_status::app_status::AppStatus};
-use proto::{
-    ds_session::GetDsSessionBeanByIdRequest,
-    ds_user::{DsUserBean as UserInfo, Flag, GetDsUserByIdRequest},
-};
+use proto::ds_user::{DsUserBean as UserInfo, Flag};
+use std::collections::HashMap;
 use tracing::info;
 pub enum AuthenticatorType {
-    Password(String),
-    Ldap(String),
+    Password,
+    Ldap,
+}
+impl AuthenticatorType {
+    pub fn new(auth_type: String) -> Self {
+        match auth_type.as_str() {
+            "PASSWORD" => AuthenticatorType::Password,
+            "LDAP" => AuthenticatorType::Ldap,
+            _ => AuthenticatorType::Password,
+        }
+    }
 }
 
 #[async_trait]
-pub trait Authenticator {
+pub trait Authenticator: Sync {
     async fn login(&self, username: String, password: String, extra: String)
         -> ApiResult<UserInfo>;
     async fn authenticate(
@@ -25,100 +28,54 @@ pub trait Authenticator {
         password: String,
         extra: String,
     ) -> ApiResult<HashMap<String, String>> {
-        let res = self.login(username, password, extra).await;
+        let res = self.login(username, password, extra.clone()).await;
+
         match res.status {
-            AppStatus::SUCCESS => {
-                let _user = res.data.unwrap();
-                // let mut map = HashMap::with_capacity(1);
-                // map.insert("session_id".to_string(), user.session_id);
-                ApiResult::new(None)
-            }
+            AppStatus::SUCCESS => match res.data {
+                Some(data) => {
+                    let session_res = session_service::create_ds_session(data, extra).await;
+                    match session_res.data {
+                        Some(session) => {
+                            let mut map = HashMap::new();
+                            map.insert("session_id".to_string(), session.id);
+                            return ApiResult::build(Some(map));
+                        }
+                        _ => ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed),
+                    }
+                }
+                _ => ApiResult::new_with_err_status(None, AppStatus::UserLoginFailure),
+            },
             _ => ApiResult::new_with_err_extra(None, res.status, res.extra),
         }
-
-        // todo!()
     }
-    async fn get_auth_user(session_id: String) -> ApiResult<UserInfo> {
-        let client = match SESSION_SERVICE
-            .get_or_init(|| async { session_client().await })
-            .await
-        {
-            Ok(client) => client,
-            Err(_) => {
-                return ApiResult::new_with_err_status(None, AppStatus::InternalServerErrorArgs);
-            }
-        };
-
-        let request = tonic::Request::new(GetDsSessionBeanByIdRequest {
-            id: session_id.clone(),
-        });
-        let response = client.clone().get_ds_session_by_id(request).await;
-        match response {
-            Ok(res) => {
-                let session = res.into_inner();
-                let user_id = session.user_id;
-                let user_client = match USER_SERVICE
-                    .get_or_init(|| async { user_client().await })
-                    .await
-                {
-                    Ok(client) => client,
-                    Err(_) => {
-                        return ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed);
-                    }
-                };
-                let request = tonic::Request::new(GetDsUserByIdRequest {
-                    id: user_id.clone(),
-                });
-                let response = user_client.clone().get_ds_user_by_id(request).await;
-                match response {
-                    Ok(res) => {
-                        let user = res.into_inner().ds_user_bean;
-                        match user {
-                            Some(u) => match u.state {
-                                Some(state) => match Flag::from_i32(state) {
-                                    Some(Flag::Yes) => ApiResult::new(Some(u)),
-                                    Some(Flag::No) => ApiResult::new_with_err_status(
-                                        None,
-                                        AppStatus::UserDisabled,
-                                    ),
-                                    None => ApiResult::new_with_err_status(
-                                        None,
-                                        AppStatus::LoginSessionFailed,
-                                    ),
-                                },
-                                None => ApiResult::new_with_err_status(
-                                    None,
-                                    AppStatus::LoginSessionFailed,
-                                ),
-                            },
-                            None =>
-                                ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed),
-                        }
-                    }
-                    Err(_) => ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed),
+    async fn get_auth_user(&self, session_id: String) -> ApiResult<UserInfo> {
+        let sesion_res = session_service::get_ds_session_by_id(session_id).await;
+        match sesion_res.data {
+            Some(s) => {
+                let user_res = user_service::get_user_by_id(s.user_id).await;
+                match user_res.data {
+                    Some(u) => match Flag::from_i32(u.state.unwrap_or(0)) {
+                        Some(Flag::Yes) => ApiResult::build(Some(u)),
+                        Some(Flag::No) =>
+                            ApiResult::new_with_err_status(None, AppStatus::UserDisabled),
+                        None => ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed),
+                    },
+                    None => ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed),
                 }
             }
-            Err(_) => ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed),
+            None => {
+                return ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed);
+            }
         }
     }
 }
 
-
+#[derive(Default)]
 pub struct PasswordAuthenticator;
-
+#[derive(Default)]
 pub struct LdapAuthenticator;
 
 
-impl PasswordAuthenticator {
-    pub fn new() -> Self {
-        PasswordAuthenticator {}
-    }
-}
-impl LdapAuthenticator {
-    pub fn new() -> Self {
-        LdapAuthenticator {}
-    }
-}
 #[async_trait]
 impl Authenticator for PasswordAuthenticator {
     async fn login(
@@ -131,7 +88,7 @@ impl Authenticator for PasswordAuthenticator {
             "username:{},password:{},extra:{}",
             username, password, extra
         );
-        user_service::query_user_by_name_password(username, password, extra).await
+        user_service::query_user_by_name_password(username, password, extra.clone()).await
     }
 }
 
@@ -152,25 +109,25 @@ impl Authenticator for LdapAuthenticator {
 }
 
 
-trait Product {}
+// trait Product {}
 
-trait Factory {
-    fn new() -> Box<dyn Product>;
-}
+// trait Factory {
+//     fn new() -> Box<dyn Product>;
+// }
 
-struct ConcreteFactory;
+// struct ConcreteFactory;
 
 
-impl Factory for ConcreteFactory {
-    fn new() -> Box<dyn Product> {
-        Box::new(ConcreteProduct::new())
-    }
-}
+// impl Factory for ConcreteFactory {
+//     fn new() -> Box<dyn Product> {
+//         Box::new(ConcreteProduct::new())
+//     }
+// }
 
-struct ConcreteProduct;
-impl ConcreteProduct {
-    fn new() -> Self {
-        ConcreteProduct {}
-    }
-}
-impl Product for ConcreteProduct {}
+// struct ConcreteProduct;
+// impl ConcreteProduct {
+//     fn new() -> Self {
+//         ConcreteProduct {}
+//     }
+// }
+// impl Product for ConcreteProduct {}

@@ -1,6 +1,9 @@
-use crate::client::client::{session_client, SESSION_SERVICE};
+use crate::client::service::{session_client, SESSION_SERVICE};
 use dolphin_common::{core_results::results::ApiResult, core_status::app_status::AppStatus};
-use proto::ds_session::{DsSessionBean, GetDsSessionBeanByIdRequest};
+use proto::{
+    ds_session::{DsSessionBean, GetDsSessionBeanByIdRequest},
+    ds_user::DsUserBean,
+};
 
 
 pub async fn get_ds_session_by_id(session_id: String) -> ApiResult<DsSessionBean> {
@@ -16,11 +19,21 @@ pub async fn get_ds_session_by_id(session_id: String) -> ApiResult<DsSessionBean
     match response {
         Ok(res) => {
             let session = res.into_inner();
-            ApiResult::new(Some(session))
+            ApiResult::build(Some(session))
         }
         Err(_) => ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed),
     }
 }
+
+pub async fn create_ds_session(_user: DsUserBean, _extra: String) -> ApiResult<DsSessionBean> {
+    let _client = match client().await {
+        Ok(value) => value,
+        Err(value) => return value,
+    };
+
+    todo!()
+}
+
 
 async fn client() -> Result<
     &'static proto::ds_session::ds_session_bean_service_client::DsSessionBeanServiceClient<

@@ -1,7 +1,4 @@
-use api_core::{
-    bean::request::ds_user_req::UserInfoReq,
-    service::user_service::User,
-};
+use api_core::{bean::request::ds_user_req::UserInfoReq, service::user_service::User};
 use axum::{
     async_trait,
     extract::{ConnectInfo, FromRequestParts, TypedHeader},

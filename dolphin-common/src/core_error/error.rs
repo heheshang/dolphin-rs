@@ -12,7 +12,7 @@ pub struct AppError(pub AppStatus);
 impl IntoResponse for AppError {
     fn into_response(self) -> Response {
         match self.0 {
-            AppStatus::SUCCESS => Json(ApiResult::new(Some(()))).into_response(),
+            AppStatus::SUCCESS => Json(ApiResult::build(Some(()))).into_response(),
             _ => Json(ApiResult::new_with_err_status(Some(()), self.0)).into_response(),
         }
     }
@@ -34,7 +34,7 @@ pub struct DolphinErrorInfo {
     pub cn_msg: String,
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub struct DisplayErrorInfo {
     pub code: i32,
     // #[cfg(feature = "en_msg")]
@@ -58,7 +58,6 @@ impl From<DolphinErrorInfo> for DisplayErrorInfo {
         }
     }
 }
-
 
 impl DolphinErrorInfo {
     pub fn new(code: i32, en_msg: String, cn_msg: String) -> DolphinErrorInfo {

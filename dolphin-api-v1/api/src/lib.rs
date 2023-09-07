@@ -61,9 +61,8 @@ async fn start_server() -> Result<()> {
         .nest(
             "/dolphinscheduler",
             Router::new()
-                .route("/login", post(login)).route_layer(
-                    CookieManagerLayer::new(),
-                )
+                // .route("/login", post(user_login))
+                .route_layer(CookieManagerLayer::new(),)
                 .route("/authorize", post(authorize))
                 .route("/get_user", post(get_user)),
         )

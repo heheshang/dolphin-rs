@@ -1,3 +1,4 @@
+use super::service::DolphinRpcServer;
 use dolphin_common::{
     core_error::error::DolphinErrorInfo,
     core_results::results::{GrpcRequest, GrpcResponse},
@@ -10,13 +11,14 @@ use proto::ds_user::{
     DeleteDsUserBeanRequest,
     DsUserBean,
     GetDsUserBeanRequest,
+    GetDsUserByIdRequest,
+    GetDsUserByIdResponse,
     ListDsUserBeansRequest,
     ListDsUserBeansResponse,
     UpdateDsUserBeanRequest,
 };
 use sea_orm::entity::prelude::*;
 
-use super::service::DolphinRpcServer;
 
 #[tonic::async_trait]
 impl DsUserBeanService for DolphinRpcServer {
@@ -27,12 +29,11 @@ impl DsUserBeanService for DolphinRpcServer {
         let conn = &self.conn;
         let name = req.into_inner().name;
         let db_user: Option<t_ds_user::Model> = t_ds_user::Entity::find()
-           // .column(t_ds_user::Column::UserName)
-           .filter(t_ds_user::Column::UserName.eq(name))
-           .into_model()
+            .filter(t_ds_user::Column::UserName.eq(name))
+            .into_model()
             .one(conn)
-                   .await
-                   .map_err(|_| tonic::Status::not_found("User not found"))?;
+            .await
+            .map_err(|_| tonic::Status::not_found("User not found"))?;
         match db_user {
             Some(v) => Ok(tonic::Response::new(v.into())),
             None => Err(tonic::Status::from_error(Box::<DolphinErrorInfo>::new(
@@ -82,5 +83,49 @@ impl DsUserBeanService for DolphinRpcServer {
         _request: GrpcRequest<DeleteDsUserBeanRequest>,
     ) -> GrpcResponse<()> {
         todo!()
+    }
+
+    async fn get_ds_user_by_id(
+        &self,
+        req: GrpcRequest<GetDsUserByIdRequest>,
+    ) -> GrpcResponse<GetDsUserByIdResponse> {
+        let conn = &self.conn;
+        let id = req.into_inner().id;
+        let db_user: Option<t_ds_user::Model> = t_ds_user::Entity::find()
+            .filter(t_ds_user::Column::Id.eq(id))
+            .into_model()
+            .one(conn)
+            .await
+            .map_err(|_| tonic::Status::not_found("User not found"))?;
+        match db_user {
+            Some(v) => Ok(tonic::Response::new(GetDsUserByIdResponse {
+                ds_user_bean: Some(v.into()),
+            })),
+            None => Ok(tonic::Response::new(GetDsUserByIdResponse {
+                ds_user_bean: None,
+            })),
+        }
+    }
+
+    async fn query_user_by_name_password(
+        &self,
+        req: tonic::Request<proto::ds_user::QueryUserByNamePasswordRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_user::DsUserBean>, tonic::Status> {
+        let conn = &self.conn;
+        let user_name = &req.get_ref().user_name;
+        let user_password = &req.get_ref().user_password;
+        let db_user: Option<t_ds_user::Model> = t_ds_user::Entity::find()
+            .filter(t_ds_user::Column::UserName.eq(user_name))
+            .filter(t_ds_user::Column::UserPassword.eq(user_password))
+            .into_model()
+            .one(conn)
+            .await
+            .map_err(|_| tonic::Status::not_found("User not found"))?;
+        match db_user {
+            Some(v) => Ok(tonic::Response::new(v.into())),
+            None => Err(tonic::Status::from_error(Box::<DolphinErrorInfo>::new(
+                AppStatus::UserNotExist.into(),
+            ))),
+        }
     }
 }
