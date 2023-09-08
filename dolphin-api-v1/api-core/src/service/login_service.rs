@@ -1,28 +1,34 @@
-use crate::{
-    bean::response::ds_user_res::UserLoginInfoRes,
-    security::get_authenticator,
-};
-use dolphin_common::{core_results::results::ApiResult, core_status::app_status::AppStatus};
+use crate::{bean::response::ds_user_res::UserLoginInfoRes, security::get_authenticator};
+use dolphin_common::core_status::app_status::AppStatus;
+use tokio::runtime;
 
-pub async fn login_service(
+pub fn login_service(
     user_name: String,
     user_password: String,
     extra: String,
-) -> ApiResult<UserLoginInfoRes> {
-    let authenticator = get_authenticator();
-    let res = authenticator
-        .authenticate(user_name.clone(), user_password.clone(), extra)
-        .await;
+) -> (Option<UserLoginInfoRes>, AppStatus) {
+    let rt = runtime::Runtime::new().unwrap();
+
+    let res = rt.block_on(async {
+        let authenticator = get_authenticator();
+        let result = authenticator
+            .authenticate(user_name.clone(), user_password.clone(), extra)
+            .await;
+        result
+    });
     match res.status {
         AppStatus::SUCCESS => match res.data {
             Some(data) => {
                 let session_id = data.get("session_id").unwrap_or(&"".to_string()).clone();
-                ApiResult::build(Some(UserLoginInfoRes {
-                    session_id: Some(session_id),
-                }))
+                (
+                    Some(UserLoginInfoRes {
+                        session_id: Some(session_id),
+                    }),
+                    AppStatus::SUCCESS,
+                )
             }
-            _ => ApiResult::new_with_err_status(None, AppStatus::UserLoginFailure),
+            _ => (None, AppStatus::UserLoginFailure),
         },
-        _ => ApiResult::new_with_err_extra(None, res.status, res.extra),
+        _ => (None, res.status),
     }
 }

@@ -9,7 +9,7 @@ edition = "2021"
 tokio = { version = "1.31.0", features = ["full"] }
 anyhow = "1.0.44"
 dotenvy = "0.15.7"
-axum = { version = "0.6.12", features = ["headers"] }
+axum = { version = "0.6.20", features = ["headers", "tracing", "macros"] }
 api-core = { path = "../api-core" }
 utils = { path = "../utils" }
 tracing = { version = "0.1.37" }
