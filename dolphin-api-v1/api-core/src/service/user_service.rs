@@ -3,19 +3,14 @@ use crate::{
     client::service::{user_client, USER_SERVICE},
 };
 use dolphin_common::{
-    core_error::error::DolphinErrorInfo,
-    core_results::results::ApiResult,
+    core_error::error::DolphinErrorInfo, core_results::results::ApiResult,
     core_status::app_status::AppStatus,
 };
 use proto::ds_user::{
-    DsUserBean,
-    GetDsUserBeanRequest,
-    GetDsUserByIdRequest,
-    QueryUserByNamePasswordRequest,
+    DsUserBean, GetDsUserBeanRequest, GetDsUserByIdRequest, QueryUserByNamePasswordRequest,
 };
 use serde::{Deserialize, Serialize};
 use tracing::{error, info};
-
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct User {
@@ -23,14 +18,12 @@ pub struct User {
     pub password: String,
 }
 
-
 impl UserInfoReq {
     pub async fn user_info(&self) -> ApiResult<UserInfoRes> {
         let client = match client().await {
             Ok(value) => value,
             Err(value) => return value,
         };
-
 
         let request = tonic::Request::new(GetDsUserBeanRequest {
             name: self.user_name.clone(),
@@ -85,7 +78,7 @@ pub async fn query_user_by_name_password(
     extra: String,
 ) -> ApiResult<DsUserBean> {
     info!(
-        "user_name: {:?} ,user_password: {:?},extra: {:?}",
+        "query_user_by_name_password user_name: {:?} ,user_password: {:?},extra: {:?}",
         user_name, user_password, extra
     );
     let client = match client().await {
@@ -97,7 +90,7 @@ pub async fn query_user_by_name_password(
         user_name,
         user_password: format!("{:x}", digest),
     });
-    client
+    let res = client
         .clone()
         .query_user_by_name_password(request)
         .await
@@ -105,10 +98,14 @@ pub async fn query_user_by_name_password(
         .map_err(|e| {
             error!("query_user_by_name_password error: {:?}", e);
             ApiResult::new_with_err_status(None, AppStatus::UserNamePasswdError)
-        })
-        .unwrap_err()
-}
+        });
 
+    info!("res: {:?}", res);
+    match res {
+        Ok(value) => value,
+        Err(value) => value,
+    }
+}
 
 async fn client<T>() -> Result<
     &'static proto::ds_user::ds_user_bean_service_client::DsUserBeanServiceClient<
@@ -129,4 +126,19 @@ async fn client<T>() -> Result<
         }
     };
     Ok(client)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[tokio::test]
+    async fn test_query_user_by_name_password() {
+        let res = query_user_by_name_password(
+            "admin".to_string(),
+            "dolphinscheduler123".to_string(),
+            "c".to_string(),
+        )
+        .await;
+        eprintln!("res: {:?}", res);
+    }
 }

@@ -90,6 +90,7 @@ dependencies = [
  "dolphin-config",
  "dolphin-proto",
  "dotenvy",
+ "futures",
  "lazy_static",
  "md5",
  "serde",

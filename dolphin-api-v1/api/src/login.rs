@@ -37,7 +37,7 @@ pub async fn user_login(
         .into_response();
     }
     // todo!()
-    let res = login_service(user_name, user_password, ip);
+    let res = login_service(user_name, user_password, ip).await;
     match res {
         (Some(data), status) => ApiResult::<UserLoginInfoRes>::new_with_err_extra(
             Some(data),

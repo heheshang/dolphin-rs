@@ -1,6 +1,6 @@
 
 [database]
-url = "postgres://postgres@localhost"
+url = "postgres://superset:superset@tx:15432/dolphinscheduler"
 
 [sparkpost]
 key = "sparkpost-dev-key"

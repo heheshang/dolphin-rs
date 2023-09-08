@@ -1,4 +1,4 @@
-use crate::get_api_config_path;
+use crate::get_dao_config_path;
 use config::{Config, ConfigError, Environment, File};
 use serde_derive::Deserialize;
 use std::env;
@@ -11,11 +11,9 @@ pub struct Database {
 
 #[derive(Debug, Deserialize)]
 #[allow(unused)]
-pub struct Sparkpost {
-    pub key: String,
-    pub token: String,
-    pub url: String,
-    pub version: u8,
+pub struct Server {
+    pub host: String,
+    pub port: u32,
 }
 
 #[derive(Debug, Deserialize)]
@@ -50,35 +48,34 @@ pub struct Security {
 pub struct Settings {
     pub debug: bool,
     pub database: Database,
-    pub sparkpost: Sparkpost,
-    pub twitter: Twitter,
-    pub braintree: Braintree,
-    pub security: Security,
+    pub server: Server,
 }
 
 impl Settings {
     pub fn new() -> Result<Self, ConfigError> {
         let run_mode = env::var("RUN_MODE").unwrap_or_else(|_| "development".into());
-        let config_path = get_api_config_path();
+        let config_path = get_dao_config_path();
         let s = Config::builder()
             // Start off by merging in the "default" configuration file
-            .add_source(File::with_name(config_path.join("default").to_str().unwrap()))
+            .add_source(File::with_name(
+                config_path.join("default").to_str().unwrap(),
+            ))
             // Add in the current environment file
             // Default to 'development' env
             // Note that this file is _optional_
             .add_source(
-                File::with_name(config_path.join( run_mode).to_str().unwrap())
-                    .required(false),
+                File::with_name(config_path.join(run_mode).to_str().unwrap()).required(false),
             )
             // Add in a local configuration file
             // This file shouldn't be checked in to git
-            .add_source(File::with_name(config_path.join("local").to_str().unwrap()).required(false))
+            .add_source(
+                File::with_name(config_path.join("local").to_str().unwrap()).required(false),
+            )
             // Add in settings from the environment (with a prefix of APP)
             // Eg.. `APP_DEBUG=1 ./target/app` would set the `debug` key
             .add_source(Environment::with_prefix("app"))
             // You may also programmatically change settings
             // .set_override("database.url", "postgres://")?
-
             .build()?;
 
         // Now that we're done, let's access our configuration
@@ -96,32 +93,38 @@ mod tests {
 
     use std::env;
 
+    use crate::get_dao_config_path;
+
     use super::*;
     #[test]
     fn config_is_work() {
         let run_mode = env::var("RUN_MODE").unwrap_or_else(|_| "development".into());
         // get dolphin-api-config path from env
-        let config_path = get_api_config_path();
+        let config_path = get_dao_config_path();
         eprintln!("config_path: {:?}", config_path);
         let s = Config::builder()
             // Start off by merging in the "default" configuration file
-            .add_source(File::with_name(config_path.join("default").to_str().unwrap()))
+            .add_source(File::with_name(
+                config_path.join("default").to_str().unwrap(),
+            ))
             // Add in the current environment file
             // Default to 'development' env
             // Note that this file is _optional_
             .add_source(
-                File::with_name(config_path.join(run_mode).to_str().unwrap())
-                    .required(false),
+                File::with_name(config_path.join(run_mode).to_str().unwrap()).required(false),
             )
             // Add in a local configuration file
             // This file shouldn't be checked in to git
-            .add_source(File::with_name(config_path.join("local").to_str().unwrap()).required(false))
+            .add_source(
+                File::with_name(config_path.join("local").to_str().unwrap()).required(false),
+            )
             // Add in settings from the environment (with a prefix of APP)
             // Eg.. `APP_DEBUG=1 ./target/app` would set the `debug` key
             .add_source(Environment::with_prefix("app"))
             // You may also programmatically change settings
-            .set_override("database.url", "postgres://").unwrap()
-            .build().unwrap();
+            // .set_override("database.url", "postgres://")
+            .build()
+            .unwrap();
 
         // Now that we're done, let's access our configuration
         println!("debug: {:?}", s.get_bool("debug"));

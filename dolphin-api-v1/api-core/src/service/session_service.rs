@@ -4,7 +4,7 @@ use proto::{
     ds_session::{DsSessionBean, GetDsSessionBeanByIdRequest},
     ds_user::DsUserBean,
 };
-
+use tracing::info;
 
 pub async fn get_ds_session_by_id(session_id: String) -> ApiResult<DsSessionBean> {
     let client = match client().await {
@@ -25,15 +25,25 @@ pub async fn get_ds_session_by_id(session_id: String) -> ApiResult<DsSessionBean
     }
 }
 
-pub async fn create_ds_session(_user: DsUserBean, _extra: String) -> ApiResult<DsSessionBean> {
+pub async fn create_ds_session(user: DsUserBean, extra: String) -> ApiResult<DsSessionBean> {
     let _client = match client().await {
         Ok(value) => value,
         Err(value) => return value,
     };
+    info!("user: {:?}, extra: {}", user, extra);
 
-    todo!()
+    // client.clone().create_ds_session_bean().await;
+
+    ApiResult::new_with_err_status(
+        Some(DsSessionBean {
+            id: "11111".to_string(),
+            user_id: user.id,
+            ip: Some(extra),
+            last_login_time: Some("sssssss".to_string()),
+        }),
+        AppStatus::SUCCESS,
+    )
 }
-
 
 async fn client() -> Result<
     &'static proto::ds_session::ds_session_bean_service_client::DsSessionBeanServiceClient<

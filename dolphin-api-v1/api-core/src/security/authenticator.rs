@@ -1,5 +1,5 @@
 use crate::service::{session_service, user_service};
-use axum::async_trait;
+use async_trait::async_trait;
 use dolphin_common::{core_results::results::ApiResult, core_status::app_status::AppStatus};
 use proto::ds_user::{DsUserBean as UserInfo, Flag};
 use std::collections::HashMap;
@@ -19,7 +19,7 @@ impl AuthenticatorType {
 }
 
 #[async_trait]
-pub trait Authenticator: Sync {
+pub trait Authenticator: Sync + Send {
     async fn login(&self, username: String, password: String, extra: String)
         -> ApiResult<UserInfo>;
     async fn authenticate(
@@ -56,8 +56,9 @@ pub trait Authenticator: Sync {
                 match user_res.data {
                     Some(u) => match Flag::from_i32(u.state.unwrap_or(0)) {
                         Some(Flag::Yes) => ApiResult::build(Some(u)),
-                        Some(Flag::No) =>
-                            ApiResult::new_with_err_status(None, AppStatus::UserDisabled),
+                        Some(Flag::No) => {
+                            ApiResult::new_with_err_status(None, AppStatus::UserDisabled)
+                        }
                         None => ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed),
                     },
                     None => ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed),
@@ -74,7 +75,6 @@ pub trait Authenticator: Sync {
 pub struct PasswordAuthenticator;
 #[derive(Default)]
 pub struct LdapAuthenticator;
-
 
 #[async_trait]
 impl Authenticator for PasswordAuthenticator {
@@ -108,7 +108,6 @@ impl Authenticator for LdapAuthenticator {
     }
 }
 
-
 // trait Product {}
 
 // trait Factory {
@@ -116,7 +115,6 @@ impl Authenticator for LdapAuthenticator {
 // }
 
 // struct ConcreteFactory;
-
 
 // impl Factory for ConcreteFactory {
 //     fn new() -> Box<dyn Product> {

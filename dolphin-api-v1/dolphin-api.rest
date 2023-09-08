@@ -100,3 +100,26 @@ content-type: application/json
 {
     "userName": "admin"
 }
+
+
+
+###
+POST http://127.0.0.1:12345/dolphinscheduler/login HTTP/1.1
+content-type: application/json
+
+{
+    "userName": "测试",
+    "userPassword": "测试"
+}
+
+###
+
+
+###
+POST http://127.0.0.1:12345/dolphinscheduler/login HTTP/1.1
+content-type: application/json
+
+{
+    "userName": "admin",
+    "userPassword": "dolphinscheduler123"
+}

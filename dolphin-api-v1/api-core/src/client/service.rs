@@ -60,16 +60,14 @@ qrtz_simple_triggers::qrtz_simple_trigger_bean_service_client::QrtzSimpleTrigger
 qrtz_simprop_triggers::qrtz_simprop_trigger_bean_service_client::QrtzSimpropTriggerBeanServiceClient,
 qrtz_triggers::qrtz_trigger_bean_service_client::QrtzTriggerBeanServiceClient,
 };
+use dolphin_config::dao_config::Settings;
 macro_rules! get_client {
     ($fn_name:ident, $service_type:ident) => {
         pub async fn $fn_name() -> anyhow::Result<$service_type<tonic::transport::Channel>> {
-            dotenvy::dotenv().ok();
-            let host = std::env::var("DOLPHIN_DAO_HOST")
-                .expect("HOST is not set in .env file")
-                .clone();
-            let port = std::env::var("DOLPHIN_DAO_PORT")
-                .expect("PORT is not set in .env file")
-                .clone();
+            let settings = Settings::new().unwrap();
+            let host = settings.server.host;
+            let port = settings.server.port;
+
             let addr_str = format!("http://{host}:{port}").clone();
             let addr = tonic::transport::Endpoint::from_shared(addr_str);
             match $service_type::connect(addr.unwrap()).await {
@@ -360,10 +358,8 @@ get_client!(
 );
 get_client!(qrtz_trigger_client, QrtzTriggerBeanServiceClient);
 
-
 // pub static USER_SERVICE: OnceCell<Result<DsUserBeanServiceClient<Channel>>> =
 //     OnceCell::const_new();
-
 
 // pub async fn get_client() -> Result<DsUserBeanServiceClient<Channel>> {
 //     dotenvy::dotenv().ok();

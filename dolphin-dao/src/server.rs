@@ -1,72 +1,18 @@
 use anyhow::Result;
-use config::{ConfigError, Config, Environment, File};
+use dolphin_config::dao_config::Settings;
 use sea_orm::Database as SeaDatabase;
 use std::net::SocketAddr;
 use tonic::transport::Server as TonicServer;
-use serde::Deserialize;
-use dolphin_config::get_dao_config_path;
-use std::env;
 pub mod service;
 
 
 pub use service::*;
 
 use crate::service::service::DolphinRpcServer;
-#[derive(Debug, Deserialize)]
-#[allow(unused)]
-struct Database {
-    url: String,
-}
-#[derive(Debug, Deserialize)]
-#[allow(unused)]
-struct Server {
-    host:String,
-    port:u16,
-}
-#[derive(Debug, Deserialize)]
-#[allow(unused)]
-pub struct Settings {
-    debug: bool,
-    database: Database,
-    server: Server,
-}
 
-impl Settings {
-    pub fn new() -> Result<Self, ConfigError> {
-        let run_mode = env::var("RUN_MODE").unwrap_or_else(|_| "development".into());
-        let config_path = get_dao_config_path();
-        let s = Config::builder()
-            // Start off by merging in the "default" configuration file
-            .add_source(File::with_name(config_path.join("default").to_str().unwrap()))
-            // Add in the current environment file
-            // Default to 'development' env
-            // Note that this file is _optional_
-            .add_source(
-                File::with_name(config_path.join( run_mode).to_str().unwrap())
-                    .required(false),
-            )
-            // Add in a local configuration file
-            // This file shouldn't be checked in to git
-            .add_source(File::with_name(config_path.join("local").to_str().unwrap()).required(false))
-            // Add in settings from the environment (with a prefix of APP)
-            // Eg.. `APP_DEBUG=1 ./target/app` would set the `debug` key
-            .add_source(Environment::with_prefix("app"))
-            // You may also programmatically change settings
-            //.set_override("database.url", "postgres://")?
-            .build()?;
-
-        // Now that we're done, let's access our configuration
-        println!("debug: {:?}", s.get_bool("debug"));
-        //println!("database: {:?}", s.get::<String>("database.url"));
-
-        // You can deserialize (and thus freeze) the entire configuration as
-        s.try_deserialize()
-    }
-}
 
 #[tokio::main]
 async fn main() -> Result<()> {
-
     //let _addr: SocketAddr = "0.0.0.0:50051".parse()?;
 
     // let database_url = env::var("postgres://superset:superset@tx:15432/dolphinscheduler").expect("DATABASE_URL must be set");
@@ -78,8 +24,7 @@ async fn main() -> Result<()> {
     let port = settings.server.port;
     let addr: SocketAddr = format!("{}:{}", host, port).parse()?;
 
-    let connection =
-        SeaDatabase::connect(url).await?;
+    let connection = SeaDatabase::connect(url).await?;
     println!("Hello, world!");
     // let hello_server = MyServer { connection };
     let grpc_server = DolphinRpcServer::new(connection);

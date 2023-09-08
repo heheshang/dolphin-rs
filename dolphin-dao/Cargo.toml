@@ -23,7 +23,6 @@ proto = { version = "0.1.0", path = "../dolphin-proto", package = "dolphin-proto
 dolphin_common = { version = "0.1.0", path = "../dolphin-common", package = "dolphin-common" }
 serde_json = "1.0.105"
 chrono = "0.4.26"
-config = "0.13.3"
 dolphin_config = { version = "0.1.0", path = "../dolphin-config", package = "dolphin-config" }
 
 # [build-dependencies]
