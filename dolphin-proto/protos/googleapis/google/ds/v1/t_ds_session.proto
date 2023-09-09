@@ -105,12 +105,6 @@ message GetDsSessionBeanUserIdResponse {
 
 
 message CreateDsSessionBeanRequest {
-  // The parent resource name where the DsSessionBean is to be created.
-  string parent = 1;
-
-  // The DsSessionBean id to use for this DsSessionBean.
-  string DsSessionBean_id = 2;
-
   // The DsSessionBean resource to create.
   // The field name should match the Noun in the method name.
   DsSessionBean DsSessionBean = 3;
@@ -120,9 +114,6 @@ message UpdateDsSessionBeanRequest {
   // The DsSessionBean resource which replaces the resource on the server.
   DsSessionBean DsSessionBean = 1;
 
-  // The update mask applies to the resource. For the `FieldMask` definition,
-  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-  google.protobuf.FieldMask update_mask = 2;
 }
 
 message DeleteDsSessionBeanRequest {

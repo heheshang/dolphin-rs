@@ -4,7 +4,7 @@ use dolphin_common::{
     core_results::results::{GrpcRequest, GrpcResponse},
     core_status::app_status::AppStatus,
 };
-use entity::t_ds_session::{self};
+use entity::t_ds_session::{self, Model};
 use proto::ds_session::{
     ds_session_bean_service_server::DsSessionBeanService,
     DsSessionBean,
@@ -37,7 +37,36 @@ impl DsSessionBeanService for DolphinRpcServer {
         &self,
         _req: tonic::Request<proto::ds_session::CreateDsSessionBeanRequest>,
     ) -> std::result::Result<tonic::Response<proto::ds_session::DsSessionBean>, tonic::Status> {
-        todo!()
+        let ds_session = _req.get_ref().ds_session_bean.clone().unwrap();
+        let id = ds_session.id.clone();
+        let parse_from_str = DateTime::parse_from_str;
+        let current_time = chrono::prelude::Local::now().naive_local();
+        let model = t_ds_session::ActiveModel {
+            id: sea_orm::ActiveValue::Set(id.clone()),
+            user_id: sea_orm::ActiveValue::Set(Some(ds_session.user_id)),
+            ip: sea_orm::ActiveValue::Set(ds_session.ip),
+            last_login_time: sea_orm::ActiveValue::Set(Some(
+                parse_from_str(&ds_session.last_login_time.unwrap(), "%Y-%m-%d %H:%M:%S")
+                    .unwrap_or(current_time),
+            )),
+        };
+        let conn = &self.conn;
+        let _ = t_ds_session::Entity::insert(model.clone())
+            .exec(conn)
+            .await
+            .map_err(|_| tonic::Status::internal("session  create failed"))?;
+        let res:Option<Model> = t_ds_session::Entity::find()
+            .filter(t_ds_session::Column::Id.eq(id.clone()))
+            .into_model()
+            .one(conn)
+            .await
+            .map_err(|_| tonic::Status::not_found("sessionId  not found"))?;
+        match res {
+            Some(v) => Ok(tonic::Response::new(v.into())),
+            None => Err(tonic::Status::from_error(Box::<DolphinErrorInfo>::new(
+                AppStatus::LoginSessionFailed.into(),
+            ))),
+        }
     }
 
     async fn update_ds_session_bean(

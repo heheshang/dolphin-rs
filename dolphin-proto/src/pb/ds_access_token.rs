@@ -32,9 +32,6 @@ pub struct ListDsAccessTokenBeansResponse {
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
     pub ds_access_token_beans: ::prost::alloc::vec::Vec<DsAccessTokenBean>,
-    /// Token to retrieve the next page of results, or empty if there are no more results in the list.
-    #[prost(string, tag = "2")]
-    pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

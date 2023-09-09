@@ -50,7 +50,6 @@ impl DsAccessTokenBeanService for DolphinRpcServer {
         let ss: Vec<DsAccessTokenBean> = res.0.into_iter().map(|v| v.into()).collect();
         Ok(tonic::Response::new(ListDsAccessTokenBeansResponse {
             ds_access_token_beans: ss,
-            next_page_token: todo!(),
         }))
     }
 

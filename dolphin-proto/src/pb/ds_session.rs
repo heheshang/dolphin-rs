@@ -64,12 +64,6 @@ pub struct GetDsSessionBeanUserIdResponse {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDsSessionBeanRequest {
-    /// The parent resource name where the DsSessionBean is to be created.
-    #[prost(string, tag = "1")]
-    pub parent: ::prost::alloc::string::String,
-    /// The DsSessionBean id to use for this DsSessionBean.
-    #[prost(string, tag = "2")]
-    pub ds_session_bean_id: ::prost::alloc::string::String,
     /// The DsSessionBean resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
@@ -81,10 +75,6 @@ pub struct UpdateDsSessionBeanRequest {
     /// The DsSessionBean resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
     pub ds_session_bean: ::core::option::Option<DsSessionBean>,
-    /// The update mask applies to the resource. For the `FieldMask` definition,
-    /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask>
-    #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

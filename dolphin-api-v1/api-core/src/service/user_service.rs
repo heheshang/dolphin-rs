@@ -17,7 +17,6 @@ pub struct User {
     pub username: String,
     pub password: String,
 }
-
 impl UserInfoReq {
     pub async fn user_info(&self) -> ApiResult<UserInfoRes> {
         let client = match client().await {

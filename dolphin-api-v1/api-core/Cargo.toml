@@ -27,3 +27,4 @@ dolphin_config = { path = "../../dolphin-config", package = "dolphin-config" }
 async-trait = "0.1.73"
 md5 = "0.7.0"
 futures = "0.3.28"
+uuid = { version = "1.4.1", features = ["v4"] }
