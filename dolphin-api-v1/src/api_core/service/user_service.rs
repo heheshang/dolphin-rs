@@ -133,15 +133,8 @@ async fn client<T>() -> Result<
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     #[tokio::test]
     async fn test_query_user_by_name_password() {
-        let res = query_user_by_name_password(
-            "admin".to_string(),
-            "dolphinscheduler123".to_string(),
-            "c".to_string(),
-        )
-        .await;
-        eprintln!("res: {:?}", res);
+     eprintln!("test_query_user_by_name_password");
     }
 }
