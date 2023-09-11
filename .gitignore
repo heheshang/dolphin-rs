@@ -10,3 +10,4 @@ Cargo.lock
 /*/*/*.log
 */*/Cargo.lock
 .idea/
+*.log
