@@ -2,21 +2,21 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsCommandBean {
+pub struct DsCommand {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int32, optional, tag = "2")]
-    pub command_ds_command_bean: ::core::option::Option<i32>,
+    pub command_ds_command: ::core::option::Option<i32>,
     #[prost(int64, tag = "3")]
     pub process_definition_code: i64,
     #[prost(string, optional, tag = "4")]
     pub command_param: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(int32, optional, tag = "5")]
-    pub task_depend_ds_command_bean: ::core::option::Option<i32>,
+    pub task_depend_ds_command: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "6")]
     pub failure_strategy: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "7")]
-    pub warning_ds_command_bean: ::core::option::Option<i32>,
+    pub warning_ds_command: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "8")]
     pub warning_group_id: ::core::option::Option<i32>,
     #[prost(string, optional, tag = "9")]
@@ -42,7 +42,7 @@ pub struct DsCommandBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsCommandBeansRequest {
+pub struct ListDsCommandsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -51,42 +51,42 @@ pub struct ListDsCommandBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsCommandBeansResponse {
-    /// The field name should match the noun "DsCommandBean" in the method name.
+pub struct ListDsCommandsResponse {
+    /// The field name should match the noun "DsCommand" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_command_beans: ::prost::alloc::vec::Vec<DsCommandBean>,
+    pub ds_commands: ::prost::alloc::vec::Vec<DsCommand>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsCommandBeanRequest {
+pub struct GetDsCommandRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsCommandBeanRequest {
-    /// The parent resource name where the DsCommandBean is to be created.
+pub struct CreateDsCommandRequest {
+    /// The parent resource name where the DsCommand is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsCommandBean id to use for this DsCommandBean.
+    /// The DsCommand id to use for this DsCommand.
     #[prost(string, tag = "2")]
-    pub ds_command_bean_id: ::prost::alloc::string::String,
-    /// The DsCommandBean resource to create.
+    pub ds_command_id: ::prost::alloc::string::String,
+    /// The DsCommand resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_command_bean: ::core::option::Option<DsCommandBean>,
+    pub ds_command: ::core::option::Option<DsCommand>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsCommandBeanRequest {
-    /// The DsCommandBean resource which replaces the resource on the server.
+pub struct UpdateDsCommandRequest {
+    /// The DsCommand resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_command_bean: ::core::option::Option<DsCommandBean>,
+    pub ds_command: ::core::option::Option<DsCommand>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -94,21 +94,21 @@ pub struct UpdateDsCommandBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsCommandBeanRequest {
-    /// The resource name of the DsCommandBean to be deleted.
+pub struct DeleteDsCommandRequest {
+    /// The resource name of the DsCommand to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_command_bean_service_client {
+pub mod ds_command_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsCommandBeanServiceClient<T> {
+    pub struct DsCommandServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsCommandBeanServiceClient<tonic::transport::Channel> {
+    impl DsCommandServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -119,7 +119,7 @@ pub mod ds_command_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsCommandBeanServiceClient<T>
+    impl<T> DsCommandServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -139,7 +139,7 @@ pub mod ds_command_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsCommandBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsCommandServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -152,7 +152,7 @@ pub mod ds_command_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsCommandBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsCommandServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -190,10 +190,10 @@ pub mod ds_command_bean_service_client {
             self
         }
 
-        pub async fn list_ds_command_beans(
+        pub async fn list_ds_commands(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsCommandBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsCommandBeansResponse>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsCommandsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsCommandsResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -202,21 +202,41 @@ pub mod ds_command_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_command.DsCommandBeanService/ListDsCommandBeans",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/ds_command.DsCommandService/ListDsCommands");
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_command.DsCommandBeanService",
-                "ListDsCommandBeans",
+                "ds_command.DsCommandService",
+                "ListDsCommands",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_command_bean(
+        pub async fn get_ds_command(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsCommandBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsCommandBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetDsCommandRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsCommand>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/ds_command.DsCommandService/GetDsCommand");
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new(
+                "ds_command.DsCommandService",
+                "GetDsCommand",
+            ));
+            self.inner.unary(req, path, codec).await
+        }
+
+        pub async fn create_ds_command(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CreateDsCommandRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsCommand>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -225,20 +245,20 @@ pub mod ds_command_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_command.DsCommandBeanService/GetDsCommandBean",
+                "/ds_command.DsCommandService/CreateDsCommand",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_command.DsCommandBeanService",
-                "GetDsCommandBean",
+                "ds_command.DsCommandService",
+                "CreateDsCommand",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_command_bean(
+        pub async fn update_ds_command(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsCommandBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsCommandBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateDsCommandRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsCommand>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -247,41 +267,19 @@ pub mod ds_command_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_command.DsCommandBeanService/CreateDsCommandBean",
+                "/ds_command.DsCommandService/UpdateDsCommand",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_command.DsCommandBeanService",
-                "CreateDsCommandBean",
+                "ds_command.DsCommandService",
+                "UpdateDsCommand",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_command_bean(
+        pub async fn delete_ds_command(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsCommandBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsCommandBean>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_command.DsCommandBeanService/UpdateDsCommandBean",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_command.DsCommandBeanService",
-                "UpdateDsCommandBean",
-            ));
-            self.inner.unary(req, path, codec).await
-        }
-
-        pub async fn delete_ds_command_bean(
-            &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsCommandBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsCommandRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -291,48 +289,48 @@ pub mod ds_command_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_command.DsCommandBeanService/DeleteDsCommandBean",
+                "/ds_command.DsCommandService/DeleteDsCommand",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_command.DsCommandBeanService",
-                "DeleteDsCommandBean",
+                "ds_command.DsCommandService",
+                "DeleteDsCommand",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_command_bean_service_server {
+pub mod ds_command_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsCommandBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsCommandServiceServer.
     #[async_trait]
-    pub trait DsCommandBeanService: Send + Sync + 'static {
-        async fn list_ds_command_beans(
+    pub trait DsCommandService: Send + Sync + 'static {
+        async fn list_ds_commands(
             &self,
-            request: tonic::Request<super::ListDsCommandBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsCommandBeansResponse>, tonic::Status>;
-        async fn get_ds_command_bean(
+            request: tonic::Request<super::ListDsCommandsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsCommandsResponse>, tonic::Status>;
+        async fn get_ds_command(
             &self,
-            request: tonic::Request<super::GetDsCommandBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsCommandBean>, tonic::Status>;
-        async fn create_ds_command_bean(
+            request: tonic::Request<super::GetDsCommandRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsCommand>, tonic::Status>;
+        async fn create_ds_command(
             &self,
-            request: tonic::Request<super::CreateDsCommandBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsCommandBean>, tonic::Status>;
-        async fn update_ds_command_bean(
+            request: tonic::Request<super::CreateDsCommandRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsCommand>, tonic::Status>;
+        async fn update_ds_command(
             &self,
-            request: tonic::Request<super::UpdateDsCommandBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsCommandBean>, tonic::Status>;
-        async fn delete_ds_command_bean(
+            request: tonic::Request<super::UpdateDsCommandRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsCommand>, tonic::Status>;
+        async fn delete_ds_command(
             &self,
-            request: tonic::Request<super::DeleteDsCommandBeanRequest>,
+            request: tonic::Request<super::DeleteDsCommandRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsCommandBeanServiceServer<T: DsCommandBeanService> {
+    pub struct DsCommandServiceServer<T: DsCommandService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -340,7 +338,7 @@ pub mod ds_command_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsCommandBeanService> DsCommandBeanServiceServer<T> {
+    impl<T: DsCommandService> DsCommandServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -393,9 +391,9 @@ pub mod ds_command_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsCommandBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsCommandServiceServer<T>
     where
-        T: DsCommandBeanService,
+        T: DsCommandService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -413,22 +411,22 @@ pub mod ds_command_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_command.DsCommandBeanService/ListDsCommandBeans" => {
+                "/ds_command.DsCommandService/ListDsCommands" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsCommandBeansSvc<T: DsCommandBeanService>(pub Arc<T>);
-                    impl<T: DsCommandBeanService>
-                        tonic::server::UnaryService<super::ListDsCommandBeansRequest>
-                        for ListDsCommandBeansSvc<T>
+                    struct ListDsCommandsSvc<T: DsCommandService>(pub Arc<T>);
+                    impl<T: DsCommandService>
+                        tonic::server::UnaryService<super::ListDsCommandsRequest>
+                        for ListDsCommandsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsCommandBeansResponse;
+                        type Response = super::ListDsCommandsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsCommandBeansRequest>,
+                            request: tonic::Request<super::ListDsCommandsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).list_ds_command_beans(request).await };
+                            let fut = async move { (*inner).list_ds_commands(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -439,7 +437,7 @@ pub mod ds_command_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsCommandBeansSvc(inner);
+                        let method = ListDsCommandsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -455,22 +453,22 @@ pub mod ds_command_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_command.DsCommandBeanService/GetDsCommandBean" => {
+                "/ds_command.DsCommandService/GetDsCommand" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsCommandBeanSvc<T: DsCommandBeanService>(pub Arc<T>);
-                    impl<T: DsCommandBeanService>
-                        tonic::server::UnaryService<super::GetDsCommandBeanRequest>
-                        for GetDsCommandBeanSvc<T>
+                    struct GetDsCommandSvc<T: DsCommandService>(pub Arc<T>);
+                    impl<T: DsCommandService>
+                        tonic::server::UnaryService<super::GetDsCommandRequest>
+                        for GetDsCommandSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsCommandBean;
+                        type Response = super::DsCommand;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsCommandBeanRequest>,
+                            request: tonic::Request<super::GetDsCommandRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_ds_command_bean(request).await };
+                            let fut = async move { (*inner).get_ds_command(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -481,7 +479,7 @@ pub mod ds_command_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsCommandBeanSvc(inner);
+                        let method = GetDsCommandSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -497,22 +495,22 @@ pub mod ds_command_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_command.DsCommandBeanService/CreateDsCommandBean" => {
+                "/ds_command.DsCommandService/CreateDsCommand" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsCommandBeanSvc<T: DsCommandBeanService>(pub Arc<T>);
-                    impl<T: DsCommandBeanService>
-                        tonic::server::UnaryService<super::CreateDsCommandBeanRequest>
-                        for CreateDsCommandBeanSvc<T>
+                    struct CreateDsCommandSvc<T: DsCommandService>(pub Arc<T>);
+                    impl<T: DsCommandService>
+                        tonic::server::UnaryService<super::CreateDsCommandRequest>
+                        for CreateDsCommandSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsCommandBean;
+                        type Response = super::DsCommand;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsCommandBeanRequest>,
+                            request: tonic::Request<super::CreateDsCommandRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).create_ds_command_bean(request).await };
+                            let fut = async move { (*inner).create_ds_command(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -523,7 +521,7 @@ pub mod ds_command_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsCommandBeanSvc(inner);
+                        let method = CreateDsCommandSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -539,22 +537,22 @@ pub mod ds_command_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_command.DsCommandBeanService/UpdateDsCommandBean" => {
+                "/ds_command.DsCommandService/UpdateDsCommand" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsCommandBeanSvc<T: DsCommandBeanService>(pub Arc<T>);
-                    impl<T: DsCommandBeanService>
-                        tonic::server::UnaryService<super::UpdateDsCommandBeanRequest>
-                        for UpdateDsCommandBeanSvc<T>
+                    struct UpdateDsCommandSvc<T: DsCommandService>(pub Arc<T>);
+                    impl<T: DsCommandService>
+                        tonic::server::UnaryService<super::UpdateDsCommandRequest>
+                        for UpdateDsCommandSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsCommandBean;
+                        type Response = super::DsCommand;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsCommandBeanRequest>,
+                            request: tonic::Request<super::UpdateDsCommandRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).update_ds_command_bean(request).await };
+                            let fut = async move { (*inner).update_ds_command(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -565,7 +563,7 @@ pub mod ds_command_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsCommandBeanSvc(inner);
+                        let method = UpdateDsCommandSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -581,22 +579,22 @@ pub mod ds_command_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_command.DsCommandBeanService/DeleteDsCommandBean" => {
+                "/ds_command.DsCommandService/DeleteDsCommand" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsCommandBeanSvc<T: DsCommandBeanService>(pub Arc<T>);
-                    impl<T: DsCommandBeanService>
-                        tonic::server::UnaryService<super::DeleteDsCommandBeanRequest>
-                        for DeleteDsCommandBeanSvc<T>
+                    struct DeleteDsCommandSvc<T: DsCommandService>(pub Arc<T>);
+                    impl<T: DsCommandService>
+                        tonic::server::UnaryService<super::DeleteDsCommandRequest>
+                        for DeleteDsCommandSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsCommandBeanRequest>,
+                            request: tonic::Request<super::DeleteDsCommandRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).delete_ds_command_bean(request).await };
+                            let fut = async move { (*inner).delete_ds_command(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -607,7 +605,7 @@ pub mod ds_command_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsCommandBeanSvc(inner);
+                        let method = DeleteDsCommandSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -634,7 +632,7 @@ pub mod ds_command_bean_service_server {
             }
         }
     }
-    impl<T: DsCommandBeanService> Clone for DsCommandBeanServiceServer<T> {
+    impl<T: DsCommandService> Clone for DsCommandServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -646,7 +644,7 @@ pub mod ds_command_bean_service_server {
             }
         }
     }
-    impl<T: DsCommandBeanService> Clone for _Inner<T> {
+    impl<T: DsCommandService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -656,7 +654,7 @@ pub mod ds_command_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsCommandBeanService> tonic::server::NamedService for DsCommandBeanServiceServer<T> {
-        const NAME: &'static str = "ds_command.DsCommandBeanService";
+    impl<T: DsCommandService> tonic::server::NamedService for DsCommandServiceServer<T> {
+        const NAME: &'static str = "ds_command.DsCommandService";
     }
 }

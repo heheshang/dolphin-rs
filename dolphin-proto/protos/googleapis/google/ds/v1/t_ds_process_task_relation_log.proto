@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 package ds_process_task_relation_log;
 
 
-message DsProcessTaskRelationLogBean {
+message DsProcessTaskRelationLog {
 
      int32   id=1 ;
      optional string    name=2 ;
@@ -29,45 +29,45 @@ message DsProcessTaskRelationLogBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsProcessTaskRelationLogBeanService {
-  rpc ListDsProcessTaskRelationLogBeans(ListDsProcessTaskRelationLogBeansRequest) returns (ListDsProcessTaskRelationLogBeansResponse) {
+service DsProcessTaskRelationLogService {
+  rpc ListDsProcessTaskRelationLogs(ListDsProcessTaskRelationLogsRequest) returns (ListDsProcessTaskRelationLogsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsProcessTaskRelationLogBeans"
+      get: "/v1alpha1/DsProcessTaskRelationLogs"
     };
   }
 
-  rpc GetDsProcessTaskRelationLogBean(GetDsProcessTaskRelationLogBeanRequest) returns (DsProcessTaskRelationLogBean) {
+  rpc GetDsProcessTaskRelationLog(GetDsProcessTaskRelationLogRequest) returns (DsProcessTaskRelationLog) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsProcessTaskRelationLogBeans/*}"
+      get: "/v1alpha1/{name=DsProcessTaskRelationLogs/*}"
     };
   }
 
-  rpc CreateDsProcessTaskRelationLogBean(CreateDsProcessTaskRelationLogBeanRequest) returns (DsProcessTaskRelationLogBean) {
+  rpc CreateDsProcessTaskRelationLog(CreateDsProcessTaskRelationLogRequest) returns (DsProcessTaskRelationLog) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsProcessTaskRelationLogBeans"
-      body: "DsProcessTaskRelationLogBean"
+      post: "/v1alpha1/DsProcessTaskRelationLogs"
+      body: "DsProcessTaskRelationLog"
     };
   }
 
-  rpc UpdateDsProcessTaskRelationLogBean(UpdateDsProcessTaskRelationLogBeanRequest) returns (DsProcessTaskRelationLogBean) {
+  rpc UpdateDsProcessTaskRelationLog(UpdateDsProcessTaskRelationLogRequest) returns (DsProcessTaskRelationLog) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsProcessTaskRelationLogBean.name=DsProcessTaskRelationLogBeans/*}"
-      body: "DsProcessTaskRelationLogBean"
+      patch: "/v1alpha1/{DsProcessTaskRelationLog.name=DsProcessTaskRelationLogs/*}"
+      body: "DsProcessTaskRelationLog"
     };
   }
 
-  rpc DeleteDsProcessTaskRelationLogBean(DeleteDsProcessTaskRelationLogBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsProcessTaskRelationLog(DeleteDsProcessTaskRelationLogRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsProcessTaskRelationLogBeans/*}"
+      delete: "/v1alpha1/{name=DsProcessTaskRelationLogs/*}"
     };
   }
 }
 
-// message DsProcessTaskRelationLogBean {
+// message DsProcessTaskRelationLog {
 // ! This should be defined elsewhere
 // }
 
-message ListDsProcessTaskRelationLogBeansRequest {
+message ListDsProcessTaskRelationLogsRequest {
 
 
   // The maximum number of items to return.
@@ -76,42 +76,42 @@ message ListDsProcessTaskRelationLogBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsProcessTaskRelationLogBeansResponse {
-  // The field name should match the noun "DsProcessTaskRelationLogBean" in the method name.
+message ListDsProcessTaskRelationLogsResponse {
+  // The field name should match the noun "DsProcessTaskRelationLog" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsProcessTaskRelationLogBean DsProcessTaskRelationLogBeans = 1;
+  repeated DsProcessTaskRelationLog DsProcessTaskRelationLogs = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsProcessTaskRelationLogBeanRequest {
+message GetDsProcessTaskRelationLogRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsProcessTaskRelationLogBeanRequest {
-  // The parent resource name where the DsProcessTaskRelationLogBean is to be created.
+message CreateDsProcessTaskRelationLogRequest {
+  // The parent resource name where the DsProcessTaskRelationLog is to be created.
   string parent = 1;
 
-  // The DsProcessTaskRelationLogBean id to use for this DsProcessTaskRelationLogBean.
-  string DsProcessTaskRelationLogBean_id = 2;
+  // The DsProcessTaskRelationLog id to use for this DsProcessTaskRelationLog.
+  string DsProcessTaskRelationLog_id = 2;
 
-  // The DsProcessTaskRelationLogBean resource to create.
+  // The DsProcessTaskRelationLog resource to create.
   // The field name should match the Noun in the method name.
-  DsProcessTaskRelationLogBean DsProcessTaskRelationLogBean = 3;
+  DsProcessTaskRelationLog DsProcessTaskRelationLog = 3;
 }
 
-message UpdateDsProcessTaskRelationLogBeanRequest {
-  // The DsProcessTaskRelationLogBean resource which replaces the resource on the server.
-  DsProcessTaskRelationLogBean DsProcessTaskRelationLogBean = 1;
+message UpdateDsProcessTaskRelationLogRequest {
+  // The DsProcessTaskRelationLog resource which replaces the resource on the server.
+  DsProcessTaskRelationLog DsProcessTaskRelationLog = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsProcessTaskRelationLogBeanRequest {
-  // The resource name of the DsProcessTaskRelationLogBean to be deleted.
+message DeleteDsProcessTaskRelationLogRequest {
+  // The resource name of the DsProcessTaskRelationLog to be deleted.
   string name = 1;
 }

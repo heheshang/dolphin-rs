@@ -1,43 +1,41 @@
-use super::service::DolphinRpcServer;
-use proto::ds_queue::ds_queue_bean_service_server::DsQueueBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_queue::ds_queue_service_server::DsQueueService;
 
 
 #[tonic::async_trait]
-impl DsQueueBeanService for DolphinRpcServer {
-    async fn list_ds_queue_beans(
+impl DsQueueService for DolphinRpcServer {
+    async fn list_ds_queues(
         &self,
-        _req: tonic::Request<proto::ds_queue::ListDsQueueBeansRequest>,
-    ) -> std::result::Result<
-        tonic::Response<proto::ds_queue::ListDsQueueBeansResponse>,
-        tonic::Status,
-    > {
+        _req: tonic::Request<proto::ds_queue::ListDsQueuesRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_queue::ListDsQueuesResponse>, tonic::Status>
+    {
         todo!()
     }
 
-    async fn get_ds_queue_bean(
+    async fn get_ds_queue(
         &self,
-        _req: tonic::Request<proto::ds_queue::GetDsQueueBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_queue::DsQueueBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_queue::GetDsQueueRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_queue::DsQueue>, tonic::Status> {
         todo!()
     }
 
-    async fn create_ds_queue_bean(
+    async fn create_ds_queue(
         &self,
-        _req: tonic::Request<proto::ds_queue::CreateDsQueueBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_queue::DsQueueBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_queue::CreateDsQueueRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_queue::DsQueue>, tonic::Status> {
         todo!()
     }
 
-    async fn update_ds_queue_bean(
+    async fn update_ds_queue(
         &self,
-        _req: tonic::Request<proto::ds_queue::UpdateDsQueueBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_queue::DsQueueBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_queue::UpdateDsQueueRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_queue::DsQueue>, tonic::Status> {
         todo!()
     }
 
-    async fn delete_ds_queue_bean(
+    async fn delete_ds_queue(
         &self,
-        _req: tonic::Request<proto::ds_queue::DeleteDsQueueBeanRequest>,
+        _req: tonic::Request<proto::ds_queue::DeleteDsQueueRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

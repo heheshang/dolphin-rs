@@ -1,43 +1,41 @@
-use super::service::DolphinRpcServer;
-use proto::ds_dq_rule::ds_dq_rule_bean_service_server::DsDqRuleBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_dq_rule::ds_dq_rule_service_server::DsDqRuleService;
 
 
 #[tonic::async_trait]
-impl DsDqRuleBeanService for DolphinRpcServer {
-    async fn list_ds_dq_rule_beans(
+impl DsDqRuleService for DolphinRpcServer {
+    async fn list_ds_dq_rules(
         &self,
-        _req: tonic::Request<proto::ds_dq_rule::ListDsDqRuleBeansRequest>,
-    ) -> std::result::Result<
-        tonic::Response<proto::ds_dq_rule::ListDsDqRuleBeansResponse>,
-        tonic::Status,
-    > {
+        _req: tonic::Request<proto::ds_dq_rule::ListDsDqRulesRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_dq_rule::ListDsDqRulesResponse>, tonic::Status>
+    {
         todo!()
     }
 
-    async fn get_ds_dq_rule_bean(
+    async fn get_ds_dq_rule(
         &self,
-        _req: tonic::Request<proto::ds_dq_rule::GetDsDqRuleBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_dq_rule::DsDqRuleBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_dq_rule::GetDsDqRuleRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_dq_rule::DsDqRule>, tonic::Status> {
         todo!()
     }
 
-    async fn create_ds_dq_rule_bean(
+    async fn create_ds_dq_rule(
         &self,
-        _req: tonic::Request<proto::ds_dq_rule::CreateDsDqRuleBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_dq_rule::DsDqRuleBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_dq_rule::CreateDsDqRuleRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_dq_rule::DsDqRule>, tonic::Status> {
         todo!()
     }
 
-    async fn update_ds_dq_rule_bean(
+    async fn update_ds_dq_rule(
         &self,
-        _req: tonic::Request<proto::ds_dq_rule::UpdateDsDqRuleBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_dq_rule::DsDqRuleBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_dq_rule::UpdateDsDqRuleRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_dq_rule::DsDqRule>, tonic::Status> {
         todo!()
     }
 
-    async fn delete_ds_dq_rule_bean(
+    async fn delete_ds_dq_rule(
         &self,
-        _req: tonic::Request<proto::ds_dq_rule::DeleteDsDqRuleBeanRequest>,
+        _req: tonic::Request<proto::ds_dq_rule::DeleteDsDqRuleRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

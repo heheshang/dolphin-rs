@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsProcessTaskRelationBean {
+pub struct DsProcessTaskRelation {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, optional, tag = "2")]
@@ -32,7 +32,7 @@ pub struct DsProcessTaskRelationBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsProcessTaskRelationBeansRequest {
+pub struct ListDsProcessTaskRelationsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -41,42 +41,42 @@ pub struct ListDsProcessTaskRelationBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsProcessTaskRelationBeansResponse {
-    /// The field name should match the noun "DsProcessTaskRelationBean" in the method name.
+pub struct ListDsProcessTaskRelationsResponse {
+    /// The field name should match the noun "DsProcessTaskRelation" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_process_task_relation_beans: ::prost::alloc::vec::Vec<DsProcessTaskRelationBean>,
+    pub ds_process_task_relations: ::prost::alloc::vec::Vec<DsProcessTaskRelation>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsProcessTaskRelationBeanRequest {
+pub struct GetDsProcessTaskRelationRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsProcessTaskRelationBeanRequest {
-    /// The parent resource name where the DsProcessTaskRelationBean is to be created.
+pub struct CreateDsProcessTaskRelationRequest {
+    /// The parent resource name where the DsProcessTaskRelation is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsProcessTaskRelationBean id to use for this DsProcessTaskRelationBean.
+    /// The DsProcessTaskRelation id to use for this DsProcessTaskRelation.
     #[prost(string, tag = "2")]
-    pub ds_process_task_relation_bean_id: ::prost::alloc::string::String,
-    /// The DsProcessTaskRelationBean resource to create.
+    pub ds_process_task_relation_id: ::prost::alloc::string::String,
+    /// The DsProcessTaskRelation resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_process_task_relation_bean: ::core::option::Option<DsProcessTaskRelationBean>,
+    pub ds_process_task_relation: ::core::option::Option<DsProcessTaskRelation>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsProcessTaskRelationBeanRequest {
-    /// The DsProcessTaskRelationBean resource which replaces the resource on the server.
+pub struct UpdateDsProcessTaskRelationRequest {
+    /// The DsProcessTaskRelation resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_process_task_relation_bean: ::core::option::Option<DsProcessTaskRelationBean>,
+    pub ds_process_task_relation: ::core::option::Option<DsProcessTaskRelation>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -84,21 +84,21 @@ pub struct UpdateDsProcessTaskRelationBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsProcessTaskRelationBeanRequest {
-    /// The resource name of the DsProcessTaskRelationBean to be deleted.
+pub struct DeleteDsProcessTaskRelationRequest {
+    /// The resource name of the DsProcessTaskRelation to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_process_task_relation_bean_service_client {
+pub mod ds_process_task_relation_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsProcessTaskRelationBeanServiceClient<T> {
+    pub struct DsProcessTaskRelationServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsProcessTaskRelationBeanServiceClient<tonic::transport::Channel> {
+    impl DsProcessTaskRelationServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -109,7 +109,7 @@ pub mod ds_process_task_relation_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsProcessTaskRelationBeanServiceClient<T>
+    impl<T> DsProcessTaskRelationServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -129,7 +129,7 @@ pub mod ds_process_task_relation_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsProcessTaskRelationBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsProcessTaskRelationServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -142,7 +142,7 @@ pub mod ds_process_task_relation_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsProcessTaskRelationBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsProcessTaskRelationServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -180,11 +180,11 @@ pub mod ds_process_task_relation_bean_service_client {
             self
         }
 
-        pub async fn list_ds_process_task_relation_beans(
+        pub async fn list_ds_process_task_relations(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsProcessTaskRelationBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsProcessTaskRelationsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsProcessTaskRelationBeansResponse>,
+            tonic::Response<super::ListDsProcessTaskRelationsResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -195,21 +195,20 @@ pub mod ds_process_task_relation_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_task_relation.DsProcessTaskRelationBeanService/\
-                 ListDsProcessTaskRelationBeans",
+                "/ds_process_task_relation.DsProcessTaskRelationService/ListDsProcessTaskRelations",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_task_relation.DsProcessTaskRelationBeanService",
-                "ListDsProcessTaskRelationBeans",
+                "ds_process_task_relation.DsProcessTaskRelationService",
+                "ListDsProcessTaskRelations",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_process_task_relation_bean(
+        pub async fn get_ds_process_task_relation(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsProcessTaskRelationBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessTaskRelationBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::GetDsProcessTaskRelationRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessTaskRelation>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -219,21 +218,20 @@ pub mod ds_process_task_relation_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_task_relation.DsProcessTaskRelationBeanService/\
-                 GetDsProcessTaskRelationBean",
+                "/ds_process_task_relation.DsProcessTaskRelationService/GetDsProcessTaskRelation",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_task_relation.DsProcessTaskRelationBeanService",
-                "GetDsProcessTaskRelationBean",
+                "ds_process_task_relation.DsProcessTaskRelationService",
+                "GetDsProcessTaskRelation",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_process_task_relation_bean(
+        pub async fn create_ds_process_task_relation(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsProcessTaskRelationBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessTaskRelationBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::CreateDsProcessTaskRelationRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessTaskRelation>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -243,21 +241,21 @@ pub mod ds_process_task_relation_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_task_relation.DsProcessTaskRelationBeanService/\
-                 CreateDsProcessTaskRelationBean",
+                "/ds_process_task_relation.DsProcessTaskRelationService/\
+                 CreateDsProcessTaskRelation",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_task_relation.DsProcessTaskRelationBeanService",
-                "CreateDsProcessTaskRelationBean",
+                "ds_process_task_relation.DsProcessTaskRelationService",
+                "CreateDsProcessTaskRelation",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_process_task_relation_bean(
+        pub async fn update_ds_process_task_relation(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsProcessTaskRelationBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessTaskRelationBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::UpdateDsProcessTaskRelationRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessTaskRelation>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -267,20 +265,20 @@ pub mod ds_process_task_relation_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_task_relation.DsProcessTaskRelationBeanService/\
-                 UpdateDsProcessTaskRelationBean",
+                "/ds_process_task_relation.DsProcessTaskRelationService/\
+                 UpdateDsProcessTaskRelation",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_task_relation.DsProcessTaskRelationBeanService",
-                "UpdateDsProcessTaskRelationBean",
+                "ds_process_task_relation.DsProcessTaskRelationService",
+                "UpdateDsProcessTaskRelation",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_process_task_relation_bean(
+        pub async fn delete_ds_process_task_relation(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsProcessTaskRelationBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsProcessTaskRelationRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -290,52 +288,52 @@ pub mod ds_process_task_relation_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_task_relation.DsProcessTaskRelationBeanService/\
-                 DeleteDsProcessTaskRelationBean",
+                "/ds_process_task_relation.DsProcessTaskRelationService/\
+                 DeleteDsProcessTaskRelation",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_task_relation.DsProcessTaskRelationBeanService",
-                "DeleteDsProcessTaskRelationBean",
+                "ds_process_task_relation.DsProcessTaskRelationService",
+                "DeleteDsProcessTaskRelation",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_process_task_relation_bean_service_server {
+pub mod ds_process_task_relation_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsProcessTaskRelationBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsProcessTaskRelationServiceServer.
     #[async_trait]
-    pub trait DsProcessTaskRelationBeanService: Send + Sync + 'static {
-        async fn list_ds_process_task_relation_beans(
+    pub trait DsProcessTaskRelationService: Send + Sync + 'static {
+        async fn list_ds_process_task_relations(
             &self,
-            request: tonic::Request<super::ListDsProcessTaskRelationBeansRequest>,
+            request: tonic::Request<super::ListDsProcessTaskRelationsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsProcessTaskRelationBeansResponse>,
+            tonic::Response<super::ListDsProcessTaskRelationsResponse>,
             tonic::Status,
         >;
-        async fn get_ds_process_task_relation_bean(
+        async fn get_ds_process_task_relation(
             &self,
-            request: tonic::Request<super::GetDsProcessTaskRelationBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessTaskRelationBean>, tonic::Status>;
-        async fn create_ds_process_task_relation_bean(
+            request: tonic::Request<super::GetDsProcessTaskRelationRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessTaskRelation>, tonic::Status>;
+        async fn create_ds_process_task_relation(
             &self,
-            request: tonic::Request<super::CreateDsProcessTaskRelationBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessTaskRelationBean>, tonic::Status>;
-        async fn update_ds_process_task_relation_bean(
+            request: tonic::Request<super::CreateDsProcessTaskRelationRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessTaskRelation>, tonic::Status>;
+        async fn update_ds_process_task_relation(
             &self,
-            request: tonic::Request<super::UpdateDsProcessTaskRelationBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessTaskRelationBean>, tonic::Status>;
-        async fn delete_ds_process_task_relation_bean(
+            request: tonic::Request<super::UpdateDsProcessTaskRelationRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessTaskRelation>, tonic::Status>;
+        async fn delete_ds_process_task_relation(
             &self,
-            request: tonic::Request<super::DeleteDsProcessTaskRelationBeanRequest>,
+            request: tonic::Request<super::DeleteDsProcessTaskRelationRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsProcessTaskRelationBeanServiceServer<T: DsProcessTaskRelationBeanService> {
+    pub struct DsProcessTaskRelationServiceServer<T: DsProcessTaskRelationService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -343,7 +341,7 @@ pub mod ds_process_task_relation_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsProcessTaskRelationBeanService> DsProcessTaskRelationBeanServiceServer<T> {
+    impl<T: DsProcessTaskRelationService> DsProcessTaskRelationServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -396,9 +394,9 @@ pub mod ds_process_task_relation_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsProcessTaskRelationBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsProcessTaskRelationServiceServer<T>
     where
-        T: DsProcessTaskRelationBeanService,
+        T: DsProcessTaskRelationService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -416,26 +414,26 @@ pub mod ds_process_task_relation_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_process_task_relation.DsProcessTaskRelationBeanService/\
-                 ListDsProcessTaskRelationBeans" => {
+                "/ds_process_task_relation.DsProcessTaskRelationService/\
+                 ListDsProcessTaskRelations" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsProcessTaskRelationBeansSvc<T: DsProcessTaskRelationBeanService>(
+                    struct ListDsProcessTaskRelationsSvc<T: DsProcessTaskRelationService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsProcessTaskRelationBeanService>
-                        tonic::server::UnaryService<super::ListDsProcessTaskRelationBeansRequest>
-                        for ListDsProcessTaskRelationBeansSvc<T>
+                    impl<T: DsProcessTaskRelationService>
+                        tonic::server::UnaryService<super::ListDsProcessTaskRelationsRequest>
+                        for ListDsProcessTaskRelationsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsProcessTaskRelationBeansResponse;
+                        type Response = super::ListDsProcessTaskRelationsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsProcessTaskRelationBeansRequest>,
+                            request: tonic::Request<super::ListDsProcessTaskRelationsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).list_ds_process_task_relation_beans(request).await
+                                (*inner).list_ds_process_task_relations(request).await
                             };
                             Box::pin(fut)
                         }
@@ -447,7 +445,7 @@ pub mod ds_process_task_relation_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsProcessTaskRelationBeansSvc(inner);
+                        let method = ListDsProcessTaskRelationsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -463,27 +461,24 @@ pub mod ds_process_task_relation_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_process_task_relation.DsProcessTaskRelationBeanService/\
-                 GetDsProcessTaskRelationBean" => {
+                "/ds_process_task_relation.DsProcessTaskRelationService/\
+                 GetDsProcessTaskRelation" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsProcessTaskRelationBeanSvc<T: DsProcessTaskRelationBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsProcessTaskRelationBeanService>
-                        tonic::server::UnaryService<super::GetDsProcessTaskRelationBeanRequest>
-                        for GetDsProcessTaskRelationBeanSvc<T>
+                    struct GetDsProcessTaskRelationSvc<T: DsProcessTaskRelationService>(pub Arc<T>);
+                    impl<T: DsProcessTaskRelationService>
+                        tonic::server::UnaryService<super::GetDsProcessTaskRelationRequest>
+                        for GetDsProcessTaskRelationSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsProcessTaskRelationBean;
+                        type Response = super::DsProcessTaskRelation;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsProcessTaskRelationBeanRequest>,
+                            request: tonic::Request<super::GetDsProcessTaskRelationRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_ds_process_task_relation_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_ds_process_task_relation(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -494,7 +489,7 @@ pub mod ds_process_task_relation_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsProcessTaskRelationBeanSvc(inner);
+                        let method = GetDsProcessTaskRelationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -510,26 +505,26 @@ pub mod ds_process_task_relation_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_process_task_relation.DsProcessTaskRelationBeanService/\
-                 CreateDsProcessTaskRelationBean" => {
+                "/ds_process_task_relation.DsProcessTaskRelationService/\
+                 CreateDsProcessTaskRelation" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsProcessTaskRelationBeanSvc<T: DsProcessTaskRelationBeanService>(
+                    struct CreateDsProcessTaskRelationSvc<T: DsProcessTaskRelationService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsProcessTaskRelationBeanService>
-                        tonic::server::UnaryService<super::CreateDsProcessTaskRelationBeanRequest>
-                        for CreateDsProcessTaskRelationBeanSvc<T>
+                    impl<T: DsProcessTaskRelationService>
+                        tonic::server::UnaryService<super::CreateDsProcessTaskRelationRequest>
+                        for CreateDsProcessTaskRelationSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsProcessTaskRelationBean;
+                        type Response = super::DsProcessTaskRelation;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsProcessTaskRelationBeanRequest>,
+                            request: tonic::Request<super::CreateDsProcessTaskRelationRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).create_ds_process_task_relation_bean(request).await
+                                (*inner).create_ds_process_task_relation(request).await
                             };
                             Box::pin(fut)
                         }
@@ -541,7 +536,7 @@ pub mod ds_process_task_relation_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsProcessTaskRelationBeanSvc(inner);
+                        let method = CreateDsProcessTaskRelationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -557,26 +552,26 @@ pub mod ds_process_task_relation_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_process_task_relation.DsProcessTaskRelationBeanService/\
-                 UpdateDsProcessTaskRelationBean" => {
+                "/ds_process_task_relation.DsProcessTaskRelationService/\
+                 UpdateDsProcessTaskRelation" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsProcessTaskRelationBeanSvc<T: DsProcessTaskRelationBeanService>(
+                    struct UpdateDsProcessTaskRelationSvc<T: DsProcessTaskRelationService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsProcessTaskRelationBeanService>
-                        tonic::server::UnaryService<super::UpdateDsProcessTaskRelationBeanRequest>
-                        for UpdateDsProcessTaskRelationBeanSvc<T>
+                    impl<T: DsProcessTaskRelationService>
+                        tonic::server::UnaryService<super::UpdateDsProcessTaskRelationRequest>
+                        for UpdateDsProcessTaskRelationSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsProcessTaskRelationBean;
+                        type Response = super::DsProcessTaskRelation;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsProcessTaskRelationBeanRequest>,
+                            request: tonic::Request<super::UpdateDsProcessTaskRelationRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).update_ds_process_task_relation_bean(request).await
+                                (*inner).update_ds_process_task_relation(request).await
                             };
                             Box::pin(fut)
                         }
@@ -588,7 +583,7 @@ pub mod ds_process_task_relation_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsProcessTaskRelationBeanSvc(inner);
+                        let method = UpdateDsProcessTaskRelationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -604,26 +599,26 @@ pub mod ds_process_task_relation_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_process_task_relation.DsProcessTaskRelationBeanService/\
-                 DeleteDsProcessTaskRelationBean" => {
+                "/ds_process_task_relation.DsProcessTaskRelationService/\
+                 DeleteDsProcessTaskRelation" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsProcessTaskRelationBeanSvc<T: DsProcessTaskRelationBeanService>(
+                    struct DeleteDsProcessTaskRelationSvc<T: DsProcessTaskRelationService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsProcessTaskRelationBeanService>
-                        tonic::server::UnaryService<super::DeleteDsProcessTaskRelationBeanRequest>
-                        for DeleteDsProcessTaskRelationBeanSvc<T>
+                    impl<T: DsProcessTaskRelationService>
+                        tonic::server::UnaryService<super::DeleteDsProcessTaskRelationRequest>
+                        for DeleteDsProcessTaskRelationSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsProcessTaskRelationBeanRequest>,
+                            request: tonic::Request<super::DeleteDsProcessTaskRelationRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).delete_ds_process_task_relation_bean(request).await
+                                (*inner).delete_ds_process_task_relation(request).await
                             };
                             Box::pin(fut)
                         }
@@ -635,7 +630,7 @@ pub mod ds_process_task_relation_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsProcessTaskRelationBeanSvc(inner);
+                        let method = DeleteDsProcessTaskRelationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -662,7 +657,7 @@ pub mod ds_process_task_relation_bean_service_server {
             }
         }
     }
-    impl<T: DsProcessTaskRelationBeanService> Clone for DsProcessTaskRelationBeanServiceServer<T> {
+    impl<T: DsProcessTaskRelationService> Clone for DsProcessTaskRelationServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -674,7 +669,7 @@ pub mod ds_process_task_relation_bean_service_server {
             }
         }
     }
-    impl<T: DsProcessTaskRelationBeanService> Clone for _Inner<T> {
+    impl<T: DsProcessTaskRelationService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -684,9 +679,9 @@ pub mod ds_process_task_relation_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsProcessTaskRelationBeanService> tonic::server::NamedService
-        for DsProcessTaskRelationBeanServiceServer<T>
+    impl<T: DsProcessTaskRelationService> tonic::server::NamedService
+        for DsProcessTaskRelationServiceServer<T>
     {
-        const NAME: &'static str = "ds_process_task_relation.DsProcessTaskRelationBeanService";
+        const NAME: &'static str = "ds_process_task_relation.DsProcessTaskRelationService";
     }
 }

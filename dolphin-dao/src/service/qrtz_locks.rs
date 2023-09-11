@@ -1,42 +1,42 @@
-use super::service::DolphinRpcServer;
-use proto::qrtz_locks::qrtz_locks_bean_service_server::QrtzLocksBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::qrtz_locks::qrtz_locks_service_server::QrtzLocksService;
 
 #[tonic::async_trait]
-impl QrtzLocksBeanService for DolphinRpcServer {
-    async fn list_qrtz_locks_beans(
+impl QrtzLocksService for DolphinRpcServer {
+    async fn list_qrtz_lockss(
         &self,
-        _req: tonic::Request<proto::qrtz_locks::ListQrtzLocksBeansRequest>,
+        _req: tonic::Request<proto::qrtz_locks::ListQrtzLockssRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_locks::ListQrtzLocksBeansResponse>,
+        tonic::Response<proto::qrtz_locks::ListQrtzLockssResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_qrtz_locks_bean(
+    async fn get_qrtz_locks(
         &self,
-        _req: tonic::Request<proto::qrtz_locks::GetQrtzLocksBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::qrtz_locks::QrtzLocksBean>, tonic::Status> {
+        _req: tonic::Request<proto::qrtz_locks::GetQrtzLocksRequest>,
+    ) -> std::result::Result<tonic::Response<proto::qrtz_locks::QrtzLocks>, tonic::Status> {
         todo!()
     }
 
-    async fn create_qrtz_locks_bean(
+    async fn create_qrtz_locks(
         &self,
-        _req: tonic::Request<proto::qrtz_locks::CreateQrtzLocksBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::qrtz_locks::QrtzLocksBean>, tonic::Status> {
+        _req: tonic::Request<proto::qrtz_locks::CreateQrtzLocksRequest>,
+    ) -> std::result::Result<tonic::Response<proto::qrtz_locks::QrtzLocks>, tonic::Status> {
         todo!()
     }
 
-    async fn update_qrtz_locks_bean(
+    async fn update_qrtz_locks(
         &self,
-        _req: tonic::Request<proto::qrtz_locks::UpdateQrtzLocksBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::qrtz_locks::QrtzLocksBean>, tonic::Status> {
+        _req: tonic::Request<proto::qrtz_locks::UpdateQrtzLocksRequest>,
+    ) -> std::result::Result<tonic::Response<proto::qrtz_locks::QrtzLocks>, tonic::Status> {
         todo!()
     }
 
-    async fn delete_qrtz_locks_bean(
+    async fn delete_qrtz_locks(
         &self,
-        _req: tonic::Request<proto::qrtz_locks::DeleteQrtzLocksBeanRequest>,
+        _req: tonic::Request<proto::qrtz_locks::DeleteQrtzLocksRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsWorkerGroupBean {
+pub struct DsWorkerGroup {
     #[prost(int64, tag = "1")]
     pub id: i64,
     #[prost(string, tag = "2")]
@@ -16,7 +16,7 @@ pub struct DsWorkerGroupBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsWorkerGroupBeansRequest {
+pub struct ListDsWorkerGroupsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -25,42 +25,42 @@ pub struct ListDsWorkerGroupBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsWorkerGroupBeansResponse {
-    /// The field name should match the noun "DsWorkerGroupBean" in the method name.
+pub struct ListDsWorkerGroupsResponse {
+    /// The field name should match the noun "DsWorkerGroup" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_worker_group_beans: ::prost::alloc::vec::Vec<DsWorkerGroupBean>,
+    pub ds_worker_groups: ::prost::alloc::vec::Vec<DsWorkerGroup>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsWorkerGroupBeanRequest {
+pub struct GetDsWorkerGroupRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsWorkerGroupBeanRequest {
-    /// The parent resource name where the DsWorkerGroupBean is to be created.
+pub struct CreateDsWorkerGroupRequest {
+    /// The parent resource name where the DsWorkerGroup is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsWorkerGroupBean id to use for this DsWorkerGroupBean.
+    /// The DsWorkerGroup id to use for this DsWorkerGroup.
     #[prost(string, tag = "2")]
-    pub ds_worker_group_bean_id: ::prost::alloc::string::String,
-    /// The DsWorkerGroupBean resource to create.
+    pub ds_worker_group_id: ::prost::alloc::string::String,
+    /// The DsWorkerGroup resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_worker_group_bean: ::core::option::Option<DsWorkerGroupBean>,
+    pub ds_worker_group: ::core::option::Option<DsWorkerGroup>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsWorkerGroupBeanRequest {
-    /// The DsWorkerGroupBean resource which replaces the resource on the server.
+pub struct UpdateDsWorkerGroupRequest {
+    /// The DsWorkerGroup resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_worker_group_bean: ::core::option::Option<DsWorkerGroupBean>,
+    pub ds_worker_group: ::core::option::Option<DsWorkerGroup>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -68,21 +68,21 @@ pub struct UpdateDsWorkerGroupBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsWorkerGroupBeanRequest {
-    /// The resource name of the DsWorkerGroupBean to be deleted.
+pub struct DeleteDsWorkerGroupRequest {
+    /// The resource name of the DsWorkerGroup to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_worker_group_bean_service_client {
+pub mod ds_worker_group_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsWorkerGroupBeanServiceClient<T> {
+    pub struct DsWorkerGroupServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsWorkerGroupBeanServiceClient<tonic::transport::Channel> {
+    impl DsWorkerGroupServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -93,7 +93,7 @@ pub mod ds_worker_group_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsWorkerGroupBeanServiceClient<T>
+    impl<T> DsWorkerGroupServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -113,7 +113,7 @@ pub mod ds_worker_group_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsWorkerGroupBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsWorkerGroupServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -126,7 +126,7 @@ pub mod ds_worker_group_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsWorkerGroupBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsWorkerGroupServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -164,13 +164,11 @@ pub mod ds_worker_group_bean_service_client {
             self
         }
 
-        pub async fn list_ds_worker_group_beans(
+        pub async fn list_ds_worker_groups(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsWorkerGroupBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsWorkerGroupBeansResponse>,
-            tonic::Status,
-        > {
+            request: impl tonic::IntoRequest<super::ListDsWorkerGroupsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsWorkerGroupsResponse>, tonic::Status>
+        {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -179,20 +177,20 @@ pub mod ds_worker_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_worker_group.DsWorkerGroupBeanService/ListDsWorkerGroupBeans",
+                "/ds_worker_group.DsWorkerGroupService/ListDsWorkerGroups",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_worker_group.DsWorkerGroupBeanService",
-                "ListDsWorkerGroupBeans",
+                "ds_worker_group.DsWorkerGroupService",
+                "ListDsWorkerGroups",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_worker_group_bean(
+        pub async fn get_ds_worker_group(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsWorkerGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsWorkerGroupBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetDsWorkerGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsWorkerGroup>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -201,20 +199,20 @@ pub mod ds_worker_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_worker_group.DsWorkerGroupBeanService/GetDsWorkerGroupBean",
+                "/ds_worker_group.DsWorkerGroupService/GetDsWorkerGroup",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_worker_group.DsWorkerGroupBeanService",
-                "GetDsWorkerGroupBean",
+                "ds_worker_group.DsWorkerGroupService",
+                "GetDsWorkerGroup",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_worker_group_bean(
+        pub async fn create_ds_worker_group(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsWorkerGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsWorkerGroupBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::CreateDsWorkerGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsWorkerGroup>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -223,20 +221,20 @@ pub mod ds_worker_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_worker_group.DsWorkerGroupBeanService/CreateDsWorkerGroupBean",
+                "/ds_worker_group.DsWorkerGroupService/CreateDsWorkerGroup",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_worker_group.DsWorkerGroupBeanService",
-                "CreateDsWorkerGroupBean",
+                "ds_worker_group.DsWorkerGroupService",
+                "CreateDsWorkerGroup",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_worker_group_bean(
+        pub async fn update_ds_worker_group(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsWorkerGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsWorkerGroupBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateDsWorkerGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsWorkerGroup>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -245,19 +243,19 @@ pub mod ds_worker_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_worker_group.DsWorkerGroupBeanService/UpdateDsWorkerGroupBean",
+                "/ds_worker_group.DsWorkerGroupService/UpdateDsWorkerGroup",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_worker_group.DsWorkerGroupBeanService",
-                "UpdateDsWorkerGroupBean",
+                "ds_worker_group.DsWorkerGroupService",
+                "UpdateDsWorkerGroup",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_worker_group_bean(
+        pub async fn delete_ds_worker_group(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsWorkerGroupBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsWorkerGroupRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -267,51 +265,48 @@ pub mod ds_worker_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_worker_group.DsWorkerGroupBeanService/DeleteDsWorkerGroupBean",
+                "/ds_worker_group.DsWorkerGroupService/DeleteDsWorkerGroup",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_worker_group.DsWorkerGroupBeanService",
-                "DeleteDsWorkerGroupBean",
+                "ds_worker_group.DsWorkerGroupService",
+                "DeleteDsWorkerGroup",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_worker_group_bean_service_server {
+pub mod ds_worker_group_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsWorkerGroupBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsWorkerGroupServiceServer.
     #[async_trait]
-    pub trait DsWorkerGroupBeanService: Send + Sync + 'static {
-        async fn list_ds_worker_group_beans(
+    pub trait DsWorkerGroupService: Send + Sync + 'static {
+        async fn list_ds_worker_groups(
             &self,
-            request: tonic::Request<super::ListDsWorkerGroupBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsWorkerGroupBeansResponse>,
-            tonic::Status,
-        >;
-        async fn get_ds_worker_group_bean(
+            request: tonic::Request<super::ListDsWorkerGroupsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsWorkerGroupsResponse>, tonic::Status>;
+        async fn get_ds_worker_group(
             &self,
-            request: tonic::Request<super::GetDsWorkerGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsWorkerGroupBean>, tonic::Status>;
-        async fn create_ds_worker_group_bean(
+            request: tonic::Request<super::GetDsWorkerGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsWorkerGroup>, tonic::Status>;
+        async fn create_ds_worker_group(
             &self,
-            request: tonic::Request<super::CreateDsWorkerGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsWorkerGroupBean>, tonic::Status>;
-        async fn update_ds_worker_group_bean(
+            request: tonic::Request<super::CreateDsWorkerGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsWorkerGroup>, tonic::Status>;
+        async fn update_ds_worker_group(
             &self,
-            request: tonic::Request<super::UpdateDsWorkerGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsWorkerGroupBean>, tonic::Status>;
-        async fn delete_ds_worker_group_bean(
+            request: tonic::Request<super::UpdateDsWorkerGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsWorkerGroup>, tonic::Status>;
+        async fn delete_ds_worker_group(
             &self,
-            request: tonic::Request<super::DeleteDsWorkerGroupBeanRequest>,
+            request: tonic::Request<super::DeleteDsWorkerGroupRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsWorkerGroupBeanServiceServer<T: DsWorkerGroupBeanService> {
+    pub struct DsWorkerGroupServiceServer<T: DsWorkerGroupService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -319,7 +314,7 @@ pub mod ds_worker_group_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsWorkerGroupBeanService> DsWorkerGroupBeanServiceServer<T> {
+    impl<T: DsWorkerGroupService> DsWorkerGroupServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -372,9 +367,9 @@ pub mod ds_worker_group_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsWorkerGroupBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsWorkerGroupServiceServer<T>
     where
-        T: DsWorkerGroupBeanService,
+        T: DsWorkerGroupService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -392,23 +387,22 @@ pub mod ds_worker_group_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_worker_group.DsWorkerGroupBeanService/ListDsWorkerGroupBeans" => {
+                "/ds_worker_group.DsWorkerGroupService/ListDsWorkerGroups" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsWorkerGroupBeansSvc<T: DsWorkerGroupBeanService>(pub Arc<T>);
-                    impl<T: DsWorkerGroupBeanService>
-                        tonic::server::UnaryService<super::ListDsWorkerGroupBeansRequest>
-                        for ListDsWorkerGroupBeansSvc<T>
+                    struct ListDsWorkerGroupsSvc<T: DsWorkerGroupService>(pub Arc<T>);
+                    impl<T: DsWorkerGroupService>
+                        tonic::server::UnaryService<super::ListDsWorkerGroupsRequest>
+                        for ListDsWorkerGroupsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsWorkerGroupBeansResponse;
+                        type Response = super::ListDsWorkerGroupsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsWorkerGroupBeansRequest>,
+                            request: tonic::Request<super::ListDsWorkerGroupsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_ds_worker_group_beans(request).await };
+                            let fut = async move { (*inner).list_ds_worker_groups(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -419,7 +413,7 @@ pub mod ds_worker_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsWorkerGroupBeansSvc(inner);
+                        let method = ListDsWorkerGroupsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -435,23 +429,22 @@ pub mod ds_worker_group_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_worker_group.DsWorkerGroupBeanService/GetDsWorkerGroupBean" => {
+                "/ds_worker_group.DsWorkerGroupService/GetDsWorkerGroup" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsWorkerGroupBeanSvc<T: DsWorkerGroupBeanService>(pub Arc<T>);
-                    impl<T: DsWorkerGroupBeanService>
-                        tonic::server::UnaryService<super::GetDsWorkerGroupBeanRequest>
-                        for GetDsWorkerGroupBeanSvc<T>
+                    struct GetDsWorkerGroupSvc<T: DsWorkerGroupService>(pub Arc<T>);
+                    impl<T: DsWorkerGroupService>
+                        tonic::server::UnaryService<super::GetDsWorkerGroupRequest>
+                        for GetDsWorkerGroupSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsWorkerGroupBean;
+                        type Response = super::DsWorkerGroup;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsWorkerGroupBeanRequest>,
+                            request: tonic::Request<super::GetDsWorkerGroupRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).get_ds_worker_group_bean(request).await };
+                            let fut = async move { (*inner).get_ds_worker_group(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -462,7 +455,7 @@ pub mod ds_worker_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsWorkerGroupBeanSvc(inner);
+                        let method = GetDsWorkerGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -478,23 +471,22 @@ pub mod ds_worker_group_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_worker_group.DsWorkerGroupBeanService/CreateDsWorkerGroupBean" => {
+                "/ds_worker_group.DsWorkerGroupService/CreateDsWorkerGroup" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsWorkerGroupBeanSvc<T: DsWorkerGroupBeanService>(pub Arc<T>);
-                    impl<T: DsWorkerGroupBeanService>
-                        tonic::server::UnaryService<super::CreateDsWorkerGroupBeanRequest>
-                        for CreateDsWorkerGroupBeanSvc<T>
+                    struct CreateDsWorkerGroupSvc<T: DsWorkerGroupService>(pub Arc<T>);
+                    impl<T: DsWorkerGroupService>
+                        tonic::server::UnaryService<super::CreateDsWorkerGroupRequest>
+                        for CreateDsWorkerGroupSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsWorkerGroupBean;
+                        type Response = super::DsWorkerGroup;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsWorkerGroupBeanRequest>,
+                            request: tonic::Request<super::CreateDsWorkerGroupRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).create_ds_worker_group_bean(request).await };
+                            let fut = async move { (*inner).create_ds_worker_group(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -505,7 +497,7 @@ pub mod ds_worker_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsWorkerGroupBeanSvc(inner);
+                        let method = CreateDsWorkerGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -521,23 +513,22 @@ pub mod ds_worker_group_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_worker_group.DsWorkerGroupBeanService/UpdateDsWorkerGroupBean" => {
+                "/ds_worker_group.DsWorkerGroupService/UpdateDsWorkerGroup" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsWorkerGroupBeanSvc<T: DsWorkerGroupBeanService>(pub Arc<T>);
-                    impl<T: DsWorkerGroupBeanService>
-                        tonic::server::UnaryService<super::UpdateDsWorkerGroupBeanRequest>
-                        for UpdateDsWorkerGroupBeanSvc<T>
+                    struct UpdateDsWorkerGroupSvc<T: DsWorkerGroupService>(pub Arc<T>);
+                    impl<T: DsWorkerGroupService>
+                        tonic::server::UnaryService<super::UpdateDsWorkerGroupRequest>
+                        for UpdateDsWorkerGroupSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsWorkerGroupBean;
+                        type Response = super::DsWorkerGroup;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsWorkerGroupBeanRequest>,
+                            request: tonic::Request<super::UpdateDsWorkerGroupRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).update_ds_worker_group_bean(request).await };
+                            let fut = async move { (*inner).update_ds_worker_group(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -548,7 +539,7 @@ pub mod ds_worker_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsWorkerGroupBeanSvc(inner);
+                        let method = UpdateDsWorkerGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -564,23 +555,22 @@ pub mod ds_worker_group_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_worker_group.DsWorkerGroupBeanService/DeleteDsWorkerGroupBean" => {
+                "/ds_worker_group.DsWorkerGroupService/DeleteDsWorkerGroup" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsWorkerGroupBeanSvc<T: DsWorkerGroupBeanService>(pub Arc<T>);
-                    impl<T: DsWorkerGroupBeanService>
-                        tonic::server::UnaryService<super::DeleteDsWorkerGroupBeanRequest>
-                        for DeleteDsWorkerGroupBeanSvc<T>
+                    struct DeleteDsWorkerGroupSvc<T: DsWorkerGroupService>(pub Arc<T>);
+                    impl<T: DsWorkerGroupService>
+                        tonic::server::UnaryService<super::DeleteDsWorkerGroupRequest>
+                        for DeleteDsWorkerGroupSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsWorkerGroupBeanRequest>,
+                            request: tonic::Request<super::DeleteDsWorkerGroupRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).delete_ds_worker_group_bean(request).await };
+                            let fut = async move { (*inner).delete_ds_worker_group(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -591,7 +581,7 @@ pub mod ds_worker_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsWorkerGroupBeanSvc(inner);
+                        let method = DeleteDsWorkerGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -618,7 +608,7 @@ pub mod ds_worker_group_bean_service_server {
             }
         }
     }
-    impl<T: DsWorkerGroupBeanService> Clone for DsWorkerGroupBeanServiceServer<T> {
+    impl<T: DsWorkerGroupService> Clone for DsWorkerGroupServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -630,7 +620,7 @@ pub mod ds_worker_group_bean_service_server {
             }
         }
     }
-    impl<T: DsWorkerGroupBeanService> Clone for _Inner<T> {
+    impl<T: DsWorkerGroupService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -640,9 +630,7 @@ pub mod ds_worker_group_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsWorkerGroupBeanService> tonic::server::NamedService
-        for DsWorkerGroupBeanServiceServer<T>
-    {
-        const NAME: &'static str = "ds_worker_group.DsWorkerGroupBeanService";
+    impl<T: DsWorkerGroupService> tonic::server::NamedService for DsWorkerGroupServiceServer<T> {
+        const NAME: &'static str = "ds_worker_group.DsWorkerGroupService";
     }
 }

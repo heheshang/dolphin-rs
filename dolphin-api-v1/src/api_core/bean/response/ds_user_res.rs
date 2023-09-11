@@ -1,8 +1,9 @@
-use proto::ds_user::DsUserBean;
+
+use proto::ds_user::DsUser;
 use serde::{Deserialize, Serialize};
 use struct_convert::Convert;
 #[derive(Debug, Serialize, Deserialize, Convert)]
-#[convert(from = "DsUserBean")]
+#[convert(from = "DsUser")]
 #[serde(rename_all = "camelCase")]
 pub struct UserInfoRes {
     pub id: i32,

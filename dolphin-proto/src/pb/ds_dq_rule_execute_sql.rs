@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsDqRuleExecuteSqlBean {
+pub struct DsDqRuleExecuteSql {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int32, optional, tag = "2")]
@@ -22,7 +22,7 @@ pub struct DsDqRuleExecuteSqlBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsDqRuleExecuteSqlBeansRequest {
+pub struct ListDsDqRuleExecuteSqlsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -31,42 +31,42 @@ pub struct ListDsDqRuleExecuteSqlBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsDqRuleExecuteSqlBeansResponse {
-    /// The field name should match the noun "DsDqRuleExecuteSqlBean" in the method name.
+pub struct ListDsDqRuleExecuteSqlsResponse {
+    /// The field name should match the noun "DsDqRuleExecuteSql" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_dq_rule_execute_sql_beans: ::prost::alloc::vec::Vec<DsDqRuleExecuteSqlBean>,
+    pub ds_dq_rule_execute_sqls: ::prost::alloc::vec::Vec<DsDqRuleExecuteSql>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsDqRuleExecuteSqlBeanRequest {
+pub struct GetDsDqRuleExecuteSqlRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsDqRuleExecuteSqlBeanRequest {
-    /// The parent resource name where the DsDqRuleExecuteSqlBean is to be created.
+pub struct CreateDsDqRuleExecuteSqlRequest {
+    /// The parent resource name where the DsDqRuleExecuteSql is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsDqRuleExecuteSqlBean id to use for this DsDqRuleExecuteSqlBean.
+    /// The DsDqRuleExecuteSql id to use for this DsDqRuleExecuteSql.
     #[prost(string, tag = "2")]
-    pub ds_dq_rule_execute_sql_bean_id: ::prost::alloc::string::String,
-    /// The DsDqRuleExecuteSqlBean resource to create.
+    pub ds_dq_rule_execute_sql_id: ::prost::alloc::string::String,
+    /// The DsDqRuleExecuteSql resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_dq_rule_execute_sql_bean: ::core::option::Option<DsDqRuleExecuteSqlBean>,
+    pub ds_dq_rule_execute_sql: ::core::option::Option<DsDqRuleExecuteSql>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsDqRuleExecuteSqlBeanRequest {
-    /// The DsDqRuleExecuteSqlBean resource which replaces the resource on the server.
+pub struct UpdateDsDqRuleExecuteSqlRequest {
+    /// The DsDqRuleExecuteSql resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_dq_rule_execute_sql_bean: ::core::option::Option<DsDqRuleExecuteSqlBean>,
+    pub ds_dq_rule_execute_sql: ::core::option::Option<DsDqRuleExecuteSql>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -74,21 +74,21 @@ pub struct UpdateDsDqRuleExecuteSqlBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsDqRuleExecuteSqlBeanRequest {
-    /// The resource name of the DsDqRuleExecuteSqlBean to be deleted.
+pub struct DeleteDsDqRuleExecuteSqlRequest {
+    /// The resource name of the DsDqRuleExecuteSql to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_dq_rule_execute_sql_bean_service_client {
+pub mod ds_dq_rule_execute_sql_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsDqRuleExecuteSqlBeanServiceClient<T> {
+    pub struct DsDqRuleExecuteSqlServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsDqRuleExecuteSqlBeanServiceClient<tonic::transport::Channel> {
+    impl DsDqRuleExecuteSqlServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -99,7 +99,7 @@ pub mod ds_dq_rule_execute_sql_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsDqRuleExecuteSqlBeanServiceClient<T>
+    impl<T> DsDqRuleExecuteSqlServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -119,7 +119,7 @@ pub mod ds_dq_rule_execute_sql_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsDqRuleExecuteSqlBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsDqRuleExecuteSqlServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -132,7 +132,7 @@ pub mod ds_dq_rule_execute_sql_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsDqRuleExecuteSqlBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsDqRuleExecuteSqlServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -170,11 +170,11 @@ pub mod ds_dq_rule_execute_sql_bean_service_client {
             self
         }
 
-        pub async fn list_ds_dq_rule_execute_sql_beans(
+        pub async fn list_ds_dq_rule_execute_sqls(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsDqRuleExecuteSqlBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsDqRuleExecuteSqlsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsDqRuleExecuteSqlBeansResponse>,
+            tonic::Response<super::ListDsDqRuleExecuteSqlsResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -185,20 +185,20 @@ pub mod ds_dq_rule_execute_sql_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService/ListDsDqRuleExecuteSqlBeans",
+                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService/ListDsDqRuleExecuteSqls",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService",
-                "ListDsDqRuleExecuteSqlBeans",
+                "ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService",
+                "ListDsDqRuleExecuteSqls",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_dq_rule_execute_sql_bean(
+        pub async fn get_ds_dq_rule_execute_sql(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsDqRuleExecuteSqlBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqRuleExecuteSqlBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::GetDsDqRuleExecuteSqlRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqRuleExecuteSql>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -208,20 +208,20 @@ pub mod ds_dq_rule_execute_sql_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService/GetDsDqRuleExecuteSqlBean",
+                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService/GetDsDqRuleExecuteSql",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService",
-                "GetDsDqRuleExecuteSqlBean",
+                "ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService",
+                "GetDsDqRuleExecuteSql",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_dq_rule_execute_sql_bean(
+        pub async fn create_ds_dq_rule_execute_sql(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsDqRuleExecuteSqlBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqRuleExecuteSqlBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::CreateDsDqRuleExecuteSqlRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqRuleExecuteSql>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -231,21 +231,20 @@ pub mod ds_dq_rule_execute_sql_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService/\
-                 CreateDsDqRuleExecuteSqlBean",
+                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService/CreateDsDqRuleExecuteSql",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService",
-                "CreateDsDqRuleExecuteSqlBean",
+                "ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService",
+                "CreateDsDqRuleExecuteSql",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_dq_rule_execute_sql_bean(
+        pub async fn update_ds_dq_rule_execute_sql(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsDqRuleExecuteSqlBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqRuleExecuteSqlBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::UpdateDsDqRuleExecuteSqlRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqRuleExecuteSql>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -255,20 +254,19 @@ pub mod ds_dq_rule_execute_sql_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService/\
-                 UpdateDsDqRuleExecuteSqlBean",
+                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService/UpdateDsDqRuleExecuteSql",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService",
-                "UpdateDsDqRuleExecuteSqlBean",
+                "ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService",
+                "UpdateDsDqRuleExecuteSql",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_dq_rule_execute_sql_bean(
+        pub async fn delete_ds_dq_rule_execute_sql(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsDqRuleExecuteSqlBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsDqRuleExecuteSqlRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -278,52 +276,51 @@ pub mod ds_dq_rule_execute_sql_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService/\
-                 DeleteDsDqRuleExecuteSqlBean",
+                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService/DeleteDsDqRuleExecuteSql",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService",
-                "DeleteDsDqRuleExecuteSqlBean",
+                "ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService",
+                "DeleteDsDqRuleExecuteSql",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_dq_rule_execute_sql_bean_service_server {
+pub mod ds_dq_rule_execute_sql_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsDqRuleExecuteSqlBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsDqRuleExecuteSqlServiceServer.
     #[async_trait]
-    pub trait DsDqRuleExecuteSqlBeanService: Send + Sync + 'static {
-        async fn list_ds_dq_rule_execute_sql_beans(
+    pub trait DsDqRuleExecuteSqlService: Send + Sync + 'static {
+        async fn list_ds_dq_rule_execute_sqls(
             &self,
-            request: tonic::Request<super::ListDsDqRuleExecuteSqlBeansRequest>,
+            request: tonic::Request<super::ListDsDqRuleExecuteSqlsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsDqRuleExecuteSqlBeansResponse>,
+            tonic::Response<super::ListDsDqRuleExecuteSqlsResponse>,
             tonic::Status,
         >;
-        async fn get_ds_dq_rule_execute_sql_bean(
+        async fn get_ds_dq_rule_execute_sql(
             &self,
-            request: tonic::Request<super::GetDsDqRuleExecuteSqlBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqRuleExecuteSqlBean>, tonic::Status>;
-        async fn create_ds_dq_rule_execute_sql_bean(
+            request: tonic::Request<super::GetDsDqRuleExecuteSqlRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqRuleExecuteSql>, tonic::Status>;
+        async fn create_ds_dq_rule_execute_sql(
             &self,
-            request: tonic::Request<super::CreateDsDqRuleExecuteSqlBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqRuleExecuteSqlBean>, tonic::Status>;
-        async fn update_ds_dq_rule_execute_sql_bean(
+            request: tonic::Request<super::CreateDsDqRuleExecuteSqlRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqRuleExecuteSql>, tonic::Status>;
+        async fn update_ds_dq_rule_execute_sql(
             &self,
-            request: tonic::Request<super::UpdateDsDqRuleExecuteSqlBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqRuleExecuteSqlBean>, tonic::Status>;
-        async fn delete_ds_dq_rule_execute_sql_bean(
+            request: tonic::Request<super::UpdateDsDqRuleExecuteSqlRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqRuleExecuteSql>, tonic::Status>;
+        async fn delete_ds_dq_rule_execute_sql(
             &self,
-            request: tonic::Request<super::DeleteDsDqRuleExecuteSqlBeanRequest>,
+            request: tonic::Request<super::DeleteDsDqRuleExecuteSqlRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsDqRuleExecuteSqlBeanServiceServer<T: DsDqRuleExecuteSqlBeanService> {
+    pub struct DsDqRuleExecuteSqlServiceServer<T: DsDqRuleExecuteSqlService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -331,7 +328,7 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsDqRuleExecuteSqlBeanService> DsDqRuleExecuteSqlBeanServiceServer<T> {
+    impl<T: DsDqRuleExecuteSqlService> DsDqRuleExecuteSqlServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -384,9 +381,9 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsDqRuleExecuteSqlBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsDqRuleExecuteSqlServiceServer<T>
     where
-        T: DsDqRuleExecuteSqlBeanService,
+        T: DsDqRuleExecuteSqlService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -404,27 +401,23 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService/\
-                 ListDsDqRuleExecuteSqlBeans" => {
+                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService/ListDsDqRuleExecuteSqls" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsDqRuleExecuteSqlBeansSvc<T: DsDqRuleExecuteSqlBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqRuleExecuteSqlBeanService>
-                        tonic::server::UnaryService<super::ListDsDqRuleExecuteSqlBeansRequest>
-                        for ListDsDqRuleExecuteSqlBeansSvc<T>
+                    struct ListDsDqRuleExecuteSqlsSvc<T: DsDqRuleExecuteSqlService>(pub Arc<T>);
+                    impl<T: DsDqRuleExecuteSqlService>
+                        tonic::server::UnaryService<super::ListDsDqRuleExecuteSqlsRequest>
+                        for ListDsDqRuleExecuteSqlsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsDqRuleExecuteSqlBeansResponse;
+                        type Response = super::ListDsDqRuleExecuteSqlsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsDqRuleExecuteSqlBeansRequest>,
+                            request: tonic::Request<super::ListDsDqRuleExecuteSqlsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).list_ds_dq_rule_execute_sql_beans(request).await
-                            };
+                            let fut =
+                                async move { (*inner).list_ds_dq_rule_execute_sqls(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -435,7 +428,7 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsDqRuleExecuteSqlBeansSvc(inner);
+                        let method = ListDsDqRuleExecuteSqlsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -451,27 +444,23 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService/\
-                 GetDsDqRuleExecuteSqlBean" => {
+                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService/GetDsDqRuleExecuteSql" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsDqRuleExecuteSqlBeanSvc<T: DsDqRuleExecuteSqlBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqRuleExecuteSqlBeanService>
-                        tonic::server::UnaryService<super::GetDsDqRuleExecuteSqlBeanRequest>
-                        for GetDsDqRuleExecuteSqlBeanSvc<T>
+                    struct GetDsDqRuleExecuteSqlSvc<T: DsDqRuleExecuteSqlService>(pub Arc<T>);
+                    impl<T: DsDqRuleExecuteSqlService>
+                        tonic::server::UnaryService<super::GetDsDqRuleExecuteSqlRequest>
+                        for GetDsDqRuleExecuteSqlSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDqRuleExecuteSqlBean;
+                        type Response = super::DsDqRuleExecuteSql;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsDqRuleExecuteSqlBeanRequest>,
+                            request: tonic::Request<super::GetDsDqRuleExecuteSqlRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_ds_dq_rule_execute_sql_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_ds_dq_rule_execute_sql(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -482,7 +471,7 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsDqRuleExecuteSqlBeanSvc(inner);
+                        let method = GetDsDqRuleExecuteSqlSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -498,26 +487,23 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService/\
-                 CreateDsDqRuleExecuteSqlBean" => {
+                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService/CreateDsDqRuleExecuteSql" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsDqRuleExecuteSqlBeanSvc<T: DsDqRuleExecuteSqlBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqRuleExecuteSqlBeanService>
-                        tonic::server::UnaryService<super::CreateDsDqRuleExecuteSqlBeanRequest>
-                        for CreateDsDqRuleExecuteSqlBeanSvc<T>
+                    struct CreateDsDqRuleExecuteSqlSvc<T: DsDqRuleExecuteSqlService>(pub Arc<T>);
+                    impl<T: DsDqRuleExecuteSqlService>
+                        tonic::server::UnaryService<super::CreateDsDqRuleExecuteSqlRequest>
+                        for CreateDsDqRuleExecuteSqlSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDqRuleExecuteSqlBean;
+                        type Response = super::DsDqRuleExecuteSql;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsDqRuleExecuteSqlBeanRequest>,
+                            request: tonic::Request<super::CreateDsDqRuleExecuteSqlRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).create_ds_dq_rule_execute_sql_bean(request).await
+                                (*inner).create_ds_dq_rule_execute_sql(request).await
                             };
                             Box::pin(fut)
                         }
@@ -529,7 +515,7 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsDqRuleExecuteSqlBeanSvc(inner);
+                        let method = CreateDsDqRuleExecuteSqlSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -545,26 +531,23 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService/\
-                 UpdateDsDqRuleExecuteSqlBean" => {
+                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService/UpdateDsDqRuleExecuteSql" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsDqRuleExecuteSqlBeanSvc<T: DsDqRuleExecuteSqlBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqRuleExecuteSqlBeanService>
-                        tonic::server::UnaryService<super::UpdateDsDqRuleExecuteSqlBeanRequest>
-                        for UpdateDsDqRuleExecuteSqlBeanSvc<T>
+                    struct UpdateDsDqRuleExecuteSqlSvc<T: DsDqRuleExecuteSqlService>(pub Arc<T>);
+                    impl<T: DsDqRuleExecuteSqlService>
+                        tonic::server::UnaryService<super::UpdateDsDqRuleExecuteSqlRequest>
+                        for UpdateDsDqRuleExecuteSqlSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDqRuleExecuteSqlBean;
+                        type Response = super::DsDqRuleExecuteSql;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsDqRuleExecuteSqlBeanRequest>,
+                            request: tonic::Request<super::UpdateDsDqRuleExecuteSqlRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).update_ds_dq_rule_execute_sql_bean(request).await
+                                (*inner).update_ds_dq_rule_execute_sql(request).await
                             };
                             Box::pin(fut)
                         }
@@ -576,7 +559,7 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsDqRuleExecuteSqlBeanSvc(inner);
+                        let method = UpdateDsDqRuleExecuteSqlSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -592,26 +575,23 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService/\
-                 DeleteDsDqRuleExecuteSqlBean" => {
+                "/ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService/DeleteDsDqRuleExecuteSql" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsDqRuleExecuteSqlBeanSvc<T: DsDqRuleExecuteSqlBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqRuleExecuteSqlBeanService>
-                        tonic::server::UnaryService<super::DeleteDsDqRuleExecuteSqlBeanRequest>
-                        for DeleteDsDqRuleExecuteSqlBeanSvc<T>
+                    struct DeleteDsDqRuleExecuteSqlSvc<T: DsDqRuleExecuteSqlService>(pub Arc<T>);
+                    impl<T: DsDqRuleExecuteSqlService>
+                        tonic::server::UnaryService<super::DeleteDsDqRuleExecuteSqlRequest>
+                        for DeleteDsDqRuleExecuteSqlSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsDqRuleExecuteSqlBeanRequest>,
+                            request: tonic::Request<super::DeleteDsDqRuleExecuteSqlRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).delete_ds_dq_rule_execute_sql_bean(request).await
+                                (*inner).delete_ds_dq_rule_execute_sql(request).await
                             };
                             Box::pin(fut)
                         }
@@ -623,7 +603,7 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsDqRuleExecuteSqlBeanSvc(inner);
+                        let method = DeleteDsDqRuleExecuteSqlSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -650,7 +630,7 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
             }
         }
     }
-    impl<T: DsDqRuleExecuteSqlBeanService> Clone for DsDqRuleExecuteSqlBeanServiceServer<T> {
+    impl<T: DsDqRuleExecuteSqlService> Clone for DsDqRuleExecuteSqlServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -662,7 +642,7 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
             }
         }
     }
-    impl<T: DsDqRuleExecuteSqlBeanService> Clone for _Inner<T> {
+    impl<T: DsDqRuleExecuteSqlService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -672,9 +652,9 @@ pub mod ds_dq_rule_execute_sql_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsDqRuleExecuteSqlBeanService> tonic::server::NamedService
-        for DsDqRuleExecuteSqlBeanServiceServer<T>
+    impl<T: DsDqRuleExecuteSqlService> tonic::server::NamedService
+        for DsDqRuleExecuteSqlServiceServer<T>
     {
-        const NAME: &'static str = "ds_dq_rule_execute_sql.DsDqRuleExecuteSqlBeanService";
+        const NAME: &'static str = "ds_dq_rule_execute_sql.DsDqRuleExecuteSqlService";
     }
 }

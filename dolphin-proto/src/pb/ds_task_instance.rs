@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsTaskInstanceBean {
+pub struct DsTaskInstance {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, optional, tag = "2")]
@@ -68,7 +68,7 @@ pub struct DsTaskInstanceBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsTaskInstanceBeansRequest {
+pub struct ListDsTaskInstancesRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -77,42 +77,42 @@ pub struct ListDsTaskInstanceBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsTaskInstanceBeansResponse {
-    /// The field name should match the noun "DsTaskInstanceBean" in the method name.
+pub struct ListDsTaskInstancesResponse {
+    /// The field name should match the noun "DsTaskInstance" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_task_instance_beans: ::prost::alloc::vec::Vec<DsTaskInstanceBean>,
+    pub ds_task_instances: ::prost::alloc::vec::Vec<DsTaskInstance>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsTaskInstanceBeanRequest {
+pub struct GetDsTaskInstanceRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsTaskInstanceBeanRequest {
-    /// The parent resource name where the DsTaskInstanceBean is to be created.
+pub struct CreateDsTaskInstanceRequest {
+    /// The parent resource name where the DsTaskInstance is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsTaskInstanceBean id to use for this DsTaskInstanceBean.
+    /// The DsTaskInstance id to use for this DsTaskInstance.
     #[prost(string, tag = "2")]
-    pub ds_task_instance_bean_id: ::prost::alloc::string::String,
-    /// The DsTaskInstanceBean resource to create.
+    pub ds_task_instance_id: ::prost::alloc::string::String,
+    /// The DsTaskInstance resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_task_instance_bean: ::core::option::Option<DsTaskInstanceBean>,
+    pub ds_task_instance: ::core::option::Option<DsTaskInstance>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsTaskInstanceBeanRequest {
-    /// The DsTaskInstanceBean resource which replaces the resource on the server.
+pub struct UpdateDsTaskInstanceRequest {
+    /// The DsTaskInstance resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_task_instance_bean: ::core::option::Option<DsTaskInstanceBean>,
+    pub ds_task_instance: ::core::option::Option<DsTaskInstance>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -120,21 +120,21 @@ pub struct UpdateDsTaskInstanceBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsTaskInstanceBeanRequest {
-    /// The resource name of the DsTaskInstanceBean to be deleted.
+pub struct DeleteDsTaskInstanceRequest {
+    /// The resource name of the DsTaskInstance to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_task_instance_bean_service_client {
+pub mod ds_task_instance_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsTaskInstanceBeanServiceClient<T> {
+    pub struct DsTaskInstanceServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsTaskInstanceBeanServiceClient<tonic::transport::Channel> {
+    impl DsTaskInstanceServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -145,7 +145,7 @@ pub mod ds_task_instance_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsTaskInstanceBeanServiceClient<T>
+    impl<T> DsTaskInstanceServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -165,7 +165,7 @@ pub mod ds_task_instance_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsTaskInstanceBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsTaskInstanceServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -178,7 +178,7 @@ pub mod ds_task_instance_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsTaskInstanceBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsTaskInstanceServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -216,35 +216,10 @@ pub mod ds_task_instance_bean_service_client {
             self
         }
 
-        pub async fn list_ds_task_instance_beans(
+        pub async fn list_ds_task_instances(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsTaskInstanceBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsTaskInstanceBeansResponse>,
-            tonic::Status,
-        > {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_instance.DsTaskInstanceBeanService/ListDsTaskInstanceBeans",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_instance.DsTaskInstanceBeanService",
-                "ListDsTaskInstanceBeans",
-            ));
-            self.inner.unary(req, path, codec).await
-        }
-
-        pub async fn get_ds_task_instance_bean(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetDsTaskInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskInstanceBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsTaskInstancesRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsTaskInstancesResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -254,21 +229,20 @@ pub mod ds_task_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_instance.DsTaskInstanceBeanService/GetDsTaskInstanceBean",
+                "/ds_task_instance.DsTaskInstanceService/ListDsTaskInstances",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_instance.DsTaskInstanceBeanService",
-                "GetDsTaskInstanceBean",
+                "ds_task_instance.DsTaskInstanceService",
+                "ListDsTaskInstances",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_task_instance_bean(
+        pub async fn get_ds_task_instance(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsTaskInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskInstanceBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::GetDsTaskInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskInstance>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -277,21 +251,20 @@ pub mod ds_task_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_instance.DsTaskInstanceBeanService/CreateDsTaskInstanceBean",
+                "/ds_task_instance.DsTaskInstanceService/GetDsTaskInstance",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_instance.DsTaskInstanceBeanService",
-                "CreateDsTaskInstanceBean",
+                "ds_task_instance.DsTaskInstanceService",
+                "GetDsTaskInstance",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_task_instance_bean(
+        pub async fn create_ds_task_instance(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsTaskInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskInstanceBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::CreateDsTaskInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskInstance>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -300,19 +273,41 @@ pub mod ds_task_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_instance.DsTaskInstanceBeanService/UpdateDsTaskInstanceBean",
+                "/ds_task_instance.DsTaskInstanceService/CreateDsTaskInstance",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_instance.DsTaskInstanceBeanService",
-                "UpdateDsTaskInstanceBean",
+                "ds_task_instance.DsTaskInstanceService",
+                "CreateDsTaskInstance",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_task_instance_bean(
+        pub async fn update_ds_task_instance(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsTaskInstanceBeanRequest>,
+            request: impl tonic::IntoRequest<super::UpdateDsTaskInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskInstance>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/ds_task_instance.DsTaskInstanceService/UpdateDsTaskInstance",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new(
+                "ds_task_instance.DsTaskInstanceService",
+                "UpdateDsTaskInstance",
+            ));
+            self.inner.unary(req, path, codec).await
+        }
+
+        pub async fn delete_ds_task_instance(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteDsTaskInstanceRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -322,51 +317,48 @@ pub mod ds_task_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_instance.DsTaskInstanceBeanService/DeleteDsTaskInstanceBean",
+                "/ds_task_instance.DsTaskInstanceService/DeleteDsTaskInstance",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_instance.DsTaskInstanceBeanService",
-                "DeleteDsTaskInstanceBean",
+                "ds_task_instance.DsTaskInstanceService",
+                "DeleteDsTaskInstance",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_task_instance_bean_service_server {
+pub mod ds_task_instance_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsTaskInstanceBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsTaskInstanceServiceServer.
     #[async_trait]
-    pub trait DsTaskInstanceBeanService: Send + Sync + 'static {
-        async fn list_ds_task_instance_beans(
+    pub trait DsTaskInstanceService: Send + Sync + 'static {
+        async fn list_ds_task_instances(
             &self,
-            request: tonic::Request<super::ListDsTaskInstanceBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsTaskInstanceBeansResponse>,
-            tonic::Status,
-        >;
-        async fn get_ds_task_instance_bean(
+            request: tonic::Request<super::ListDsTaskInstancesRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsTaskInstancesResponse>, tonic::Status>;
+        async fn get_ds_task_instance(
             &self,
-            request: tonic::Request<super::GetDsTaskInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskInstanceBean>, tonic::Status>;
-        async fn create_ds_task_instance_bean(
+            request: tonic::Request<super::GetDsTaskInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskInstance>, tonic::Status>;
+        async fn create_ds_task_instance(
             &self,
-            request: tonic::Request<super::CreateDsTaskInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskInstanceBean>, tonic::Status>;
-        async fn update_ds_task_instance_bean(
+            request: tonic::Request<super::CreateDsTaskInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskInstance>, tonic::Status>;
+        async fn update_ds_task_instance(
             &self,
-            request: tonic::Request<super::UpdateDsTaskInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskInstanceBean>, tonic::Status>;
-        async fn delete_ds_task_instance_bean(
+            request: tonic::Request<super::UpdateDsTaskInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskInstance>, tonic::Status>;
+        async fn delete_ds_task_instance(
             &self,
-            request: tonic::Request<super::DeleteDsTaskInstanceBeanRequest>,
+            request: tonic::Request<super::DeleteDsTaskInstanceRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsTaskInstanceBeanServiceServer<T: DsTaskInstanceBeanService> {
+    pub struct DsTaskInstanceServiceServer<T: DsTaskInstanceService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -374,7 +366,7 @@ pub mod ds_task_instance_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsTaskInstanceBeanService> DsTaskInstanceBeanServiceServer<T> {
+    impl<T: DsTaskInstanceService> DsTaskInstanceServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -427,9 +419,9 @@ pub mod ds_task_instance_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsTaskInstanceBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsTaskInstanceServiceServer<T>
     where
-        T: DsTaskInstanceBeanService,
+        T: DsTaskInstanceService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -447,23 +439,22 @@ pub mod ds_task_instance_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_task_instance.DsTaskInstanceBeanService/ListDsTaskInstanceBeans" => {
+                "/ds_task_instance.DsTaskInstanceService/ListDsTaskInstances" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsTaskInstanceBeansSvc<T: DsTaskInstanceBeanService>(pub Arc<T>);
-                    impl<T: DsTaskInstanceBeanService>
-                        tonic::server::UnaryService<super::ListDsTaskInstanceBeansRequest>
-                        for ListDsTaskInstanceBeansSvc<T>
+                    struct ListDsTaskInstancesSvc<T: DsTaskInstanceService>(pub Arc<T>);
+                    impl<T: DsTaskInstanceService>
+                        tonic::server::UnaryService<super::ListDsTaskInstancesRequest>
+                        for ListDsTaskInstancesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsTaskInstanceBeansResponse;
+                        type Response = super::ListDsTaskInstancesResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsTaskInstanceBeansRequest>,
+                            request: tonic::Request<super::ListDsTaskInstancesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_ds_task_instance_beans(request).await };
+                            let fut = async move { (*inner).list_ds_task_instances(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -474,7 +465,7 @@ pub mod ds_task_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsTaskInstanceBeansSvc(inner);
+                        let method = ListDsTaskInstancesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -490,23 +481,22 @@ pub mod ds_task_instance_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_instance.DsTaskInstanceBeanService/GetDsTaskInstanceBean" => {
+                "/ds_task_instance.DsTaskInstanceService/GetDsTaskInstance" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsTaskInstanceBeanSvc<T: DsTaskInstanceBeanService>(pub Arc<T>);
-                    impl<T: DsTaskInstanceBeanService>
-                        tonic::server::UnaryService<super::GetDsTaskInstanceBeanRequest>
-                        for GetDsTaskInstanceBeanSvc<T>
+                    struct GetDsTaskInstanceSvc<T: DsTaskInstanceService>(pub Arc<T>);
+                    impl<T: DsTaskInstanceService>
+                        tonic::server::UnaryService<super::GetDsTaskInstanceRequest>
+                        for GetDsTaskInstanceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsTaskInstanceBean;
+                        type Response = super::DsTaskInstance;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsTaskInstanceBeanRequest>,
+                            request: tonic::Request<super::GetDsTaskInstanceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).get_ds_task_instance_bean(request).await };
+                            let fut = async move { (*inner).get_ds_task_instance(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -517,7 +507,7 @@ pub mod ds_task_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsTaskInstanceBeanSvc(inner);
+                        let method = GetDsTaskInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -533,23 +523,23 @@ pub mod ds_task_instance_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_instance.DsTaskInstanceBeanService/CreateDsTaskInstanceBean" => {
+                "/ds_task_instance.DsTaskInstanceService/CreateDsTaskInstance" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsTaskInstanceBeanSvc<T: DsTaskInstanceBeanService>(pub Arc<T>);
-                    impl<T: DsTaskInstanceBeanService>
-                        tonic::server::UnaryService<super::CreateDsTaskInstanceBeanRequest>
-                        for CreateDsTaskInstanceBeanSvc<T>
+                    struct CreateDsTaskInstanceSvc<T: DsTaskInstanceService>(pub Arc<T>);
+                    impl<T: DsTaskInstanceService>
+                        tonic::server::UnaryService<super::CreateDsTaskInstanceRequest>
+                        for CreateDsTaskInstanceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsTaskInstanceBean;
+                        type Response = super::DsTaskInstance;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsTaskInstanceBeanRequest>,
+                            request: tonic::Request<super::CreateDsTaskInstanceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).create_ds_task_instance_bean(request).await };
+                                async move { (*inner).create_ds_task_instance(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -560,7 +550,7 @@ pub mod ds_task_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsTaskInstanceBeanSvc(inner);
+                        let method = CreateDsTaskInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -576,23 +566,23 @@ pub mod ds_task_instance_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_instance.DsTaskInstanceBeanService/UpdateDsTaskInstanceBean" => {
+                "/ds_task_instance.DsTaskInstanceService/UpdateDsTaskInstance" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsTaskInstanceBeanSvc<T: DsTaskInstanceBeanService>(pub Arc<T>);
-                    impl<T: DsTaskInstanceBeanService>
-                        tonic::server::UnaryService<super::UpdateDsTaskInstanceBeanRequest>
-                        for UpdateDsTaskInstanceBeanSvc<T>
+                    struct UpdateDsTaskInstanceSvc<T: DsTaskInstanceService>(pub Arc<T>);
+                    impl<T: DsTaskInstanceService>
+                        tonic::server::UnaryService<super::UpdateDsTaskInstanceRequest>
+                        for UpdateDsTaskInstanceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsTaskInstanceBean;
+                        type Response = super::DsTaskInstance;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsTaskInstanceBeanRequest>,
+                            request: tonic::Request<super::UpdateDsTaskInstanceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).update_ds_task_instance_bean(request).await };
+                                async move { (*inner).update_ds_task_instance(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -603,7 +593,7 @@ pub mod ds_task_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsTaskInstanceBeanSvc(inner);
+                        let method = UpdateDsTaskInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -619,23 +609,23 @@ pub mod ds_task_instance_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_instance.DsTaskInstanceBeanService/DeleteDsTaskInstanceBean" => {
+                "/ds_task_instance.DsTaskInstanceService/DeleteDsTaskInstance" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsTaskInstanceBeanSvc<T: DsTaskInstanceBeanService>(pub Arc<T>);
-                    impl<T: DsTaskInstanceBeanService>
-                        tonic::server::UnaryService<super::DeleteDsTaskInstanceBeanRequest>
-                        for DeleteDsTaskInstanceBeanSvc<T>
+                    struct DeleteDsTaskInstanceSvc<T: DsTaskInstanceService>(pub Arc<T>);
+                    impl<T: DsTaskInstanceService>
+                        tonic::server::UnaryService<super::DeleteDsTaskInstanceRequest>
+                        for DeleteDsTaskInstanceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsTaskInstanceBeanRequest>,
+                            request: tonic::Request<super::DeleteDsTaskInstanceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).delete_ds_task_instance_bean(request).await };
+                                async move { (*inner).delete_ds_task_instance(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -646,7 +636,7 @@ pub mod ds_task_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsTaskInstanceBeanSvc(inner);
+                        let method = DeleteDsTaskInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -673,7 +663,7 @@ pub mod ds_task_instance_bean_service_server {
             }
         }
     }
-    impl<T: DsTaskInstanceBeanService> Clone for DsTaskInstanceBeanServiceServer<T> {
+    impl<T: DsTaskInstanceService> Clone for DsTaskInstanceServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -685,7 +675,7 @@ pub mod ds_task_instance_bean_service_server {
             }
         }
     }
-    impl<T: DsTaskInstanceBeanService> Clone for _Inner<T> {
+    impl<T: DsTaskInstanceService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -695,9 +685,7 @@ pub mod ds_task_instance_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsTaskInstanceBeanService> tonic::server::NamedService
-        for DsTaskInstanceBeanServiceServer<T>
-    {
-        const NAME: &'static str = "ds_task_instance.DsTaskInstanceBeanService";
+    impl<T: DsTaskInstanceService> tonic::server::NamedService for DsTaskInstanceServiceServer<T> {
+        const NAME: &'static str = "ds_task_instance.DsTaskInstanceService";
     }
 }

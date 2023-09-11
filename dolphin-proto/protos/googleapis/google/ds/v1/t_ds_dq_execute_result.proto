@@ -9,7 +9,7 @@ package ds_dq_execute_result;
 
 
 
-message DsDqExecuteResultBean {
+message DsDqExecuteResult {
 
      int32 id= 1;
      optional int32 process_definition_id= 2;
@@ -32,45 +32,45 @@ message DsDqExecuteResultBean {
 }
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsDqExecuteResultBeanService {
-  rpc ListDsDqExecuteResultBeans(ListDsDqExecuteResultBeansRequest) returns (ListDsDqExecuteResultBeansResponse) {
+service DsDqExecuteResultService {
+  rpc ListDsDqExecuteResults(ListDsDqExecuteResultsRequest) returns (ListDsDqExecuteResultsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsDqExecuteResultBeans"
+      get: "/v1alpha1/DsDqExecuteResults"
     };
   }
 
-  rpc GetDsDqExecuteResultBean(GetDsDqExecuteResultBeanRequest) returns (DsDqExecuteResultBean) {
+  rpc GetDsDqExecuteResult(GetDsDqExecuteResultRequest) returns (DsDqExecuteResult) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsDqExecuteResultBeans/*}"
+      get: "/v1alpha1/{name=DsDqExecuteResults/*}"
     };
   }
 
-  rpc CreateDsDqExecuteResultBean(CreateDsDqExecuteResultBeanRequest) returns (DsDqExecuteResultBean) {
+  rpc CreateDsDqExecuteResult(CreateDsDqExecuteResultRequest) returns (DsDqExecuteResult) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsDqExecuteResultBeans"
-      body: "DsDqExecuteResultBean"
+      post: "/v1alpha1/DsDqExecuteResults"
+      body: "DsDqExecuteResult"
     };
   }
 
-  rpc UpdateDsDqExecuteResultBean(UpdateDsDqExecuteResultBeanRequest) returns (DsDqExecuteResultBean) {
+  rpc UpdateDsDqExecuteResult(UpdateDsDqExecuteResultRequest) returns (DsDqExecuteResult) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsDqExecuteResultBean.name=DsDqExecuteResultBeans/*}"
-      body: "DsDqExecuteResultBean"
+      patch: "/v1alpha1/{DsDqExecuteResult.name=DsDqExecuteResults/*}"
+      body: "DsDqExecuteResult"
     };
   }
 
-  rpc DeleteDsDqExecuteResultBean(DeleteDsDqExecuteResultBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsDqExecuteResult(DeleteDsDqExecuteResultRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsDqExecuteResultBeans/*}"
+      delete: "/v1alpha1/{name=DsDqExecuteResults/*}"
     };
   }
 }
 
-// message DsDqExecuteResultBean {
+// message DsDqExecuteResult {
 // ! This should be defined elsewhere
 // }
 
-message ListDsDqExecuteResultBeansRequest {
+message ListDsDqExecuteResultsRequest {
 
 
   // The maximum number of items to return.
@@ -79,42 +79,42 @@ message ListDsDqExecuteResultBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsDqExecuteResultBeansResponse {
-  // The field name should match the noun "DsDqExecuteResultBean" in the method name.
+message ListDsDqExecuteResultsResponse {
+  // The field name should match the noun "DsDqExecuteResult" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsDqExecuteResultBean DsDqExecuteResultBeans = 1;
+  repeated DsDqExecuteResult DsDqExecuteResults = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsDqExecuteResultBeanRequest {
+message GetDsDqExecuteResultRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsDqExecuteResultBeanRequest {
-  // The parent resource name where the DsDqExecuteResultBean is to be created.
+message CreateDsDqExecuteResultRequest {
+  // The parent resource name where the DsDqExecuteResult is to be created.
   string parent = 1;
 
-  // The DsDqExecuteResultBean id to use for this DsDqExecuteResultBean.
-  string DsDqExecuteResultBean_id = 2;
+  // The DsDqExecuteResult id to use for this DsDqExecuteResult.
+  string DsDqExecuteResult_id = 2;
 
-  // The DsDqExecuteResultBean resource to create.
+  // The DsDqExecuteResult resource to create.
   // The field name should match the Noun in the method name.
-  DsDqExecuteResultBean DsDqExecuteResultBean = 3;
+  DsDqExecuteResult DsDqExecuteResult = 3;
 }
 
-message UpdateDsDqExecuteResultBeanRequest {
-  // The DsDqExecuteResultBean resource which replaces the resource on the server.
-  DsDqExecuteResultBean DsDqExecuteResultBean = 1;
+message UpdateDsDqExecuteResultRequest {
+  // The DsDqExecuteResult resource which replaces the resource on the server.
+  DsDqExecuteResult DsDqExecuteResult = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsDqExecuteResultBeanRequest {
-  // The resource name of the DsDqExecuteResultBean to be deleted.
+message DeleteDsDqExecuteResultRequest {
+  // The resource name of the DsDqExecuteResult to be deleted.
   string name = 1;
 }

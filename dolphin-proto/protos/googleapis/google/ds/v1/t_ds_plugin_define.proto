@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 
 package ds_plugin_define;
 
-message DsPluginDefineBean {
+message DsPluginDefine {
 
      int32 id=1 ;
      string  plugin_name= 2;
@@ -20,45 +20,45 @@ message DsPluginDefineBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsPluginDefineBeanService {
-  rpc ListDsPluginDefineBeans(ListDsPluginDefineBeansRequest) returns (ListDsPluginDefineBeansResponse) {
+service DsPluginDefineService {
+  rpc ListDsPluginDefines(ListDsPluginDefinesRequest) returns (ListDsPluginDefinesResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsPluginDefineBeans"
+      get: "/v1alpha1/DsPluginDefines"
     };
   }
 
-  rpc GetDsPluginDefineBean(GetDsPluginDefineBeanRequest) returns (DsPluginDefineBean) {
+  rpc GetDsPluginDefine(GetDsPluginDefineRequest) returns (DsPluginDefine) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsPluginDefineBeans/*}"
+      get: "/v1alpha1/{name=DsPluginDefines/*}"
     };
   }
 
-  rpc CreateDsPluginDefineBean(CreateDsPluginDefineBeanRequest) returns (DsPluginDefineBean) {
+  rpc CreateDsPluginDefine(CreateDsPluginDefineRequest) returns (DsPluginDefine) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsPluginDefineBeans"
-      body: "DsPluginDefineBean"
+      post: "/v1alpha1/DsPluginDefines"
+      body: "DsPluginDefine"
     };
   }
 
-  rpc UpdateDsPluginDefineBean(UpdateDsPluginDefineBeanRequest) returns (DsPluginDefineBean) {
+  rpc UpdateDsPluginDefine(UpdateDsPluginDefineRequest) returns (DsPluginDefine) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsPluginDefineBean.name=DsPluginDefineBeans/*}"
-      body: "DsPluginDefineBean"
+      patch: "/v1alpha1/{DsPluginDefine.name=DsPluginDefines/*}"
+      body: "DsPluginDefine"
     };
   }
 
-  rpc DeleteDsPluginDefineBean(DeleteDsPluginDefineBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsPluginDefine(DeleteDsPluginDefineRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsPluginDefineBeans/*}"
+      delete: "/v1alpha1/{name=DsPluginDefines/*}"
     };
   }
 }
 
-// message DsPluginDefineBean {
+// message DsPluginDefine {
 // ! This should be defined elsewhere
 // }
 
-message ListDsPluginDefineBeansRequest {
+message ListDsPluginDefinesRequest {
 
 
   // The maximum number of items to return.
@@ -67,42 +67,42 @@ message ListDsPluginDefineBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsPluginDefineBeansResponse {
-  // The field name should match the noun "DsPluginDefineBean" in the method name.
+message ListDsPluginDefinesResponse {
+  // The field name should match the noun "DsPluginDefine" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsPluginDefineBean DsPluginDefineBeans = 1;
+  repeated DsPluginDefine DsPluginDefines = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsPluginDefineBeanRequest {
+message GetDsPluginDefineRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsPluginDefineBeanRequest {
-  // The parent resource name where the DsPluginDefineBean is to be created.
+message CreateDsPluginDefineRequest {
+  // The parent resource name where the DsPluginDefine is to be created.
   string parent = 1;
 
-  // The DsPluginDefineBean id to use for this DsPluginDefineBean.
-  string DsPluginDefineBean_id = 2;
+  // The DsPluginDefine id to use for this DsPluginDefine.
+  string DsPluginDefine_id = 2;
 
-  // The DsPluginDefineBean resource to create.
+  // The DsPluginDefine resource to create.
   // The field name should match the Noun in the method name.
-  DsPluginDefineBean DsPluginDefineBean = 3;
+  DsPluginDefine DsPluginDefine = 3;
 }
 
-message UpdateDsPluginDefineBeanRequest {
-  // The DsPluginDefineBean resource which replaces the resource on the server.
-  DsPluginDefineBean DsPluginDefineBean = 1;
+message UpdateDsPluginDefineRequest {
+  // The DsPluginDefine resource which replaces the resource on the server.
+  DsPluginDefine DsPluginDefine = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsPluginDefineBeanRequest {
-  // The resource name of the DsPluginDefineBean to be deleted.
+message DeleteDsPluginDefineRequest {
+  // The resource name of the DsPluginDefine to be deleted.
   string name = 1;
 }

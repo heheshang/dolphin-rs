@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsVersionBean {
+pub struct DsVersion {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, tag = "2")]
@@ -10,7 +10,7 @@ pub struct DsVersionBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsVersionBeansRequest {
+pub struct ListDsVersionsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -19,42 +19,42 @@ pub struct ListDsVersionBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsVersionBeansResponse {
-    /// The field name should match the noun "DsVersionBean" in the method name.
+pub struct ListDsVersionsResponse {
+    /// The field name should match the noun "DsVersion" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_version_beans: ::prost::alloc::vec::Vec<DsVersionBean>,
+    pub ds_versions: ::prost::alloc::vec::Vec<DsVersion>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsVersionBeanRequest {
+pub struct GetDsVersionRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsVersionBeanRequest {
-    /// The parent resource name where the DsVersionBean is to be created.
+pub struct CreateDsVersionRequest {
+    /// The parent resource name where the DsVersion is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsVersionBean id to use for this DsVersionBean.
+    /// The DsVersion id to use for this DsVersion.
     #[prost(string, tag = "2")]
-    pub ds_version_bean_id: ::prost::alloc::string::String,
-    /// The DsVersionBean resource to create.
+    pub ds_version_id: ::prost::alloc::string::String,
+    /// The DsVersion resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_version_bean: ::core::option::Option<DsVersionBean>,
+    pub ds_version: ::core::option::Option<DsVersion>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsVersionBeanRequest {
-    /// The DsVersionBean resource which replaces the resource on the server.
+pub struct UpdateDsVersionRequest {
+    /// The DsVersion resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_version_bean: ::core::option::Option<DsVersionBean>,
+    pub ds_version: ::core::option::Option<DsVersion>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -62,21 +62,21 @@ pub struct UpdateDsVersionBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsVersionBeanRequest {
-    /// The resource name of the DsVersionBean to be deleted.
+pub struct DeleteDsVersionRequest {
+    /// The resource name of the DsVersion to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_version_bean_service_client {
+pub mod ds_version_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsVersionBeanServiceClient<T> {
+    pub struct DsVersionServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsVersionBeanServiceClient<tonic::transport::Channel> {
+    impl DsVersionServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -87,7 +87,7 @@ pub mod ds_version_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsVersionBeanServiceClient<T>
+    impl<T> DsVersionServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -107,7 +107,7 @@ pub mod ds_version_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsVersionBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsVersionServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -120,7 +120,7 @@ pub mod ds_version_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsVersionBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsVersionServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -158,10 +158,10 @@ pub mod ds_version_bean_service_client {
             self
         }
 
-        pub async fn list_ds_version_beans(
+        pub async fn list_ds_versions(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsVersionBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsVersionBeansResponse>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsVersionsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsVersionsResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -170,21 +170,41 @@ pub mod ds_version_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_version.DsVersionBeanService/ListDsVersionBeans",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/ds_version.DsVersionService/ListDsVersions");
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_version.DsVersionBeanService",
-                "ListDsVersionBeans",
+                "ds_version.DsVersionService",
+                "ListDsVersions",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_version_bean(
+        pub async fn get_ds_version(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsVersionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsVersionBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetDsVersionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsVersion>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/ds_version.DsVersionService/GetDsVersion");
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new(
+                "ds_version.DsVersionService",
+                "GetDsVersion",
+            ));
+            self.inner.unary(req, path, codec).await
+        }
+
+        pub async fn create_ds_version(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CreateDsVersionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsVersion>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -193,20 +213,20 @@ pub mod ds_version_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_version.DsVersionBeanService/GetDsVersionBean",
+                "/ds_version.DsVersionService/CreateDsVersion",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_version.DsVersionBeanService",
-                "GetDsVersionBean",
+                "ds_version.DsVersionService",
+                "CreateDsVersion",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_version_bean(
+        pub async fn update_ds_version(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsVersionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsVersionBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateDsVersionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsVersion>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -215,41 +235,19 @@ pub mod ds_version_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_version.DsVersionBeanService/CreateDsVersionBean",
+                "/ds_version.DsVersionService/UpdateDsVersion",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_version.DsVersionBeanService",
-                "CreateDsVersionBean",
+                "ds_version.DsVersionService",
+                "UpdateDsVersion",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_version_bean(
+        pub async fn delete_ds_version(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsVersionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsVersionBean>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_version.DsVersionBeanService/UpdateDsVersionBean",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_version.DsVersionBeanService",
-                "UpdateDsVersionBean",
-            ));
-            self.inner.unary(req, path, codec).await
-        }
-
-        pub async fn delete_ds_version_bean(
-            &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsVersionBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsVersionRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -259,48 +257,48 @@ pub mod ds_version_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_version.DsVersionBeanService/DeleteDsVersionBean",
+                "/ds_version.DsVersionService/DeleteDsVersion",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_version.DsVersionBeanService",
-                "DeleteDsVersionBean",
+                "ds_version.DsVersionService",
+                "DeleteDsVersion",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_version_bean_service_server {
+pub mod ds_version_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsVersionBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsVersionServiceServer.
     #[async_trait]
-    pub trait DsVersionBeanService: Send + Sync + 'static {
-        async fn list_ds_version_beans(
+    pub trait DsVersionService: Send + Sync + 'static {
+        async fn list_ds_versions(
             &self,
-            request: tonic::Request<super::ListDsVersionBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsVersionBeansResponse>, tonic::Status>;
-        async fn get_ds_version_bean(
+            request: tonic::Request<super::ListDsVersionsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsVersionsResponse>, tonic::Status>;
+        async fn get_ds_version(
             &self,
-            request: tonic::Request<super::GetDsVersionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsVersionBean>, tonic::Status>;
-        async fn create_ds_version_bean(
+            request: tonic::Request<super::GetDsVersionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsVersion>, tonic::Status>;
+        async fn create_ds_version(
             &self,
-            request: tonic::Request<super::CreateDsVersionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsVersionBean>, tonic::Status>;
-        async fn update_ds_version_bean(
+            request: tonic::Request<super::CreateDsVersionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsVersion>, tonic::Status>;
+        async fn update_ds_version(
             &self,
-            request: tonic::Request<super::UpdateDsVersionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsVersionBean>, tonic::Status>;
-        async fn delete_ds_version_bean(
+            request: tonic::Request<super::UpdateDsVersionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsVersion>, tonic::Status>;
+        async fn delete_ds_version(
             &self,
-            request: tonic::Request<super::DeleteDsVersionBeanRequest>,
+            request: tonic::Request<super::DeleteDsVersionRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsVersionBeanServiceServer<T: DsVersionBeanService> {
+    pub struct DsVersionServiceServer<T: DsVersionService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -308,7 +306,7 @@ pub mod ds_version_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsVersionBeanService> DsVersionBeanServiceServer<T> {
+    impl<T: DsVersionService> DsVersionServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -361,9 +359,9 @@ pub mod ds_version_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsVersionBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsVersionServiceServer<T>
     where
-        T: DsVersionBeanService,
+        T: DsVersionService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -381,22 +379,22 @@ pub mod ds_version_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_version.DsVersionBeanService/ListDsVersionBeans" => {
+                "/ds_version.DsVersionService/ListDsVersions" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsVersionBeansSvc<T: DsVersionBeanService>(pub Arc<T>);
-                    impl<T: DsVersionBeanService>
-                        tonic::server::UnaryService<super::ListDsVersionBeansRequest>
-                        for ListDsVersionBeansSvc<T>
+                    struct ListDsVersionsSvc<T: DsVersionService>(pub Arc<T>);
+                    impl<T: DsVersionService>
+                        tonic::server::UnaryService<super::ListDsVersionsRequest>
+                        for ListDsVersionsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsVersionBeansResponse;
+                        type Response = super::ListDsVersionsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsVersionBeansRequest>,
+                            request: tonic::Request<super::ListDsVersionsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).list_ds_version_beans(request).await };
+                            let fut = async move { (*inner).list_ds_versions(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -407,7 +405,7 @@ pub mod ds_version_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsVersionBeansSvc(inner);
+                        let method = ListDsVersionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -423,22 +421,22 @@ pub mod ds_version_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_version.DsVersionBeanService/GetDsVersionBean" => {
+                "/ds_version.DsVersionService/GetDsVersion" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsVersionBeanSvc<T: DsVersionBeanService>(pub Arc<T>);
-                    impl<T: DsVersionBeanService>
-                        tonic::server::UnaryService<super::GetDsVersionBeanRequest>
-                        for GetDsVersionBeanSvc<T>
+                    struct GetDsVersionSvc<T: DsVersionService>(pub Arc<T>);
+                    impl<T: DsVersionService>
+                        tonic::server::UnaryService<super::GetDsVersionRequest>
+                        for GetDsVersionSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsVersionBean;
+                        type Response = super::DsVersion;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsVersionBeanRequest>,
+                            request: tonic::Request<super::GetDsVersionRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_ds_version_bean(request).await };
+                            let fut = async move { (*inner).get_ds_version(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -449,7 +447,7 @@ pub mod ds_version_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsVersionBeanSvc(inner);
+                        let method = GetDsVersionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -465,22 +463,22 @@ pub mod ds_version_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_version.DsVersionBeanService/CreateDsVersionBean" => {
+                "/ds_version.DsVersionService/CreateDsVersion" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsVersionBeanSvc<T: DsVersionBeanService>(pub Arc<T>);
-                    impl<T: DsVersionBeanService>
-                        tonic::server::UnaryService<super::CreateDsVersionBeanRequest>
-                        for CreateDsVersionBeanSvc<T>
+                    struct CreateDsVersionSvc<T: DsVersionService>(pub Arc<T>);
+                    impl<T: DsVersionService>
+                        tonic::server::UnaryService<super::CreateDsVersionRequest>
+                        for CreateDsVersionSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsVersionBean;
+                        type Response = super::DsVersion;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsVersionBeanRequest>,
+                            request: tonic::Request<super::CreateDsVersionRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).create_ds_version_bean(request).await };
+                            let fut = async move { (*inner).create_ds_version(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -491,7 +489,7 @@ pub mod ds_version_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsVersionBeanSvc(inner);
+                        let method = CreateDsVersionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -507,22 +505,22 @@ pub mod ds_version_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_version.DsVersionBeanService/UpdateDsVersionBean" => {
+                "/ds_version.DsVersionService/UpdateDsVersion" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsVersionBeanSvc<T: DsVersionBeanService>(pub Arc<T>);
-                    impl<T: DsVersionBeanService>
-                        tonic::server::UnaryService<super::UpdateDsVersionBeanRequest>
-                        for UpdateDsVersionBeanSvc<T>
+                    struct UpdateDsVersionSvc<T: DsVersionService>(pub Arc<T>);
+                    impl<T: DsVersionService>
+                        tonic::server::UnaryService<super::UpdateDsVersionRequest>
+                        for UpdateDsVersionSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsVersionBean;
+                        type Response = super::DsVersion;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsVersionBeanRequest>,
+                            request: tonic::Request<super::UpdateDsVersionRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).update_ds_version_bean(request).await };
+                            let fut = async move { (*inner).update_ds_version(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -533,7 +531,7 @@ pub mod ds_version_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsVersionBeanSvc(inner);
+                        let method = UpdateDsVersionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -549,22 +547,22 @@ pub mod ds_version_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_version.DsVersionBeanService/DeleteDsVersionBean" => {
+                "/ds_version.DsVersionService/DeleteDsVersion" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsVersionBeanSvc<T: DsVersionBeanService>(pub Arc<T>);
-                    impl<T: DsVersionBeanService>
-                        tonic::server::UnaryService<super::DeleteDsVersionBeanRequest>
-                        for DeleteDsVersionBeanSvc<T>
+                    struct DeleteDsVersionSvc<T: DsVersionService>(pub Arc<T>);
+                    impl<T: DsVersionService>
+                        tonic::server::UnaryService<super::DeleteDsVersionRequest>
+                        for DeleteDsVersionSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsVersionBeanRequest>,
+                            request: tonic::Request<super::DeleteDsVersionRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).delete_ds_version_bean(request).await };
+                            let fut = async move { (*inner).delete_ds_version(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -575,7 +573,7 @@ pub mod ds_version_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsVersionBeanSvc(inner);
+                        let method = DeleteDsVersionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -602,7 +600,7 @@ pub mod ds_version_bean_service_server {
             }
         }
     }
-    impl<T: DsVersionBeanService> Clone for DsVersionBeanServiceServer<T> {
+    impl<T: DsVersionService> Clone for DsVersionServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -614,7 +612,7 @@ pub mod ds_version_bean_service_server {
             }
         }
     }
-    impl<T: DsVersionBeanService> Clone for _Inner<T> {
+    impl<T: DsVersionService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -624,7 +622,7 @@ pub mod ds_version_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsVersionBeanService> tonic::server::NamedService for DsVersionBeanServiceServer<T> {
-        const NAME: &'static str = "ds_version.DsVersionBeanService";
+    impl<T: DsVersionService> tonic::server::NamedService for DsVersionServiceServer<T> {
+        const NAME: &'static str = "ds_version.DsVersionService";
     }
 }

@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsTaskDefinitionLogBean {
+pub struct DsTaskDefinitionLog {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int64, tag = "2")]
@@ -58,7 +58,7 @@ pub struct DsTaskDefinitionLogBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsTaskDefinitionLogBeansRequest {
+pub struct ListDsTaskDefinitionLogsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -67,42 +67,42 @@ pub struct ListDsTaskDefinitionLogBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsTaskDefinitionLogBeansResponse {
-    /// The field name should match the noun "DsTaskDefinitionLogBean" in the method name.
+pub struct ListDsTaskDefinitionLogsResponse {
+    /// The field name should match the noun "DsTaskDefinitionLog" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_task_definition_log_beans: ::prost::alloc::vec::Vec<DsTaskDefinitionLogBean>,
+    pub ds_task_definition_logs: ::prost::alloc::vec::Vec<DsTaskDefinitionLog>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsTaskDefinitionLogBeanRequest {
+pub struct GetDsTaskDefinitionLogRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsTaskDefinitionLogBeanRequest {
-    /// The parent resource name where the DsTaskDefinitionLogBean is to be created.
+pub struct CreateDsTaskDefinitionLogRequest {
+    /// The parent resource name where the DsTaskDefinitionLog is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsTaskDefinitionLogBean id to use for this DsTaskDefinitionLogBean.
+    /// The DsTaskDefinitionLog id to use for this DsTaskDefinitionLog.
     #[prost(string, tag = "2")]
-    pub ds_task_definition_log_bean_id: ::prost::alloc::string::String,
-    /// The DsTaskDefinitionLogBean resource to create.
+    pub ds_task_definition_log_id: ::prost::alloc::string::String,
+    /// The DsTaskDefinitionLog resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_task_definition_log_bean: ::core::option::Option<DsTaskDefinitionLogBean>,
+    pub ds_task_definition_log: ::core::option::Option<DsTaskDefinitionLog>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsTaskDefinitionLogBeanRequest {
-    /// The DsTaskDefinitionLogBean resource which replaces the resource on the server.
+pub struct UpdateDsTaskDefinitionLogRequest {
+    /// The DsTaskDefinitionLog resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_task_definition_log_bean: ::core::option::Option<DsTaskDefinitionLogBean>,
+    pub ds_task_definition_log: ::core::option::Option<DsTaskDefinitionLog>,
     /// The update mask applies to the resource. For the `FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask>
     #[prost(message, optional, tag = "2")]
@@ -110,21 +110,21 @@ pub struct UpdateDsTaskDefinitionLogBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsTaskDefinitionLogBeanRequest {
-    /// The resource name of the DsTaskDefinitionLogBean to be deleted.
+pub struct DeleteDsTaskDefinitionLogRequest {
+    /// The resource name of the DsTaskDefinitionLog to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_task_definition_log_bean_service_client {
+pub mod ds_task_definition_log_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsTaskDefinitionLogBeanServiceClient<T> {
+    pub struct DsTaskDefinitionLogServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsTaskDefinitionLogBeanServiceClient<tonic::transport::Channel> {
+    impl DsTaskDefinitionLogServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -135,7 +135,7 @@ pub mod ds_task_definition_log_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsTaskDefinitionLogBeanServiceClient<T>
+    impl<T> DsTaskDefinitionLogServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -155,7 +155,7 @@ pub mod ds_task_definition_log_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsTaskDefinitionLogBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsTaskDefinitionLogServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -168,7 +168,7 @@ pub mod ds_task_definition_log_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsTaskDefinitionLogBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsTaskDefinitionLogServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -206,11 +206,11 @@ pub mod ds_task_definition_log_bean_service_client {
             self
         }
 
-        pub async fn list_ds_task_definition_log_beans(
+        pub async fn list_ds_task_definition_logs(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsTaskDefinitionLogBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsTaskDefinitionLogsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsTaskDefinitionLogBeansResponse>,
+            tonic::Response<super::ListDsTaskDefinitionLogsResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -221,21 +221,20 @@ pub mod ds_task_definition_log_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_definition_log.DsTaskDefinitionLogBeanService/\
-                 ListDsTaskDefinitionLogBeans",
+                "/ds_task_definition_log.DsTaskDefinitionLogService/ListDsTaskDefinitionLogs",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_definition_log.DsTaskDefinitionLogBeanService",
-                "ListDsTaskDefinitionLogBeans",
+                "ds_task_definition_log.DsTaskDefinitionLogService",
+                "ListDsTaskDefinitionLogs",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_task_definition_log_bean(
+        pub async fn get_ds_task_definition_log(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsTaskDefinitionLogBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionLogBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::GetDsTaskDefinitionLogRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionLog>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -245,20 +244,20 @@ pub mod ds_task_definition_log_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_definition_log.DsTaskDefinitionLogBeanService/GetDsTaskDefinitionLogBean",
+                "/ds_task_definition_log.DsTaskDefinitionLogService/GetDsTaskDefinitionLog",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_definition_log.DsTaskDefinitionLogBeanService",
-                "GetDsTaskDefinitionLogBean",
+                "ds_task_definition_log.DsTaskDefinitionLogService",
+                "GetDsTaskDefinitionLog",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_task_definition_log_bean(
+        pub async fn create_ds_task_definition_log(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsTaskDefinitionLogBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionLogBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::CreateDsTaskDefinitionLogRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionLog>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -268,21 +267,20 @@ pub mod ds_task_definition_log_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_definition_log.DsTaskDefinitionLogBeanService/\
-                 CreateDsTaskDefinitionLogBean",
+                "/ds_task_definition_log.DsTaskDefinitionLogService/CreateDsTaskDefinitionLog",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_definition_log.DsTaskDefinitionLogBeanService",
-                "CreateDsTaskDefinitionLogBean",
+                "ds_task_definition_log.DsTaskDefinitionLogService",
+                "CreateDsTaskDefinitionLog",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_task_definition_log_bean(
+        pub async fn update_ds_task_definition_log(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsTaskDefinitionLogBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionLogBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::UpdateDsTaskDefinitionLogRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionLog>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -292,20 +290,19 @@ pub mod ds_task_definition_log_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_definition_log.DsTaskDefinitionLogBeanService/\
-                 UpdateDsTaskDefinitionLogBean",
+                "/ds_task_definition_log.DsTaskDefinitionLogService/UpdateDsTaskDefinitionLog",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_definition_log.DsTaskDefinitionLogBeanService",
-                "UpdateDsTaskDefinitionLogBean",
+                "ds_task_definition_log.DsTaskDefinitionLogService",
+                "UpdateDsTaskDefinitionLog",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_task_definition_log_bean(
+        pub async fn delete_ds_task_definition_log(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsTaskDefinitionLogBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsTaskDefinitionLogRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -315,52 +312,51 @@ pub mod ds_task_definition_log_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_definition_log.DsTaskDefinitionLogBeanService/\
-                 DeleteDsTaskDefinitionLogBean",
+                "/ds_task_definition_log.DsTaskDefinitionLogService/DeleteDsTaskDefinitionLog",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_definition_log.DsTaskDefinitionLogBeanService",
-                "DeleteDsTaskDefinitionLogBean",
+                "ds_task_definition_log.DsTaskDefinitionLogService",
+                "DeleteDsTaskDefinitionLog",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_task_definition_log_bean_service_server {
+pub mod ds_task_definition_log_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsTaskDefinitionLogBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsTaskDefinitionLogServiceServer.
     #[async_trait]
-    pub trait DsTaskDefinitionLogBeanService: Send + Sync + 'static {
-        async fn list_ds_task_definition_log_beans(
+    pub trait DsTaskDefinitionLogService: Send + Sync + 'static {
+        async fn list_ds_task_definition_logs(
             &self,
-            request: tonic::Request<super::ListDsTaskDefinitionLogBeansRequest>,
+            request: tonic::Request<super::ListDsTaskDefinitionLogsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsTaskDefinitionLogBeansResponse>,
+            tonic::Response<super::ListDsTaskDefinitionLogsResponse>,
             tonic::Status,
         >;
-        async fn get_ds_task_definition_log_bean(
+        async fn get_ds_task_definition_log(
             &self,
-            request: tonic::Request<super::GetDsTaskDefinitionLogBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionLogBean>, tonic::Status>;
-        async fn create_ds_task_definition_log_bean(
+            request: tonic::Request<super::GetDsTaskDefinitionLogRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionLog>, tonic::Status>;
+        async fn create_ds_task_definition_log(
             &self,
-            request: tonic::Request<super::CreateDsTaskDefinitionLogBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionLogBean>, tonic::Status>;
-        async fn update_ds_task_definition_log_bean(
+            request: tonic::Request<super::CreateDsTaskDefinitionLogRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionLog>, tonic::Status>;
+        async fn update_ds_task_definition_log(
             &self,
-            request: tonic::Request<super::UpdateDsTaskDefinitionLogBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionLogBean>, tonic::Status>;
-        async fn delete_ds_task_definition_log_bean(
+            request: tonic::Request<super::UpdateDsTaskDefinitionLogRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionLog>, tonic::Status>;
+        async fn delete_ds_task_definition_log(
             &self,
-            request: tonic::Request<super::DeleteDsTaskDefinitionLogBeanRequest>,
+            request: tonic::Request<super::DeleteDsTaskDefinitionLogRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsTaskDefinitionLogBeanServiceServer<T: DsTaskDefinitionLogBeanService> {
+    pub struct DsTaskDefinitionLogServiceServer<T: DsTaskDefinitionLogService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -368,7 +364,7 @@ pub mod ds_task_definition_log_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsTaskDefinitionLogBeanService> DsTaskDefinitionLogBeanServiceServer<T> {
+    impl<T: DsTaskDefinitionLogService> DsTaskDefinitionLogServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -421,9 +417,9 @@ pub mod ds_task_definition_log_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsTaskDefinitionLogBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsTaskDefinitionLogServiceServer<T>
     where
-        T: DsTaskDefinitionLogBeanService,
+        T: DsTaskDefinitionLogService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -441,27 +437,23 @@ pub mod ds_task_definition_log_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_task_definition_log.DsTaskDefinitionLogBeanService/\
-                 ListDsTaskDefinitionLogBeans" => {
+                "/ds_task_definition_log.DsTaskDefinitionLogService/ListDsTaskDefinitionLogs" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsTaskDefinitionLogBeansSvc<T: DsTaskDefinitionLogBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsTaskDefinitionLogBeanService>
-                        tonic::server::UnaryService<super::ListDsTaskDefinitionLogBeansRequest>
-                        for ListDsTaskDefinitionLogBeansSvc<T>
+                    struct ListDsTaskDefinitionLogsSvc<T: DsTaskDefinitionLogService>(pub Arc<T>);
+                    impl<T: DsTaskDefinitionLogService>
+                        tonic::server::UnaryService<super::ListDsTaskDefinitionLogsRequest>
+                        for ListDsTaskDefinitionLogsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsTaskDefinitionLogBeansResponse;
+                        type Response = super::ListDsTaskDefinitionLogsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsTaskDefinitionLogBeansRequest>,
+                            request: tonic::Request<super::ListDsTaskDefinitionLogsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).list_ds_task_definition_log_beans(request).await
-                            };
+                            let fut =
+                                async move { (*inner).list_ds_task_definition_logs(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -472,7 +464,7 @@ pub mod ds_task_definition_log_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsTaskDefinitionLogBeansSvc(inner);
+                        let method = ListDsTaskDefinitionLogsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -488,27 +480,23 @@ pub mod ds_task_definition_log_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_definition_log.DsTaskDefinitionLogBeanService/\
-                 GetDsTaskDefinitionLogBean" => {
+                "/ds_task_definition_log.DsTaskDefinitionLogService/GetDsTaskDefinitionLog" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsTaskDefinitionLogBeanSvc<T: DsTaskDefinitionLogBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsTaskDefinitionLogBeanService>
-                        tonic::server::UnaryService<super::GetDsTaskDefinitionLogBeanRequest>
-                        for GetDsTaskDefinitionLogBeanSvc<T>
+                    struct GetDsTaskDefinitionLogSvc<T: DsTaskDefinitionLogService>(pub Arc<T>);
+                    impl<T: DsTaskDefinitionLogService>
+                        tonic::server::UnaryService<super::GetDsTaskDefinitionLogRequest>
+                        for GetDsTaskDefinitionLogSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsTaskDefinitionLogBean;
+                        type Response = super::DsTaskDefinitionLog;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsTaskDefinitionLogBeanRequest>,
+                            request: tonic::Request<super::GetDsTaskDefinitionLogRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_ds_task_definition_log_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_ds_task_definition_log(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -519,7 +507,7 @@ pub mod ds_task_definition_log_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsTaskDefinitionLogBeanSvc(inner);
+                        let method = GetDsTaskDefinitionLogSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -535,26 +523,23 @@ pub mod ds_task_definition_log_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_definition_log.DsTaskDefinitionLogBeanService/\
-                 CreateDsTaskDefinitionLogBean" => {
+                "/ds_task_definition_log.DsTaskDefinitionLogService/CreateDsTaskDefinitionLog" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsTaskDefinitionLogBeanSvc<T: DsTaskDefinitionLogBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsTaskDefinitionLogBeanService>
-                        tonic::server::UnaryService<super::CreateDsTaskDefinitionLogBeanRequest>
-                        for CreateDsTaskDefinitionLogBeanSvc<T>
+                    struct CreateDsTaskDefinitionLogSvc<T: DsTaskDefinitionLogService>(pub Arc<T>);
+                    impl<T: DsTaskDefinitionLogService>
+                        tonic::server::UnaryService<super::CreateDsTaskDefinitionLogRequest>
+                        for CreateDsTaskDefinitionLogSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsTaskDefinitionLogBean;
+                        type Response = super::DsTaskDefinitionLog;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsTaskDefinitionLogBeanRequest>,
+                            request: tonic::Request<super::CreateDsTaskDefinitionLogRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).create_ds_task_definition_log_bean(request).await
+                                (*inner).create_ds_task_definition_log(request).await
                             };
                             Box::pin(fut)
                         }
@@ -566,7 +551,7 @@ pub mod ds_task_definition_log_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsTaskDefinitionLogBeanSvc(inner);
+                        let method = CreateDsTaskDefinitionLogSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -582,26 +567,23 @@ pub mod ds_task_definition_log_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_definition_log.DsTaskDefinitionLogBeanService/\
-                 UpdateDsTaskDefinitionLogBean" => {
+                "/ds_task_definition_log.DsTaskDefinitionLogService/UpdateDsTaskDefinitionLog" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsTaskDefinitionLogBeanSvc<T: DsTaskDefinitionLogBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsTaskDefinitionLogBeanService>
-                        tonic::server::UnaryService<super::UpdateDsTaskDefinitionLogBeanRequest>
-                        for UpdateDsTaskDefinitionLogBeanSvc<T>
+                    struct UpdateDsTaskDefinitionLogSvc<T: DsTaskDefinitionLogService>(pub Arc<T>);
+                    impl<T: DsTaskDefinitionLogService>
+                        tonic::server::UnaryService<super::UpdateDsTaskDefinitionLogRequest>
+                        for UpdateDsTaskDefinitionLogSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsTaskDefinitionLogBean;
+                        type Response = super::DsTaskDefinitionLog;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsTaskDefinitionLogBeanRequest>,
+                            request: tonic::Request<super::UpdateDsTaskDefinitionLogRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).update_ds_task_definition_log_bean(request).await
+                                (*inner).update_ds_task_definition_log(request).await
                             };
                             Box::pin(fut)
                         }
@@ -613,7 +595,7 @@ pub mod ds_task_definition_log_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsTaskDefinitionLogBeanSvc(inner);
+                        let method = UpdateDsTaskDefinitionLogSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -629,26 +611,23 @@ pub mod ds_task_definition_log_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_definition_log.DsTaskDefinitionLogBeanService/\
-                 DeleteDsTaskDefinitionLogBean" => {
+                "/ds_task_definition_log.DsTaskDefinitionLogService/DeleteDsTaskDefinitionLog" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsTaskDefinitionLogBeanSvc<T: DsTaskDefinitionLogBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsTaskDefinitionLogBeanService>
-                        tonic::server::UnaryService<super::DeleteDsTaskDefinitionLogBeanRequest>
-                        for DeleteDsTaskDefinitionLogBeanSvc<T>
+                    struct DeleteDsTaskDefinitionLogSvc<T: DsTaskDefinitionLogService>(pub Arc<T>);
+                    impl<T: DsTaskDefinitionLogService>
+                        tonic::server::UnaryService<super::DeleteDsTaskDefinitionLogRequest>
+                        for DeleteDsTaskDefinitionLogSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsTaskDefinitionLogBeanRequest>,
+                            request: tonic::Request<super::DeleteDsTaskDefinitionLogRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).delete_ds_task_definition_log_bean(request).await
+                                (*inner).delete_ds_task_definition_log(request).await
                             };
                             Box::pin(fut)
                         }
@@ -660,7 +639,7 @@ pub mod ds_task_definition_log_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsTaskDefinitionLogBeanSvc(inner);
+                        let method = DeleteDsTaskDefinitionLogSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -687,7 +666,7 @@ pub mod ds_task_definition_log_bean_service_server {
             }
         }
     }
-    impl<T: DsTaskDefinitionLogBeanService> Clone for DsTaskDefinitionLogBeanServiceServer<T> {
+    impl<T: DsTaskDefinitionLogService> Clone for DsTaskDefinitionLogServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -699,7 +678,7 @@ pub mod ds_task_definition_log_bean_service_server {
             }
         }
     }
-    impl<T: DsTaskDefinitionLogBeanService> Clone for _Inner<T> {
+    impl<T: DsTaskDefinitionLogService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -709,9 +688,9 @@ pub mod ds_task_definition_log_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsTaskDefinitionLogBeanService> tonic::server::NamedService
-        for DsTaskDefinitionLogBeanServiceServer<T>
+    impl<T: DsTaskDefinitionLogService> tonic::server::NamedService
+        for DsTaskDefinitionLogServiceServer<T>
     {
-        const NAME: &'static str = "ds_task_definition_log.DsTaskDefinitionLogBeanService";
+        const NAME: &'static str = "ds_task_definition_log.DsTaskDefinitionLogService";
     }
 }

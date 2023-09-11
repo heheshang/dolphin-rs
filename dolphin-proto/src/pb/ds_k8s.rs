@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsK8sBean {
+pub struct DsK8s {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, optional, tag = "2")]
@@ -16,7 +16,7 @@ pub struct DsK8sBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsK8sBeansRequest {
+pub struct ListDsK8ssRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -25,42 +25,42 @@ pub struct ListDsK8sBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsK8sBeansResponse {
-    /// The field name should match the noun "DsK8sBean" in the method name.
+pub struct ListDsK8ssResponse {
+    /// The field name should match the noun "DsK8s" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_k8s_beans: ::prost::alloc::vec::Vec<DsK8sBean>,
+    pub ds_k8ss: ::prost::alloc::vec::Vec<DsK8s>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsK8sBeanRequest {
+pub struct GetDsK8sRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsK8sBeanRequest {
-    /// The parent resource name where the DsK8sBean is to be created.
+pub struct CreateDsK8sRequest {
+    /// The parent resource name where the DsK8s is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsK8sBean id to use for this DsK8sBean.
+    /// The DsK8s id to use for this DsK8s.
     #[prost(string, tag = "2")]
-    pub ds_k8s_bean_id: ::prost::alloc::string::String,
-    /// The DsK8sBean resource to create.
+    pub ds_k8s_id: ::prost::alloc::string::String,
+    /// The DsK8s resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_k8s_bean: ::core::option::Option<DsK8sBean>,
+    pub ds_k8s: ::core::option::Option<DsK8s>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsK8sBeanRequest {
-    /// The DsK8sBean resource which replaces the resource on the server.
+pub struct UpdateDsK8sRequest {
+    /// The DsK8s resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_k8s_bean: ::core::option::Option<DsK8sBean>,
+    pub ds_k8s: ::core::option::Option<DsK8s>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -68,21 +68,21 @@ pub struct UpdateDsK8sBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsK8sBeanRequest {
-    /// The resource name of the DsK8sBean to be deleted.
+pub struct DeleteDsK8sRequest {
+    /// The resource name of the DsK8s to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_k8s_bean_service_client {
+pub mod ds_k8s_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsK8sBeanServiceClient<T> {
+    pub struct DsK8sServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsK8sBeanServiceClient<tonic::transport::Channel> {
+    impl DsK8sServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -93,7 +93,7 @@ pub mod ds_k8s_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsK8sBeanServiceClient<T>
+    impl<T> DsK8sServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -113,7 +113,7 @@ pub mod ds_k8s_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsK8sBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsK8sServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -126,7 +126,7 @@ pub mod ds_k8s_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsK8sBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsK8sServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -164,10 +164,10 @@ pub mod ds_k8s_bean_service_client {
             self
         }
 
-        pub async fn list_ds_k8s_beans(
+        pub async fn list_ds_k8ss(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsK8sBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsK8sBeansResponse>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsK8ssRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsK8ssResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -176,18 +176,17 @@ pub mod ds_k8s_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/ds_k8s.DsK8sBeanService/ListDsK8sBeans");
+            let path = http::uri::PathAndQuery::from_static("/ds_k8s.DsK8sService/ListDsK8ss");
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("ds_k8s.DsK8sBeanService", "ListDsK8sBeans"));
+                .insert(GrpcMethod::new("ds_k8s.DsK8sService", "ListDsK8ss"));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_k8s_bean(
+        pub async fn get_ds_k8s(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsK8sBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsK8sBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetDsK8sRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsK8s>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -195,18 +194,17 @@ pub mod ds_k8s_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/ds_k8s.DsK8sBeanService/GetDsK8sBean");
+            let path = http::uri::PathAndQuery::from_static("/ds_k8s.DsK8sService/GetDsK8s");
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("ds_k8s.DsK8sBeanService", "GetDsK8sBean"));
+                .insert(GrpcMethod::new("ds_k8s.DsK8sService", "GetDsK8s"));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_k8s_bean(
+        pub async fn create_ds_k8s(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsK8sBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsK8sBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::CreateDsK8sRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsK8s>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -214,20 +212,17 @@ pub mod ds_k8s_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/ds_k8s.DsK8sBeanService/CreateDsK8sBean");
+            let path = http::uri::PathAndQuery::from_static("/ds_k8s.DsK8sService/CreateDsK8s");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_k8s.DsK8sBeanService",
-                "CreateDsK8sBean",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_k8s.DsK8sService", "CreateDsK8s"));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_k8s_bean(
+        pub async fn update_ds_k8s(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsK8sBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsK8sBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateDsK8sRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsK8s>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -235,19 +230,16 @@ pub mod ds_k8s_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/ds_k8s.DsK8sBeanService/UpdateDsK8sBean");
+            let path = http::uri::PathAndQuery::from_static("/ds_k8s.DsK8sService/UpdateDsK8s");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_k8s.DsK8sBeanService",
-                "UpdateDsK8sBean",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_k8s.DsK8sService", "UpdateDsK8s"));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_k8s_bean(
+        pub async fn delete_ds_k8s(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsK8sBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsK8sRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -256,48 +248,45 @@ pub mod ds_k8s_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/ds_k8s.DsK8sBeanService/DeleteDsK8sBean");
+            let path = http::uri::PathAndQuery::from_static("/ds_k8s.DsK8sService/DeleteDsK8s");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_k8s.DsK8sBeanService",
-                "DeleteDsK8sBean",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_k8s.DsK8sService", "DeleteDsK8s"));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_k8s_bean_service_server {
+pub mod ds_k8s_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsK8sBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsK8sServiceServer.
     #[async_trait]
-    pub trait DsK8sBeanService: Send + Sync + 'static {
-        async fn list_ds_k8s_beans(
+    pub trait DsK8sService: Send + Sync + 'static {
+        async fn list_ds_k8ss(
             &self,
-            request: tonic::Request<super::ListDsK8sBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsK8sBeansResponse>, tonic::Status>;
-        async fn get_ds_k8s_bean(
+            request: tonic::Request<super::ListDsK8ssRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsK8ssResponse>, tonic::Status>;
+        async fn get_ds_k8s(
             &self,
-            request: tonic::Request<super::GetDsK8sBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsK8sBean>, tonic::Status>;
-        async fn create_ds_k8s_bean(
+            request: tonic::Request<super::GetDsK8sRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsK8s>, tonic::Status>;
+        async fn create_ds_k8s(
             &self,
-            request: tonic::Request<super::CreateDsK8sBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsK8sBean>, tonic::Status>;
-        async fn update_ds_k8s_bean(
+            request: tonic::Request<super::CreateDsK8sRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsK8s>, tonic::Status>;
+        async fn update_ds_k8s(
             &self,
-            request: tonic::Request<super::UpdateDsK8sBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsK8sBean>, tonic::Status>;
-        async fn delete_ds_k8s_bean(
+            request: tonic::Request<super::UpdateDsK8sRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsK8s>, tonic::Status>;
+        async fn delete_ds_k8s(
             &self,
-            request: tonic::Request<super::DeleteDsK8sBeanRequest>,
+            request: tonic::Request<super::DeleteDsK8sRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsK8sBeanServiceServer<T: DsK8sBeanService> {
+    pub struct DsK8sServiceServer<T: DsK8sService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -305,7 +294,7 @@ pub mod ds_k8s_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsK8sBeanService> DsK8sBeanServiceServer<T> {
+    impl<T: DsK8sService> DsK8sServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -358,9 +347,9 @@ pub mod ds_k8s_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsK8sBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsK8sServiceServer<T>
     where
-        T: DsK8sBeanService,
+        T: DsK8sService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -378,22 +367,19 @@ pub mod ds_k8s_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_k8s.DsK8sBeanService/ListDsK8sBeans" => {
+                "/ds_k8s.DsK8sService/ListDsK8ss" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsK8sBeansSvc<T: DsK8sBeanService>(pub Arc<T>);
-                    impl<T: DsK8sBeanService>
-                        tonic::server::UnaryService<super::ListDsK8sBeansRequest>
-                        for ListDsK8sBeansSvc<T>
-                    {
+                    struct ListDsK8ssSvc<T: DsK8sService>(pub Arc<T>);
+                    impl<T: DsK8sService> tonic::server::UnaryService<super::ListDsK8ssRequest> for ListDsK8ssSvc<T> {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsK8sBeansResponse;
+                        type Response = super::ListDsK8ssResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsK8sBeansRequest>,
+                            request: tonic::Request<super::ListDsK8ssRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).list_ds_k8s_beans(request).await };
+                            let fut = async move { (*inner).list_ds_k8ss(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -404,7 +390,7 @@ pub mod ds_k8s_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsK8sBeansSvc(inner);
+                        let method = ListDsK8ssSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -420,22 +406,19 @@ pub mod ds_k8s_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_k8s.DsK8sBeanService/GetDsK8sBean" => {
+                "/ds_k8s.DsK8sService/GetDsK8s" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsK8sBeanSvc<T: DsK8sBeanService>(pub Arc<T>);
-                    impl<T: DsK8sBeanService>
-                        tonic::server::UnaryService<super::GetDsK8sBeanRequest>
-                        for GetDsK8sBeanSvc<T>
-                    {
+                    struct GetDsK8sSvc<T: DsK8sService>(pub Arc<T>);
+                    impl<T: DsK8sService> tonic::server::UnaryService<super::GetDsK8sRequest> for GetDsK8sSvc<T> {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsK8sBean;
+                        type Response = super::DsK8s;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsK8sBeanRequest>,
+                            request: tonic::Request<super::GetDsK8sRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_ds_k8s_bean(request).await };
+                            let fut = async move { (*inner).get_ds_k8s(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -446,7 +429,7 @@ pub mod ds_k8s_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsK8sBeanSvc(inner);
+                        let method = GetDsK8sSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -462,22 +445,19 @@ pub mod ds_k8s_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_k8s.DsK8sBeanService/CreateDsK8sBean" => {
+                "/ds_k8s.DsK8sService/CreateDsK8s" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsK8sBeanSvc<T: DsK8sBeanService>(pub Arc<T>);
-                    impl<T: DsK8sBeanService>
-                        tonic::server::UnaryService<super::CreateDsK8sBeanRequest>
-                        for CreateDsK8sBeanSvc<T>
-                    {
+                    struct CreateDsK8sSvc<T: DsK8sService>(pub Arc<T>);
+                    impl<T: DsK8sService> tonic::server::UnaryService<super::CreateDsK8sRequest> for CreateDsK8sSvc<T> {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsK8sBean;
+                        type Response = super::DsK8s;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsK8sBeanRequest>,
+                            request: tonic::Request<super::CreateDsK8sRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).create_ds_k8s_bean(request).await };
+                            let fut = async move { (*inner).create_ds_k8s(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -488,7 +468,7 @@ pub mod ds_k8s_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsK8sBeanSvc(inner);
+                        let method = CreateDsK8sSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -504,22 +484,19 @@ pub mod ds_k8s_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_k8s.DsK8sBeanService/UpdateDsK8sBean" => {
+                "/ds_k8s.DsK8sService/UpdateDsK8s" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsK8sBeanSvc<T: DsK8sBeanService>(pub Arc<T>);
-                    impl<T: DsK8sBeanService>
-                        tonic::server::UnaryService<super::UpdateDsK8sBeanRequest>
-                        for UpdateDsK8sBeanSvc<T>
-                    {
+                    struct UpdateDsK8sSvc<T: DsK8sService>(pub Arc<T>);
+                    impl<T: DsK8sService> tonic::server::UnaryService<super::UpdateDsK8sRequest> for UpdateDsK8sSvc<T> {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsK8sBean;
+                        type Response = super::DsK8s;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsK8sBeanRequest>,
+                            request: tonic::Request<super::UpdateDsK8sRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).update_ds_k8s_bean(request).await };
+                            let fut = async move { (*inner).update_ds_k8s(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -530,7 +507,7 @@ pub mod ds_k8s_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsK8sBeanSvc(inner);
+                        let method = UpdateDsK8sSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -546,22 +523,19 @@ pub mod ds_k8s_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_k8s.DsK8sBeanService/DeleteDsK8sBean" => {
+                "/ds_k8s.DsK8sService/DeleteDsK8s" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsK8sBeanSvc<T: DsK8sBeanService>(pub Arc<T>);
-                    impl<T: DsK8sBeanService>
-                        tonic::server::UnaryService<super::DeleteDsK8sBeanRequest>
-                        for DeleteDsK8sBeanSvc<T>
-                    {
+                    struct DeleteDsK8sSvc<T: DsK8sService>(pub Arc<T>);
+                    impl<T: DsK8sService> tonic::server::UnaryService<super::DeleteDsK8sRequest> for DeleteDsK8sSvc<T> {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsK8sBeanRequest>,
+                            request: tonic::Request<super::DeleteDsK8sRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).delete_ds_k8s_bean(request).await };
+                            let fut = async move { (*inner).delete_ds_k8s(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -572,7 +546,7 @@ pub mod ds_k8s_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsK8sBeanSvc(inner);
+                        let method = DeleteDsK8sSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -599,7 +573,7 @@ pub mod ds_k8s_bean_service_server {
             }
         }
     }
-    impl<T: DsK8sBeanService> Clone for DsK8sBeanServiceServer<T> {
+    impl<T: DsK8sService> Clone for DsK8sServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -611,7 +585,7 @@ pub mod ds_k8s_bean_service_server {
             }
         }
     }
-    impl<T: DsK8sBeanService> Clone for _Inner<T> {
+    impl<T: DsK8sService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -621,7 +595,7 @@ pub mod ds_k8s_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsK8sBeanService> tonic::server::NamedService for DsK8sBeanServiceServer<T> {
-        const NAME: &'static str = "ds_k8s.DsK8sBeanService";
+    impl<T: DsK8sService> tonic::server::NamedService for DsK8sServiceServer<T> {
+        const NAME: &'static str = "ds_k8s.DsK8sService";
     }
 }

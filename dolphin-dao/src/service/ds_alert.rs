@@ -1,41 +1,39 @@
-use super::service::DolphinRpcServer;
-use proto::ds_alert::ds_alert_bean_service_server::DsAlertBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_alert::ds_alert_service_server::DsAlertService;
 #[tonic::async_trait]
-impl DsAlertBeanService for DolphinRpcServer {
-    async fn list_ds_alert_beans(
+impl DsAlertService for DolphinRpcServer {
+    async fn list_ds_alerts(
         &self,
-        _req: tonic::Request<proto::ds_alert::ListDsAlertBeansRequest>,
-    ) -> std::result::Result<
-        tonic::Response<proto::ds_alert::ListDsAlertBeansResponse>,
-        tonic::Status,
-    > {
+        _req: tonic::Request<proto::ds_alert::ListDsAlertsRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_alert::ListDsAlertsResponse>, tonic::Status>
+    {
         todo!()
     }
 
-    async fn get_ds_alert_bean(
+    async fn get_ds_alert(
         &self,
-        _req: tonic::Request<proto::ds_alert::GetDsAlertBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_alert::DsAlertBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_alert::GetDsAlertRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_alert::DsAlert>, tonic::Status> {
         todo!()
     }
 
-    async fn create_ds_alert_bean(
+    async fn create_ds_alert(
         &self,
-        _req: tonic::Request<proto::ds_alert::CreateDsAlertBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_alert::DsAlertBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_alert::CreateDsAlertRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_alert::DsAlert>, tonic::Status> {
         todo!()
     }
 
-    async fn update_ds_alert_bean(
+    async fn update_ds_alert(
         &self,
-        _req: tonic::Request<proto::ds_alert::UpdateDsAlertBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_alert::DsAlertBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_alert::UpdateDsAlertRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_alert::DsAlert>, tonic::Status> {
         todo!()
     }
 
-    async fn delete_ds_alert_bean(
+    async fn delete_ds_alert(
         &self,
-        _req: tonic::Request<proto::ds_alert::DeleteDsAlertBeanRequest>,
+        _req: tonic::Request<proto::ds_alert::DeleteDsAlertRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

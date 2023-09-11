@@ -1,4 +1,4 @@
-use super::service::DolphinRpcServer;
+use super::dao_service::DolphinRpcServer;
 use dolphin_common::{
     core_error::error::DolphinErrorInfo,
     core_results::results::{GrpcRequest, GrpcResponse},
@@ -6,38 +6,38 @@ use dolphin_common::{
 };
 use entity::t_ds_session::{self, Model};
 use proto::ds_session::{
-    ds_session_bean_service_server::DsSessionBeanService,
-    DsSessionBean,
-    GetDsSessionBeanByIdRequest,
-    GetDsSessionBeanUserIdRequest,
-    GetDsSessionBeanUserIdResponse,
+    ds_session_service_server::DsSessionService,
+    DsSession,
+    GetDsSessionByIdRequest,
+    GetDsSessionUserIdRequest,
+    GetDsSessionUserIdResponse,
 };
 use sea_orm::entity::prelude::*;
 
 #[tonic::async_trait]
-impl DsSessionBeanService for DolphinRpcServer {
-    async fn list_ds_session_beans(
+impl DsSessionService for DolphinRpcServer {
+    async fn list_ds_sessions(
         &self,
-        _req: tonic::Request<proto::ds_session::ListDsSessionBeansRequest>,
+        _req: tonic::Request<proto::ds_session::ListDsSessionsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_session::ListDsSessionBeansResponse>,
+        tonic::Response<proto::ds_session::ListDsSessionsResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_session_bean(
+    async fn get_ds_session(
         &self,
         _req: tonic::Request<proto::ds_session::GetDsSessionByIRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_session::DsSessionBean>, tonic::Status> {
+    ) -> std::result::Result<tonic::Response<proto::ds_session::DsSession>, tonic::Status> {
         todo!()
     }
 
-    async fn create_ds_session_bean(
+    async fn create_ds_session(
         &self,
-        _req: tonic::Request<proto::ds_session::CreateDsSessionBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_session::DsSessionBean>, tonic::Status> {
-        let ds_session = _req.get_ref().ds_session_bean.clone().unwrap();
+        _req: tonic::Request<proto::ds_session::CreateDsSessionRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_session::DsSession>, tonic::Status> {
+        let ds_session = _req.get_ref().ds_session.clone().unwrap();
         let id = ds_session.id.clone();
         let parse_from_str = DateTime::parse_from_str;
         let current_time = chrono::prelude::Local::now().naive_local();
@@ -55,7 +55,7 @@ impl DsSessionBeanService for DolphinRpcServer {
             .exec(conn)
             .await
             .map_err(|_| tonic::Status::internal("session  create failed"))?;
-        let res:Option<Model> = t_ds_session::Entity::find()
+        let res: Option<Model> = t_ds_session::Entity::find()
             .filter(t_ds_session::Column::Id.eq(id.clone()))
             .into_model()
             .one(conn)
@@ -69,11 +69,11 @@ impl DsSessionBeanService for DolphinRpcServer {
         }
     }
 
-    async fn update_ds_session_bean(
+    async fn update_ds_session(
         &self,
-        req: tonic::Request<proto::ds_session::UpdateDsSessionBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_session::DsSessionBean>, tonic::Status> {
-        let ds_session = req.get_ref().ds_session_bean.clone().unwrap();
+        req: tonic::Request<proto::ds_session::UpdateDsSessionRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_session::DsSession>, tonic::Status> {
+        let ds_session = req.get_ref().ds_session.clone().unwrap();
         let id = ds_session.id.clone();
         let parse_from_str = DateTime::parse_from_str;
         let current_time = chrono::prelude::Local::now().naive_local();
@@ -96,9 +96,9 @@ impl DsSessionBeanService for DolphinRpcServer {
         Ok(tonic::Response::new(res.into()))
     }
 
-    async fn delete_ds_session_bean(
+    async fn delete_ds_session(
         &self,
-        request: tonic::Request<proto::ds_session::DeleteDsSessionBeanRequest>,
+        request: tonic::Request<proto::ds_session::DeleteDsSessionRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         let conn = &self.conn;
         let id = request.into_inner().id;
@@ -117,8 +117,8 @@ impl DsSessionBeanService for DolphinRpcServer {
 
     async fn get_ds_session_by_id(
         &self,
-        request: GrpcRequest<GetDsSessionBeanByIdRequest>,
-    ) -> GrpcResponse<DsSessionBean> {
+        request: GrpcRequest<GetDsSessionByIdRequest>,
+    ) -> GrpcResponse<DsSession> {
         let conn = &self.conn;
         let id = request.into_inner().id;
         let ds_session: Option<t_ds_session::Model> = t_ds_session::Entity::find()
@@ -137,8 +137,8 @@ impl DsSessionBeanService for DolphinRpcServer {
 
     async fn get_ds_session_by_user_id(
         &self,
-        request: GrpcRequest<GetDsSessionBeanUserIdRequest>,
-    ) -> GrpcResponse<GetDsSessionBeanUserIdResponse> {
+        request: GrpcRequest<GetDsSessionUserIdRequest>,
+    ) -> GrpcResponse<GetDsSessionUserIdResponse> {
         let conn = &self.conn;
         let user_id = request.into_inner().user_id;
         let ds_sessions: Vec<t_ds_session::Model> = t_ds_session::Entity::find()
@@ -152,8 +152,8 @@ impl DsSessionBeanService for DolphinRpcServer {
                 ))
             })?;
 
-        Ok(tonic::Response::new(GetDsSessionBeanUserIdResponse {
-            ds_session_beans: ds_sessions.into_iter().map(|v| v.into()).collect(),
+        Ok(tonic::Response::new(GetDsSessionUserIdResponse {
+            ds_sessions: ds_sessions.into_iter().map(|v| v.into()).collect(),
         }))
     }
 }

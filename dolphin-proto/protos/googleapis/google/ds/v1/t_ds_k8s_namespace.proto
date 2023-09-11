@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 package ds_k8s_namespace;
 
-message DsK8sNamespaceBean{
+message DsK8sNamespace{
 
      int32 id=1 ;
      optional int32  limits_memory=2 ;
@@ -25,45 +25,45 @@ message DsK8sNamespaceBean{
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsK8sNamespaceBeanService {
-  rpc ListDsK8sNamespaceBeans(ListDsK8sNamespaceBeansRequest) returns (ListDsK8sNamespaceBeansResponse) {
+service DsK8sNamespaceService {
+  rpc ListDsK8sNamespaces(ListDsK8sNamespacesRequest) returns (ListDsK8sNamespacesResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsK8sNamespaceBeans"
+      get: "/v1alpha1/DsK8sNamespaces"
     };
   }
 
-  rpc GetDsK8sNamespaceBean(GetDsK8sNamespaceBeanRequest) returns (DsK8sNamespaceBean) {
+  rpc GetDsK8sNamespace(GetDsK8sNamespaceRequest) returns (DsK8sNamespace) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsK8sNamespaceBeans/*}"
+      get: "/v1alpha1/{name=DsK8sNamespaces/*}"
     };
   }
 
-  rpc CreateDsK8sNamespaceBean(CreateDsK8sNamespaceBeanRequest) returns (DsK8sNamespaceBean) {
+  rpc CreateDsK8sNamespace(CreateDsK8sNamespaceRequest) returns (DsK8sNamespace) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsK8sNamespaceBeans"
-      body: "DsK8sNamespaceBean"
+      post: "/v1alpha1/DsK8sNamespaces"
+      body: "DsK8sNamespace"
     };
   }
 
-  rpc UpdateDsK8sNamespaceBean(UpdateDsK8sNamespaceBeanRequest) returns (DsK8sNamespaceBean) {
+  rpc UpdateDsK8sNamespace(UpdateDsK8sNamespaceRequest) returns (DsK8sNamespace) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsK8sNamespaceBean.name=DsK8sNamespaceBeans/*}"
-      body: "DsK8sNamespaceBean"
+      patch: "/v1alpha1/{DsK8sNamespace.name=DsK8sNamespaces/*}"
+      body: "DsK8sNamespace"
     };
   }
 
-  rpc DeleteDsK8sNamespaceBean(DeleteDsK8sNamespaceBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsK8sNamespace(DeleteDsK8sNamespaceRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsK8sNamespaceBeans/*}"
+      delete: "/v1alpha1/{name=DsK8sNamespaces/*}"
     };
   }
 }
 
-// message DsK8sNamespaceBean {
+// message DsK8sNamespace {
 // ! This should be defined elsewhere
 // }
 
-message ListDsK8sNamespaceBeansRequest {
+message ListDsK8sNamespacesRequest {
 
 
   // The maximum number of items to return.
@@ -72,42 +72,42 @@ message ListDsK8sNamespaceBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsK8sNamespaceBeansResponse {
-  // The field name should match the noun "DsK8sNamespaceBean" in the method name.
+message ListDsK8sNamespacesResponse {
+  // The field name should match the noun "DsK8sNamespace" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsK8sNamespaceBean DsK8sNamespaceBeans = 1;
+  repeated DsK8sNamespace DsK8sNamespaces = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsK8sNamespaceBeanRequest {
+message GetDsK8sNamespaceRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsK8sNamespaceBeanRequest {
-  // The parent resource name where the DsK8sNamespaceBean is to be created.
+message CreateDsK8sNamespaceRequest {
+  // The parent resource name where the DsK8sNamespace is to be created.
   string parent = 1;
 
-  // The DsK8sNamespaceBean id to use for this DsK8sNamespaceBean.
-  string DsK8sNamespaceBean_id = 2;
+  // The DsK8sNamespace id to use for this DsK8sNamespace.
+  string DsK8sNamespace_id = 2;
 
-  // The DsK8sNamespaceBean resource to create.
+  // The DsK8sNamespace resource to create.
   // The field name should match the Noun in the method name.
-  DsK8sNamespaceBean DsK8sNamespaceBean = 3;
+  DsK8sNamespace DsK8sNamespace = 3;
 }
 
-message UpdateDsK8sNamespaceBeanRequest {
-  // The DsK8sNamespaceBean resource which replaces the resource on the server.
-  DsK8sNamespaceBean DsK8sNamespaceBean = 1;
+message UpdateDsK8sNamespaceRequest {
+  // The DsK8sNamespace resource which replaces the resource on the server.
+  DsK8sNamespace DsK8sNamespace = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsK8sNamespaceBeanRequest {
-  // The resource name of the DsK8sNamespaceBean to be deleted.
+message DeleteDsK8sNamespaceRequest {
+  // The resource name of the DsK8sNamespace to be deleted.
   string name = 1;
 }

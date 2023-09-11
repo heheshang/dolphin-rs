@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 package ds_task_definition;
 
-message DsTaskDefinitionBean {
+message DsTaskDefinition {
 
      int32 id=1 ;
      int64 code=2 ;
@@ -37,45 +37,45 @@ message DsTaskDefinitionBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsTaskDefinitionBeanService {
-  rpc ListDsTaskDefinitionBeans(ListDsTaskDefinitionBeansRequest) returns (ListDsTaskDefinitionBeansResponse) {
+service DsTaskDefinitionService {
+  rpc ListDsTaskDefinitions(ListDsTaskDefinitionsRequest) returns (ListDsTaskDefinitionsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsTaskDefinitionBeans"
+      get: "/v1alpha1/DsTaskDefinitions"
     };
   }
 
-  rpc GetDsTaskDefinitionBean(GetDsTaskDefinitionBeanRequest) returns (DsTaskDefinitionBean) {
+  rpc GetDsTaskDefinition(GetDsTaskDefinitionRequest) returns (DsTaskDefinition) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsTaskDefinitionBeans/*}"
+      get: "/v1alpha1/{name=DsTaskDefinitions/*}"
     };
   }
 
-  rpc CreateDsTaskDefinitionBean(CreateDsTaskDefinitionBeanRequest) returns (DsTaskDefinitionBean) {
+  rpc CreateDsTaskDefinition(CreateDsTaskDefinitionRequest) returns (DsTaskDefinition) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsTaskDefinitionBeans"
-      body: "DsTaskDefinitionBean"
+      post: "/v1alpha1/DsTaskDefinitions"
+      body: "DsTaskDefinition"
     };
   }
 
-  rpc UpdateDsTaskDefinitionBean(UpdateDsTaskDefinitionBeanRequest) returns (DsTaskDefinitionBean) {
+  rpc UpdateDsTaskDefinition(UpdateDsTaskDefinitionRequest) returns (DsTaskDefinition) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsTaskDefinitionBean.name=DsTaskDefinitionBeans/*}"
-      body: "DsTaskDefinitionBean"
+      patch: "/v1alpha1/{DsTaskDefinition.name=DsTaskDefinitions/*}"
+      body: "DsTaskDefinition"
     };
   }
 
-  rpc DeleteDsTaskDefinitionBean(DeleteDsTaskDefinitionBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsTaskDefinition(DeleteDsTaskDefinitionRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsTaskDefinitionBeans/*}"
+      delete: "/v1alpha1/{name=DsTaskDefinitions/*}"
     };
   }
 }
 
-// message DsTaskDefinitionBean {
+// message DsTaskDefinition {
 // ! This should be defined elsewhere
 // }
 
-message ListDsTaskDefinitionBeansRequest {
+message ListDsTaskDefinitionsRequest {
 
 
   // The maximum number of items to return.
@@ -84,42 +84,42 @@ message ListDsTaskDefinitionBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsTaskDefinitionBeansResponse {
-  // The field name should match the noun "DsTaskDefinitionBean" in the method name.
+message ListDsTaskDefinitionsResponse {
+  // The field name should match the noun "DsTaskDefinition" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsTaskDefinitionBean DsTaskDefinitionBeans = 1;
+  repeated DsTaskDefinition DsTaskDefinitions = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsTaskDefinitionBeanRequest {
+message GetDsTaskDefinitionRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsTaskDefinitionBeanRequest {
-  // The parent resource name where the DsTaskDefinitionBean is to be created.
+message CreateDsTaskDefinitionRequest {
+  // The parent resource name where the DsTaskDefinition is to be created.
   string parent = 1;
 
-  // The DsTaskDefinitionBean id to use for this DsTaskDefinitionBean.
-  string DsTaskDefinitionBean_id = 2;
+  // The DsTaskDefinition id to use for this DsTaskDefinition.
+  string DsTaskDefinition_id = 2;
 
-  // The DsTaskDefinitionBean resource to create.
+  // The DsTaskDefinition resource to create.
   // The field name should match the Noun in the method name.
-  DsTaskDefinitionBean DsTaskDefinitionBean = 3;
+  DsTaskDefinition DsTaskDefinition = 3;
 }
 
-message UpdateDsTaskDefinitionBeanRequest {
-  // The DsTaskDefinitionBean resource which replaces the resource on the server.
-  DsTaskDefinitionBean DsTaskDefinitionBean = 1;
+message UpdateDsTaskDefinitionRequest {
+  // The DsTaskDefinition resource which replaces the resource on the server.
+  DsTaskDefinition DsTaskDefinition = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsTaskDefinitionBeanRequest {
-  // The resource name of the DsTaskDefinitionBean to be deleted.
+message DeleteDsTaskDefinitionRequest {
+  // The resource name of the DsTaskDefinition to be deleted.
   string name = 1;
 }

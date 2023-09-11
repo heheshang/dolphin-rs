@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct QrtzSchedulerStateBean {
+pub struct QrtzSchedulerState {
     #[prost(string, tag = "1")]
     pub sched_name: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
@@ -14,7 +14,7 @@ pub struct QrtzSchedulerStateBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQrtzSchedulerStateBeansRequest {
+pub struct ListQrtzSchedulerStatesRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -23,42 +23,42 @@ pub struct ListQrtzSchedulerStateBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQrtzSchedulerStateBeansResponse {
-    /// The field name should match the noun "QrtzSchedulerStateBean" in the method name.
+pub struct ListQrtzSchedulerStatesResponse {
+    /// The field name should match the noun "QrtzSchedulerState" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub qrtz_scheduler_state_beans: ::prost::alloc::vec::Vec<QrtzSchedulerStateBean>,
+    pub qrtz_scheduler_states: ::prost::alloc::vec::Vec<QrtzSchedulerState>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetQrtzSchedulerStateBeanRequest {
+pub struct GetQrtzSchedulerStateRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateQrtzSchedulerStateBeanRequest {
-    /// The parent resource name where the QrtzSchedulerStateBean is to be created.
+pub struct CreateQrtzSchedulerStateRequest {
+    /// The parent resource name where the QrtzSchedulerState is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The QrtzSchedulerStateBean id to use for this QrtzSchedulerStateBean.
+    /// The QrtzSchedulerState id to use for this QrtzSchedulerState.
     #[prost(string, tag = "2")]
-    pub qrtz_scheduler_state_bean_id: ::prost::alloc::string::String,
-    /// The QrtzSchedulerStateBean resource to create.
+    pub qrtz_scheduler_state_id: ::prost::alloc::string::String,
+    /// The QrtzSchedulerState resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub qrtz_scheduler_state_bean: ::core::option::Option<QrtzSchedulerStateBean>,
+    pub qrtz_scheduler_state: ::core::option::Option<QrtzSchedulerState>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateQrtzSchedulerStateBeanRequest {
-    /// The QrtzSchedulerStateBean resource which replaces the resource on the server.
+pub struct UpdateQrtzSchedulerStateRequest {
+    /// The QrtzSchedulerState resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub qrtz_scheduler_state_bean: ::core::option::Option<QrtzSchedulerStateBean>,
+    pub qrtz_scheduler_state: ::core::option::Option<QrtzSchedulerState>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -66,21 +66,21 @@ pub struct UpdateQrtzSchedulerStateBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteQrtzSchedulerStateBeanRequest {
-    /// The resource name of the QrtzSchedulerStateBean to be deleted.
+pub struct DeleteQrtzSchedulerStateRequest {
+    /// The resource name of the QrtzSchedulerState to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod qrtz_scheduler_state_bean_service_client {
+pub mod qrtz_scheduler_state_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct QrtzSchedulerStateBeanServiceClient<T> {
+    pub struct QrtzSchedulerStateServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl QrtzSchedulerStateBeanServiceClient<tonic::transport::Channel> {
+    impl QrtzSchedulerStateServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -91,7 +91,7 @@ pub mod qrtz_scheduler_state_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> QrtzSchedulerStateBeanServiceClient<T>
+    impl<T> QrtzSchedulerStateServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -111,7 +111,7 @@ pub mod qrtz_scheduler_state_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> QrtzSchedulerStateBeanServiceClient<InterceptedService<T, F>>
+        ) -> QrtzSchedulerStateServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -124,7 +124,7 @@ pub mod qrtz_scheduler_state_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            QrtzSchedulerStateBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            QrtzSchedulerStateServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -162,11 +162,11 @@ pub mod qrtz_scheduler_state_bean_service_client {
             self
         }
 
-        pub async fn list_qrtz_scheduler_state_beans(
+        pub async fn list_qrtz_scheduler_states(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListQrtzSchedulerStateBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListQrtzSchedulerStatesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListQrtzSchedulerStateBeansResponse>,
+            tonic::Response<super::ListQrtzSchedulerStatesResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -177,20 +177,20 @@ pub mod qrtz_scheduler_state_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_scheduler_state.QrtzSchedulerStateBeanService/ListQrtzSchedulerStateBeans",
+                "/qrtz_scheduler_state.QrtzSchedulerStateService/ListQrtzSchedulerStates",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_scheduler_state.QrtzSchedulerStateBeanService",
-                "ListQrtzSchedulerStateBeans",
+                "qrtz_scheduler_state.QrtzSchedulerStateService",
+                "ListQrtzSchedulerStates",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_qrtz_scheduler_state_bean(
+        pub async fn get_qrtz_scheduler_state(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetQrtzSchedulerStateBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzSchedulerStateBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::GetQrtzSchedulerStateRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzSchedulerState>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -200,20 +200,20 @@ pub mod qrtz_scheduler_state_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_scheduler_state.QrtzSchedulerStateBeanService/GetQrtzSchedulerStateBean",
+                "/qrtz_scheduler_state.QrtzSchedulerStateService/GetQrtzSchedulerState",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_scheduler_state.QrtzSchedulerStateBeanService",
-                "GetQrtzSchedulerStateBean",
+                "qrtz_scheduler_state.QrtzSchedulerStateService",
+                "GetQrtzSchedulerState",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_qrtz_scheduler_state_bean(
+        pub async fn create_qrtz_scheduler_state(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateQrtzSchedulerStateBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzSchedulerStateBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::CreateQrtzSchedulerStateRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzSchedulerState>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -223,20 +223,20 @@ pub mod qrtz_scheduler_state_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_scheduler_state.QrtzSchedulerStateBeanService/CreateQrtzSchedulerStateBean",
+                "/qrtz_scheduler_state.QrtzSchedulerStateService/CreateQrtzSchedulerState",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_scheduler_state.QrtzSchedulerStateBeanService",
-                "CreateQrtzSchedulerStateBean",
+                "qrtz_scheduler_state.QrtzSchedulerStateService",
+                "CreateQrtzSchedulerState",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_qrtz_scheduler_state_bean(
+        pub async fn update_qrtz_scheduler_state(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateQrtzSchedulerStateBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzSchedulerStateBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::UpdateQrtzSchedulerStateRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzSchedulerState>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -246,19 +246,19 @@ pub mod qrtz_scheduler_state_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_scheduler_state.QrtzSchedulerStateBeanService/UpdateQrtzSchedulerStateBean",
+                "/qrtz_scheduler_state.QrtzSchedulerStateService/UpdateQrtzSchedulerState",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_scheduler_state.QrtzSchedulerStateBeanService",
-                "UpdateQrtzSchedulerStateBean",
+                "qrtz_scheduler_state.QrtzSchedulerStateService",
+                "UpdateQrtzSchedulerState",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_qrtz_scheduler_state_bean(
+        pub async fn delete_qrtz_scheduler_state(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteQrtzSchedulerStateBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteQrtzSchedulerStateRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -268,51 +268,51 @@ pub mod qrtz_scheduler_state_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_scheduler_state.QrtzSchedulerStateBeanService/DeleteQrtzSchedulerStateBean",
+                "/qrtz_scheduler_state.QrtzSchedulerStateService/DeleteQrtzSchedulerState",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_scheduler_state.QrtzSchedulerStateBeanService",
-                "DeleteQrtzSchedulerStateBean",
+                "qrtz_scheduler_state.QrtzSchedulerStateService",
+                "DeleteQrtzSchedulerState",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod qrtz_scheduler_state_bean_service_server {
+pub mod qrtz_scheduler_state_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with QrtzSchedulerStateBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with QrtzSchedulerStateServiceServer.
     #[async_trait]
-    pub trait QrtzSchedulerStateBeanService: Send + Sync + 'static {
-        async fn list_qrtz_scheduler_state_beans(
+    pub trait QrtzSchedulerStateService: Send + Sync + 'static {
+        async fn list_qrtz_scheduler_states(
             &self,
-            request: tonic::Request<super::ListQrtzSchedulerStateBeansRequest>,
+            request: tonic::Request<super::ListQrtzSchedulerStatesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListQrtzSchedulerStateBeansResponse>,
+            tonic::Response<super::ListQrtzSchedulerStatesResponse>,
             tonic::Status,
         >;
-        async fn get_qrtz_scheduler_state_bean(
+        async fn get_qrtz_scheduler_state(
             &self,
-            request: tonic::Request<super::GetQrtzSchedulerStateBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzSchedulerStateBean>, tonic::Status>;
-        async fn create_qrtz_scheduler_state_bean(
+            request: tonic::Request<super::GetQrtzSchedulerStateRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzSchedulerState>, tonic::Status>;
+        async fn create_qrtz_scheduler_state(
             &self,
-            request: tonic::Request<super::CreateQrtzSchedulerStateBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzSchedulerStateBean>, tonic::Status>;
-        async fn update_qrtz_scheduler_state_bean(
+            request: tonic::Request<super::CreateQrtzSchedulerStateRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzSchedulerState>, tonic::Status>;
+        async fn update_qrtz_scheduler_state(
             &self,
-            request: tonic::Request<super::UpdateQrtzSchedulerStateBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzSchedulerStateBean>, tonic::Status>;
-        async fn delete_qrtz_scheduler_state_bean(
+            request: tonic::Request<super::UpdateQrtzSchedulerStateRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzSchedulerState>, tonic::Status>;
+        async fn delete_qrtz_scheduler_state(
             &self,
-            request: tonic::Request<super::DeleteQrtzSchedulerStateBeanRequest>,
+            request: tonic::Request<super::DeleteQrtzSchedulerStateRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct QrtzSchedulerStateBeanServiceServer<T: QrtzSchedulerStateBeanService> {
+    pub struct QrtzSchedulerStateServiceServer<T: QrtzSchedulerStateService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -320,7 +320,7 @@ pub mod qrtz_scheduler_state_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: QrtzSchedulerStateBeanService> QrtzSchedulerStateBeanServiceServer<T> {
+    impl<T: QrtzSchedulerStateService> QrtzSchedulerStateServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -373,9 +373,9 @@ pub mod qrtz_scheduler_state_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for QrtzSchedulerStateBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for QrtzSchedulerStateServiceServer<T>
     where
-        T: QrtzSchedulerStateBeanService,
+        T: QrtzSchedulerStateService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -393,27 +393,23 @@ pub mod qrtz_scheduler_state_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/qrtz_scheduler_state.QrtzSchedulerStateBeanService/\
-                 ListQrtzSchedulerStateBeans" => {
+                "/qrtz_scheduler_state.QrtzSchedulerStateService/ListQrtzSchedulerStates" => {
                     #[allow(non_camel_case_types)]
-                    struct ListQrtzSchedulerStateBeansSvc<T: QrtzSchedulerStateBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: QrtzSchedulerStateBeanService>
-                        tonic::server::UnaryService<super::ListQrtzSchedulerStateBeansRequest>
-                        for ListQrtzSchedulerStateBeansSvc<T>
+                    struct ListQrtzSchedulerStatesSvc<T: QrtzSchedulerStateService>(pub Arc<T>);
+                    impl<T: QrtzSchedulerStateService>
+                        tonic::server::UnaryService<super::ListQrtzSchedulerStatesRequest>
+                        for ListQrtzSchedulerStatesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListQrtzSchedulerStateBeansResponse;
+                        type Response = super::ListQrtzSchedulerStatesResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListQrtzSchedulerStateBeansRequest>,
+                            request: tonic::Request<super::ListQrtzSchedulerStatesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).list_qrtz_scheduler_state_beans(request).await
-                            };
+                            let fut =
+                                async move { (*inner).list_qrtz_scheduler_states(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -424,7 +420,7 @@ pub mod qrtz_scheduler_state_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListQrtzSchedulerStateBeansSvc(inner);
+                        let method = ListQrtzSchedulerStatesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -440,26 +436,23 @@ pub mod qrtz_scheduler_state_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_scheduler_state.QrtzSchedulerStateBeanService/GetQrtzSchedulerStateBean" => {
+                "/qrtz_scheduler_state.QrtzSchedulerStateService/GetQrtzSchedulerState" => {
                     #[allow(non_camel_case_types)]
-                    struct GetQrtzSchedulerStateBeanSvc<T: QrtzSchedulerStateBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: QrtzSchedulerStateBeanService>
-                        tonic::server::UnaryService<super::GetQrtzSchedulerStateBeanRequest>
-                        for GetQrtzSchedulerStateBeanSvc<T>
+                    struct GetQrtzSchedulerStateSvc<T: QrtzSchedulerStateService>(pub Arc<T>);
+                    impl<T: QrtzSchedulerStateService>
+                        tonic::server::UnaryService<super::GetQrtzSchedulerStateRequest>
+                        for GetQrtzSchedulerStateSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzSchedulerStateBean;
+                        type Response = super::QrtzSchedulerState;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetQrtzSchedulerStateBeanRequest>,
+                            request: tonic::Request<super::GetQrtzSchedulerStateRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_qrtz_scheduler_state_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_qrtz_scheduler_state(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -470,7 +463,7 @@ pub mod qrtz_scheduler_state_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetQrtzSchedulerStateBeanSvc(inner);
+                        let method = GetQrtzSchedulerStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -486,27 +479,23 @@ pub mod qrtz_scheduler_state_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_scheduler_state.QrtzSchedulerStateBeanService/\
-                 CreateQrtzSchedulerStateBean" => {
+                "/qrtz_scheduler_state.QrtzSchedulerStateService/CreateQrtzSchedulerState" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateQrtzSchedulerStateBeanSvc<T: QrtzSchedulerStateBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: QrtzSchedulerStateBeanService>
-                        tonic::server::UnaryService<super::CreateQrtzSchedulerStateBeanRequest>
-                        for CreateQrtzSchedulerStateBeanSvc<T>
+                    struct CreateQrtzSchedulerStateSvc<T: QrtzSchedulerStateService>(pub Arc<T>);
+                    impl<T: QrtzSchedulerStateService>
+                        tonic::server::UnaryService<super::CreateQrtzSchedulerStateRequest>
+                        for CreateQrtzSchedulerStateSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzSchedulerStateBean;
+                        type Response = super::QrtzSchedulerState;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateQrtzSchedulerStateBeanRequest>,
+                            request: tonic::Request<super::CreateQrtzSchedulerStateRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).create_qrtz_scheduler_state_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).create_qrtz_scheduler_state(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -517,7 +506,7 @@ pub mod qrtz_scheduler_state_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateQrtzSchedulerStateBeanSvc(inner);
+                        let method = CreateQrtzSchedulerStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -533,27 +522,23 @@ pub mod qrtz_scheduler_state_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_scheduler_state.QrtzSchedulerStateBeanService/\
-                 UpdateQrtzSchedulerStateBean" => {
+                "/qrtz_scheduler_state.QrtzSchedulerStateService/UpdateQrtzSchedulerState" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateQrtzSchedulerStateBeanSvc<T: QrtzSchedulerStateBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: QrtzSchedulerStateBeanService>
-                        tonic::server::UnaryService<super::UpdateQrtzSchedulerStateBeanRequest>
-                        for UpdateQrtzSchedulerStateBeanSvc<T>
+                    struct UpdateQrtzSchedulerStateSvc<T: QrtzSchedulerStateService>(pub Arc<T>);
+                    impl<T: QrtzSchedulerStateService>
+                        tonic::server::UnaryService<super::UpdateQrtzSchedulerStateRequest>
+                        for UpdateQrtzSchedulerStateSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzSchedulerStateBean;
+                        type Response = super::QrtzSchedulerState;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateQrtzSchedulerStateBeanRequest>,
+                            request: tonic::Request<super::UpdateQrtzSchedulerStateRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).update_qrtz_scheduler_state_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).update_qrtz_scheduler_state(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -564,7 +549,7 @@ pub mod qrtz_scheduler_state_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateQrtzSchedulerStateBeanSvc(inner);
+                        let method = UpdateQrtzSchedulerStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -580,27 +565,23 @@ pub mod qrtz_scheduler_state_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_scheduler_state.QrtzSchedulerStateBeanService/\
-                 DeleteQrtzSchedulerStateBean" => {
+                "/qrtz_scheduler_state.QrtzSchedulerStateService/DeleteQrtzSchedulerState" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteQrtzSchedulerStateBeanSvc<T: QrtzSchedulerStateBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: QrtzSchedulerStateBeanService>
-                        tonic::server::UnaryService<super::DeleteQrtzSchedulerStateBeanRequest>
-                        for DeleteQrtzSchedulerStateBeanSvc<T>
+                    struct DeleteQrtzSchedulerStateSvc<T: QrtzSchedulerStateService>(pub Arc<T>);
+                    impl<T: QrtzSchedulerStateService>
+                        tonic::server::UnaryService<super::DeleteQrtzSchedulerStateRequest>
+                        for DeleteQrtzSchedulerStateSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteQrtzSchedulerStateBeanRequest>,
+                            request: tonic::Request<super::DeleteQrtzSchedulerStateRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).delete_qrtz_scheduler_state_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).delete_qrtz_scheduler_state(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -611,7 +592,7 @@ pub mod qrtz_scheduler_state_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteQrtzSchedulerStateBeanSvc(inner);
+                        let method = DeleteQrtzSchedulerStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -638,7 +619,7 @@ pub mod qrtz_scheduler_state_bean_service_server {
             }
         }
     }
-    impl<T: QrtzSchedulerStateBeanService> Clone for QrtzSchedulerStateBeanServiceServer<T> {
+    impl<T: QrtzSchedulerStateService> Clone for QrtzSchedulerStateServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -650,7 +631,7 @@ pub mod qrtz_scheduler_state_bean_service_server {
             }
         }
     }
-    impl<T: QrtzSchedulerStateBeanService> Clone for _Inner<T> {
+    impl<T: QrtzSchedulerStateService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -660,9 +641,9 @@ pub mod qrtz_scheduler_state_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: QrtzSchedulerStateBeanService> tonic::server::NamedService
-        for QrtzSchedulerStateBeanServiceServer<T>
+    impl<T: QrtzSchedulerStateService> tonic::server::NamedService
+        for QrtzSchedulerStateServiceServer<T>
     {
-        const NAME: &'static str = "qrtz_scheduler_state.QrtzSchedulerStateBeanService";
+        const NAME: &'static str = "qrtz_scheduler_state.QrtzSchedulerStateService";
     }
 }

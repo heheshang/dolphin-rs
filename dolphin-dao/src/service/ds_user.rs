@@ -1,4 +1,4 @@
-use super::service::DolphinRpcServer;
+use super::dao_service::DolphinRpcServer;
 use dolphin_common::{
     core_error::error::DolphinErrorInfo,
     core_results::results::{GrpcRequest, GrpcResponse},
@@ -6,26 +6,23 @@ use dolphin_common::{
 };
 use entity::t_ds_user::{self};
 use proto::ds_user::{
-    ds_user_bean_service_server::DsUserBeanService,
-    CreateDsUserBeanRequest,
-    DeleteDsUserBeanRequest,
-    DsUserBean,
-    GetDsUserBeanRequest,
+    ds_user_service_server::DsUserService,
+    CreateDsUserRequest,
+    DeleteDsUserRequest,
+    DsUser,
     GetDsUserByIdRequest,
     GetDsUserByIdResponse,
-    ListDsUserBeansRequest,
-    ListDsUserBeansResponse,
-    UpdateDsUserBeanRequest,
+    GetDsUserRequest,
+    ListDsUsersRequest,
+    ListDsUsersResponse,
+    UpdateDsUserRequest,
 };
 use sea_orm::entity::prelude::*;
 
 
 #[tonic::async_trait]
-impl DsUserBeanService for DolphinRpcServer {
-    async fn get_ds_user_bean(
-        &self,
-        req: GrpcRequest<GetDsUserBeanRequest>,
-    ) -> GrpcResponse<DsUserBean> {
+impl DsUserService for DolphinRpcServer {
+    async fn get_ds_user(&self, req: GrpcRequest<GetDsUserRequest>) -> GrpcResponse<DsUser> {
         let conn = &self.conn;
         let name = req.into_inner().name;
         let db_user: Option<t_ds_user::Model> = t_ds_user::Entity::find()
@@ -42,12 +39,9 @@ impl DsUserBeanService for DolphinRpcServer {
         }
     }
 
-    async fn update_ds_user_bean(
-        &self,
-        req: GrpcRequest<UpdateDsUserBeanRequest>,
-    ) -> GrpcResponse<DsUserBean> {
+    async fn update_ds_user(&self, req: GrpcRequest<UpdateDsUserRequest>) -> GrpcResponse<DsUser> {
         let conn = &self.conn;
-        if let Some(user) = req.into_inner().ds_user_bean {
+        if let Some(user) = req.into_inner().ds_user {
             let db_user = t_ds_user::Entity::find_by_id(user.id)
                 .one(conn)
                 .await
@@ -60,28 +54,25 @@ impl DsUserBeanService for DolphinRpcServer {
             Ok(tonic::Response::new(db_user.into()))
         } else {
             Err(tonic::Status::not_found("User not found"))
-            // Ok(tonic::Response::new(DsUserBean::default()))
+            // Ok(tonic::Response::new(DsUser::default()))
         }
     }
 
-    async fn list_ds_user_beans(
+    async fn list_ds_users(
         &self,
-        _req: GrpcRequest<ListDsUserBeansRequest>,
-    ) -> GrpcResponse<ListDsUserBeansResponse> {
+        _req: GrpcRequest<ListDsUsersRequest>,
+    ) -> GrpcResponse<ListDsUsersResponse> {
         todo!()
     }
 
-    async fn create_ds_user_bean(
+    async fn create_ds_user(
         &self,
-        _request: GrpcRequest<CreateDsUserBeanRequest>,
-    ) -> GrpcResponse<DsUserBean> {
+        _request: GrpcRequest<CreateDsUserRequest>,
+    ) -> GrpcResponse<DsUser> {
         todo!()
     }
 
-    async fn delete_ds_user_bean(
-        &self,
-        _request: GrpcRequest<DeleteDsUserBeanRequest>,
-    ) -> GrpcResponse<()> {
+    async fn delete_ds_user(&self, _request: GrpcRequest<DeleteDsUserRequest>) -> GrpcResponse<()> {
         todo!()
     }
 
@@ -99,10 +90,10 @@ impl DsUserBeanService for DolphinRpcServer {
             .map_err(|_| tonic::Status::not_found("User not found"))?;
         match db_user {
             Some(v) => Ok(tonic::Response::new(GetDsUserByIdResponse {
-                ds_user_bean: Some(v.into()),
+                ds_user: Some(v.into()),
             })),
             None => Ok(tonic::Response::new(GetDsUserByIdResponse {
-                ds_user_bean: None,
+                ds_user: None,
             })),
         }
     }
@@ -110,7 +101,7 @@ impl DsUserBeanService for DolphinRpcServer {
     async fn query_user_by_name_password(
         &self,
         req: tonic::Request<proto::ds_user::QueryUserByNamePasswordRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_user::DsUserBean>, tonic::Status> {
+    ) -> std::result::Result<tonic::Response<proto::ds_user::DsUser>, tonic::Status> {
         let conn = &self.conn;
         let user_name = &req.get_ref().user_name;
         let user_password = &req.get_ref().user_password;

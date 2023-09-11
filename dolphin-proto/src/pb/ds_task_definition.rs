@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsTaskDefinitionBean {
+pub struct DsTaskDefinition {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int64, tag = "2")]
@@ -54,7 +54,7 @@ pub struct DsTaskDefinitionBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsTaskDefinitionBeansRequest {
+pub struct ListDsTaskDefinitionsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -63,42 +63,42 @@ pub struct ListDsTaskDefinitionBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsTaskDefinitionBeansResponse {
-    /// The field name should match the noun "DsTaskDefinitionBean" in the method name.
+pub struct ListDsTaskDefinitionsResponse {
+    /// The field name should match the noun "DsTaskDefinition" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_task_definition_beans: ::prost::alloc::vec::Vec<DsTaskDefinitionBean>,
+    pub ds_task_definitions: ::prost::alloc::vec::Vec<DsTaskDefinition>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsTaskDefinitionBeanRequest {
+pub struct GetDsTaskDefinitionRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsTaskDefinitionBeanRequest {
-    /// The parent resource name where the DsTaskDefinitionBean is to be created.
+pub struct CreateDsTaskDefinitionRequest {
+    /// The parent resource name where the DsTaskDefinition is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsTaskDefinitionBean id to use for this DsTaskDefinitionBean.
+    /// The DsTaskDefinition id to use for this DsTaskDefinition.
     #[prost(string, tag = "2")]
-    pub ds_task_definition_bean_id: ::prost::alloc::string::String,
-    /// The DsTaskDefinitionBean resource to create.
+    pub ds_task_definition_id: ::prost::alloc::string::String,
+    /// The DsTaskDefinition resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_task_definition_bean: ::core::option::Option<DsTaskDefinitionBean>,
+    pub ds_task_definition: ::core::option::Option<DsTaskDefinition>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsTaskDefinitionBeanRequest {
-    /// The DsTaskDefinitionBean resource which replaces the resource on the server.
+pub struct UpdateDsTaskDefinitionRequest {
+    /// The DsTaskDefinition resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_task_definition_bean: ::core::option::Option<DsTaskDefinitionBean>,
+    pub ds_task_definition: ::core::option::Option<DsTaskDefinition>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -106,21 +106,21 @@ pub struct UpdateDsTaskDefinitionBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsTaskDefinitionBeanRequest {
-    /// The resource name of the DsTaskDefinitionBean to be deleted.
+pub struct DeleteDsTaskDefinitionRequest {
+    /// The resource name of the DsTaskDefinition to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_task_definition_bean_service_client {
+pub mod ds_task_definition_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsTaskDefinitionBeanServiceClient<T> {
+    pub struct DsTaskDefinitionServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsTaskDefinitionBeanServiceClient<tonic::transport::Channel> {
+    impl DsTaskDefinitionServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -131,7 +131,7 @@ pub mod ds_task_definition_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsTaskDefinitionBeanServiceClient<T>
+    impl<T> DsTaskDefinitionServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -151,7 +151,7 @@ pub mod ds_task_definition_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsTaskDefinitionBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsTaskDefinitionServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -164,7 +164,7 @@ pub mod ds_task_definition_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsTaskDefinitionBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsTaskDefinitionServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -202,35 +202,10 @@ pub mod ds_task_definition_bean_service_client {
             self
         }
 
-        pub async fn list_ds_task_definition_beans(
+        pub async fn list_ds_task_definitions(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsTaskDefinitionBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsTaskDefinitionBeansResponse>,
-            tonic::Status,
-        > {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_definition.DsTaskDefinitionBeanService/ListDsTaskDefinitionBeans",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_definition.DsTaskDefinitionBeanService",
-                "ListDsTaskDefinitionBeans",
-            ));
-            self.inner.unary(req, path, codec).await
-        }
-
-        pub async fn get_ds_task_definition_bean(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetDsTaskDefinitionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsTaskDefinitionsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsTaskDefinitionsResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -240,21 +215,20 @@ pub mod ds_task_definition_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_definition.DsTaskDefinitionBeanService/GetDsTaskDefinitionBean",
+                "/ds_task_definition.DsTaskDefinitionService/ListDsTaskDefinitions",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_definition.DsTaskDefinitionBeanService",
-                "GetDsTaskDefinitionBean",
+                "ds_task_definition.DsTaskDefinitionService",
+                "ListDsTaskDefinitions",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_task_definition_bean(
+        pub async fn get_ds_task_definition(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsTaskDefinitionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::GetDsTaskDefinitionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskDefinition>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -263,21 +237,20 @@ pub mod ds_task_definition_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_definition.DsTaskDefinitionBeanService/CreateDsTaskDefinitionBean",
+                "/ds_task_definition.DsTaskDefinitionService/GetDsTaskDefinition",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_definition.DsTaskDefinitionBeanService",
-                "CreateDsTaskDefinitionBean",
+                "ds_task_definition.DsTaskDefinitionService",
+                "GetDsTaskDefinition",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_task_definition_bean(
+        pub async fn create_ds_task_definition(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsTaskDefinitionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::CreateDsTaskDefinitionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskDefinition>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -286,19 +259,41 @@ pub mod ds_task_definition_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_definition.DsTaskDefinitionBeanService/UpdateDsTaskDefinitionBean",
+                "/ds_task_definition.DsTaskDefinitionService/CreateDsTaskDefinition",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_definition.DsTaskDefinitionBeanService",
-                "UpdateDsTaskDefinitionBean",
+                "ds_task_definition.DsTaskDefinitionService",
+                "CreateDsTaskDefinition",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_task_definition_bean(
+        pub async fn update_ds_task_definition(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsTaskDefinitionBeanRequest>,
+            request: impl tonic::IntoRequest<super::UpdateDsTaskDefinitionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskDefinition>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/ds_task_definition.DsTaskDefinitionService/UpdateDsTaskDefinition",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new(
+                "ds_task_definition.DsTaskDefinitionService",
+                "UpdateDsTaskDefinition",
+            ));
+            self.inner.unary(req, path, codec).await
+        }
+
+        pub async fn delete_ds_task_definition(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteDsTaskDefinitionRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -308,51 +303,48 @@ pub mod ds_task_definition_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_definition.DsTaskDefinitionBeanService/DeleteDsTaskDefinitionBean",
+                "/ds_task_definition.DsTaskDefinitionService/DeleteDsTaskDefinition",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_definition.DsTaskDefinitionBeanService",
-                "DeleteDsTaskDefinitionBean",
+                "ds_task_definition.DsTaskDefinitionService",
+                "DeleteDsTaskDefinition",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_task_definition_bean_service_server {
+pub mod ds_task_definition_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsTaskDefinitionBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsTaskDefinitionServiceServer.
     #[async_trait]
-    pub trait DsTaskDefinitionBeanService: Send + Sync + 'static {
-        async fn list_ds_task_definition_beans(
+    pub trait DsTaskDefinitionService: Send + Sync + 'static {
+        async fn list_ds_task_definitions(
             &self,
-            request: tonic::Request<super::ListDsTaskDefinitionBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsTaskDefinitionBeansResponse>,
-            tonic::Status,
-        >;
-        async fn get_ds_task_definition_bean(
+            request: tonic::Request<super::ListDsTaskDefinitionsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsTaskDefinitionsResponse>, tonic::Status>;
+        async fn get_ds_task_definition(
             &self,
-            request: tonic::Request<super::GetDsTaskDefinitionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionBean>, tonic::Status>;
-        async fn create_ds_task_definition_bean(
+            request: tonic::Request<super::GetDsTaskDefinitionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskDefinition>, tonic::Status>;
+        async fn create_ds_task_definition(
             &self,
-            request: tonic::Request<super::CreateDsTaskDefinitionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionBean>, tonic::Status>;
-        async fn update_ds_task_definition_bean(
+            request: tonic::Request<super::CreateDsTaskDefinitionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskDefinition>, tonic::Status>;
+        async fn update_ds_task_definition(
             &self,
-            request: tonic::Request<super::UpdateDsTaskDefinitionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskDefinitionBean>, tonic::Status>;
-        async fn delete_ds_task_definition_bean(
+            request: tonic::Request<super::UpdateDsTaskDefinitionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskDefinition>, tonic::Status>;
+        async fn delete_ds_task_definition(
             &self,
-            request: tonic::Request<super::DeleteDsTaskDefinitionBeanRequest>,
+            request: tonic::Request<super::DeleteDsTaskDefinitionRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsTaskDefinitionBeanServiceServer<T: DsTaskDefinitionBeanService> {
+    pub struct DsTaskDefinitionServiceServer<T: DsTaskDefinitionService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -360,7 +352,7 @@ pub mod ds_task_definition_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsTaskDefinitionBeanService> DsTaskDefinitionBeanServiceServer<T> {
+    impl<T: DsTaskDefinitionService> DsTaskDefinitionServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -413,9 +405,9 @@ pub mod ds_task_definition_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsTaskDefinitionBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsTaskDefinitionServiceServer<T>
     where
-        T: DsTaskDefinitionBeanService,
+        T: DsTaskDefinitionService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -433,67 +425,23 @@ pub mod ds_task_definition_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_task_definition.DsTaskDefinitionBeanService/ListDsTaskDefinitionBeans" => {
+                "/ds_task_definition.DsTaskDefinitionService/ListDsTaskDefinitions" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsTaskDefinitionBeansSvc<T: DsTaskDefinitionBeanService>(pub Arc<T>);
-                    impl<T: DsTaskDefinitionBeanService>
-                        tonic::server::UnaryService<super::ListDsTaskDefinitionBeansRequest>
-                        for ListDsTaskDefinitionBeansSvc<T>
+                    struct ListDsTaskDefinitionsSvc<T: DsTaskDefinitionService>(pub Arc<T>);
+                    impl<T: DsTaskDefinitionService>
+                        tonic::server::UnaryService<super::ListDsTaskDefinitionsRequest>
+                        for ListDsTaskDefinitionsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsTaskDefinitionBeansResponse;
+                        type Response = super::ListDsTaskDefinitionsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsTaskDefinitionBeansRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).list_ds_task_definition_beans(request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = ListDsTaskDefinitionBeansSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/ds_task_definition.DsTaskDefinitionBeanService/GetDsTaskDefinitionBean" => {
-                    #[allow(non_camel_case_types)]
-                    struct GetDsTaskDefinitionBeanSvc<T: DsTaskDefinitionBeanService>(pub Arc<T>);
-                    impl<T: DsTaskDefinitionBeanService>
-                        tonic::server::UnaryService<super::GetDsTaskDefinitionBeanRequest>
-                        for GetDsTaskDefinitionBeanSvc<T>
-                    {
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsTaskDefinitionBean;
-
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::GetDsTaskDefinitionBeanRequest>,
+                            request: tonic::Request<super::ListDsTaskDefinitionsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).get_ds_task_definition_bean(request).await };
+                                async move { (*inner).list_ds_task_definitions(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -504,7 +452,7 @@ pub mod ds_task_definition_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsTaskDefinitionBeanSvc(inner);
+                        let method = ListDsTaskDefinitionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -520,26 +468,22 @@ pub mod ds_task_definition_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_definition.DsTaskDefinitionBeanService/CreateDsTaskDefinitionBean" => {
+                "/ds_task_definition.DsTaskDefinitionService/GetDsTaskDefinition" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsTaskDefinitionBeanSvc<T: DsTaskDefinitionBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsTaskDefinitionBeanService>
-                        tonic::server::UnaryService<super::CreateDsTaskDefinitionBeanRequest>
-                        for CreateDsTaskDefinitionBeanSvc<T>
+                    struct GetDsTaskDefinitionSvc<T: DsTaskDefinitionService>(pub Arc<T>);
+                    impl<T: DsTaskDefinitionService>
+                        tonic::server::UnaryService<super::GetDsTaskDefinitionRequest>
+                        for GetDsTaskDefinitionSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsTaskDefinitionBean;
+                        type Response = super::DsTaskDefinition;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsTaskDefinitionBeanRequest>,
+                            request: tonic::Request<super::GetDsTaskDefinitionRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).create_ds_task_definition_bean(request).await
-                            };
+                            let fut = async move { (*inner).get_ds_task_definition(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -550,7 +494,7 @@ pub mod ds_task_definition_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsTaskDefinitionBeanSvc(inner);
+                        let method = GetDsTaskDefinitionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -566,26 +510,23 @@ pub mod ds_task_definition_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_definition.DsTaskDefinitionBeanService/UpdateDsTaskDefinitionBean" => {
+                "/ds_task_definition.DsTaskDefinitionService/CreateDsTaskDefinition" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsTaskDefinitionBeanSvc<T: DsTaskDefinitionBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsTaskDefinitionBeanService>
-                        tonic::server::UnaryService<super::UpdateDsTaskDefinitionBeanRequest>
-                        for UpdateDsTaskDefinitionBeanSvc<T>
+                    struct CreateDsTaskDefinitionSvc<T: DsTaskDefinitionService>(pub Arc<T>);
+                    impl<T: DsTaskDefinitionService>
+                        tonic::server::UnaryService<super::CreateDsTaskDefinitionRequest>
+                        for CreateDsTaskDefinitionSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsTaskDefinitionBean;
+                        type Response = super::DsTaskDefinition;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsTaskDefinitionBeanRequest>,
+                            request: tonic::Request<super::CreateDsTaskDefinitionRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).update_ds_task_definition_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).create_ds_task_definition(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -596,7 +537,7 @@ pub mod ds_task_definition_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsTaskDefinitionBeanSvc(inner);
+                        let method = CreateDsTaskDefinitionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -612,26 +553,66 @@ pub mod ds_task_definition_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_definition.DsTaskDefinitionBeanService/DeleteDsTaskDefinitionBean" => {
+                "/ds_task_definition.DsTaskDefinitionService/UpdateDsTaskDefinition" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsTaskDefinitionBeanSvc<T: DsTaskDefinitionBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsTaskDefinitionBeanService>
-                        tonic::server::UnaryService<super::DeleteDsTaskDefinitionBeanRequest>
-                        for DeleteDsTaskDefinitionBeanSvc<T>
+                    struct UpdateDsTaskDefinitionSvc<T: DsTaskDefinitionService>(pub Arc<T>);
+                    impl<T: DsTaskDefinitionService>
+                        tonic::server::UnaryService<super::UpdateDsTaskDefinitionRequest>
+                        for UpdateDsTaskDefinitionSvc<T>
+                    {
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::DsTaskDefinition;
+
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UpdateDsTaskDefinitionRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut =
+                                async move { (*inner).update_ds_task_definition(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = UpdateDsTaskDefinitionSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/ds_task_definition.DsTaskDefinitionService/DeleteDsTaskDefinition" => {
+                    #[allow(non_camel_case_types)]
+                    struct DeleteDsTaskDefinitionSvc<T: DsTaskDefinitionService>(pub Arc<T>);
+                    impl<T: DsTaskDefinitionService>
+                        tonic::server::UnaryService<super::DeleteDsTaskDefinitionRequest>
+                        for DeleteDsTaskDefinitionSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsTaskDefinitionBeanRequest>,
+                            request: tonic::Request<super::DeleteDsTaskDefinitionRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).delete_ds_task_definition_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).delete_ds_task_definition(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -642,7 +623,7 @@ pub mod ds_task_definition_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsTaskDefinitionBeanSvc(inner);
+                        let method = DeleteDsTaskDefinitionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -669,7 +650,7 @@ pub mod ds_task_definition_bean_service_server {
             }
         }
     }
-    impl<T: DsTaskDefinitionBeanService> Clone for DsTaskDefinitionBeanServiceServer<T> {
+    impl<T: DsTaskDefinitionService> Clone for DsTaskDefinitionServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -681,7 +662,7 @@ pub mod ds_task_definition_bean_service_server {
             }
         }
     }
-    impl<T: DsTaskDefinitionBeanService> Clone for _Inner<T> {
+    impl<T: DsTaskDefinitionService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -691,9 +672,7 @@ pub mod ds_task_definition_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsTaskDefinitionBeanService> tonic::server::NamedService
-        for DsTaskDefinitionBeanServiceServer<T>
-    {
-        const NAME: &'static str = "ds_task_definition.DsTaskDefinitionBeanService";
+    impl<T: DsTaskDefinitionService> tonic::server::NamedService for DsTaskDefinitionServiceServer<T> {
+        const NAME: &'static str = "ds_task_definition.DsTaskDefinitionService";
     }
 }

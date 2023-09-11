@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsAlertPluginInstanceBean {
+pub struct DsAlertPluginInstance {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int32, tag = "2")]
@@ -18,7 +18,7 @@ pub struct DsAlertPluginInstanceBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsAlertPluginInstanceBeansRequest {
+pub struct ListDsAlertPluginInstancesRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -27,42 +27,42 @@ pub struct ListDsAlertPluginInstanceBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsAlertPluginInstanceBeansResponse {
-    /// The field name should match the noun "DsAlertPluginInstanceBean" in the method name.
+pub struct ListDsAlertPluginInstancesResponse {
+    /// The field name should match the noun "DsAlertPluginInstance" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_alert_plugin_instance_beans: ::prost::alloc::vec::Vec<DsAlertPluginInstanceBean>,
+    pub ds_alert_plugin_instances: ::prost::alloc::vec::Vec<DsAlertPluginInstance>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsAlertPluginInstanceBeanRequest {
+pub struct GetDsAlertPluginInstanceRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsAlertPluginInstanceBeanRequest {
-    /// The parent resource name where the DsAlertPluginInstanceBean is to be created.
+pub struct CreateDsAlertPluginInstanceRequest {
+    /// The parent resource name where the DsAlertPluginInstance is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsAlertPluginInstanceBean id to use for this DsAlertPluginInstanceBean.
+    /// The DsAlertPluginInstance id to use for this DsAlertPluginInstance.
     #[prost(string, tag = "2")]
-    pub ds_alert_plugin_instance_bean_id: ::prost::alloc::string::String,
-    /// The DsAlertPluginInstanceBean resource to create.
+    pub ds_alert_plugin_instance_id: ::prost::alloc::string::String,
+    /// The DsAlertPluginInstance resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_alert_plugin_instance_bean: ::core::option::Option<DsAlertPluginInstanceBean>,
+    pub ds_alert_plugin_instance: ::core::option::Option<DsAlertPluginInstance>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsAlertPluginInstanceBeanRequest {
-    /// The DsAlertPluginInstanceBean resource which replaces the resource on the server.
+pub struct UpdateDsAlertPluginInstanceRequest {
+    /// The DsAlertPluginInstance resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_alert_plugin_instance_bean: ::core::option::Option<DsAlertPluginInstanceBean>,
+    pub ds_alert_plugin_instance: ::core::option::Option<DsAlertPluginInstance>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -70,21 +70,21 @@ pub struct UpdateDsAlertPluginInstanceBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsAlertPluginInstanceBeanRequest {
-    /// The resource name of the DsAlertPluginInstanceBean to be deleted.
+pub struct DeleteDsAlertPluginInstanceRequest {
+    /// The resource name of the DsAlertPluginInstance to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_alert_plugin_instance_bean_service_client {
+pub mod ds_alert_plugin_instance_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsAlertPluginInstanceBeanServiceClient<T> {
+    pub struct DsAlertPluginInstanceServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsAlertPluginInstanceBeanServiceClient<tonic::transport::Channel> {
+    impl DsAlertPluginInstanceServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -95,7 +95,7 @@ pub mod ds_alert_plugin_instance_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsAlertPluginInstanceBeanServiceClient<T>
+    impl<T> DsAlertPluginInstanceServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -115,7 +115,7 @@ pub mod ds_alert_plugin_instance_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsAlertPluginInstanceBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsAlertPluginInstanceServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -128,7 +128,7 @@ pub mod ds_alert_plugin_instance_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsAlertPluginInstanceBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsAlertPluginInstanceServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -166,11 +166,11 @@ pub mod ds_alert_plugin_instance_bean_service_client {
             self
         }
 
-        pub async fn list_ds_alert_plugin_instance_beans(
+        pub async fn list_ds_alert_plugin_instances(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsAlertPluginInstanceBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsAlertPluginInstancesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsAlertPluginInstanceBeansResponse>,
+            tonic::Response<super::ListDsAlertPluginInstancesResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -181,21 +181,20 @@ pub mod ds_alert_plugin_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_alert_plugin_instance.DsAlertPluginInstanceBeanService/\
-                 ListDsAlertPluginInstanceBeans",
+                "/ds_alert_plugin_instance.DsAlertPluginInstanceService/ListDsAlertPluginInstances",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_alert_plugin_instance.DsAlertPluginInstanceBeanService",
-                "ListDsAlertPluginInstanceBeans",
+                "ds_alert_plugin_instance.DsAlertPluginInstanceService",
+                "ListDsAlertPluginInstances",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_alert_plugin_instance_bean(
+        pub async fn get_ds_alert_plugin_instance(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsAlertPluginInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAlertPluginInstanceBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::GetDsAlertPluginInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAlertPluginInstance>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -205,21 +204,20 @@ pub mod ds_alert_plugin_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_alert_plugin_instance.DsAlertPluginInstanceBeanService/\
-                 GetDsAlertPluginInstanceBean",
+                "/ds_alert_plugin_instance.DsAlertPluginInstanceService/GetDsAlertPluginInstance",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_alert_plugin_instance.DsAlertPluginInstanceBeanService",
-                "GetDsAlertPluginInstanceBean",
+                "ds_alert_plugin_instance.DsAlertPluginInstanceService",
+                "GetDsAlertPluginInstance",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_alert_plugin_instance_bean(
+        pub async fn create_ds_alert_plugin_instance(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsAlertPluginInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAlertPluginInstanceBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::CreateDsAlertPluginInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAlertPluginInstance>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -229,21 +227,21 @@ pub mod ds_alert_plugin_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_alert_plugin_instance.DsAlertPluginInstanceBeanService/\
-                 CreateDsAlertPluginInstanceBean",
+                "/ds_alert_plugin_instance.DsAlertPluginInstanceService/\
+                 CreateDsAlertPluginInstance",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_alert_plugin_instance.DsAlertPluginInstanceBeanService",
-                "CreateDsAlertPluginInstanceBean",
+                "ds_alert_plugin_instance.DsAlertPluginInstanceService",
+                "CreateDsAlertPluginInstance",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_alert_plugin_instance_bean(
+        pub async fn update_ds_alert_plugin_instance(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsAlertPluginInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAlertPluginInstanceBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::UpdateDsAlertPluginInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAlertPluginInstance>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -253,20 +251,20 @@ pub mod ds_alert_plugin_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_alert_plugin_instance.DsAlertPluginInstanceBeanService/\
-                 UpdateDsAlertPluginInstanceBean",
+                "/ds_alert_plugin_instance.DsAlertPluginInstanceService/\
+                 UpdateDsAlertPluginInstance",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_alert_plugin_instance.DsAlertPluginInstanceBeanService",
-                "UpdateDsAlertPluginInstanceBean",
+                "ds_alert_plugin_instance.DsAlertPluginInstanceService",
+                "UpdateDsAlertPluginInstance",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_alert_plugin_instance_bean(
+        pub async fn delete_ds_alert_plugin_instance(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsAlertPluginInstanceBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsAlertPluginInstanceRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -276,52 +274,52 @@ pub mod ds_alert_plugin_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_alert_plugin_instance.DsAlertPluginInstanceBeanService/\
-                 DeleteDsAlertPluginInstanceBean",
+                "/ds_alert_plugin_instance.DsAlertPluginInstanceService/\
+                 DeleteDsAlertPluginInstance",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_alert_plugin_instance.DsAlertPluginInstanceBeanService",
-                "DeleteDsAlertPluginInstanceBean",
+                "ds_alert_plugin_instance.DsAlertPluginInstanceService",
+                "DeleteDsAlertPluginInstance",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_alert_plugin_instance_bean_service_server {
+pub mod ds_alert_plugin_instance_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsAlertPluginInstanceBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsAlertPluginInstanceServiceServer.
     #[async_trait]
-    pub trait DsAlertPluginInstanceBeanService: Send + Sync + 'static {
-        async fn list_ds_alert_plugin_instance_beans(
+    pub trait DsAlertPluginInstanceService: Send + Sync + 'static {
+        async fn list_ds_alert_plugin_instances(
             &self,
-            request: tonic::Request<super::ListDsAlertPluginInstanceBeansRequest>,
+            request: tonic::Request<super::ListDsAlertPluginInstancesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsAlertPluginInstanceBeansResponse>,
+            tonic::Response<super::ListDsAlertPluginInstancesResponse>,
             tonic::Status,
         >;
-        async fn get_ds_alert_plugin_instance_bean(
+        async fn get_ds_alert_plugin_instance(
             &self,
-            request: tonic::Request<super::GetDsAlertPluginInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAlertPluginInstanceBean>, tonic::Status>;
-        async fn create_ds_alert_plugin_instance_bean(
+            request: tonic::Request<super::GetDsAlertPluginInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAlertPluginInstance>, tonic::Status>;
+        async fn create_ds_alert_plugin_instance(
             &self,
-            request: tonic::Request<super::CreateDsAlertPluginInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAlertPluginInstanceBean>, tonic::Status>;
-        async fn update_ds_alert_plugin_instance_bean(
+            request: tonic::Request<super::CreateDsAlertPluginInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAlertPluginInstance>, tonic::Status>;
+        async fn update_ds_alert_plugin_instance(
             &self,
-            request: tonic::Request<super::UpdateDsAlertPluginInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAlertPluginInstanceBean>, tonic::Status>;
-        async fn delete_ds_alert_plugin_instance_bean(
+            request: tonic::Request<super::UpdateDsAlertPluginInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAlertPluginInstance>, tonic::Status>;
+        async fn delete_ds_alert_plugin_instance(
             &self,
-            request: tonic::Request<super::DeleteDsAlertPluginInstanceBeanRequest>,
+            request: tonic::Request<super::DeleteDsAlertPluginInstanceRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsAlertPluginInstanceBeanServiceServer<T: DsAlertPluginInstanceBeanService> {
+    pub struct DsAlertPluginInstanceServiceServer<T: DsAlertPluginInstanceService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -329,7 +327,7 @@ pub mod ds_alert_plugin_instance_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsAlertPluginInstanceBeanService> DsAlertPluginInstanceBeanServiceServer<T> {
+    impl<T: DsAlertPluginInstanceService> DsAlertPluginInstanceServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -382,9 +380,9 @@ pub mod ds_alert_plugin_instance_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsAlertPluginInstanceBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsAlertPluginInstanceServiceServer<T>
     where
-        T: DsAlertPluginInstanceBeanService,
+        T: DsAlertPluginInstanceService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -402,26 +400,26 @@ pub mod ds_alert_plugin_instance_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_alert_plugin_instance.DsAlertPluginInstanceBeanService/\
-                 ListDsAlertPluginInstanceBeans" => {
+                "/ds_alert_plugin_instance.DsAlertPluginInstanceService/\
+                 ListDsAlertPluginInstances" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsAlertPluginInstanceBeansSvc<T: DsAlertPluginInstanceBeanService>(
+                    struct ListDsAlertPluginInstancesSvc<T: DsAlertPluginInstanceService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsAlertPluginInstanceBeanService>
-                        tonic::server::UnaryService<super::ListDsAlertPluginInstanceBeansRequest>
-                        for ListDsAlertPluginInstanceBeansSvc<T>
+                    impl<T: DsAlertPluginInstanceService>
+                        tonic::server::UnaryService<super::ListDsAlertPluginInstancesRequest>
+                        for ListDsAlertPluginInstancesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsAlertPluginInstanceBeansResponse;
+                        type Response = super::ListDsAlertPluginInstancesResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsAlertPluginInstanceBeansRequest>,
+                            request: tonic::Request<super::ListDsAlertPluginInstancesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).list_ds_alert_plugin_instance_beans(request).await
+                                (*inner).list_ds_alert_plugin_instances(request).await
                             };
                             Box::pin(fut)
                         }
@@ -433,7 +431,7 @@ pub mod ds_alert_plugin_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsAlertPluginInstanceBeansSvc(inner);
+                        let method = ListDsAlertPluginInstancesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -449,27 +447,24 @@ pub mod ds_alert_plugin_instance_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_alert_plugin_instance.DsAlertPluginInstanceBeanService/\
-                 GetDsAlertPluginInstanceBean" => {
+                "/ds_alert_plugin_instance.DsAlertPluginInstanceService/\
+                 GetDsAlertPluginInstance" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsAlertPluginInstanceBeanSvc<T: DsAlertPluginInstanceBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsAlertPluginInstanceBeanService>
-                        tonic::server::UnaryService<super::GetDsAlertPluginInstanceBeanRequest>
-                        for GetDsAlertPluginInstanceBeanSvc<T>
+                    struct GetDsAlertPluginInstanceSvc<T: DsAlertPluginInstanceService>(pub Arc<T>);
+                    impl<T: DsAlertPluginInstanceService>
+                        tonic::server::UnaryService<super::GetDsAlertPluginInstanceRequest>
+                        for GetDsAlertPluginInstanceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsAlertPluginInstanceBean;
+                        type Response = super::DsAlertPluginInstance;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsAlertPluginInstanceBeanRequest>,
+                            request: tonic::Request<super::GetDsAlertPluginInstanceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_ds_alert_plugin_instance_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_ds_alert_plugin_instance(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -480,7 +475,7 @@ pub mod ds_alert_plugin_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsAlertPluginInstanceBeanSvc(inner);
+                        let method = GetDsAlertPluginInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -496,26 +491,26 @@ pub mod ds_alert_plugin_instance_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_alert_plugin_instance.DsAlertPluginInstanceBeanService/\
-                 CreateDsAlertPluginInstanceBean" => {
+                "/ds_alert_plugin_instance.DsAlertPluginInstanceService/\
+                 CreateDsAlertPluginInstance" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsAlertPluginInstanceBeanSvc<T: DsAlertPluginInstanceBeanService>(
+                    struct CreateDsAlertPluginInstanceSvc<T: DsAlertPluginInstanceService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsAlertPluginInstanceBeanService>
-                        tonic::server::UnaryService<super::CreateDsAlertPluginInstanceBeanRequest>
-                        for CreateDsAlertPluginInstanceBeanSvc<T>
+                    impl<T: DsAlertPluginInstanceService>
+                        tonic::server::UnaryService<super::CreateDsAlertPluginInstanceRequest>
+                        for CreateDsAlertPluginInstanceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsAlertPluginInstanceBean;
+                        type Response = super::DsAlertPluginInstance;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsAlertPluginInstanceBeanRequest>,
+                            request: tonic::Request<super::CreateDsAlertPluginInstanceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).create_ds_alert_plugin_instance_bean(request).await
+                                (*inner).create_ds_alert_plugin_instance(request).await
                             };
                             Box::pin(fut)
                         }
@@ -527,7 +522,7 @@ pub mod ds_alert_plugin_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsAlertPluginInstanceBeanSvc(inner);
+                        let method = CreateDsAlertPluginInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -543,26 +538,26 @@ pub mod ds_alert_plugin_instance_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_alert_plugin_instance.DsAlertPluginInstanceBeanService/\
-                 UpdateDsAlertPluginInstanceBean" => {
+                "/ds_alert_plugin_instance.DsAlertPluginInstanceService/\
+                 UpdateDsAlertPluginInstance" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsAlertPluginInstanceBeanSvc<T: DsAlertPluginInstanceBeanService>(
+                    struct UpdateDsAlertPluginInstanceSvc<T: DsAlertPluginInstanceService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsAlertPluginInstanceBeanService>
-                        tonic::server::UnaryService<super::UpdateDsAlertPluginInstanceBeanRequest>
-                        for UpdateDsAlertPluginInstanceBeanSvc<T>
+                    impl<T: DsAlertPluginInstanceService>
+                        tonic::server::UnaryService<super::UpdateDsAlertPluginInstanceRequest>
+                        for UpdateDsAlertPluginInstanceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsAlertPluginInstanceBean;
+                        type Response = super::DsAlertPluginInstance;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsAlertPluginInstanceBeanRequest>,
+                            request: tonic::Request<super::UpdateDsAlertPluginInstanceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).update_ds_alert_plugin_instance_bean(request).await
+                                (*inner).update_ds_alert_plugin_instance(request).await
                             };
                             Box::pin(fut)
                         }
@@ -574,7 +569,7 @@ pub mod ds_alert_plugin_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsAlertPluginInstanceBeanSvc(inner);
+                        let method = UpdateDsAlertPluginInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -590,26 +585,26 @@ pub mod ds_alert_plugin_instance_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_alert_plugin_instance.DsAlertPluginInstanceBeanService/\
-                 DeleteDsAlertPluginInstanceBean" => {
+                "/ds_alert_plugin_instance.DsAlertPluginInstanceService/\
+                 DeleteDsAlertPluginInstance" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsAlertPluginInstanceBeanSvc<T: DsAlertPluginInstanceBeanService>(
+                    struct DeleteDsAlertPluginInstanceSvc<T: DsAlertPluginInstanceService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsAlertPluginInstanceBeanService>
-                        tonic::server::UnaryService<super::DeleteDsAlertPluginInstanceBeanRequest>
-                        for DeleteDsAlertPluginInstanceBeanSvc<T>
+                    impl<T: DsAlertPluginInstanceService>
+                        tonic::server::UnaryService<super::DeleteDsAlertPluginInstanceRequest>
+                        for DeleteDsAlertPluginInstanceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsAlertPluginInstanceBeanRequest>,
+                            request: tonic::Request<super::DeleteDsAlertPluginInstanceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).delete_ds_alert_plugin_instance_bean(request).await
+                                (*inner).delete_ds_alert_plugin_instance(request).await
                             };
                             Box::pin(fut)
                         }
@@ -621,7 +616,7 @@ pub mod ds_alert_plugin_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsAlertPluginInstanceBeanSvc(inner);
+                        let method = DeleteDsAlertPluginInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -648,7 +643,7 @@ pub mod ds_alert_plugin_instance_bean_service_server {
             }
         }
     }
-    impl<T: DsAlertPluginInstanceBeanService> Clone for DsAlertPluginInstanceBeanServiceServer<T> {
+    impl<T: DsAlertPluginInstanceService> Clone for DsAlertPluginInstanceServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -660,7 +655,7 @@ pub mod ds_alert_plugin_instance_bean_service_server {
             }
         }
     }
-    impl<T: DsAlertPluginInstanceBeanService> Clone for _Inner<T> {
+    impl<T: DsAlertPluginInstanceService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -670,9 +665,9 @@ pub mod ds_alert_plugin_instance_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsAlertPluginInstanceBeanService> tonic::server::NamedService
-        for DsAlertPluginInstanceBeanServiceServer<T>
+    impl<T: DsAlertPluginInstanceService> tonic::server::NamedService
+        for DsAlertPluginInstanceServiceServer<T>
     {
-        const NAME: &'static str = "ds_alert_plugin_instance.DsAlertPluginInstanceBeanService";
+        const NAME: &'static str = "ds_alert_plugin_instance.DsAlertPluginInstanceService";
     }
 }

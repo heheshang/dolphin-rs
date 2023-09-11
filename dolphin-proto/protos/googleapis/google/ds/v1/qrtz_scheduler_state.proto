@@ -8,7 +8,7 @@ import "google/protobuf/field_mask.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
-message QrtzSchedulerStateBean {
+message QrtzSchedulerState {
     string  sched_name=1;
     string instance_name=2;
     int64 last_checkin_time=3;
@@ -16,45 +16,45 @@ message QrtzSchedulerStateBean {
 
 }
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service QrtzSchedulerStateBeanService {
-  rpc ListQrtzSchedulerStateBeans(ListQrtzSchedulerStateBeansRequest) returns (ListQrtzSchedulerStateBeansResponse) {
+service QrtzSchedulerStateService {
+  rpc ListQrtzSchedulerStates(ListQrtzSchedulerStatesRequest) returns (ListQrtzSchedulerStatesResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/QrtzSchedulerStateBeans"
+      get: "/v1alpha1/QrtzSchedulerStates"
     };
   }
 
-  rpc GetQrtzSchedulerStateBean(GetQrtzSchedulerStateBeanRequest) returns (QrtzSchedulerStateBean) {
+  rpc GetQrtzSchedulerState(GetQrtzSchedulerStateRequest) returns (QrtzSchedulerState) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=QrtzSchedulerStateBeans/*}"
+      get: "/v1alpha1/{name=QrtzSchedulerStates/*}"
     };
   }
 
-  rpc CreateQrtzSchedulerStateBean(CreateQrtzSchedulerStateBeanRequest) returns (QrtzSchedulerStateBean) {
+  rpc CreateQrtzSchedulerState(CreateQrtzSchedulerStateRequest) returns (QrtzSchedulerState) {
     option (google.api.http) = {
-      post: "/v1alpha1/QrtzSchedulerStateBeans"
-      body: "QrtzSchedulerStateBean"
+      post: "/v1alpha1/QrtzSchedulerStates"
+      body: "QrtzSchedulerState"
     };
   }
 
-  rpc UpdateQrtzSchedulerStateBean(UpdateQrtzSchedulerStateBeanRequest) returns (QrtzSchedulerStateBean) {
+  rpc UpdateQrtzSchedulerState(UpdateQrtzSchedulerStateRequest) returns (QrtzSchedulerState) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{QrtzSchedulerStateBean.name=QrtzSchedulerStateBeans/*}"
-      body: "QrtzSchedulerStateBean"
+      patch: "/v1alpha1/{QrtzSchedulerState.name=QrtzSchedulerStates/*}"
+      body: "QrtzSchedulerState"
     };
   }
 
-  rpc DeleteQrtzSchedulerStateBean(DeleteQrtzSchedulerStateBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteQrtzSchedulerState(DeleteQrtzSchedulerStateRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=QrtzSchedulerStateBeans/*}"
+      delete: "/v1alpha1/{name=QrtzSchedulerStates/*}"
     };
   }
 }
 
-// message QrtzSchedulerStateBean {
+// message QrtzSchedulerState {
 // ! This should be defined elsewhere
 // }
 
-message ListQrtzSchedulerStateBeansRequest {
+message ListQrtzSchedulerStatesRequest {
 
 
   // The maximum number of items to return.
@@ -63,42 +63,42 @@ message ListQrtzSchedulerStateBeansRequest {
  int32 page_num = 2;
 }
 
-message ListQrtzSchedulerStateBeansResponse {
-  // The field name should match the noun "QrtzSchedulerStateBean" in the method name.
+message ListQrtzSchedulerStatesResponse {
+  // The field name should match the noun "QrtzSchedulerState" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated QrtzSchedulerStateBean QrtzSchedulerStateBeans = 1;
+  repeated QrtzSchedulerState QrtzSchedulerStates = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetQrtzSchedulerStateBeanRequest {
+message GetQrtzSchedulerStateRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateQrtzSchedulerStateBeanRequest {
-  // The parent resource name where the QrtzSchedulerStateBean is to be created.
+message CreateQrtzSchedulerStateRequest {
+  // The parent resource name where the QrtzSchedulerState is to be created.
   string parent = 1;
 
-  // The QrtzSchedulerStateBean id to use for this QrtzSchedulerStateBean.
-  string QrtzSchedulerStateBean_id = 2;
+  // The QrtzSchedulerState id to use for this QrtzSchedulerState.
+  string QrtzSchedulerState_id = 2;
 
-  // The QrtzSchedulerStateBean resource to create.
+  // The QrtzSchedulerState resource to create.
   // The field name should match the Noun in the method name.
-  QrtzSchedulerStateBean QrtzSchedulerStateBean = 3;
+  QrtzSchedulerState QrtzSchedulerState = 3;
 }
 
-message UpdateQrtzSchedulerStateBeanRequest {
-  // The QrtzSchedulerStateBean resource which replaces the resource on the server.
-  QrtzSchedulerStateBean QrtzSchedulerStateBean = 1;
+message UpdateQrtzSchedulerStateRequest {
+  // The QrtzSchedulerState resource which replaces the resource on the server.
+  QrtzSchedulerState QrtzSchedulerState = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteQrtzSchedulerStateBeanRequest {
-  // The resource name of the QrtzSchedulerStateBean to be deleted.
+message DeleteQrtzSchedulerStateRequest {
+  // The resource name of the QrtzSchedulerState to be deleted.
   string name = 1;
 }

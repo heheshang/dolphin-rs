@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 package ds_dq_rule;
 
 
-message DsDqRuleBean {
+message DsDqRule {
 
      int32 id=1 ;
      optional string name=2 ;
@@ -20,45 +20,45 @@ message DsDqRuleBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsDqRuleBeanService {
-  rpc ListDsDqRuleBeans(ListDsDqRuleBeansRequest) returns (ListDsDqRuleBeansResponse) {
+service DsDqRuleService {
+  rpc ListDsDqRules(ListDsDqRulesRequest) returns (ListDsDqRulesResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsDqRuleBeans"
+      get: "/v1alpha1/DsDqRules"
     };
   }
 
-  rpc GetDsDqRuleBean(GetDsDqRuleBeanRequest) returns (DsDqRuleBean) {
+  rpc GetDsDqRule(GetDsDqRuleRequest) returns (DsDqRule) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsDqRuleBeans/*}"
+      get: "/v1alpha1/{name=DsDqRules/*}"
     };
   }
 
-  rpc CreateDsDqRuleBean(CreateDsDqRuleBeanRequest) returns (DsDqRuleBean) {
+  rpc CreateDsDqRule(CreateDsDqRuleRequest) returns (DsDqRule) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsDqRuleBeans"
-      body: "DsDqRuleBean"
+      post: "/v1alpha1/DsDqRules"
+      body: "DsDqRule"
     };
   }
 
-  rpc UpdateDsDqRuleBean(UpdateDsDqRuleBeanRequest) returns (DsDqRuleBean) {
+  rpc UpdateDsDqRule(UpdateDsDqRuleRequest) returns (DsDqRule) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsDqRuleBean.name=DsDqRuleBeans/*}"
-      body: "DsDqRuleBean"
+      patch: "/v1alpha1/{DsDqRule.name=DsDqRules/*}"
+      body: "DsDqRule"
     };
   }
 
-  rpc DeleteDsDqRuleBean(DeleteDsDqRuleBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsDqRule(DeleteDsDqRuleRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsDqRuleBeans/*}"
+      delete: "/v1alpha1/{name=DsDqRules/*}"
     };
   }
 }
 
-// message DsDqRuleBean {
+// message DsDqRule {
 // ! This should be defined elsewhere
 // }
 
-message ListDsDqRuleBeansRequest {
+message ListDsDqRulesRequest {
 
 
   // The maximum number of items to return.
@@ -67,42 +67,42 @@ message ListDsDqRuleBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsDqRuleBeansResponse {
-  // The field name should match the noun "DsDqRuleBean" in the method name.
+message ListDsDqRulesResponse {
+  // The field name should match the noun "DsDqRule" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsDqRuleBean DsDqRuleBeans = 1;
+  repeated DsDqRule DsDqRules = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsDqRuleBeanRequest {
+message GetDsDqRuleRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsDqRuleBeanRequest {
-  // The parent resource name where the DsDqRuleBean is to be created.
+message CreateDsDqRuleRequest {
+  // The parent resource name where the DsDqRule is to be created.
   string parent = 1;
 
-  // The DsDqRuleBean id to use for this DsDqRuleBean.
-  string DsDqRuleBean_id = 2;
+  // The DsDqRule id to use for this DsDqRule.
+  string DsDqRule_id = 2;
 
-  // The DsDqRuleBean resource to create.
+  // The DsDqRule resource to create.
   // The field name should match the Noun in the method name.
-  DsDqRuleBean DsDqRuleBean = 3;
+  DsDqRule DsDqRule = 3;
 }
 
-message UpdateDsDqRuleBeanRequest {
-  // The DsDqRuleBean resource which replaces the resource on the server.
-  DsDqRuleBean DsDqRuleBean = 1;
+message UpdateDsDqRuleRequest {
+  // The DsDqRule resource which replaces the resource on the server.
+  DsDqRule DsDqRule = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsDqRuleBeanRequest {
-  // The resource name of the DsDqRuleBean to be deleted.
+message DeleteDsDqRuleRequest {
+  // The resource name of the DsDqRule to be deleted.
   string name = 1;
 }

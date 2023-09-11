@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsProcessDefinitionBean {
+pub struct DsProcessDefinition {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int64, tag = "2")]
@@ -40,7 +40,7 @@ pub struct DsProcessDefinitionBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsProcessDefinitionBeansRequest {
+pub struct ListDsProcessDefinitionsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -49,42 +49,42 @@ pub struct ListDsProcessDefinitionBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsProcessDefinitionBeansResponse {
-    /// The field name should match the noun "DsProcessDefinitionBean" in the method name.
+pub struct ListDsProcessDefinitionsResponse {
+    /// The field name should match the noun "DsProcessDefinition" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_process_definition_beans: ::prost::alloc::vec::Vec<DsProcessDefinitionBean>,
+    pub ds_process_definitions: ::prost::alloc::vec::Vec<DsProcessDefinition>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsProcessDefinitionBeanRequest {
+pub struct GetDsProcessDefinitionRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsProcessDefinitionBeanRequest {
-    /// The parent resource name where the DsProcessDefinitionBean is to be created.
+pub struct CreateDsProcessDefinitionRequest {
+    /// The parent resource name where the DsProcessDefinition is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsProcessDefinitionBean id to use for this DsProcessDefinitionBean.
+    /// The DsProcessDefinition id to use for this DsProcessDefinition.
     #[prost(string, tag = "2")]
-    pub ds_process_definition_bean_id: ::prost::alloc::string::String,
-    /// The DsProcessDefinitionBean resource to create.
+    pub ds_process_definition_id: ::prost::alloc::string::String,
+    /// The DsProcessDefinition resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_process_definition_bean: ::core::option::Option<DsProcessDefinitionBean>,
+    pub ds_process_definition: ::core::option::Option<DsProcessDefinition>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsProcessDefinitionBeanRequest {
-    /// The DsProcessDefinitionBean resource which replaces the resource on the server.
+pub struct UpdateDsProcessDefinitionRequest {
+    /// The DsProcessDefinition resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_process_definition_bean: ::core::option::Option<DsProcessDefinitionBean>,
+    pub ds_process_definition: ::core::option::Option<DsProcessDefinition>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -92,21 +92,21 @@ pub struct UpdateDsProcessDefinitionBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsProcessDefinitionBeanRequest {
-    /// The resource name of the DsProcessDefinitionBean to be deleted.
+pub struct DeleteDsProcessDefinitionRequest {
+    /// The resource name of the DsProcessDefinition to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_process_definition_bean_service_client {
+pub mod ds_process_definition_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsProcessDefinitionBeanServiceClient<T> {
+    pub struct DsProcessDefinitionServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsProcessDefinitionBeanServiceClient<tonic::transport::Channel> {
+    impl DsProcessDefinitionServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -117,7 +117,7 @@ pub mod ds_process_definition_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsProcessDefinitionBeanServiceClient<T>
+    impl<T> DsProcessDefinitionServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -137,7 +137,7 @@ pub mod ds_process_definition_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsProcessDefinitionBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsProcessDefinitionServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -150,7 +150,7 @@ pub mod ds_process_definition_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsProcessDefinitionBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsProcessDefinitionServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -188,11 +188,11 @@ pub mod ds_process_definition_bean_service_client {
             self
         }
 
-        pub async fn list_ds_process_definition_beans(
+        pub async fn list_ds_process_definitions(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsProcessDefinitionBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsProcessDefinitionsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsProcessDefinitionBeansResponse>,
+            tonic::Response<super::ListDsProcessDefinitionsResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -203,21 +203,20 @@ pub mod ds_process_definition_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_definition.DsProcessDefinitionBeanService/\
-                 ListDsProcessDefinitionBeans",
+                "/ds_process_definition.DsProcessDefinitionService/ListDsProcessDefinitions",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_definition.DsProcessDefinitionBeanService",
-                "ListDsProcessDefinitionBeans",
+                "ds_process_definition.DsProcessDefinitionService",
+                "ListDsProcessDefinitions",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_process_definition_bean(
+        pub async fn get_ds_process_definition(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsProcessDefinitionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessDefinitionBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::GetDsProcessDefinitionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessDefinition>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -227,20 +226,20 @@ pub mod ds_process_definition_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_definition.DsProcessDefinitionBeanService/GetDsProcessDefinitionBean",
+                "/ds_process_definition.DsProcessDefinitionService/GetDsProcessDefinition",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_definition.DsProcessDefinitionBeanService",
-                "GetDsProcessDefinitionBean",
+                "ds_process_definition.DsProcessDefinitionService",
+                "GetDsProcessDefinition",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_process_definition_bean(
+        pub async fn create_ds_process_definition(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsProcessDefinitionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessDefinitionBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::CreateDsProcessDefinitionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessDefinition>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -250,21 +249,20 @@ pub mod ds_process_definition_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_definition.DsProcessDefinitionBeanService/\
-                 CreateDsProcessDefinitionBean",
+                "/ds_process_definition.DsProcessDefinitionService/CreateDsProcessDefinition",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_definition.DsProcessDefinitionBeanService",
-                "CreateDsProcessDefinitionBean",
+                "ds_process_definition.DsProcessDefinitionService",
+                "CreateDsProcessDefinition",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_process_definition_bean(
+        pub async fn update_ds_process_definition(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsProcessDefinitionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessDefinitionBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::UpdateDsProcessDefinitionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessDefinition>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -274,20 +272,19 @@ pub mod ds_process_definition_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_definition.DsProcessDefinitionBeanService/\
-                 UpdateDsProcessDefinitionBean",
+                "/ds_process_definition.DsProcessDefinitionService/UpdateDsProcessDefinition",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_definition.DsProcessDefinitionBeanService",
-                "UpdateDsProcessDefinitionBean",
+                "ds_process_definition.DsProcessDefinitionService",
+                "UpdateDsProcessDefinition",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_process_definition_bean(
+        pub async fn delete_ds_process_definition(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsProcessDefinitionBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsProcessDefinitionRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -297,52 +294,51 @@ pub mod ds_process_definition_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_definition.DsProcessDefinitionBeanService/\
-                 DeleteDsProcessDefinitionBean",
+                "/ds_process_definition.DsProcessDefinitionService/DeleteDsProcessDefinition",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_definition.DsProcessDefinitionBeanService",
-                "DeleteDsProcessDefinitionBean",
+                "ds_process_definition.DsProcessDefinitionService",
+                "DeleteDsProcessDefinition",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_process_definition_bean_service_server {
+pub mod ds_process_definition_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsProcessDefinitionBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsProcessDefinitionServiceServer.
     #[async_trait]
-    pub trait DsProcessDefinitionBeanService: Send + Sync + 'static {
-        async fn list_ds_process_definition_beans(
+    pub trait DsProcessDefinitionService: Send + Sync + 'static {
+        async fn list_ds_process_definitions(
             &self,
-            request: tonic::Request<super::ListDsProcessDefinitionBeansRequest>,
+            request: tonic::Request<super::ListDsProcessDefinitionsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsProcessDefinitionBeansResponse>,
+            tonic::Response<super::ListDsProcessDefinitionsResponse>,
             tonic::Status,
         >;
-        async fn get_ds_process_definition_bean(
+        async fn get_ds_process_definition(
             &self,
-            request: tonic::Request<super::GetDsProcessDefinitionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessDefinitionBean>, tonic::Status>;
-        async fn create_ds_process_definition_bean(
+            request: tonic::Request<super::GetDsProcessDefinitionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessDefinition>, tonic::Status>;
+        async fn create_ds_process_definition(
             &self,
-            request: tonic::Request<super::CreateDsProcessDefinitionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessDefinitionBean>, tonic::Status>;
-        async fn update_ds_process_definition_bean(
+            request: tonic::Request<super::CreateDsProcessDefinitionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessDefinition>, tonic::Status>;
+        async fn update_ds_process_definition(
             &self,
-            request: tonic::Request<super::UpdateDsProcessDefinitionBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessDefinitionBean>, tonic::Status>;
-        async fn delete_ds_process_definition_bean(
+            request: tonic::Request<super::UpdateDsProcessDefinitionRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessDefinition>, tonic::Status>;
+        async fn delete_ds_process_definition(
             &self,
-            request: tonic::Request<super::DeleteDsProcessDefinitionBeanRequest>,
+            request: tonic::Request<super::DeleteDsProcessDefinitionRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsProcessDefinitionBeanServiceServer<T: DsProcessDefinitionBeanService> {
+    pub struct DsProcessDefinitionServiceServer<T: DsProcessDefinitionService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -350,7 +346,7 @@ pub mod ds_process_definition_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsProcessDefinitionBeanService> DsProcessDefinitionBeanServiceServer<T> {
+    impl<T: DsProcessDefinitionService> DsProcessDefinitionServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -403,9 +399,9 @@ pub mod ds_process_definition_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsProcessDefinitionBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsProcessDefinitionServiceServer<T>
     where
-        T: DsProcessDefinitionBeanService,
+        T: DsProcessDefinitionService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -423,27 +419,23 @@ pub mod ds_process_definition_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_process_definition.DsProcessDefinitionBeanService/\
-                 ListDsProcessDefinitionBeans" => {
+                "/ds_process_definition.DsProcessDefinitionService/ListDsProcessDefinitions" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsProcessDefinitionBeansSvc<T: DsProcessDefinitionBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsProcessDefinitionBeanService>
-                        tonic::server::UnaryService<super::ListDsProcessDefinitionBeansRequest>
-                        for ListDsProcessDefinitionBeansSvc<T>
+                    struct ListDsProcessDefinitionsSvc<T: DsProcessDefinitionService>(pub Arc<T>);
+                    impl<T: DsProcessDefinitionService>
+                        tonic::server::UnaryService<super::ListDsProcessDefinitionsRequest>
+                        for ListDsProcessDefinitionsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsProcessDefinitionBeansResponse;
+                        type Response = super::ListDsProcessDefinitionsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsProcessDefinitionBeansRequest>,
+                            request: tonic::Request<super::ListDsProcessDefinitionsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).list_ds_process_definition_beans(request).await
-                            };
+                            let fut =
+                                async move { (*inner).list_ds_process_definitions(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -454,7 +446,7 @@ pub mod ds_process_definition_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsProcessDefinitionBeansSvc(inner);
+                        let method = ListDsProcessDefinitionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -470,27 +462,23 @@ pub mod ds_process_definition_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_process_definition.DsProcessDefinitionBeanService/\
-                 GetDsProcessDefinitionBean" => {
+                "/ds_process_definition.DsProcessDefinitionService/GetDsProcessDefinition" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsProcessDefinitionBeanSvc<T: DsProcessDefinitionBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsProcessDefinitionBeanService>
-                        tonic::server::UnaryService<super::GetDsProcessDefinitionBeanRequest>
-                        for GetDsProcessDefinitionBeanSvc<T>
+                    struct GetDsProcessDefinitionSvc<T: DsProcessDefinitionService>(pub Arc<T>);
+                    impl<T: DsProcessDefinitionService>
+                        tonic::server::UnaryService<super::GetDsProcessDefinitionRequest>
+                        for GetDsProcessDefinitionSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsProcessDefinitionBean;
+                        type Response = super::DsProcessDefinition;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsProcessDefinitionBeanRequest>,
+                            request: tonic::Request<super::GetDsProcessDefinitionRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_ds_process_definition_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_ds_process_definition(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -501,7 +489,7 @@ pub mod ds_process_definition_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsProcessDefinitionBeanSvc(inner);
+                        let method = GetDsProcessDefinitionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -517,27 +505,23 @@ pub mod ds_process_definition_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_process_definition.DsProcessDefinitionBeanService/\
-                 CreateDsProcessDefinitionBean" => {
+                "/ds_process_definition.DsProcessDefinitionService/CreateDsProcessDefinition" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsProcessDefinitionBeanSvc<T: DsProcessDefinitionBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsProcessDefinitionBeanService>
-                        tonic::server::UnaryService<super::CreateDsProcessDefinitionBeanRequest>
-                        for CreateDsProcessDefinitionBeanSvc<T>
+                    struct CreateDsProcessDefinitionSvc<T: DsProcessDefinitionService>(pub Arc<T>);
+                    impl<T: DsProcessDefinitionService>
+                        tonic::server::UnaryService<super::CreateDsProcessDefinitionRequest>
+                        for CreateDsProcessDefinitionSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsProcessDefinitionBean;
+                        type Response = super::DsProcessDefinition;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsProcessDefinitionBeanRequest>,
+                            request: tonic::Request<super::CreateDsProcessDefinitionRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).create_ds_process_definition_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).create_ds_process_definition(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -548,7 +532,7 @@ pub mod ds_process_definition_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsProcessDefinitionBeanSvc(inner);
+                        let method = CreateDsProcessDefinitionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -564,27 +548,23 @@ pub mod ds_process_definition_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_process_definition.DsProcessDefinitionBeanService/\
-                 UpdateDsProcessDefinitionBean" => {
+                "/ds_process_definition.DsProcessDefinitionService/UpdateDsProcessDefinition" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsProcessDefinitionBeanSvc<T: DsProcessDefinitionBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsProcessDefinitionBeanService>
-                        tonic::server::UnaryService<super::UpdateDsProcessDefinitionBeanRequest>
-                        for UpdateDsProcessDefinitionBeanSvc<T>
+                    struct UpdateDsProcessDefinitionSvc<T: DsProcessDefinitionService>(pub Arc<T>);
+                    impl<T: DsProcessDefinitionService>
+                        tonic::server::UnaryService<super::UpdateDsProcessDefinitionRequest>
+                        for UpdateDsProcessDefinitionSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsProcessDefinitionBean;
+                        type Response = super::DsProcessDefinition;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsProcessDefinitionBeanRequest>,
+                            request: tonic::Request<super::UpdateDsProcessDefinitionRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).update_ds_process_definition_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).update_ds_process_definition(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -595,7 +575,7 @@ pub mod ds_process_definition_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsProcessDefinitionBeanSvc(inner);
+                        let method = UpdateDsProcessDefinitionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -611,27 +591,23 @@ pub mod ds_process_definition_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_process_definition.DsProcessDefinitionBeanService/\
-                 DeleteDsProcessDefinitionBean" => {
+                "/ds_process_definition.DsProcessDefinitionService/DeleteDsProcessDefinition" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsProcessDefinitionBeanSvc<T: DsProcessDefinitionBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsProcessDefinitionBeanService>
-                        tonic::server::UnaryService<super::DeleteDsProcessDefinitionBeanRequest>
-                        for DeleteDsProcessDefinitionBeanSvc<T>
+                    struct DeleteDsProcessDefinitionSvc<T: DsProcessDefinitionService>(pub Arc<T>);
+                    impl<T: DsProcessDefinitionService>
+                        tonic::server::UnaryService<super::DeleteDsProcessDefinitionRequest>
+                        for DeleteDsProcessDefinitionSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsProcessDefinitionBeanRequest>,
+                            request: tonic::Request<super::DeleteDsProcessDefinitionRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).delete_ds_process_definition_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).delete_ds_process_definition(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -642,7 +618,7 @@ pub mod ds_process_definition_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsProcessDefinitionBeanSvc(inner);
+                        let method = DeleteDsProcessDefinitionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -669,7 +645,7 @@ pub mod ds_process_definition_bean_service_server {
             }
         }
     }
-    impl<T: DsProcessDefinitionBeanService> Clone for DsProcessDefinitionBeanServiceServer<T> {
+    impl<T: DsProcessDefinitionService> Clone for DsProcessDefinitionServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -681,7 +657,7 @@ pub mod ds_process_definition_bean_service_server {
             }
         }
     }
-    impl<T: DsProcessDefinitionBeanService> Clone for _Inner<T> {
+    impl<T: DsProcessDefinitionService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -691,9 +667,9 @@ pub mod ds_process_definition_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsProcessDefinitionBeanService> tonic::server::NamedService
-        for DsProcessDefinitionBeanServiceServer<T>
+    impl<T: DsProcessDefinitionService> tonic::server::NamedService
+        for DsProcessDefinitionServiceServer<T>
     {
-        const NAME: &'static str = "ds_process_definition.DsProcessDefinitionBeanService";
+        const NAME: &'static str = "ds_process_definition.DsProcessDefinitionService";
     }
 }

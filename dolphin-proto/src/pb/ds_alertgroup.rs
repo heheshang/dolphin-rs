@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsAlertGroupBean {
+pub struct DsAlertGroup {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, optional, tag = "2")]
@@ -20,7 +20,7 @@ pub struct DsAlertGroupBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsAlertGroupBeansRequest {
+pub struct ListDsAlertGroupsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -29,42 +29,42 @@ pub struct ListDsAlertGroupBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsAlertGroupBeansResponse {
-    /// The field name should match the noun "DsAlertGroupBean" in the method name.
+pub struct ListDsAlertGroupsResponse {
+    /// The field name should match the noun "DsAlertGroup" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_alert_group_beans: ::prost::alloc::vec::Vec<DsAlertGroupBean>,
+    pub ds_alert_groups: ::prost::alloc::vec::Vec<DsAlertGroup>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsAlertGroupBeanRequest {
+pub struct GetDsAlertGroupRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsAlertGroupBeanRequest {
-    /// The parent resource name where the DsAlertGroupBean is to be created.
+pub struct CreateDsAlertGroupRequest {
+    /// The parent resource name where the DsAlertGroup is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsAlertGroupBean id to use for this DsAlertGroupBean.
+    /// The DsAlertGroup id to use for this DsAlertGroup.
     #[prost(string, tag = "2")]
-    pub ds_alert_group_bean_id: ::prost::alloc::string::String,
-    /// The DsAlertGroupBean resource to create.
+    pub ds_alert_group_id: ::prost::alloc::string::String,
+    /// The DsAlertGroup resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_alert_group_bean: ::core::option::Option<DsAlertGroupBean>,
+    pub ds_alert_group: ::core::option::Option<DsAlertGroup>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsAlertGroupBeanRequest {
-    /// The DsAlertGroupBean resource which replaces the resource on the server.
+pub struct UpdateDsAlertGroupRequest {
+    /// The DsAlertGroup resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_alert_group_bean: ::core::option::Option<DsAlertGroupBean>,
+    pub ds_alert_group: ::core::option::Option<DsAlertGroup>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -72,21 +72,21 @@ pub struct UpdateDsAlertGroupBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsAlertGroupBeanRequest {
-    /// The resource name of the DsAlertGroupBean to be deleted.
+pub struct DeleteDsAlertGroupRequest {
+    /// The resource name of the DsAlertGroup to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_alert_group_bean_service_client {
+pub mod ds_alert_group_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsAlertGroupBeanServiceClient<T> {
+    pub struct DsAlertGroupServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsAlertGroupBeanServiceClient<tonic::transport::Channel> {
+    impl DsAlertGroupServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -97,7 +97,7 @@ pub mod ds_alert_group_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsAlertGroupBeanServiceClient<T>
+    impl<T> DsAlertGroupServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -117,7 +117,7 @@ pub mod ds_alert_group_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsAlertGroupBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsAlertGroupServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -130,7 +130,7 @@ pub mod ds_alert_group_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsAlertGroupBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsAlertGroupServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -168,10 +168,10 @@ pub mod ds_alert_group_bean_service_client {
             self
         }
 
-        pub async fn list_ds_alert_group_beans(
+        pub async fn list_ds_alert_groups(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsAlertGroupBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsAlertGroupBeansResponse>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsAlertGroupsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsAlertGroupsResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -181,20 +181,20 @@ pub mod ds_alert_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_alertgroup.DsAlertGroupBeanService/ListDsAlertGroupBeans",
+                "/ds_alertgroup.DsAlertGroupService/ListDsAlertGroups",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_alertgroup.DsAlertGroupBeanService",
-                "ListDsAlertGroupBeans",
+                "ds_alertgroup.DsAlertGroupService",
+                "ListDsAlertGroups",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_alert_group_bean(
+        pub async fn get_ds_alert_group(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsAlertGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAlertGroupBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetDsAlertGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAlertGroup>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -203,20 +203,20 @@ pub mod ds_alert_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_alertgroup.DsAlertGroupBeanService/GetDsAlertGroupBean",
+                "/ds_alertgroup.DsAlertGroupService/GetDsAlertGroup",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_alertgroup.DsAlertGroupBeanService",
-                "GetDsAlertGroupBean",
+                "ds_alertgroup.DsAlertGroupService",
+                "GetDsAlertGroup",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_alert_group_bean(
+        pub async fn create_ds_alert_group(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsAlertGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAlertGroupBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::CreateDsAlertGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAlertGroup>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -225,20 +225,20 @@ pub mod ds_alert_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_alertgroup.DsAlertGroupBeanService/CreateDsAlertGroupBean",
+                "/ds_alertgroup.DsAlertGroupService/CreateDsAlertGroup",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_alertgroup.DsAlertGroupBeanService",
-                "CreateDsAlertGroupBean",
+                "ds_alertgroup.DsAlertGroupService",
+                "CreateDsAlertGroup",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_alert_group_bean(
+        pub async fn update_ds_alert_group(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsAlertGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAlertGroupBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateDsAlertGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAlertGroup>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -247,19 +247,19 @@ pub mod ds_alert_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_alertgroup.DsAlertGroupBeanService/UpdateDsAlertGroupBean",
+                "/ds_alertgroup.DsAlertGroupService/UpdateDsAlertGroup",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_alertgroup.DsAlertGroupBeanService",
-                "UpdateDsAlertGroupBean",
+                "ds_alertgroup.DsAlertGroupService",
+                "UpdateDsAlertGroup",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_alert_group_bean(
+        pub async fn delete_ds_alert_group(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsAlertGroupBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsAlertGroupRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -269,48 +269,48 @@ pub mod ds_alert_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_alertgroup.DsAlertGroupBeanService/DeleteDsAlertGroupBean",
+                "/ds_alertgroup.DsAlertGroupService/DeleteDsAlertGroup",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_alertgroup.DsAlertGroupBeanService",
-                "DeleteDsAlertGroupBean",
+                "ds_alertgroup.DsAlertGroupService",
+                "DeleteDsAlertGroup",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_alert_group_bean_service_server {
+pub mod ds_alert_group_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsAlertGroupBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsAlertGroupServiceServer.
     #[async_trait]
-    pub trait DsAlertGroupBeanService: Send + Sync + 'static {
-        async fn list_ds_alert_group_beans(
+    pub trait DsAlertGroupService: Send + Sync + 'static {
+        async fn list_ds_alert_groups(
             &self,
-            request: tonic::Request<super::ListDsAlertGroupBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsAlertGroupBeansResponse>, tonic::Status>;
-        async fn get_ds_alert_group_bean(
+            request: tonic::Request<super::ListDsAlertGroupsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsAlertGroupsResponse>, tonic::Status>;
+        async fn get_ds_alert_group(
             &self,
-            request: tonic::Request<super::GetDsAlertGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAlertGroupBean>, tonic::Status>;
-        async fn create_ds_alert_group_bean(
+            request: tonic::Request<super::GetDsAlertGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAlertGroup>, tonic::Status>;
+        async fn create_ds_alert_group(
             &self,
-            request: tonic::Request<super::CreateDsAlertGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAlertGroupBean>, tonic::Status>;
-        async fn update_ds_alert_group_bean(
+            request: tonic::Request<super::CreateDsAlertGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAlertGroup>, tonic::Status>;
+        async fn update_ds_alert_group(
             &self,
-            request: tonic::Request<super::UpdateDsAlertGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAlertGroupBean>, tonic::Status>;
-        async fn delete_ds_alert_group_bean(
+            request: tonic::Request<super::UpdateDsAlertGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAlertGroup>, tonic::Status>;
+        async fn delete_ds_alert_group(
             &self,
-            request: tonic::Request<super::DeleteDsAlertGroupBeanRequest>,
+            request: tonic::Request<super::DeleteDsAlertGroupRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsAlertGroupBeanServiceServer<T: DsAlertGroupBeanService> {
+    pub struct DsAlertGroupServiceServer<T: DsAlertGroupService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -318,7 +318,7 @@ pub mod ds_alert_group_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsAlertGroupBeanService> DsAlertGroupBeanServiceServer<T> {
+    impl<T: DsAlertGroupService> DsAlertGroupServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -371,9 +371,9 @@ pub mod ds_alert_group_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsAlertGroupBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsAlertGroupServiceServer<T>
     where
-        T: DsAlertGroupBeanService,
+        T: DsAlertGroupService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -391,23 +391,22 @@ pub mod ds_alert_group_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_alertgroup.DsAlertGroupBeanService/ListDsAlertGroupBeans" => {
+                "/ds_alertgroup.DsAlertGroupService/ListDsAlertGroups" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsAlertGroupBeansSvc<T: DsAlertGroupBeanService>(pub Arc<T>);
-                    impl<T: DsAlertGroupBeanService>
-                        tonic::server::UnaryService<super::ListDsAlertGroupBeansRequest>
-                        for ListDsAlertGroupBeansSvc<T>
+                    struct ListDsAlertGroupsSvc<T: DsAlertGroupService>(pub Arc<T>);
+                    impl<T: DsAlertGroupService>
+                        tonic::server::UnaryService<super::ListDsAlertGroupsRequest>
+                        for ListDsAlertGroupsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsAlertGroupBeansResponse;
+                        type Response = super::ListDsAlertGroupsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsAlertGroupBeansRequest>,
+                            request: tonic::Request<super::ListDsAlertGroupsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_ds_alert_group_beans(request).await };
+                            let fut = async move { (*inner).list_ds_alert_groups(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -418,7 +417,7 @@ pub mod ds_alert_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsAlertGroupBeansSvc(inner);
+                        let method = ListDsAlertGroupsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -434,23 +433,22 @@ pub mod ds_alert_group_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_alertgroup.DsAlertGroupBeanService/GetDsAlertGroupBean" => {
+                "/ds_alertgroup.DsAlertGroupService/GetDsAlertGroup" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsAlertGroupBeanSvc<T: DsAlertGroupBeanService>(pub Arc<T>);
-                    impl<T: DsAlertGroupBeanService>
-                        tonic::server::UnaryService<super::GetDsAlertGroupBeanRequest>
-                        for GetDsAlertGroupBeanSvc<T>
+                    struct GetDsAlertGroupSvc<T: DsAlertGroupService>(pub Arc<T>);
+                    impl<T: DsAlertGroupService>
+                        tonic::server::UnaryService<super::GetDsAlertGroupRequest>
+                        for GetDsAlertGroupSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsAlertGroupBean;
+                        type Response = super::DsAlertGroup;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsAlertGroupBeanRequest>,
+                            request: tonic::Request<super::GetDsAlertGroupRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).get_ds_alert_group_bean(request).await };
+                            let fut = async move { (*inner).get_ds_alert_group(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -461,7 +459,7 @@ pub mod ds_alert_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsAlertGroupBeanSvc(inner);
+                        let method = GetDsAlertGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -477,23 +475,22 @@ pub mod ds_alert_group_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_alertgroup.DsAlertGroupBeanService/CreateDsAlertGroupBean" => {
+                "/ds_alertgroup.DsAlertGroupService/CreateDsAlertGroup" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsAlertGroupBeanSvc<T: DsAlertGroupBeanService>(pub Arc<T>);
-                    impl<T: DsAlertGroupBeanService>
-                        tonic::server::UnaryService<super::CreateDsAlertGroupBeanRequest>
-                        for CreateDsAlertGroupBeanSvc<T>
+                    struct CreateDsAlertGroupSvc<T: DsAlertGroupService>(pub Arc<T>);
+                    impl<T: DsAlertGroupService>
+                        tonic::server::UnaryService<super::CreateDsAlertGroupRequest>
+                        for CreateDsAlertGroupSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsAlertGroupBean;
+                        type Response = super::DsAlertGroup;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsAlertGroupBeanRequest>,
+                            request: tonic::Request<super::CreateDsAlertGroupRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).create_ds_alert_group_bean(request).await };
+                            let fut = async move { (*inner).create_ds_alert_group(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -504,7 +501,7 @@ pub mod ds_alert_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsAlertGroupBeanSvc(inner);
+                        let method = CreateDsAlertGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -520,23 +517,22 @@ pub mod ds_alert_group_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_alertgroup.DsAlertGroupBeanService/UpdateDsAlertGroupBean" => {
+                "/ds_alertgroup.DsAlertGroupService/UpdateDsAlertGroup" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsAlertGroupBeanSvc<T: DsAlertGroupBeanService>(pub Arc<T>);
-                    impl<T: DsAlertGroupBeanService>
-                        tonic::server::UnaryService<super::UpdateDsAlertGroupBeanRequest>
-                        for UpdateDsAlertGroupBeanSvc<T>
+                    struct UpdateDsAlertGroupSvc<T: DsAlertGroupService>(pub Arc<T>);
+                    impl<T: DsAlertGroupService>
+                        tonic::server::UnaryService<super::UpdateDsAlertGroupRequest>
+                        for UpdateDsAlertGroupSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsAlertGroupBean;
+                        type Response = super::DsAlertGroup;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsAlertGroupBeanRequest>,
+                            request: tonic::Request<super::UpdateDsAlertGroupRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).update_ds_alert_group_bean(request).await };
+                            let fut = async move { (*inner).update_ds_alert_group(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -547,7 +543,7 @@ pub mod ds_alert_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsAlertGroupBeanSvc(inner);
+                        let method = UpdateDsAlertGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -563,23 +559,22 @@ pub mod ds_alert_group_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_alertgroup.DsAlertGroupBeanService/DeleteDsAlertGroupBean" => {
+                "/ds_alertgroup.DsAlertGroupService/DeleteDsAlertGroup" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsAlertGroupBeanSvc<T: DsAlertGroupBeanService>(pub Arc<T>);
-                    impl<T: DsAlertGroupBeanService>
-                        tonic::server::UnaryService<super::DeleteDsAlertGroupBeanRequest>
-                        for DeleteDsAlertGroupBeanSvc<T>
+                    struct DeleteDsAlertGroupSvc<T: DsAlertGroupService>(pub Arc<T>);
+                    impl<T: DsAlertGroupService>
+                        tonic::server::UnaryService<super::DeleteDsAlertGroupRequest>
+                        for DeleteDsAlertGroupSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsAlertGroupBeanRequest>,
+                            request: tonic::Request<super::DeleteDsAlertGroupRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).delete_ds_alert_group_bean(request).await };
+                            let fut = async move { (*inner).delete_ds_alert_group(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -590,7 +585,7 @@ pub mod ds_alert_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsAlertGroupBeanSvc(inner);
+                        let method = DeleteDsAlertGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -617,7 +612,7 @@ pub mod ds_alert_group_bean_service_server {
             }
         }
     }
-    impl<T: DsAlertGroupBeanService> Clone for DsAlertGroupBeanServiceServer<T> {
+    impl<T: DsAlertGroupService> Clone for DsAlertGroupServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -629,7 +624,7 @@ pub mod ds_alert_group_bean_service_server {
             }
         }
     }
-    impl<T: DsAlertGroupBeanService> Clone for _Inner<T> {
+    impl<T: DsAlertGroupService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -639,7 +634,7 @@ pub mod ds_alert_group_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsAlertGroupBeanService> tonic::server::NamedService for DsAlertGroupBeanServiceServer<T> {
-        const NAME: &'static str = "ds_alertgroup.DsAlertGroupBeanService";
+    impl<T: DsAlertGroupService> tonic::server::NamedService for DsAlertGroupServiceServer<T> {
+        const NAME: &'static str = "ds_alertgroup.DsAlertGroupService";
     }
 }

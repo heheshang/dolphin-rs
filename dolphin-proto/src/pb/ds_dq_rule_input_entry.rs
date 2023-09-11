@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsDqRuleInputEntryBean {
+pub struct DsDqRuleInputEntry {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, optional, tag = "2")]
@@ -38,7 +38,7 @@ pub struct DsDqRuleInputEntryBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsDqRuleInputEntryBeansRequest {
+pub struct ListDsDqRuleInputEntriesRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -47,42 +47,42 @@ pub struct ListDsDqRuleInputEntryBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsDqRuleInputEntryBeansResponse {
-    /// The field name should match the noun "DsDqRuleInputEntryBean" in the method name.
+pub struct ListDsDqRuleInputEntriesResponse {
+    /// The field name should match the noun "DsDqRuleInputEntry" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_dq_rule_input_entry_beans: ::prost::alloc::vec::Vec<DsDqRuleInputEntryBean>,
+    pub ds_dq_rule_input_entries: ::prost::alloc::vec::Vec<DsDqRuleInputEntry>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsDqRuleInputEntryBeanRequest {
+pub struct GetDsDqRuleInputEntryRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsDqRuleInputEntryBeanRequest {
-    /// The parent resource name where the DsDqRuleInputEntryBean is to be created.
+pub struct CreateDsDqRuleInputEntryRequest {
+    /// The parent resource name where the DsDqRuleInputEntry is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsDqRuleInputEntryBean id to use for this DsDqRuleInputEntryBean.
+    /// The DsDqRuleInputEntry id to use for this DsDqRuleInputEntry.
     #[prost(string, tag = "2")]
-    pub ds_dq_rule_input_entry_bean_id: ::prost::alloc::string::String,
-    /// The DsDqRuleInputEntryBean resource to create.
+    pub ds_dq_rule_input_entry_id: ::prost::alloc::string::String,
+    /// The DsDqRuleInputEntry resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_dq_rule_input_entry_bean: ::core::option::Option<DsDqRuleInputEntryBean>,
+    pub ds_dq_rule_input_entry: ::core::option::Option<DsDqRuleInputEntry>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsDqRuleInputEntryBeanRequest {
-    /// The DsDqRuleInputEntryBean resource which replaces the resource on the server.
+pub struct UpdateDsDqRuleInputEntryRequest {
+    /// The DsDqRuleInputEntry resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_dq_rule_input_entry_bean: ::core::option::Option<DsDqRuleInputEntryBean>,
+    pub ds_dq_rule_input_entry: ::core::option::Option<DsDqRuleInputEntry>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -90,21 +90,21 @@ pub struct UpdateDsDqRuleInputEntryBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsDqRuleInputEntryBeanRequest {
-    /// The resource name of the DsDqRuleInputEntryBean to be deleted.
+pub struct DeleteDsDqRuleInputEntryRequest {
+    /// The resource name of the DsDqRuleInputEntry to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_dq_rule_input_entry_bean_service_client {
+pub mod ds_dq_rule_input_entry_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsDqRuleInputEntryBeanServiceClient<T> {
+    pub struct DsDqRuleInputEntryServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsDqRuleInputEntryBeanServiceClient<tonic::transport::Channel> {
+    impl DsDqRuleInputEntryServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -115,7 +115,7 @@ pub mod ds_dq_rule_input_entry_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsDqRuleInputEntryBeanServiceClient<T>
+    impl<T> DsDqRuleInputEntryServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -135,7 +135,7 @@ pub mod ds_dq_rule_input_entry_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsDqRuleInputEntryBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsDqRuleInputEntryServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -148,7 +148,7 @@ pub mod ds_dq_rule_input_entry_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsDqRuleInputEntryBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsDqRuleInputEntryServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -186,11 +186,11 @@ pub mod ds_dq_rule_input_entry_bean_service_client {
             self
         }
 
-        pub async fn list_ds_dq_rule_input_entry_beans(
+        pub async fn list_ds_dq_rule_input_entries(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsDqRuleInputEntryBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsDqRuleInputEntriesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsDqRuleInputEntryBeansResponse>,
+            tonic::Response<super::ListDsDqRuleInputEntriesResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -201,20 +201,20 @@ pub mod ds_dq_rule_input_entry_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService/ListDsDqRuleInputEntryBeans",
+                "/ds_dq_rule_input_entry.DsDqRuleInputEntryService/ListDsDqRuleInputEntries",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService",
-                "ListDsDqRuleInputEntryBeans",
+                "ds_dq_rule_input_entry.DsDqRuleInputEntryService",
+                "ListDsDqRuleInputEntries",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_dq_rule_input_entry_bean(
+        pub async fn get_ds_dq_rule_input_entry(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsDqRuleInputEntryBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqRuleInputEntryBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::GetDsDqRuleInputEntryRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqRuleInputEntry>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -224,20 +224,20 @@ pub mod ds_dq_rule_input_entry_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService/GetDsDqRuleInputEntryBean",
+                "/ds_dq_rule_input_entry.DsDqRuleInputEntryService/GetDsDqRuleInputEntry",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService",
-                "GetDsDqRuleInputEntryBean",
+                "ds_dq_rule_input_entry.DsDqRuleInputEntryService",
+                "GetDsDqRuleInputEntry",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_dq_rule_input_entry_bean(
+        pub async fn create_ds_dq_rule_input_entry(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsDqRuleInputEntryBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqRuleInputEntryBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::CreateDsDqRuleInputEntryRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqRuleInputEntry>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -247,21 +247,20 @@ pub mod ds_dq_rule_input_entry_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService/\
-                 CreateDsDqRuleInputEntryBean",
+                "/ds_dq_rule_input_entry.DsDqRuleInputEntryService/CreateDsDqRuleInputEntry",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService",
-                "CreateDsDqRuleInputEntryBean",
+                "ds_dq_rule_input_entry.DsDqRuleInputEntryService",
+                "CreateDsDqRuleInputEntry",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_dq_rule_input_entry_bean(
+        pub async fn update_ds_dq_rule_input_entry(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsDqRuleInputEntryBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqRuleInputEntryBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::UpdateDsDqRuleInputEntryRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqRuleInputEntry>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -271,20 +270,19 @@ pub mod ds_dq_rule_input_entry_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService/\
-                 UpdateDsDqRuleInputEntryBean",
+                "/ds_dq_rule_input_entry.DsDqRuleInputEntryService/UpdateDsDqRuleInputEntry",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService",
-                "UpdateDsDqRuleInputEntryBean",
+                "ds_dq_rule_input_entry.DsDqRuleInputEntryService",
+                "UpdateDsDqRuleInputEntry",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_dq_rule_input_entry_bean(
+        pub async fn delete_ds_dq_rule_input_entry(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsDqRuleInputEntryBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsDqRuleInputEntryRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -294,52 +292,51 @@ pub mod ds_dq_rule_input_entry_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService/\
-                 DeleteDsDqRuleInputEntryBean",
+                "/ds_dq_rule_input_entry.DsDqRuleInputEntryService/DeleteDsDqRuleInputEntry",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService",
-                "DeleteDsDqRuleInputEntryBean",
+                "ds_dq_rule_input_entry.DsDqRuleInputEntryService",
+                "DeleteDsDqRuleInputEntry",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_dq_rule_input_entry_bean_service_server {
+pub mod ds_dq_rule_input_entry_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsDqRuleInputEntryBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsDqRuleInputEntryServiceServer.
     #[async_trait]
-    pub trait DsDqRuleInputEntryBeanService: Send + Sync + 'static {
-        async fn list_ds_dq_rule_input_entry_beans(
+    pub trait DsDqRuleInputEntryService: Send + Sync + 'static {
+        async fn list_ds_dq_rule_input_entries(
             &self,
-            request: tonic::Request<super::ListDsDqRuleInputEntryBeansRequest>,
+            request: tonic::Request<super::ListDsDqRuleInputEntriesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsDqRuleInputEntryBeansResponse>,
+            tonic::Response<super::ListDsDqRuleInputEntriesResponse>,
             tonic::Status,
         >;
-        async fn get_ds_dq_rule_input_entry_bean(
+        async fn get_ds_dq_rule_input_entry(
             &self,
-            request: tonic::Request<super::GetDsDqRuleInputEntryBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqRuleInputEntryBean>, tonic::Status>;
-        async fn create_ds_dq_rule_input_entry_bean(
+            request: tonic::Request<super::GetDsDqRuleInputEntryRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqRuleInputEntry>, tonic::Status>;
+        async fn create_ds_dq_rule_input_entry(
             &self,
-            request: tonic::Request<super::CreateDsDqRuleInputEntryBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqRuleInputEntryBean>, tonic::Status>;
-        async fn update_ds_dq_rule_input_entry_bean(
+            request: tonic::Request<super::CreateDsDqRuleInputEntryRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqRuleInputEntry>, tonic::Status>;
+        async fn update_ds_dq_rule_input_entry(
             &self,
-            request: tonic::Request<super::UpdateDsDqRuleInputEntryBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqRuleInputEntryBean>, tonic::Status>;
-        async fn delete_ds_dq_rule_input_entry_bean(
+            request: tonic::Request<super::UpdateDsDqRuleInputEntryRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqRuleInputEntry>, tonic::Status>;
+        async fn delete_ds_dq_rule_input_entry(
             &self,
-            request: tonic::Request<super::DeleteDsDqRuleInputEntryBeanRequest>,
+            request: tonic::Request<super::DeleteDsDqRuleInputEntryRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsDqRuleInputEntryBeanServiceServer<T: DsDqRuleInputEntryBeanService> {
+    pub struct DsDqRuleInputEntryServiceServer<T: DsDqRuleInputEntryService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -347,7 +344,7 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsDqRuleInputEntryBeanService> DsDqRuleInputEntryBeanServiceServer<T> {
+    impl<T: DsDqRuleInputEntryService> DsDqRuleInputEntryServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -400,9 +397,9 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsDqRuleInputEntryBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsDqRuleInputEntryServiceServer<T>
     where
-        T: DsDqRuleInputEntryBeanService,
+        T: DsDqRuleInputEntryService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -420,26 +417,23 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService/\
-                 ListDsDqRuleInputEntryBeans" => {
+                "/ds_dq_rule_input_entry.DsDqRuleInputEntryService/ListDsDqRuleInputEntries" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsDqRuleInputEntryBeansSvc<T: DsDqRuleInputEntryBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqRuleInputEntryBeanService>
-                        tonic::server::UnaryService<super::ListDsDqRuleInputEntryBeansRequest>
-                        for ListDsDqRuleInputEntryBeansSvc<T>
+                    struct ListDsDqRuleInputEntriesSvc<T: DsDqRuleInputEntryService>(pub Arc<T>);
+                    impl<T: DsDqRuleInputEntryService>
+                        tonic::server::UnaryService<super::ListDsDqRuleInputEntriesRequest>
+                        for ListDsDqRuleInputEntriesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsDqRuleInputEntryBeansResponse;
+                        type Response = super::ListDsDqRuleInputEntriesResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsDqRuleInputEntryBeansRequest>,
+                            request: tonic::Request<super::ListDsDqRuleInputEntriesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).list_ds_dq_rule_input_entry_beans(request).await
+                                (*inner).list_ds_dq_rule_input_entries(request).await
                             };
                             Box::pin(fut)
                         }
@@ -451,7 +445,7 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsDqRuleInputEntryBeansSvc(inner);
+                        let method = ListDsDqRuleInputEntriesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -467,27 +461,23 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService/\
-                 GetDsDqRuleInputEntryBean" => {
+                "/ds_dq_rule_input_entry.DsDqRuleInputEntryService/GetDsDqRuleInputEntry" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsDqRuleInputEntryBeanSvc<T: DsDqRuleInputEntryBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqRuleInputEntryBeanService>
-                        tonic::server::UnaryService<super::GetDsDqRuleInputEntryBeanRequest>
-                        for GetDsDqRuleInputEntryBeanSvc<T>
+                    struct GetDsDqRuleInputEntrySvc<T: DsDqRuleInputEntryService>(pub Arc<T>);
+                    impl<T: DsDqRuleInputEntryService>
+                        tonic::server::UnaryService<super::GetDsDqRuleInputEntryRequest>
+                        for GetDsDqRuleInputEntrySvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDqRuleInputEntryBean;
+                        type Response = super::DsDqRuleInputEntry;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsDqRuleInputEntryBeanRequest>,
+                            request: tonic::Request<super::GetDsDqRuleInputEntryRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_ds_dq_rule_input_entry_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_ds_dq_rule_input_entry(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -498,7 +488,7 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsDqRuleInputEntryBeanSvc(inner);
+                        let method = GetDsDqRuleInputEntrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -514,26 +504,23 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService/\
-                 CreateDsDqRuleInputEntryBean" => {
+                "/ds_dq_rule_input_entry.DsDqRuleInputEntryService/CreateDsDqRuleInputEntry" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsDqRuleInputEntryBeanSvc<T: DsDqRuleInputEntryBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqRuleInputEntryBeanService>
-                        tonic::server::UnaryService<super::CreateDsDqRuleInputEntryBeanRequest>
-                        for CreateDsDqRuleInputEntryBeanSvc<T>
+                    struct CreateDsDqRuleInputEntrySvc<T: DsDqRuleInputEntryService>(pub Arc<T>);
+                    impl<T: DsDqRuleInputEntryService>
+                        tonic::server::UnaryService<super::CreateDsDqRuleInputEntryRequest>
+                        for CreateDsDqRuleInputEntrySvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDqRuleInputEntryBean;
+                        type Response = super::DsDqRuleInputEntry;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsDqRuleInputEntryBeanRequest>,
+                            request: tonic::Request<super::CreateDsDqRuleInputEntryRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).create_ds_dq_rule_input_entry_bean(request).await
+                                (*inner).create_ds_dq_rule_input_entry(request).await
                             };
                             Box::pin(fut)
                         }
@@ -545,7 +532,7 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsDqRuleInputEntryBeanSvc(inner);
+                        let method = CreateDsDqRuleInputEntrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -561,26 +548,23 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService/\
-                 UpdateDsDqRuleInputEntryBean" => {
+                "/ds_dq_rule_input_entry.DsDqRuleInputEntryService/UpdateDsDqRuleInputEntry" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsDqRuleInputEntryBeanSvc<T: DsDqRuleInputEntryBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqRuleInputEntryBeanService>
-                        tonic::server::UnaryService<super::UpdateDsDqRuleInputEntryBeanRequest>
-                        for UpdateDsDqRuleInputEntryBeanSvc<T>
+                    struct UpdateDsDqRuleInputEntrySvc<T: DsDqRuleInputEntryService>(pub Arc<T>);
+                    impl<T: DsDqRuleInputEntryService>
+                        tonic::server::UnaryService<super::UpdateDsDqRuleInputEntryRequest>
+                        for UpdateDsDqRuleInputEntrySvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDqRuleInputEntryBean;
+                        type Response = super::DsDqRuleInputEntry;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsDqRuleInputEntryBeanRequest>,
+                            request: tonic::Request<super::UpdateDsDqRuleInputEntryRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).update_ds_dq_rule_input_entry_bean(request).await
+                                (*inner).update_ds_dq_rule_input_entry(request).await
                             };
                             Box::pin(fut)
                         }
@@ -592,7 +576,7 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsDqRuleInputEntryBeanSvc(inner);
+                        let method = UpdateDsDqRuleInputEntrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -608,26 +592,23 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService/\
-                 DeleteDsDqRuleInputEntryBean" => {
+                "/ds_dq_rule_input_entry.DsDqRuleInputEntryService/DeleteDsDqRuleInputEntry" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsDqRuleInputEntryBeanSvc<T: DsDqRuleInputEntryBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqRuleInputEntryBeanService>
-                        tonic::server::UnaryService<super::DeleteDsDqRuleInputEntryBeanRequest>
-                        for DeleteDsDqRuleInputEntryBeanSvc<T>
+                    struct DeleteDsDqRuleInputEntrySvc<T: DsDqRuleInputEntryService>(pub Arc<T>);
+                    impl<T: DsDqRuleInputEntryService>
+                        tonic::server::UnaryService<super::DeleteDsDqRuleInputEntryRequest>
+                        for DeleteDsDqRuleInputEntrySvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsDqRuleInputEntryBeanRequest>,
+                            request: tonic::Request<super::DeleteDsDqRuleInputEntryRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).delete_ds_dq_rule_input_entry_bean(request).await
+                                (*inner).delete_ds_dq_rule_input_entry(request).await
                             };
                             Box::pin(fut)
                         }
@@ -639,7 +620,7 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsDqRuleInputEntryBeanSvc(inner);
+                        let method = DeleteDsDqRuleInputEntrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -666,7 +647,7 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
             }
         }
     }
-    impl<T: DsDqRuleInputEntryBeanService> Clone for DsDqRuleInputEntryBeanServiceServer<T> {
+    impl<T: DsDqRuleInputEntryService> Clone for DsDqRuleInputEntryServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -678,7 +659,7 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
             }
         }
     }
-    impl<T: DsDqRuleInputEntryBeanService> Clone for _Inner<T> {
+    impl<T: DsDqRuleInputEntryService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -688,9 +669,9 @@ pub mod ds_dq_rule_input_entry_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsDqRuleInputEntryBeanService> tonic::server::NamedService
-        for DsDqRuleInputEntryBeanServiceServer<T>
+    impl<T: DsDqRuleInputEntryService> tonic::server::NamedService
+        for DsDqRuleInputEntryServiceServer<T>
     {
-        const NAME: &'static str = "ds_dq_rule_input_entry.DsDqRuleInputEntryBeanService";
+        const NAME: &'static str = "ds_dq_rule_input_entry.DsDqRuleInputEntryService";
     }
 }

@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsQueueBean {
+pub struct DsQueue {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, optional, tag = "2")]
@@ -16,7 +16,7 @@ pub struct DsQueueBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsQueueBeansRequest {
+pub struct ListDsQueuesRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -25,42 +25,42 @@ pub struct ListDsQueueBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsQueueBeansResponse {
-    /// The field name should match the noun "DsQueueBean" in the method name.
+pub struct ListDsQueuesResponse {
+    /// The field name should match the noun "DsQueue" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_queue_beans: ::prost::alloc::vec::Vec<DsQueueBean>,
+    pub ds_queues: ::prost::alloc::vec::Vec<DsQueue>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsQueueBeanRequest {
+pub struct GetDsQueueRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsQueueBeanRequest {
-    /// The parent resource name where the DsQueueBean is to be created.
+pub struct CreateDsQueueRequest {
+    /// The parent resource name where the DsQueue is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsQueueBean id to use for this DsQueueBean.
+    /// The DsQueue id to use for this DsQueue.
     #[prost(string, tag = "2")]
-    pub ds_queue_bean_id: ::prost::alloc::string::String,
-    /// The DsQueueBean resource to create.
+    pub ds_queue_id: ::prost::alloc::string::String,
+    /// The DsQueue resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_queue_bean: ::core::option::Option<DsQueueBean>,
+    pub ds_queue: ::core::option::Option<DsQueue>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsQueueBeanRequest {
-    /// The DsQueueBean resource which replaces the resource on the server.
+pub struct UpdateDsQueueRequest {
+    /// The DsQueue resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_queue_bean: ::core::option::Option<DsQueueBean>,
+    pub ds_queue: ::core::option::Option<DsQueue>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -68,21 +68,21 @@ pub struct UpdateDsQueueBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsQueueBeanRequest {
-    /// The resource name of the DsQueueBean to be deleted.
+pub struct DeleteDsQueueRequest {
+    /// The resource name of the DsQueue to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_queue_bean_service_client {
+pub mod ds_queue_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsQueueBeanServiceClient<T> {
+    pub struct DsQueueServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsQueueBeanServiceClient<tonic::transport::Channel> {
+    impl DsQueueServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -93,7 +93,7 @@ pub mod ds_queue_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsQueueBeanServiceClient<T>
+    impl<T> DsQueueServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -113,7 +113,7 @@ pub mod ds_queue_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsQueueBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsQueueServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -126,7 +126,7 @@ pub mod ds_queue_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsQueueBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsQueueServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -164,10 +164,10 @@ pub mod ds_queue_bean_service_client {
             self
         }
 
-        pub async fn list_ds_queue_beans(
+        pub async fn list_ds_queues(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsQueueBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsQueueBeansResponse>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsQueuesRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsQueuesResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -176,21 +176,36 @@ pub mod ds_queue_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_queue.DsQueueBeanService/ListDsQueueBeans",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/ds_queue.DsQueueService/ListDsQueues");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_queue.DsQueueBeanService",
-                "ListDsQueueBeans",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_queue.DsQueueService", "ListDsQueues"));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_queue_bean(
+        pub async fn get_ds_queue(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsQueueBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsQueueBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetDsQueueRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsQueue>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static("/ds_queue.DsQueueService/GetDsQueue");
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_queue.DsQueueService", "GetDsQueue"));
+            self.inner.unary(req, path, codec).await
+        }
+
+        pub async fn create_ds_queue(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CreateDsQueueRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsQueue>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -199,19 +214,17 @@ pub mod ds_queue_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path =
-                http::uri::PathAndQuery::from_static("/ds_queue.DsQueueBeanService/GetDsQueueBean");
+                http::uri::PathAndQuery::from_static("/ds_queue.DsQueueService/CreateDsQueue");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_queue.DsQueueBeanService",
-                "GetDsQueueBean",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_queue.DsQueueService", "CreateDsQueue"));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_queue_bean(
+        pub async fn update_ds_queue(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsQueueBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsQueueBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateDsQueueRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsQueue>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -219,42 +232,17 @@ pub mod ds_queue_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_queue.DsQueueBeanService/CreateDsQueueBean",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/ds_queue.DsQueueService/UpdateDsQueue");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_queue.DsQueueBeanService",
-                "CreateDsQueueBean",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_queue.DsQueueService", "UpdateDsQueue"));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_queue_bean(
+        pub async fn delete_ds_queue(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsQueueBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsQueueBean>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_queue.DsQueueBeanService/UpdateDsQueueBean",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_queue.DsQueueBeanService",
-                "UpdateDsQueueBean",
-            ));
-            self.inner.unary(req, path, codec).await
-        }
-
-        pub async fn delete_ds_queue_bean(
-            &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsQueueBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsQueueRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -263,49 +251,46 @@ pub mod ds_queue_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_queue.DsQueueBeanService/DeleteDsQueueBean",
-            );
+            let path =
+                http::uri::PathAndQuery::from_static("/ds_queue.DsQueueService/DeleteDsQueue");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_queue.DsQueueBeanService",
-                "DeleteDsQueueBean",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_queue.DsQueueService", "DeleteDsQueue"));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_queue_bean_service_server {
+pub mod ds_queue_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsQueueBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsQueueServiceServer.
     #[async_trait]
-    pub trait DsQueueBeanService: Send + Sync + 'static {
-        async fn list_ds_queue_beans(
+    pub trait DsQueueService: Send + Sync + 'static {
+        async fn list_ds_queues(
             &self,
-            request: tonic::Request<super::ListDsQueueBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsQueueBeansResponse>, tonic::Status>;
-        async fn get_ds_queue_bean(
+            request: tonic::Request<super::ListDsQueuesRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsQueuesResponse>, tonic::Status>;
+        async fn get_ds_queue(
             &self,
-            request: tonic::Request<super::GetDsQueueBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsQueueBean>, tonic::Status>;
-        async fn create_ds_queue_bean(
+            request: tonic::Request<super::GetDsQueueRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsQueue>, tonic::Status>;
+        async fn create_ds_queue(
             &self,
-            request: tonic::Request<super::CreateDsQueueBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsQueueBean>, tonic::Status>;
-        async fn update_ds_queue_bean(
+            request: tonic::Request<super::CreateDsQueueRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsQueue>, tonic::Status>;
+        async fn update_ds_queue(
             &self,
-            request: tonic::Request<super::UpdateDsQueueBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsQueueBean>, tonic::Status>;
-        async fn delete_ds_queue_bean(
+            request: tonic::Request<super::UpdateDsQueueRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsQueue>, tonic::Status>;
+        async fn delete_ds_queue(
             &self,
-            request: tonic::Request<super::DeleteDsQueueBeanRequest>,
+            request: tonic::Request<super::DeleteDsQueueRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsQueueBeanServiceServer<T: DsQueueBeanService> {
+    pub struct DsQueueServiceServer<T: DsQueueService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -313,7 +298,7 @@ pub mod ds_queue_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsQueueBeanService> DsQueueBeanServiceServer<T> {
+    impl<T: DsQueueService> DsQueueServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -366,9 +351,9 @@ pub mod ds_queue_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsQueueBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsQueueServiceServer<T>
     where
-        T: DsQueueBeanService,
+        T: DsQueueService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -386,22 +371,21 @@ pub mod ds_queue_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_queue.DsQueueBeanService/ListDsQueueBeans" => {
+                "/ds_queue.DsQueueService/ListDsQueues" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsQueueBeansSvc<T: DsQueueBeanService>(pub Arc<T>);
-                    impl<T: DsQueueBeanService>
-                        tonic::server::UnaryService<super::ListDsQueueBeansRequest>
-                        for ListDsQueueBeansSvc<T>
+                    struct ListDsQueuesSvc<T: DsQueueService>(pub Arc<T>);
+                    impl<T: DsQueueService> tonic::server::UnaryService<super::ListDsQueuesRequest>
+                        for ListDsQueuesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsQueueBeansResponse;
+                        type Response = super::ListDsQueuesResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsQueueBeansRequest>,
+                            request: tonic::Request<super::ListDsQueuesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).list_ds_queue_beans(request).await };
+                            let fut = async move { (*inner).list_ds_queues(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -412,7 +396,7 @@ pub mod ds_queue_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsQueueBeansSvc(inner);
+                        let method = ListDsQueuesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -428,22 +412,19 @@ pub mod ds_queue_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_queue.DsQueueBeanService/GetDsQueueBean" => {
+                "/ds_queue.DsQueueService/GetDsQueue" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsQueueBeanSvc<T: DsQueueBeanService>(pub Arc<T>);
-                    impl<T: DsQueueBeanService>
-                        tonic::server::UnaryService<super::GetDsQueueBeanRequest>
-                        for GetDsQueueBeanSvc<T>
-                    {
+                    struct GetDsQueueSvc<T: DsQueueService>(pub Arc<T>);
+                    impl<T: DsQueueService> tonic::server::UnaryService<super::GetDsQueueRequest> for GetDsQueueSvc<T> {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsQueueBean;
+                        type Response = super::DsQueue;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsQueueBeanRequest>,
+                            request: tonic::Request<super::GetDsQueueRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_ds_queue_bean(request).await };
+                            let fut = async move { (*inner).get_ds_queue(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -454,7 +435,7 @@ pub mod ds_queue_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsQueueBeanSvc(inner);
+                        let method = GetDsQueueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -470,22 +451,21 @@ pub mod ds_queue_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_queue.DsQueueBeanService/CreateDsQueueBean" => {
+                "/ds_queue.DsQueueService/CreateDsQueue" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsQueueBeanSvc<T: DsQueueBeanService>(pub Arc<T>);
-                    impl<T: DsQueueBeanService>
-                        tonic::server::UnaryService<super::CreateDsQueueBeanRequest>
-                        for CreateDsQueueBeanSvc<T>
+                    struct CreateDsQueueSvc<T: DsQueueService>(pub Arc<T>);
+                    impl<T: DsQueueService> tonic::server::UnaryService<super::CreateDsQueueRequest>
+                        for CreateDsQueueSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsQueueBean;
+                        type Response = super::DsQueue;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsQueueBeanRequest>,
+                            request: tonic::Request<super::CreateDsQueueRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).create_ds_queue_bean(request).await };
+                            let fut = async move { (*inner).create_ds_queue(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -496,7 +476,7 @@ pub mod ds_queue_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsQueueBeanSvc(inner);
+                        let method = CreateDsQueueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -512,22 +492,21 @@ pub mod ds_queue_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_queue.DsQueueBeanService/UpdateDsQueueBean" => {
+                "/ds_queue.DsQueueService/UpdateDsQueue" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsQueueBeanSvc<T: DsQueueBeanService>(pub Arc<T>);
-                    impl<T: DsQueueBeanService>
-                        tonic::server::UnaryService<super::UpdateDsQueueBeanRequest>
-                        for UpdateDsQueueBeanSvc<T>
+                    struct UpdateDsQueueSvc<T: DsQueueService>(pub Arc<T>);
+                    impl<T: DsQueueService> tonic::server::UnaryService<super::UpdateDsQueueRequest>
+                        for UpdateDsQueueSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsQueueBean;
+                        type Response = super::DsQueue;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsQueueBeanRequest>,
+                            request: tonic::Request<super::UpdateDsQueueRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).update_ds_queue_bean(request).await };
+                            let fut = async move { (*inner).update_ds_queue(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -538,7 +517,7 @@ pub mod ds_queue_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsQueueBeanSvc(inner);
+                        let method = UpdateDsQueueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -554,22 +533,21 @@ pub mod ds_queue_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_queue.DsQueueBeanService/DeleteDsQueueBean" => {
+                "/ds_queue.DsQueueService/DeleteDsQueue" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsQueueBeanSvc<T: DsQueueBeanService>(pub Arc<T>);
-                    impl<T: DsQueueBeanService>
-                        tonic::server::UnaryService<super::DeleteDsQueueBeanRequest>
-                        for DeleteDsQueueBeanSvc<T>
+                    struct DeleteDsQueueSvc<T: DsQueueService>(pub Arc<T>);
+                    impl<T: DsQueueService> tonic::server::UnaryService<super::DeleteDsQueueRequest>
+                        for DeleteDsQueueSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsQueueBeanRequest>,
+                            request: tonic::Request<super::DeleteDsQueueRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).delete_ds_queue_bean(request).await };
+                            let fut = async move { (*inner).delete_ds_queue(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -580,7 +558,7 @@ pub mod ds_queue_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsQueueBeanSvc(inner);
+                        let method = DeleteDsQueueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -607,7 +585,7 @@ pub mod ds_queue_bean_service_server {
             }
         }
     }
-    impl<T: DsQueueBeanService> Clone for DsQueueBeanServiceServer<T> {
+    impl<T: DsQueueService> Clone for DsQueueServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -619,7 +597,7 @@ pub mod ds_queue_bean_service_server {
             }
         }
     }
-    impl<T: DsQueueBeanService> Clone for _Inner<T> {
+    impl<T: DsQueueService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -629,7 +607,7 @@ pub mod ds_queue_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsQueueBeanService> tonic::server::NamedService for DsQueueBeanServiceServer<T> {
-        const NAME: &'static str = "ds_queue.DsQueueBeanService";
+    impl<T: DsQueueService> tonic::server::NamedService for DsQueueServiceServer<T> {
+        const NAME: &'static str = "ds_queue.DsQueueService";
     }
 }

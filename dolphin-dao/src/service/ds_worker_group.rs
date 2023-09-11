@@ -1,51 +1,45 @@
-use super::service::DolphinRpcServer;
-use proto::ds_worker_group::ds_worker_group_bean_service_server::DsWorkerGroupBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_worker_group::ds_worker_group_service_server::DsWorkerGroupService;
 
 #[tonic::async_trait]
-impl DsWorkerGroupBeanService for DolphinRpcServer {
-    async fn list_ds_worker_group_beans(
+impl DsWorkerGroupService for DolphinRpcServer {
+    async fn list_ds_worker_groups(
         &self,
-        _req: tonic::Request<proto::ds_worker_group::ListDsWorkerGroupBeansRequest>,
+        _req: tonic::Request<proto::ds_worker_group::ListDsWorkerGroupsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_worker_group::ListDsWorkerGroupBeansResponse>,
+        tonic::Response<proto::ds_worker_group::ListDsWorkerGroupsResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_worker_group_bean(
+    async fn get_ds_worker_group(
         &self,
-        _req: tonic::Request<proto::ds_worker_group::GetDsWorkerGroupBeanRequest>,
-    ) -> std::result::Result<
-        tonic::Response<proto::ds_worker_group::DsWorkerGroupBean>,
-        tonic::Status,
-    > {
+        _req: tonic::Request<proto::ds_worker_group::GetDsWorkerGroupRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_worker_group::DsWorkerGroup>, tonic::Status>
+    {
         todo!()
     }
 
-    async fn create_ds_worker_group_bean(
+    async fn create_ds_worker_group(
         &self,
-        _req: tonic::Request<proto::ds_worker_group::CreateDsWorkerGroupBeanRequest>,
-    ) -> std::result::Result<
-        tonic::Response<proto::ds_worker_group::DsWorkerGroupBean>,
-        tonic::Status,
-    > {
+        _req: tonic::Request<proto::ds_worker_group::CreateDsWorkerGroupRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_worker_group::DsWorkerGroup>, tonic::Status>
+    {
         todo!()
     }
 
-    async fn update_ds_worker_group_bean(
+    async fn update_ds_worker_group(
         &self,
-        _req: tonic::Request<proto::ds_worker_group::UpdateDsWorkerGroupBeanRequest>,
-    ) -> std::result::Result<
-        tonic::Response<proto::ds_worker_group::DsWorkerGroupBean>,
-        tonic::Status,
-    > {
+        _req: tonic::Request<proto::ds_worker_group::UpdateDsWorkerGroupRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_worker_group::DsWorkerGroup>, tonic::Status>
+    {
         todo!()
     }
 
-    async fn delete_ds_worker_group_bean(
+    async fn delete_ds_worker_group(
         &self,
-        _req: tonic::Request<proto::ds_worker_group::DeleteDsWorkerGroupBeanRequest>,
+        _req: tonic::Request<proto::ds_worker_group::DeleteDsWorkerGroupRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

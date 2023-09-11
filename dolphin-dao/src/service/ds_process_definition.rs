@@ -1,51 +1,51 @@
-use super::service::DolphinRpcServer;
-use proto::ds_process_definition::ds_process_definition_bean_service_server::DsProcessDefinitionBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_process_definition::ds_process_definition_service_server::DsProcessDefinitionService;
 
 #[tonic::async_trait]
-impl DsProcessDefinitionBeanService for DolphinRpcServer {
-    async fn list_ds_process_definition_beans(
+impl DsProcessDefinitionService for DolphinRpcServer {
+    async fn list_ds_process_definitions(
         &self,
-        _req: tonic::Request<proto::ds_process_definition::ListDsProcessDefinitionBeansRequest>,
+        _req: tonic::Request<proto::ds_process_definition::ListDsProcessDefinitionsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_process_definition::ListDsProcessDefinitionBeansResponse>,
+        tonic::Response<proto::ds_process_definition::ListDsProcessDefinitionsResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_process_definition_bean(
+    async fn get_ds_process_definition(
         &self,
-        _req: tonic::Request<proto::ds_process_definition::GetDsProcessDefinitionBeanRequest>,
+        _req: tonic::Request<proto::ds_process_definition::GetDsProcessDefinitionRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_process_definition::DsProcessDefinitionBean>,
+        tonic::Response<proto::ds_process_definition::DsProcessDefinition>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn create_ds_process_definition_bean(
+    async fn create_ds_process_definition(
         &self,
-        _req: tonic::Request<proto::ds_process_definition::CreateDsProcessDefinitionBeanRequest>,
+        _req: tonic::Request<proto::ds_process_definition::CreateDsProcessDefinitionRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_process_definition::DsProcessDefinitionBean>,
+        tonic::Response<proto::ds_process_definition::DsProcessDefinition>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn update_ds_process_definition_bean(
+    async fn update_ds_process_definition(
         &self,
-        _req: tonic::Request<proto::ds_process_definition::UpdateDsProcessDefinitionBeanRequest>,
+        _req: tonic::Request<proto::ds_process_definition::UpdateDsProcessDefinitionRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_process_definition::DsProcessDefinitionBean>,
+        tonic::Response<proto::ds_process_definition::DsProcessDefinition>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn delete_ds_process_definition_bean(
+    async fn delete_ds_process_definition(
         &self,
-        _req: tonic::Request<proto::ds_process_definition::DeleteDsProcessDefinitionBeanRequest>,
+        _req: tonic::Request<proto::ds_process_definition::DeleteDsProcessDefinitionRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

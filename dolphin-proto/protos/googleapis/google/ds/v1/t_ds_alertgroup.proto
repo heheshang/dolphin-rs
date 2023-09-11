@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 package ds_alertgroup;
 
 
-message DsAlertGroupBean {
+message DsAlertGroup {
 
     int32 id= 1;
     optional string alert_instance_ids=2;
@@ -20,45 +20,45 @@ message DsAlertGroupBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsAlertGroupBeanService {
-  rpc ListDsAlertGroupBeans(ListDsAlertGroupBeansRequest) returns (ListDsAlertGroupBeansResponse) {
+service DsAlertGroupService {
+  rpc ListDsAlertGroups(ListDsAlertGroupsRequest) returns (ListDsAlertGroupsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsAlertGroupBeans"
+      get: "/v1alpha1/DsAlertGroups"
     };
   }
 
-  rpc GetDsAlertGroupBean(GetDsAlertGroupBeanRequest) returns (DsAlertGroupBean) {
+  rpc GetDsAlertGroup(GetDsAlertGroupRequest) returns (DsAlertGroup) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsAlertGroupBeans/*}"
+      get: "/v1alpha1/{name=DsAlertGroups/*}"
     };
   }
 
-  rpc CreateDsAlertGroupBean(CreateDsAlertGroupBeanRequest) returns (DsAlertGroupBean) {
+  rpc CreateDsAlertGroup(CreateDsAlertGroupRequest) returns (DsAlertGroup) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsAlertGroupBeans"
-      body: "DsAlertGroupBean"
+      post: "/v1alpha1/DsAlertGroups"
+      body: "DsAlertGroup"
     };
   }
 
-  rpc UpdateDsAlertGroupBean(UpdateDsAlertGroupBeanRequest) returns (DsAlertGroupBean) {
+  rpc UpdateDsAlertGroup(UpdateDsAlertGroupRequest) returns (DsAlertGroup) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsAlertGroupBean.name=DsAlertGroupBeans/*}"
-      body: "DsAlertGroupBean"
+      patch: "/v1alpha1/{DsAlertGroup.name=DsAlertGroups/*}"
+      body: "DsAlertGroup"
     };
   }
 
-  rpc DeleteDsAlertGroupBean(DeleteDsAlertGroupBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsAlertGroup(DeleteDsAlertGroupRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsAlertGroupBeans/*}"
+      delete: "/v1alpha1/{name=DsAlertGroups/*}"
     };
   }
 }
 
-// message DsAlertGroupBean {
+// message DsAlertGroup {
 // ! This should be defined elsewhere
 // }
 
-message ListDsAlertGroupBeansRequest {
+message ListDsAlertGroupsRequest {
 
 
   // The maximum number of items to return.
@@ -67,42 +67,42 @@ message ListDsAlertGroupBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsAlertGroupBeansResponse {
-  // The field name should match the noun "DsAlertGroupBean" in the method name.
+message ListDsAlertGroupsResponse {
+  // The field name should match the noun "DsAlertGroup" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsAlertGroupBean DsAlertGroupBeans = 1;
+  repeated DsAlertGroup DsAlertGroups = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsAlertGroupBeanRequest {
+message GetDsAlertGroupRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsAlertGroupBeanRequest {
-  // The parent resource name where the DsAlertGroupBean is to be created.
+message CreateDsAlertGroupRequest {
+  // The parent resource name where the DsAlertGroup is to be created.
   string parent = 1;
 
-  // The DsAlertGroupBean id to use for this DsAlertGroupBean.
-  string DsAlertGroupBean_id = 2;
+  // The DsAlertGroup id to use for this DsAlertGroup.
+  string DsAlertGroup_id = 2;
 
-  // The DsAlertGroupBean resource to create.
+  // The DsAlertGroup resource to create.
   // The field name should match the Noun in the method name.
-  DsAlertGroupBean DsAlertGroupBean = 3;
+  DsAlertGroup DsAlertGroup = 3;
 }
 
-message UpdateDsAlertGroupBeanRequest {
-  // The DsAlertGroupBean resource which replaces the resource on the server.
-  DsAlertGroupBean DsAlertGroupBean = 1;
+message UpdateDsAlertGroupRequest {
+  // The DsAlertGroup resource which replaces the resource on the server.
+  DsAlertGroup DsAlertGroup = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsAlertGroupBeanRequest {
-  // The resource name of the DsAlertGroupBean to be deleted.
+message DeleteDsAlertGroupRequest {
+  // The resource name of the DsAlertGroup to be deleted.
   string name = 1;
 }

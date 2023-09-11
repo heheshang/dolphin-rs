@@ -61,65 +61,65 @@ use crate::{
 };
 
 use proto::{
-    ds_access_token::DsAccessTokenBean,
-    ds_alert::DsAlertBean,
-    ds_alert_plugin_instance::DsAlertPluginInstanceBean,
-    ds_alert_send_status::DsAlertSendStatusBean,
-    ds_alertgroup::DsAlertGroupBean,
-    ds_audit_log::DsAuditLogBean,
-    ds_command::DsCommandBean,
-    ds_datasource::DsDatasourceBean,
-    ds_dq_comparison_type::DsDqComparisonTypeBean,
-    ds_dq_execute_result::DsDqExecuteResultBean,
-    ds_dq_rule::DsDqRuleBean,
-    ds_dq_rule_execute_sql::DsDqRuleExecuteSqlBean,
-    ds_dq_rule_input_entry::DsDqRuleInputEntryBean,
-    ds_dq_task_statistics_value::DsDqTaskStatisticsValueBean,
-    ds_environment::DsEnvironmentBean,
-    ds_environment_worker_group_relation::DsEnvironmentWorkerGroupRelationBean,
-    ds_error_command::DsErrorCommandBean,
-    ds_k8s::DsK8sBean,
-    ds_k8s_namespace::DsK8sNamespaceBean,
-    ds_plugin_define::DsPluginDefineBean,
-    ds_process_definition::DsProcessDefinitionBean,
-    ds_process_definition_log::DsProcessDefinitionLogBean,
-    ds_process_instance::DsProcessInstanceBean,
-    ds_process_task_relation::DsProcessTaskRelationBean,
-    ds_process_task_relation_log::DsProcessTaskRelationLogBean,
-    ds_project::DsProjectBean,
-    ds_queue::DsQueueBean,
-    ds_relation_datasource_user::DsRelationDatasourceUserBean,
-    ds_relation_namespace_user::DsRelationNamespaceUserBean,
-    ds_relation_process_instance::DsRelationProcessInstanceBean,
-    ds_relation_project_user::DsRelationProjectUserBean,
-    ds_relation_resources_user::DsRelationResourcesUserBean,
-    ds_relation_rule_execute_sql::DsRelationRuleExecuteSqlBean,
-    ds_relation_rule_input_entry::DsRelationRuleInputEntryBean,
-    ds_relation_udfs_user::DsRelationUdfsUserBean,
-    ds_resources::DsResourceBean,
-    ds_schedules::DsSchedulesBean,
-    ds_session::DsSessionBean,
-    ds_task_definition::DsTaskDefinitionBean,
-    ds_task_definition_log::DsTaskDefinitionLogBean,
-    ds_task_group::DsTaskGroupBean,
-    ds_task_group_queue::DsTaskGroupQueueBean,
-    ds_task_instance::DsTaskInstanceBean,
-    ds_tenant::DsTenantBean,
-    ds_udfs::DsUdfsBean,
-    ds_user::DsUserBean,
-    ds_version::DsVersionBean,
-    ds_worker_group::DsWorkerGroupBean,
-    qrtz_blob_triggers::QrtzBlobTriggerBean,
-    qrtz_calendars::QrtzCalendarBean,
-    qrtz_cron_triggers::QrtzCronTriggersBean,
-    qrtz_fired_triggers::QrtzFiredTriggersBean,
-    qrtz_job_details::QrtzJobDetailsBean,
-    qrtz_locks::QrtzLocksBean,
-    qrtz_paused_trigger_grps::QrtzPausedTriggerGrpsBean,
-    qrtz_scheduler_state::QrtzSchedulerStateBean,
-    qrtz_simple_triggers::QrtzSimpleTriggerBean,
-    qrtz_simprop_triggers::QrtzSimpropTriggerBean,
-    qrtz_triggers::QrtzTriggerBean,
+    ds_access_token::DsAccessToken,
+    ds_alert::DsAlert,
+    ds_alert_plugin_instance::DsAlertPluginInstance,
+    ds_alert_send_status::DsAlertSendStatus,
+    ds_alertgroup::DsAlertGroup,
+    ds_audit_log::DsAuditLog,
+    ds_command::DsCommand,
+    ds_datasource::DsDatasource,
+    ds_dq_comparison_type::DsDqComparisonType,
+    ds_dq_execute_result::DsDqExecuteResult,
+    ds_dq_rule::DsDqRule,
+    ds_dq_rule_execute_sql::DsDqRuleExecuteSql,
+    ds_dq_rule_input_entry::DsDqRuleInputEntry,
+    ds_dq_task_statistics_value::DsDqTaskStatisticsValue,
+    ds_environment::DsEnvironment,
+    ds_environment_worker_group_relation::DsEnvironmentWorkerGroupRelation,
+    ds_error_command::DsErrorCommand,
+    ds_k8s::DsK8s,
+    ds_k8s_namespace::DsK8sNamespace,
+    ds_plugin_define::DsPluginDefine,
+    ds_process_definition::DsProcessDefinition,
+    ds_process_definition_log::DsProcessDefinitionLog,
+    ds_process_instance::DsProcessInstance,
+    ds_process_task_relation::DsProcessTaskRelation,
+    ds_process_task_relation_log::DsProcessTaskRelationLog,
+    ds_project::DsProject,
+    ds_queue::DsQueue,
+    ds_relation_datasource_user::DsRelationDatasourceUser,
+    ds_relation_namespace_user::DsRelationNamespaceUser,
+    ds_relation_process_instance::DsRelationProcessInstance,
+    ds_relation_project_user::DsRelationProjectUser,
+    ds_relation_resources_user::DsRelationResourcesUser,
+    ds_relation_rule_execute_sql::DsRelationRuleExecuteSql,
+    ds_relation_rule_input::DsRelationRuleInput,
+    ds_relation_udfs_user::DsRelationUdfsUser,
+    ds_resources::DsResource,
+    ds_schedules::DsSchedules,
+    ds_session::DsSession,
+    ds_task_definition::DsTaskDefinition,
+    ds_task_definition_log::DsTaskDefinitionLog,
+    ds_task_group::DsTaskGroup,
+    ds_task_group_queue::DsTaskGroupQueue,
+    ds_task_instance::DsTaskInstance,
+    ds_tenant::DsTenant,
+    ds_udfs::DsUdfs,
+    ds_user::DsUser,
+    ds_version::DsVersion,
+    ds_worker_group::DsWorkerGroup,
+    qrtz_blob_triggers::QrtzBlobTrigger,
+    qrtz_calendars::QrtzCalendar,
+    qrtz_cron_triggers::QrtzCronTriggers,
+    qrtz_fired_triggers::QrtzFiredTriggers,
+    qrtz_job_details::QrtzJobDetails,
+    qrtz_locks::QrtzLocks,
+    qrtz_paused_trigger_grps::QrtzPausedTriggerGrps,
+    qrtz_scheduler_state::QrtzSchedulerState,
+    qrtz_simple_triggers::QrtzSimpleTrigger,
+    qrtz_simprop_triggers::QrtzSimpropTrigger,
+    qrtz_triggers::QrtzTrigger,
 };
 
 
@@ -134,74 +134,74 @@ macro_rules! impl_from {
 }
 
 
-impl_from!(DsAccessTokenModel, DsAccessTokenBean);
-impl_from!(DsAlertModel, DsAlertBean);
-impl_from!(DsAlertPluginInstanceModel, DsAlertPluginInstanceBean);
-impl_from!(DsAlertSendStatusModel, DsAlertSendStatusBean);
-impl_from!(DsAlertgroupModel, DsAlertGroupBean);
-impl_from!(DsAuditLogModel, DsAuditLogBean);
-impl_from!(DsCommandModel, DsCommandBean);
-impl_from!(DsDatasourceModel, DsDatasourceBean);
-impl_from!(DsDqComparisonTypeModel, DsDqComparisonTypeBean);
-impl_from!(DsDqExecuteResultModel, DsDqExecuteResultBean);
-impl_from!(DsDqRuleModel, DsDqRuleBean);
-impl_from!(DsDqRuleExecuteSqlModel, DsDqRuleExecuteSqlBean);
-impl_from!(DsDqRuleInputEntryModel, DsDqRuleInputEntryBean);
-impl_from!(DsDqTaskStatisticsValueModel, DsDqTaskStatisticsValueBean);
-impl_from!(DsEnvironmentModel, DsEnvironmentBean);
+impl_from!(DsAccessTokenModel, DsAccessToken);
+impl_from!(DsAlertModel, DsAlert);
+impl_from!(DsAlertPluginInstanceModel, DsAlertPluginInstance);
+impl_from!(DsAlertSendStatusModel, DsAlertSendStatus);
+impl_from!(DsAlertgroupModel, DsAlertGroup);
+impl_from!(DsAuditLogModel, DsAuditLog);
+impl_from!(DsCommandModel, DsCommand);
+impl_from!(DsDatasourceModel, DsDatasource);
+impl_from!(DsDqComparisonTypeModel, DsDqComparisonType);
+impl_from!(DsDqExecuteResultModel, DsDqExecuteResult);
+impl_from!(DsDqRuleModel, DsDqRule);
+impl_from!(DsDqRuleExecuteSqlModel, DsDqRuleExecuteSql);
+impl_from!(DsDqRuleInputEntryModel, DsDqRuleInputEntry);
+impl_from!(DsDqTaskStatisticsValueModel, DsDqTaskStatisticsValue);
+impl_from!(DsEnvironmentModel, DsEnvironment);
 impl_from!(
     DsEnvironmentWorkerGroupRelationModel,
-    DsEnvironmentWorkerGroupRelationBean
+    DsEnvironmentWorkerGroupRelation
 );
-impl_from!(DsErrorCommandModel, DsErrorCommandBean);
-impl_from!(DsK8sModel, DsK8sBean);
-impl_from!(DsK8sNamespaceModel, DsK8sNamespaceBean);
-impl_from!(DsPluginDefineModel, DsPluginDefineBean);
-impl_from!(DsProcessDefinitionModel, DsProcessDefinitionBean);
-impl_from!(DsProcessDefinitionLogModel, DsProcessDefinitionLogBean);
-impl_from!(DsProcessInstanceModel, DsProcessInstanceBean);
-impl_from!(DsProcessTaskRelationModel, DsProcessTaskRelationBean);
-impl_from!(DsProcessTaskRelationLogModel, DsProcessTaskRelationLogBean);
-impl_from!(DsProjectModel, DsProjectBean);
-impl_from!(DsQueueModel, DsQueueBean);
-impl_from!(DsRelationDatasourceUserModel, DsRelationDatasourceUserBean);
-impl_from!(DsRelationNamespaceUserModel, DsRelationNamespaceUserBean);
+impl_from!(DsErrorCommandModel, DsErrorCommand);
+impl_from!(DsK8sModel, DsK8s);
+impl_from!(DsK8sNamespaceModel, DsK8sNamespace);
+impl_from!(DsPluginDefineModel, DsPluginDefine);
+impl_from!(DsProcessDefinitionModel, DsProcessDefinition);
+impl_from!(DsProcessDefinitionLogModel, DsProcessDefinitionLog);
+impl_from!(DsProcessInstanceModel, DsProcessInstance);
+impl_from!(DsProcessTaskRelationModel, DsProcessTaskRelation);
+impl_from!(DsProcessTaskRelationLogModel, DsProcessTaskRelationLog);
+impl_from!(DsProjectModel, DsProject);
+impl_from!(DsQueueModel, DsQueue);
+impl_from!(DsRelationDatasourceUserModel, DsRelationDatasourceUser);
+impl_from!(DsRelationNamespaceUserModel, DsRelationNamespaceUser);
 impl_from!(
     DsRelationProcessInstanceModel,
-    DsRelationProcessInstanceBean
+    DsRelationProcessInstance
 );
-impl_from!(DsRelationProjectUserModel, DsRelationProjectUserBean);
-impl_from!(DsRelationResourcesUserModel, DsRelationResourcesUserBean);
-impl_from!(DsRelationRuleExecuteSqlModel, DsRelationRuleExecuteSqlBean);
-impl_from!(DsRelationRuleInputEntryModel, DsRelationRuleInputEntryBean);
-impl_from!(DsRelationUdfsUserModel, DsRelationUdfsUserBean);
-impl_from!(DsResourcesModel, DsResourceBean);
-impl_from!(DsSchedulesModel, DsSchedulesBean);
-impl_from!(DsSessionModel, DsSessionBean);
-impl_from!(DsTaskDefinitionModel, DsTaskDefinitionBean);
-impl_from!(DsTaskDefinitionLogModel, DsTaskDefinitionLogBean);
-impl_from!(DsTaskGroupModel, DsTaskGroupBean);
-impl_from!(DsTaskGroupQueueModel, DsTaskGroupQueueBean);
-impl_from!(DsTaskInstanceModel, DsTaskInstanceBean);
-impl_from!(DsTenantModel, DsTenantBean);
-impl_from!(DsUdfsModel, DsUdfsBean);
-impl_from!(DsUserModel, DsUserBean);
-impl_from!(DsVersionModel, DsVersionBean);
-impl_from!(DsWorkerGroupModel, DsWorkerGroupBean);
-impl_from!(QrtzBlobTriggerModel, QrtzBlobTriggerBean);
-impl_from!(QrtzCalendarModel, QrtzCalendarBean);
-impl_from!(QrtzCronTriggersModel, QrtzCronTriggersBean);
-impl_from!(QrtzFiredTriggersModel, QrtzFiredTriggersBean);
-impl_from!(QrtzJobDetailsModel, QrtzJobDetailsBean);
-impl_from!(QrtzLocksModel, QrtzLocksBean);
-impl_from!(QrtzPausedTriggerGrpsModel, QrtzPausedTriggerGrpsBean);
-impl_from!(QrtzSchedulerStateModel, QrtzSchedulerStateBean);
-impl_from!(QrtzSimpleTriggersModel, QrtzSimpleTriggerBean);
-impl_from!(QrtzTriggersModel, QrtzTriggerBean);
-impl_from!(QrtzSimpropTriggerModel, QrtzSimpropTriggerBean);
+impl_from!(DsRelationProjectUserModel, DsRelationProjectUser);
+impl_from!(DsRelationResourcesUserModel, DsRelationResourcesUser);
+impl_from!(DsRelationRuleExecuteSqlModel, DsRelationRuleExecuteSql);
+impl_from!(DsRelationRuleInputEntryModel, DsRelationRuleInput);
+impl_from!(DsRelationUdfsUserModel, DsRelationUdfsUser);
+impl_from!(DsResourcesModel, DsResource);
+impl_from!(DsSchedulesModel, DsSchedules);
+impl_from!(DsSessionModel, DsSession);
+impl_from!(DsTaskDefinitionModel, DsTaskDefinition);
+impl_from!(DsTaskDefinitionLogModel, DsTaskDefinitionLog);
+impl_from!(DsTaskGroupModel, DsTaskGroup);
+impl_from!(DsTaskGroupQueueModel, DsTaskGroupQueue);
+impl_from!(DsTaskInstanceModel, DsTaskInstance);
+impl_from!(DsTenantModel, DsTenant);
+impl_from!(DsUdfsModel, DsUdfs);
+impl_from!(DsUserModel, DsUser);
+impl_from!(DsVersionModel, DsVersion);
+impl_from!(DsWorkerGroupModel, DsWorkerGroup);
+impl_from!(QrtzBlobTriggerModel, QrtzBlobTrigger);
+impl_from!(QrtzCalendarModel, QrtzCalendar);
+impl_from!(QrtzCronTriggersModel, QrtzCronTriggers);
+impl_from!(QrtzFiredTriggersModel, QrtzFiredTriggers);
+impl_from!(QrtzJobDetailsModel, QrtzJobDetails);
+impl_from!(QrtzLocksModel, QrtzLocks);
+impl_from!(QrtzPausedTriggerGrpsModel, QrtzPausedTriggerGrps);
+impl_from!(QrtzSchedulerStateModel, QrtzSchedulerState);
+impl_from!(QrtzSimpleTriggersModel, QrtzSimpleTrigger);
+impl_from!(QrtzTriggersModel, QrtzTrigger);
+impl_from!(QrtzSimpropTriggerModel, QrtzSimpropTrigger);
 
 
-// impl From<DsUserModel> for DsUserBean}; {
+// impl From<DsUserModel> for DsUser}; {
 //     fn from(model: DsUserModel) -> Self {
 //         serde_json::from_str(&serde_json::to_string(&model).unwrap()).unwrap()
 
@@ -223,7 +223,7 @@ impl_from!(QrtzSimpropTriggerModel, QrtzSimpropTriggerBean);
 // }
 
 
-// impl From<crate::qrtz_blob_triggers::Model> for QrtzBlobTriggerBean}; {
+// impl From<crate::qrtz_blob_triggers::Model> for QrtzBlobTrigger}; {
 //     fn from(model: crate::qrtz_blob_triggers::Model) -> Self {
 //         Self {
 //             sched_name: model.sched_name,

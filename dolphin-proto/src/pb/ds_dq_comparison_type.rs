@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsDqComparisonTypeBean {
+pub struct DsDqComparisonType {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, tag = "2")]
@@ -22,7 +22,7 @@ pub struct DsDqComparisonTypeBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsDqComparisonTypeBeansRequest {
+pub struct ListDsDqComparisonTypesRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -31,42 +31,42 @@ pub struct ListDsDqComparisonTypeBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsDqComparisonTypeBeansResponse {
-    /// The field name should match the noun "DsDqComparisonTypeBean" in the method name.
+pub struct ListDsDqComparisonTypesResponse {
+    /// The field name should match the noun "DsDqComparisonType" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_dq_comparison_type_beans: ::prost::alloc::vec::Vec<DsDqComparisonTypeBean>,
+    pub ds_dq_comparison_types: ::prost::alloc::vec::Vec<DsDqComparisonType>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsDqComparisonTypeBeanRequest {
+pub struct GetDsDqComparisonTypeRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsDqComparisonTypeBeanRequest {
-    /// The parent resource name where the DsDqComparisonTypeBean is to be created.
+pub struct CreateDsDqComparisonTypeRequest {
+    /// The parent resource name where the DsDqComparisonType is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsDqComparisonTypeBean id to use for this DsDqComparisonTypeBean.
+    /// The DsDqComparisonType id to use for this DsDqComparisonType.
     #[prost(string, tag = "2")]
-    pub ds_dq_comparison_type_bean_id: ::prost::alloc::string::String,
-    /// The DsDqComparisonTypeBean resource to create.
+    pub ds_dq_comparison_type_id: ::prost::alloc::string::String,
+    /// The DsDqComparisonType resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_dq_comparison_type_bean: ::core::option::Option<DsDqComparisonTypeBean>,
+    pub ds_dq_comparison_type: ::core::option::Option<DsDqComparisonType>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsDqComparisonTypeBeanRequest {
-    /// The DsDqComparisonTypeBean resource which replaces the resource on the server.
+pub struct UpdateDsDqComparisonTypeRequest {
+    /// The DsDqComparisonType resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_dq_comparison_type_bean: ::core::option::Option<DsDqComparisonTypeBean>,
+    pub ds_dq_comparison_type: ::core::option::Option<DsDqComparisonType>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -74,21 +74,21 @@ pub struct UpdateDsDqComparisonTypeBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsDqComparisonTypeBeanRequest {
-    /// The resource name of the DsDqComparisonTypeBean to be deleted.
+pub struct DeleteDsDqComparisonTypeRequest {
+    /// The resource name of the DsDqComparisonType to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_dq_comparison_type_bean_service_client {
+pub mod ds_dq_comparison_type_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsDqComparisonTypeBeanServiceClient<T> {
+    pub struct DsDqComparisonTypeServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsDqComparisonTypeBeanServiceClient<tonic::transport::Channel> {
+    impl DsDqComparisonTypeServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -99,7 +99,7 @@ pub mod ds_dq_comparison_type_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsDqComparisonTypeBeanServiceClient<T>
+    impl<T> DsDqComparisonTypeServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -119,7 +119,7 @@ pub mod ds_dq_comparison_type_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsDqComparisonTypeBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsDqComparisonTypeServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -132,7 +132,7 @@ pub mod ds_dq_comparison_type_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsDqComparisonTypeBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsDqComparisonTypeServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -170,11 +170,11 @@ pub mod ds_dq_comparison_type_bean_service_client {
             self
         }
 
-        pub async fn list_ds_dq_comparison_type_beans(
+        pub async fn list_ds_dq_comparison_types(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsDqComparisonTypeBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsDqComparisonTypesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsDqComparisonTypeBeansResponse>,
+            tonic::Response<super::ListDsDqComparisonTypesResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -185,20 +185,20 @@ pub mod ds_dq_comparison_type_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_comparison_type.DsDqComparisonTypeBeanService/ListDsDqComparisonTypeBeans",
+                "/ds_dq_comparison_type.DsDqComparisonTypeService/ListDsDqComparisonTypes",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_comparison_type.DsDqComparisonTypeBeanService",
-                "ListDsDqComparisonTypeBeans",
+                "ds_dq_comparison_type.DsDqComparisonTypeService",
+                "ListDsDqComparisonTypes",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_dq_comparison_type_bean(
+        pub async fn get_ds_dq_comparison_type(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsDqComparisonTypeBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqComparisonTypeBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::GetDsDqComparisonTypeRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqComparisonType>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -208,20 +208,20 @@ pub mod ds_dq_comparison_type_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_comparison_type.DsDqComparisonTypeBeanService/GetDsDqComparisonTypeBean",
+                "/ds_dq_comparison_type.DsDqComparisonTypeService/GetDsDqComparisonType",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_comparison_type.DsDqComparisonTypeBeanService",
-                "GetDsDqComparisonTypeBean",
+                "ds_dq_comparison_type.DsDqComparisonTypeService",
+                "GetDsDqComparisonType",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_dq_comparison_type_bean(
+        pub async fn create_ds_dq_comparison_type(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsDqComparisonTypeBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqComparisonTypeBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::CreateDsDqComparisonTypeRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqComparisonType>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -231,20 +231,20 @@ pub mod ds_dq_comparison_type_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_comparison_type.DsDqComparisonTypeBeanService/CreateDsDqComparisonTypeBean",
+                "/ds_dq_comparison_type.DsDqComparisonTypeService/CreateDsDqComparisonType",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_comparison_type.DsDqComparisonTypeBeanService",
-                "CreateDsDqComparisonTypeBean",
+                "ds_dq_comparison_type.DsDqComparisonTypeService",
+                "CreateDsDqComparisonType",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_dq_comparison_type_bean(
+        pub async fn update_ds_dq_comparison_type(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsDqComparisonTypeBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqComparisonTypeBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::UpdateDsDqComparisonTypeRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqComparisonType>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -254,19 +254,19 @@ pub mod ds_dq_comparison_type_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_comparison_type.DsDqComparisonTypeBeanService/UpdateDsDqComparisonTypeBean",
+                "/ds_dq_comparison_type.DsDqComparisonTypeService/UpdateDsDqComparisonType",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_comparison_type.DsDqComparisonTypeBeanService",
-                "UpdateDsDqComparisonTypeBean",
+                "ds_dq_comparison_type.DsDqComparisonTypeService",
+                "UpdateDsDqComparisonType",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_dq_comparison_type_bean(
+        pub async fn delete_ds_dq_comparison_type(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsDqComparisonTypeBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsDqComparisonTypeRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -276,51 +276,51 @@ pub mod ds_dq_comparison_type_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_comparison_type.DsDqComparisonTypeBeanService/DeleteDsDqComparisonTypeBean",
+                "/ds_dq_comparison_type.DsDqComparisonTypeService/DeleteDsDqComparisonType",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_comparison_type.DsDqComparisonTypeBeanService",
-                "DeleteDsDqComparisonTypeBean",
+                "ds_dq_comparison_type.DsDqComparisonTypeService",
+                "DeleteDsDqComparisonType",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_dq_comparison_type_bean_service_server {
+pub mod ds_dq_comparison_type_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsDqComparisonTypeBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsDqComparisonTypeServiceServer.
     #[async_trait]
-    pub trait DsDqComparisonTypeBeanService: Send + Sync + 'static {
-        async fn list_ds_dq_comparison_type_beans(
+    pub trait DsDqComparisonTypeService: Send + Sync + 'static {
+        async fn list_ds_dq_comparison_types(
             &self,
-            request: tonic::Request<super::ListDsDqComparisonTypeBeansRequest>,
+            request: tonic::Request<super::ListDsDqComparisonTypesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsDqComparisonTypeBeansResponse>,
+            tonic::Response<super::ListDsDqComparisonTypesResponse>,
             tonic::Status,
         >;
-        async fn get_ds_dq_comparison_type_bean(
+        async fn get_ds_dq_comparison_type(
             &self,
-            request: tonic::Request<super::GetDsDqComparisonTypeBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqComparisonTypeBean>, tonic::Status>;
-        async fn create_ds_dq_comparison_type_bean(
+            request: tonic::Request<super::GetDsDqComparisonTypeRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqComparisonType>, tonic::Status>;
+        async fn create_ds_dq_comparison_type(
             &self,
-            request: tonic::Request<super::CreateDsDqComparisonTypeBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqComparisonTypeBean>, tonic::Status>;
-        async fn update_ds_dq_comparison_type_bean(
+            request: tonic::Request<super::CreateDsDqComparisonTypeRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqComparisonType>, tonic::Status>;
+        async fn update_ds_dq_comparison_type(
             &self,
-            request: tonic::Request<super::UpdateDsDqComparisonTypeBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqComparisonTypeBean>, tonic::Status>;
-        async fn delete_ds_dq_comparison_type_bean(
+            request: tonic::Request<super::UpdateDsDqComparisonTypeRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqComparisonType>, tonic::Status>;
+        async fn delete_ds_dq_comparison_type(
             &self,
-            request: tonic::Request<super::DeleteDsDqComparisonTypeBeanRequest>,
+            request: tonic::Request<super::DeleteDsDqComparisonTypeRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsDqComparisonTypeBeanServiceServer<T: DsDqComparisonTypeBeanService> {
+    pub struct DsDqComparisonTypeServiceServer<T: DsDqComparisonTypeService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -328,7 +328,7 @@ pub mod ds_dq_comparison_type_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsDqComparisonTypeBeanService> DsDqComparisonTypeBeanServiceServer<T> {
+    impl<T: DsDqComparisonTypeService> DsDqComparisonTypeServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -381,9 +381,9 @@ pub mod ds_dq_comparison_type_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsDqComparisonTypeBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsDqComparisonTypeServiceServer<T>
     where
-        T: DsDqComparisonTypeBeanService,
+        T: DsDqComparisonTypeService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -401,27 +401,23 @@ pub mod ds_dq_comparison_type_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_dq_comparison_type.DsDqComparisonTypeBeanService/\
-                 ListDsDqComparisonTypeBeans" => {
+                "/ds_dq_comparison_type.DsDqComparisonTypeService/ListDsDqComparisonTypes" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsDqComparisonTypeBeansSvc<T: DsDqComparisonTypeBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqComparisonTypeBeanService>
-                        tonic::server::UnaryService<super::ListDsDqComparisonTypeBeansRequest>
-                        for ListDsDqComparisonTypeBeansSvc<T>
+                    struct ListDsDqComparisonTypesSvc<T: DsDqComparisonTypeService>(pub Arc<T>);
+                    impl<T: DsDqComparisonTypeService>
+                        tonic::server::UnaryService<super::ListDsDqComparisonTypesRequest>
+                        for ListDsDqComparisonTypesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsDqComparisonTypeBeansResponse;
+                        type Response = super::ListDsDqComparisonTypesResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsDqComparisonTypeBeansRequest>,
+                            request: tonic::Request<super::ListDsDqComparisonTypesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).list_ds_dq_comparison_type_beans(request).await
-                            };
+                            let fut =
+                                async move { (*inner).list_ds_dq_comparison_types(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -432,7 +428,7 @@ pub mod ds_dq_comparison_type_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsDqComparisonTypeBeansSvc(inner);
+                        let method = ListDsDqComparisonTypesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -448,27 +444,23 @@ pub mod ds_dq_comparison_type_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_comparison_type.DsDqComparisonTypeBeanService/\
-                 GetDsDqComparisonTypeBean" => {
+                "/ds_dq_comparison_type.DsDqComparisonTypeService/GetDsDqComparisonType" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsDqComparisonTypeBeanSvc<T: DsDqComparisonTypeBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqComparisonTypeBeanService>
-                        tonic::server::UnaryService<super::GetDsDqComparisonTypeBeanRequest>
-                        for GetDsDqComparisonTypeBeanSvc<T>
+                    struct GetDsDqComparisonTypeSvc<T: DsDqComparisonTypeService>(pub Arc<T>);
+                    impl<T: DsDqComparisonTypeService>
+                        tonic::server::UnaryService<super::GetDsDqComparisonTypeRequest>
+                        for GetDsDqComparisonTypeSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDqComparisonTypeBean;
+                        type Response = super::DsDqComparisonType;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsDqComparisonTypeBeanRequest>,
+                            request: tonic::Request<super::GetDsDqComparisonTypeRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_ds_dq_comparison_type_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_ds_dq_comparison_type(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -479,7 +471,7 @@ pub mod ds_dq_comparison_type_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsDqComparisonTypeBeanSvc(inner);
+                        let method = GetDsDqComparisonTypeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -495,27 +487,23 @@ pub mod ds_dq_comparison_type_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_comparison_type.DsDqComparisonTypeBeanService/\
-                 CreateDsDqComparisonTypeBean" => {
+                "/ds_dq_comparison_type.DsDqComparisonTypeService/CreateDsDqComparisonType" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsDqComparisonTypeBeanSvc<T: DsDqComparisonTypeBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqComparisonTypeBeanService>
-                        tonic::server::UnaryService<super::CreateDsDqComparisonTypeBeanRequest>
-                        for CreateDsDqComparisonTypeBeanSvc<T>
+                    struct CreateDsDqComparisonTypeSvc<T: DsDqComparisonTypeService>(pub Arc<T>);
+                    impl<T: DsDqComparisonTypeService>
+                        tonic::server::UnaryService<super::CreateDsDqComparisonTypeRequest>
+                        for CreateDsDqComparisonTypeSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDqComparisonTypeBean;
+                        type Response = super::DsDqComparisonType;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsDqComparisonTypeBeanRequest>,
+                            request: tonic::Request<super::CreateDsDqComparisonTypeRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).create_ds_dq_comparison_type_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).create_ds_dq_comparison_type(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -526,7 +514,7 @@ pub mod ds_dq_comparison_type_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsDqComparisonTypeBeanSvc(inner);
+                        let method = CreateDsDqComparisonTypeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -542,27 +530,23 @@ pub mod ds_dq_comparison_type_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_comparison_type.DsDqComparisonTypeBeanService/\
-                 UpdateDsDqComparisonTypeBean" => {
+                "/ds_dq_comparison_type.DsDqComparisonTypeService/UpdateDsDqComparisonType" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsDqComparisonTypeBeanSvc<T: DsDqComparisonTypeBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqComparisonTypeBeanService>
-                        tonic::server::UnaryService<super::UpdateDsDqComparisonTypeBeanRequest>
-                        for UpdateDsDqComparisonTypeBeanSvc<T>
+                    struct UpdateDsDqComparisonTypeSvc<T: DsDqComparisonTypeService>(pub Arc<T>);
+                    impl<T: DsDqComparisonTypeService>
+                        tonic::server::UnaryService<super::UpdateDsDqComparisonTypeRequest>
+                        for UpdateDsDqComparisonTypeSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDqComparisonTypeBean;
+                        type Response = super::DsDqComparisonType;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsDqComparisonTypeBeanRequest>,
+                            request: tonic::Request<super::UpdateDsDqComparisonTypeRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).update_ds_dq_comparison_type_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).update_ds_dq_comparison_type(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -573,7 +557,7 @@ pub mod ds_dq_comparison_type_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsDqComparisonTypeBeanSvc(inner);
+                        let method = UpdateDsDqComparisonTypeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -589,27 +573,23 @@ pub mod ds_dq_comparison_type_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_comparison_type.DsDqComparisonTypeBeanService/\
-                 DeleteDsDqComparisonTypeBean" => {
+                "/ds_dq_comparison_type.DsDqComparisonTypeService/DeleteDsDqComparisonType" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsDqComparisonTypeBeanSvc<T: DsDqComparisonTypeBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqComparisonTypeBeanService>
-                        tonic::server::UnaryService<super::DeleteDsDqComparisonTypeBeanRequest>
-                        for DeleteDsDqComparisonTypeBeanSvc<T>
+                    struct DeleteDsDqComparisonTypeSvc<T: DsDqComparisonTypeService>(pub Arc<T>);
+                    impl<T: DsDqComparisonTypeService>
+                        tonic::server::UnaryService<super::DeleteDsDqComparisonTypeRequest>
+                        for DeleteDsDqComparisonTypeSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsDqComparisonTypeBeanRequest>,
+                            request: tonic::Request<super::DeleteDsDqComparisonTypeRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).delete_ds_dq_comparison_type_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).delete_ds_dq_comparison_type(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -620,7 +600,7 @@ pub mod ds_dq_comparison_type_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsDqComparisonTypeBeanSvc(inner);
+                        let method = DeleteDsDqComparisonTypeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -647,7 +627,7 @@ pub mod ds_dq_comparison_type_bean_service_server {
             }
         }
     }
-    impl<T: DsDqComparisonTypeBeanService> Clone for DsDqComparisonTypeBeanServiceServer<T> {
+    impl<T: DsDqComparisonTypeService> Clone for DsDqComparisonTypeServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -659,7 +639,7 @@ pub mod ds_dq_comparison_type_bean_service_server {
             }
         }
     }
-    impl<T: DsDqComparisonTypeBeanService> Clone for _Inner<T> {
+    impl<T: DsDqComparisonTypeService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -669,9 +649,9 @@ pub mod ds_dq_comparison_type_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsDqComparisonTypeBeanService> tonic::server::NamedService
-        for DsDqComparisonTypeBeanServiceServer<T>
+    impl<T: DsDqComparisonTypeService> tonic::server::NamedService
+        for DsDqComparisonTypeServiceServer<T>
     {
-        const NAME: &'static str = "ds_dq_comparison_type.DsDqComparisonTypeBeanService";
+        const NAME: &'static str = "ds_dq_comparison_type.DsDqComparisonTypeService";
     }
 }

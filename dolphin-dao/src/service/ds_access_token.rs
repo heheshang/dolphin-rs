@@ -5,25 +5,25 @@ use dolphin_common::{
 };
 use entity::t_ds_access_token;
 use proto::ds_access_token::{
-    ds_access_token_bean_service_server::DsAccessTokenBeanService,
-    CreateDsAccessTokenBeanRequest,
-    DeleteDsAccessTokenBeanRequest,
-    DsAccessTokenBean,
-    GetDsAccessTokenBeanRequest,
-    ListDsAccessTokenBeansRequest,
-    ListDsAccessTokenBeansResponse,
-    UpdateDsAccessTokenBeanRequest,
+    ds_access_token_service_server::DsAccessTokenService,
+    CreateDsAccessTokenRequest,
+    DeleteDsAccessTokenRequest,
+    DsAccessToken,
+    GetDsAccessTokenRequest,
+    ListDsAccessTokensRequest,
+    ListDsAccessTokensResponse,
+    UpdateDsAccessTokenRequest,
 };
 use sea_orm::{entity::prelude::*, QueryOrder};
 
-use super::service::DolphinRpcServer;
+use super::dao_service::DolphinRpcServer;
 
 #[tonic::async_trait]
-impl DsAccessTokenBeanService for DolphinRpcServer {
-    async fn list_ds_access_token_beans(
+impl DsAccessTokenService for DolphinRpcServer {
+    async fn list_ds_access_tokens(
         &self,
-        req: GrpcRequest<ListDsAccessTokenBeansRequest>,
-    ) -> GrpcResponse<ListDsAccessTokenBeansResponse> {
+        req: GrpcRequest<ListDsAccessTokensRequest>,
+    ) -> GrpcResponse<ListDsAccessTokensResponse> {
         let page_size = req.get_ref().page_size;
         let page_num = req.get_ref().page_num;
 
@@ -47,36 +47,36 @@ impl DsAccessTokenBeanService for DolphinRpcServer {
                 ))
             })?;
 
-        let ss: Vec<DsAccessTokenBean> = res.0.into_iter().map(|v| v.into()).collect();
-        Ok(tonic::Response::new(ListDsAccessTokenBeansResponse {
-            ds_access_token_beans: ss,
+        let ss: Vec<DsAccessToken> = res.0.into_iter().map(|v| v.into()).collect();
+        Ok(tonic::Response::new(ListDsAccessTokensResponse {
+            ds_access_tokens: ss,
         }))
     }
 
-    async fn get_ds_access_token_bean(
+    async fn get_ds_access_token(
         &self,
-        _req: GrpcRequest<GetDsAccessTokenBeanRequest>,
-    ) -> GrpcResponse<DsAccessTokenBean> {
+        _req: GrpcRequest<GetDsAccessTokenRequest>,
+    ) -> GrpcResponse<DsAccessToken> {
         todo!()
     }
 
-    async fn create_ds_access_token_bean(
+    async fn create_ds_access_token(
         &self,
-        _req: GrpcRequest<CreateDsAccessTokenBeanRequest>,
-    ) -> GrpcResponse<DsAccessTokenBean> {
+        _req: GrpcRequest<CreateDsAccessTokenRequest>,
+    ) -> GrpcResponse<DsAccessToken> {
         todo!()
     }
 
-    async fn update_ds_access_token_bean(
+    async fn update_ds_access_token(
         &self,
-        _req: GrpcRequest<UpdateDsAccessTokenBeanRequest>,
-    ) -> GrpcResponse<DsAccessTokenBean> {
+        _req: GrpcRequest<UpdateDsAccessTokenRequest>,
+    ) -> GrpcResponse<DsAccessToken> {
         todo!()
     }
 
-    async fn delete_ds_access_token_bean(
+    async fn delete_ds_access_token(
         &self,
-        _req: GrpcRequest<DeleteDsAccessTokenBeanRequest>,
+        _req: GrpcRequest<DeleteDsAccessTokenRequest>,
     ) -> GrpcResponse<()> {
         todo!()
     }

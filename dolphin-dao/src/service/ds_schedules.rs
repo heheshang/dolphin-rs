@@ -1,46 +1,43 @@
-use super::service::DolphinRpcServer;
-use proto::ds_schedules::ds_schedules_bean_service_server::DsSchedulesBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_schedules::ds_schedules_service_server::DsSchedulesService;
 
 
 #[tonic::async_trait]
-impl DsSchedulesBeanService for DolphinRpcServer {
-    async fn list_ds_schedules_beans(
+impl DsSchedulesService for DolphinRpcServer {
+    async fn list_ds_scheduless(
         &self,
-        _req: tonic::Request<proto::ds_schedules::ListDsSchedulesBeansRequest>,
+        _req: tonic::Request<proto::ds_schedules::ListDsSchedulessRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_schedules::ListDsSchedulesBeansResponse>,
+        tonic::Response<proto::ds_schedules::ListDsSchedulessResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_schedules_bean(
+    async fn get_ds_schedules(
         &self,
-        _req: tonic::Request<proto::ds_schedules::GetDsSchedulesBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_schedules::DsSchedulesBean>, tonic::Status>
-    {
+        _req: tonic::Request<proto::ds_schedules::GetDsSchedulesRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_schedules::DsSchedules>, tonic::Status> {
         todo!()
     }
 
-    async fn create_ds_schedules_bean(
+    async fn create_ds_schedules(
         &self,
-        _req: tonic::Request<proto::ds_schedules::CreateDsSchedulesBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_schedules::DsSchedulesBean>, tonic::Status>
-    {
+        _req: tonic::Request<proto::ds_schedules::CreateDsSchedulesRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_schedules::DsSchedules>, tonic::Status> {
         todo!()
     }
 
-    async fn update_ds_schedules_bean(
+    async fn update_ds_schedules(
         &self,
-        _req: tonic::Request<proto::ds_schedules::UpdateDsSchedulesBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_schedules::DsSchedulesBean>, tonic::Status>
-    {
+        _req: tonic::Request<proto::ds_schedules::UpdateDsSchedulesRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_schedules::DsSchedules>, tonic::Status> {
         todo!()
     }
 
-    async fn delete_ds_schedules_bean(
+    async fn delete_ds_schedules(
         &self,
-        _req: tonic::Request<proto::ds_schedules::DeleteDsSchedulesBeanRequest>,
+        _req: tonic::Request<proto::ds_schedules::DeleteDsSchedulesRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

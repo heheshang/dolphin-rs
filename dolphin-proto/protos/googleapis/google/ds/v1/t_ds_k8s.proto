@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 package ds_k8s;
 
 
-message DsK8sBean {
+message DsK8s {
 
      int32 id=1 ;
      optional string k8s_name=2 ;
@@ -19,45 +19,45 @@ message DsK8sBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsK8sBeanService {
-  rpc ListDsK8sBeans(ListDsK8sBeansRequest) returns (ListDsK8sBeansResponse) {
+service DsK8sService {
+  rpc ListDsK8ss(ListDsK8ssRequest) returns (ListDsK8ssResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsK8sBeans"
+      get: "/v1alpha1/DsK8ss"
     };
   }
 
-  rpc GetDsK8sBean(GetDsK8sBeanRequest) returns (DsK8sBean) {
+  rpc GetDsK8s(GetDsK8sRequest) returns (DsK8s) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsK8sBeans/*}"
+      get: "/v1alpha1/{name=DsK8ss/*}"
     };
   }
 
-  rpc CreateDsK8sBean(CreateDsK8sBeanRequest) returns (DsK8sBean) {
+  rpc CreateDsK8s(CreateDsK8sRequest) returns (DsK8s) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsK8sBeans"
-      body: "DsK8sBean"
+      post: "/v1alpha1/DsK8ss"
+      body: "DsK8s"
     };
   }
 
-  rpc UpdateDsK8sBean(UpdateDsK8sBeanRequest) returns (DsK8sBean) {
+  rpc UpdateDsK8s(UpdateDsK8sRequest) returns (DsK8s) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsK8sBean.name=DsK8sBeans/*}"
-      body: "DsK8sBean"
+      patch: "/v1alpha1/{DsK8s.name=DsK8ss/*}"
+      body: "DsK8s"
     };
   }
 
-  rpc DeleteDsK8sBean(DeleteDsK8sBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsK8s(DeleteDsK8sRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsK8sBeans/*}"
+      delete: "/v1alpha1/{name=DsK8ss/*}"
     };
   }
 }
 
-// message DsK8sBean {
+// message DsK8s {
 // ! This should be defined elsewhere
 // }
 
-message ListDsK8sBeansRequest {
+message ListDsK8ssRequest {
 
 
   // The maximum number of items to return.
@@ -66,42 +66,42 @@ message ListDsK8sBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsK8sBeansResponse {
-  // The field name should match the noun "DsK8sBean" in the method name.
+message ListDsK8ssResponse {
+  // The field name should match the noun "DsK8s" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsK8sBean DsK8sBeans = 1;
+  repeated DsK8s DsK8ss = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsK8sBeanRequest {
+message GetDsK8sRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsK8sBeanRequest {
-  // The parent resource name where the DsK8sBean is to be created.
+message CreateDsK8sRequest {
+  // The parent resource name where the DsK8s is to be created.
   string parent = 1;
 
-  // The DsK8sBean id to use for this DsK8sBean.
-  string DsK8sBean_id = 2;
+  // The DsK8s id to use for this DsK8s.
+  string DsK8s_id = 2;
 
-  // The DsK8sBean resource to create.
+  // The DsK8s resource to create.
   // The field name should match the Noun in the method name.
-  DsK8sBean DsK8sBean = 3;
+  DsK8s DsK8s = 3;
 }
 
-message UpdateDsK8sBeanRequest {
-  // The DsK8sBean resource which replaces the resource on the server.
-  DsK8sBean DsK8sBean = 1;
+message UpdateDsK8sRequest {
+  // The DsK8s resource which replaces the resource on the server.
+  DsK8s DsK8s = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsK8sBeanRequest {
-  // The resource name of the DsK8sBean to be deleted.
+message DeleteDsK8sRequest {
+  // The resource name of the DsK8s to be deleted.
   string name = 1;
 }

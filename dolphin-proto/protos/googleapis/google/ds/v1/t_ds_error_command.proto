@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 package ds_error_command;
 
 
-message DsErrorCommandBean {
+message DsErrorCommand {
 
     int32 id=1 ;
     optional int32 command_type=2 ;
@@ -33,45 +33,45 @@ message DsErrorCommandBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsErrorCommandBeanService {
-  rpc ListDsErrorCommandBeans(ListDsErrorCommandBeansRequest) returns (ListDsErrorCommandBeansResponse) {
+service DsErrorCommandService {
+  rpc ListDsErrorCommands(ListDsErrorCommandsRequest) returns (ListDsErrorCommandsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsErrorCommandBeans"
+      get: "/v1alpha1/DsErrorCommands"
     };
   }
 
-  rpc GetDsErrorCommandBean(GetDsErrorCommandBeanRequest) returns (DsErrorCommandBean) {
+  rpc GetDsErrorCommand(GetDsErrorCommandRequest) returns (DsErrorCommand) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsErrorCommandBeans/*}"
+      get: "/v1alpha1/{name=DsErrorCommands/*}"
     };
   }
 
-  rpc CreateDsErrorCommandBean(CreateDsErrorCommandBeanRequest) returns (DsErrorCommandBean) {
+  rpc CreateDsErrorCommand(CreateDsErrorCommandRequest) returns (DsErrorCommand) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsErrorCommandBeans"
-      body: "DsErrorCommandBean"
+      post: "/v1alpha1/DsErrorCommands"
+      body: "DsErrorCommand"
     };
   }
 
-  rpc UpdateDsErrorCommandBean(UpdateDsErrorCommandBeanRequest) returns (DsErrorCommandBean) {
+  rpc UpdateDsErrorCommand(UpdateDsErrorCommandRequest) returns (DsErrorCommand) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsErrorCommandBean.name=DsErrorCommandBeans/*}"
-      body: "DsErrorCommandBean"
+      patch: "/v1alpha1/{DsErrorCommand.name=DsErrorCommands/*}"
+      body: "DsErrorCommand"
     };
   }
 
-  rpc DeleteDsErrorCommandBean(DeleteDsErrorCommandBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsErrorCommand(DeleteDsErrorCommandRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsErrorCommandBeans/*}"
+      delete: "/v1alpha1/{name=DsErrorCommands/*}"
     };
   }
 }
 
-// message DsErrorCommandBean {
+// message DsErrorCommand {
 // ! This should be defined elsewhere
 // }
 
-message ListDsErrorCommandBeansRequest {
+message ListDsErrorCommandsRequest {
 
 
   // The maximum number of items to return.
@@ -80,42 +80,42 @@ message ListDsErrorCommandBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsErrorCommandBeansResponse {
-  // The field name should match the noun "DsErrorCommandBean" in the method name.
+message ListDsErrorCommandsResponse {
+  // The field name should match the noun "DsErrorCommand" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsErrorCommandBean DsErrorCommandBeans = 1;
+  repeated DsErrorCommand DsErrorCommands = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsErrorCommandBeanRequest {
+message GetDsErrorCommandRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsErrorCommandBeanRequest {
-  // The parent resource name where the DsErrorCommandBean is to be created.
+message CreateDsErrorCommandRequest {
+  // The parent resource name where the DsErrorCommand is to be created.
   string parent = 1;
 
-  // The DsErrorCommandBean id to use for this DsErrorCommandBean.
-  string DsErrorCommandBean_id = 2;
+  // The DsErrorCommand id to use for this DsErrorCommand.
+  string DsErrorCommand_id = 2;
 
-  // The DsErrorCommandBean resource to create.
+  // The DsErrorCommand resource to create.
   // The field name should match the Noun in the method name.
-  DsErrorCommandBean DsErrorCommandBean = 3;
+  DsErrorCommand DsErrorCommand = 3;
 }
 
-message UpdateDsErrorCommandBeanRequest {
-  // The DsErrorCommandBean resource which replaces the resource on the server.
-  DsErrorCommandBean DsErrorCommandBean = 1;
+message UpdateDsErrorCommandRequest {
+  // The DsErrorCommand resource which replaces the resource on the server.
+  DsErrorCommand DsErrorCommand = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsErrorCommandBeanRequest {
-  // The resource name of the DsErrorCommandBean to be deleted.
+message DeleteDsErrorCommandRequest {
+  // The resource name of the DsErrorCommand to be deleted.
   string name = 1;
 }

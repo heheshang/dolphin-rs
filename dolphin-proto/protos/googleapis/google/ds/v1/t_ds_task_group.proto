@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 package ds_task_group;
 
-message DsTaskGroupBean {
+message DsTaskGroup {
 
      int32 id=1 ;
      optional string  name=2 ;
@@ -23,45 +23,45 @@ message DsTaskGroupBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsTaskGroupBeanService {
-  rpc ListDsTaskGroupBeans(ListDsTaskGroupBeansRequest) returns (ListDsTaskGroupBeansResponse) {
+service DsTaskGroupService {
+  rpc ListDsTaskGroups(ListDsTaskGroupsRequest) returns (ListDsTaskGroupsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsTaskGroupBeans"
+      get: "/v1alpha1/DsTaskGroups"
     };
   }
 
-  rpc GetDsTaskGroupBean(GetDsTaskGroupBeanRequest) returns (DsTaskGroupBean) {
+  rpc GetDsTaskGroup(GetDsTaskGroupRequest) returns (DsTaskGroup) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsTaskGroupBeans/*}"
+      get: "/v1alpha1/{name=DsTaskGroups/*}"
     };
   }
 
-  rpc CreateDsTaskGroupBean(CreateDsTaskGroupBeanRequest) returns (DsTaskGroupBean) {
+  rpc CreateDsTaskGroup(CreateDsTaskGroupRequest) returns (DsTaskGroup) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsTaskGroupBeans"
-      body: "DsTaskGroupBean"
+      post: "/v1alpha1/DsTaskGroups"
+      body: "DsTaskGroup"
     };
   }
 
-  rpc UpdateDsTaskGroupBean(UpdateDsTaskGroupBeanRequest) returns (DsTaskGroupBean) {
+  rpc UpdateDsTaskGroup(UpdateDsTaskGroupRequest) returns (DsTaskGroup) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsTaskGroupBean.name=DsTaskGroupBeans/*}"
-      body: "DsTaskGroupBean"
+      patch: "/v1alpha1/{DsTaskGroup.name=DsTaskGroups/*}"
+      body: "DsTaskGroup"
     };
   }
 
-  rpc DeleteDsTaskGroupBean(DeleteDsTaskGroupBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsTaskGroup(DeleteDsTaskGroupRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsTaskGroupBeans/*}"
+      delete: "/v1alpha1/{name=DsTaskGroups/*}"
     };
   }
 }
 
-// message DsTaskGroupBean {
+// message DsTaskGroup {
 // ! This should be defined elsewhere
 // }
 
-message ListDsTaskGroupBeansRequest {
+message ListDsTaskGroupsRequest {
 
 
   // The maximum number of items to return.
@@ -70,42 +70,42 @@ message ListDsTaskGroupBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsTaskGroupBeansResponse {
-  // The field name should match the noun "DsTaskGroupBean" in the method name.
+message ListDsTaskGroupsResponse {
+  // The field name should match the noun "DsTaskGroup" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsTaskGroupBean DsTaskGroupBeans = 1;
+  repeated DsTaskGroup DsTaskGroups = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsTaskGroupBeanRequest {
+message GetDsTaskGroupRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsTaskGroupBeanRequest {
-  // The parent resource name where the DsTaskGroupBean is to be created.
+message CreateDsTaskGroupRequest {
+  // The parent resource name where the DsTaskGroup is to be created.
   string parent = 1;
 
-  // The DsTaskGroupBean id to use for this DsTaskGroupBean.
-  string DsTaskGroupBean_id = 2;
+  // The DsTaskGroup id to use for this DsTaskGroup.
+  string DsTaskGroup_id = 2;
 
-  // The DsTaskGroupBean resource to create.
+  // The DsTaskGroup resource to create.
   // The field name should match the Noun in the method name.
-  DsTaskGroupBean DsTaskGroupBean = 3;
+  DsTaskGroup DsTaskGroup = 3;
 }
 
-message UpdateDsTaskGroupBeanRequest {
-  // The DsTaskGroupBean resource which replaces the resource on the server.
-  DsTaskGroupBean DsTaskGroupBean = 1;
+message UpdateDsTaskGroupRequest {
+  // The DsTaskGroup resource which replaces the resource on the server.
+  DsTaskGroup DsTaskGroup = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsTaskGroupBeanRequest {
-  // The resource name of the DsTaskGroupBean to be deleted.
+message DeleteDsTaskGroupRequest {
+  // The resource name of the DsTaskGroup to be deleted.
   string name = 1;
 }

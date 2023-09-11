@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct QrtzCalendarBean {
+pub struct QrtzCalendar {
     #[prost(string, tag = "1")]
     pub sched_name: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
@@ -12,7 +12,7 @@ pub struct QrtzCalendarBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQrtzCalendarBeansRequest {
+pub struct ListQrtzCalendarsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -21,42 +21,42 @@ pub struct ListQrtzCalendarBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQrtzCalendarBeansResponse {
-    /// The field name should match the noun "QrtzCalendarBean" in the method name.
+pub struct ListQrtzCalendarsResponse {
+    /// The field name should match the noun "QrtzCalendar" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub qrtz_calendar_beans: ::prost::alloc::vec::Vec<QrtzCalendarBean>,
+    pub qrtz_calendars: ::prost::alloc::vec::Vec<QrtzCalendar>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetQrtzCalendarBeanRequest {
+pub struct GetQrtzCalendarRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateQrtzCalendarBeanRequest {
-    /// The parent resource name where the QrtzCalendarBean is to be created.
+pub struct CreateQrtzCalendarRequest {
+    /// The parent resource name where the QrtzCalendar is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The QrtzCalendarBean id to use for this QrtzCalendarBean.
+    /// The QrtzCalendar id to use for this QrtzCalendar.
     #[prost(string, tag = "2")]
-    pub qrtz_calendar_bean_id: ::prost::alloc::string::String,
-    /// The QrtzCalendarBean resource to create.
+    pub qrtz_calendar_id: ::prost::alloc::string::String,
+    /// The QrtzCalendar resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub qrtz_calendar_bean: ::core::option::Option<QrtzCalendarBean>,
+    pub qrtz_calendar: ::core::option::Option<QrtzCalendar>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateQrtzCalendarBeanRequest {
-    /// The QrtzCalendarBean resource which replaces the resource on the server.
+pub struct UpdateQrtzCalendarRequest {
+    /// The QrtzCalendar resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub qrtz_calendar_bean: ::core::option::Option<QrtzCalendarBean>,
+    pub qrtz_calendar: ::core::option::Option<QrtzCalendar>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -64,21 +64,21 @@ pub struct UpdateQrtzCalendarBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteQrtzCalendarBeanRequest {
-    /// The resource name of the QrtzCalendarBean to be deleted.
+pub struct DeleteQrtzCalendarRequest {
+    /// The resource name of the QrtzCalendar to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod qrtz_calendar_bean_service_client {
+pub mod qrtz_calendar_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct QrtzCalendarBeanServiceClient<T> {
+    pub struct QrtzCalendarServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl QrtzCalendarBeanServiceClient<tonic::transport::Channel> {
+    impl QrtzCalendarServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -89,7 +89,7 @@ pub mod qrtz_calendar_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> QrtzCalendarBeanServiceClient<T>
+    impl<T> QrtzCalendarServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -109,7 +109,7 @@ pub mod qrtz_calendar_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> QrtzCalendarBeanServiceClient<InterceptedService<T, F>>
+        ) -> QrtzCalendarServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -122,7 +122,7 @@ pub mod qrtz_calendar_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            QrtzCalendarBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            QrtzCalendarServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -160,10 +160,10 @@ pub mod qrtz_calendar_bean_service_client {
             self
         }
 
-        pub async fn list_qrtz_calendar_beans(
+        pub async fn list_qrtz_calendars(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListQrtzCalendarBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListQrtzCalendarBeansResponse>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListQrtzCalendarsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListQrtzCalendarsResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -173,20 +173,20 @@ pub mod qrtz_calendar_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_calendars.QrtzCalendarBeanService/ListQrtzCalendarBeans",
+                "/qrtz_calendars.QrtzCalendarService/ListQrtzCalendars",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_calendars.QrtzCalendarBeanService",
-                "ListQrtzCalendarBeans",
+                "qrtz_calendars.QrtzCalendarService",
+                "ListQrtzCalendars",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_qrtz_calendar_bean(
+        pub async fn get_qrtz_calendar(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetQrtzCalendarBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzCalendarBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetQrtzCalendarRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzCalendar>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -195,20 +195,20 @@ pub mod qrtz_calendar_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_calendars.QrtzCalendarBeanService/GetQrtzCalendarBean",
+                "/qrtz_calendars.QrtzCalendarService/GetQrtzCalendar",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_calendars.QrtzCalendarBeanService",
-                "GetQrtzCalendarBean",
+                "qrtz_calendars.QrtzCalendarService",
+                "GetQrtzCalendar",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_qrtz_calendar_bean(
+        pub async fn create_qrtz_calendar(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateQrtzCalendarBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzCalendarBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::CreateQrtzCalendarRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzCalendar>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -217,20 +217,20 @@ pub mod qrtz_calendar_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_calendars.QrtzCalendarBeanService/CreateQrtzCalendarBean",
+                "/qrtz_calendars.QrtzCalendarService/CreateQrtzCalendar",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_calendars.QrtzCalendarBeanService",
-                "CreateQrtzCalendarBean",
+                "qrtz_calendars.QrtzCalendarService",
+                "CreateQrtzCalendar",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_qrtz_calendar_bean(
+        pub async fn update_qrtz_calendar(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateQrtzCalendarBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzCalendarBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateQrtzCalendarRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzCalendar>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -239,19 +239,19 @@ pub mod qrtz_calendar_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_calendars.QrtzCalendarBeanService/UpdateQrtzCalendarBean",
+                "/qrtz_calendars.QrtzCalendarService/UpdateQrtzCalendar",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_calendars.QrtzCalendarBeanService",
-                "UpdateQrtzCalendarBean",
+                "qrtz_calendars.QrtzCalendarService",
+                "UpdateQrtzCalendar",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_qrtz_calendar_bean(
+        pub async fn delete_qrtz_calendar(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteQrtzCalendarBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteQrtzCalendarRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -261,48 +261,48 @@ pub mod qrtz_calendar_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_calendars.QrtzCalendarBeanService/DeleteQrtzCalendarBean",
+                "/qrtz_calendars.QrtzCalendarService/DeleteQrtzCalendar",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_calendars.QrtzCalendarBeanService",
-                "DeleteQrtzCalendarBean",
+                "qrtz_calendars.QrtzCalendarService",
+                "DeleteQrtzCalendar",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod qrtz_calendar_bean_service_server {
+pub mod qrtz_calendar_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with QrtzCalendarBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with QrtzCalendarServiceServer.
     #[async_trait]
-    pub trait QrtzCalendarBeanService: Send + Sync + 'static {
-        async fn list_qrtz_calendar_beans(
+    pub trait QrtzCalendarService: Send + Sync + 'static {
+        async fn list_qrtz_calendars(
             &self,
-            request: tonic::Request<super::ListQrtzCalendarBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListQrtzCalendarBeansResponse>, tonic::Status>;
-        async fn get_qrtz_calendar_bean(
+            request: tonic::Request<super::ListQrtzCalendarsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListQrtzCalendarsResponse>, tonic::Status>;
+        async fn get_qrtz_calendar(
             &self,
-            request: tonic::Request<super::GetQrtzCalendarBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzCalendarBean>, tonic::Status>;
-        async fn create_qrtz_calendar_bean(
+            request: tonic::Request<super::GetQrtzCalendarRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzCalendar>, tonic::Status>;
+        async fn create_qrtz_calendar(
             &self,
-            request: tonic::Request<super::CreateQrtzCalendarBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzCalendarBean>, tonic::Status>;
-        async fn update_qrtz_calendar_bean(
+            request: tonic::Request<super::CreateQrtzCalendarRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzCalendar>, tonic::Status>;
+        async fn update_qrtz_calendar(
             &self,
-            request: tonic::Request<super::UpdateQrtzCalendarBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzCalendarBean>, tonic::Status>;
-        async fn delete_qrtz_calendar_bean(
+            request: tonic::Request<super::UpdateQrtzCalendarRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzCalendar>, tonic::Status>;
+        async fn delete_qrtz_calendar(
             &self,
-            request: tonic::Request<super::DeleteQrtzCalendarBeanRequest>,
+            request: tonic::Request<super::DeleteQrtzCalendarRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct QrtzCalendarBeanServiceServer<T: QrtzCalendarBeanService> {
+    pub struct QrtzCalendarServiceServer<T: QrtzCalendarService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -310,7 +310,7 @@ pub mod qrtz_calendar_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: QrtzCalendarBeanService> QrtzCalendarBeanServiceServer<T> {
+    impl<T: QrtzCalendarService> QrtzCalendarServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -363,9 +363,9 @@ pub mod qrtz_calendar_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for QrtzCalendarBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for QrtzCalendarServiceServer<T>
     where
-        T: QrtzCalendarBeanService,
+        T: QrtzCalendarService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -383,23 +383,22 @@ pub mod qrtz_calendar_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/qrtz_calendars.QrtzCalendarBeanService/ListQrtzCalendarBeans" => {
+                "/qrtz_calendars.QrtzCalendarService/ListQrtzCalendars" => {
                     #[allow(non_camel_case_types)]
-                    struct ListQrtzCalendarBeansSvc<T: QrtzCalendarBeanService>(pub Arc<T>);
-                    impl<T: QrtzCalendarBeanService>
-                        tonic::server::UnaryService<super::ListQrtzCalendarBeansRequest>
-                        for ListQrtzCalendarBeansSvc<T>
+                    struct ListQrtzCalendarsSvc<T: QrtzCalendarService>(pub Arc<T>);
+                    impl<T: QrtzCalendarService>
+                        tonic::server::UnaryService<super::ListQrtzCalendarsRequest>
+                        for ListQrtzCalendarsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListQrtzCalendarBeansResponse;
+                        type Response = super::ListQrtzCalendarsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListQrtzCalendarBeansRequest>,
+                            request: tonic::Request<super::ListQrtzCalendarsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_qrtz_calendar_beans(request).await };
+                            let fut = async move { (*inner).list_qrtz_calendars(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -410,7 +409,7 @@ pub mod qrtz_calendar_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListQrtzCalendarBeansSvc(inner);
+                        let method = ListQrtzCalendarsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -426,22 +425,22 @@ pub mod qrtz_calendar_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_calendars.QrtzCalendarBeanService/GetQrtzCalendarBean" => {
+                "/qrtz_calendars.QrtzCalendarService/GetQrtzCalendar" => {
                     #[allow(non_camel_case_types)]
-                    struct GetQrtzCalendarBeanSvc<T: QrtzCalendarBeanService>(pub Arc<T>);
-                    impl<T: QrtzCalendarBeanService>
-                        tonic::server::UnaryService<super::GetQrtzCalendarBeanRequest>
-                        for GetQrtzCalendarBeanSvc<T>
+                    struct GetQrtzCalendarSvc<T: QrtzCalendarService>(pub Arc<T>);
+                    impl<T: QrtzCalendarService>
+                        tonic::server::UnaryService<super::GetQrtzCalendarRequest>
+                        for GetQrtzCalendarSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzCalendarBean;
+                        type Response = super::QrtzCalendar;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetQrtzCalendarBeanRequest>,
+                            request: tonic::Request<super::GetQrtzCalendarRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_qrtz_calendar_bean(request).await };
+                            let fut = async move { (*inner).get_qrtz_calendar(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -452,7 +451,7 @@ pub mod qrtz_calendar_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetQrtzCalendarBeanSvc(inner);
+                        let method = GetQrtzCalendarSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -468,23 +467,22 @@ pub mod qrtz_calendar_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_calendars.QrtzCalendarBeanService/CreateQrtzCalendarBean" => {
+                "/qrtz_calendars.QrtzCalendarService/CreateQrtzCalendar" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateQrtzCalendarBeanSvc<T: QrtzCalendarBeanService>(pub Arc<T>);
-                    impl<T: QrtzCalendarBeanService>
-                        tonic::server::UnaryService<super::CreateQrtzCalendarBeanRequest>
-                        for CreateQrtzCalendarBeanSvc<T>
+                    struct CreateQrtzCalendarSvc<T: QrtzCalendarService>(pub Arc<T>);
+                    impl<T: QrtzCalendarService>
+                        tonic::server::UnaryService<super::CreateQrtzCalendarRequest>
+                        for CreateQrtzCalendarSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzCalendarBean;
+                        type Response = super::QrtzCalendar;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateQrtzCalendarBeanRequest>,
+                            request: tonic::Request<super::CreateQrtzCalendarRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).create_qrtz_calendar_bean(request).await };
+                            let fut = async move { (*inner).create_qrtz_calendar(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -495,7 +493,7 @@ pub mod qrtz_calendar_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateQrtzCalendarBeanSvc(inner);
+                        let method = CreateQrtzCalendarSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -511,23 +509,22 @@ pub mod qrtz_calendar_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_calendars.QrtzCalendarBeanService/UpdateQrtzCalendarBean" => {
+                "/qrtz_calendars.QrtzCalendarService/UpdateQrtzCalendar" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateQrtzCalendarBeanSvc<T: QrtzCalendarBeanService>(pub Arc<T>);
-                    impl<T: QrtzCalendarBeanService>
-                        tonic::server::UnaryService<super::UpdateQrtzCalendarBeanRequest>
-                        for UpdateQrtzCalendarBeanSvc<T>
+                    struct UpdateQrtzCalendarSvc<T: QrtzCalendarService>(pub Arc<T>);
+                    impl<T: QrtzCalendarService>
+                        tonic::server::UnaryService<super::UpdateQrtzCalendarRequest>
+                        for UpdateQrtzCalendarSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzCalendarBean;
+                        type Response = super::QrtzCalendar;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateQrtzCalendarBeanRequest>,
+                            request: tonic::Request<super::UpdateQrtzCalendarRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).update_qrtz_calendar_bean(request).await };
+                            let fut = async move { (*inner).update_qrtz_calendar(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -538,7 +535,7 @@ pub mod qrtz_calendar_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateQrtzCalendarBeanSvc(inner);
+                        let method = UpdateQrtzCalendarSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -554,23 +551,22 @@ pub mod qrtz_calendar_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_calendars.QrtzCalendarBeanService/DeleteQrtzCalendarBean" => {
+                "/qrtz_calendars.QrtzCalendarService/DeleteQrtzCalendar" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteQrtzCalendarBeanSvc<T: QrtzCalendarBeanService>(pub Arc<T>);
-                    impl<T: QrtzCalendarBeanService>
-                        tonic::server::UnaryService<super::DeleteQrtzCalendarBeanRequest>
-                        for DeleteQrtzCalendarBeanSvc<T>
+                    struct DeleteQrtzCalendarSvc<T: QrtzCalendarService>(pub Arc<T>);
+                    impl<T: QrtzCalendarService>
+                        tonic::server::UnaryService<super::DeleteQrtzCalendarRequest>
+                        for DeleteQrtzCalendarSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteQrtzCalendarBeanRequest>,
+                            request: tonic::Request<super::DeleteQrtzCalendarRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).delete_qrtz_calendar_bean(request).await };
+                            let fut = async move { (*inner).delete_qrtz_calendar(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -581,7 +577,7 @@ pub mod qrtz_calendar_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteQrtzCalendarBeanSvc(inner);
+                        let method = DeleteQrtzCalendarSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -608,7 +604,7 @@ pub mod qrtz_calendar_bean_service_server {
             }
         }
     }
-    impl<T: QrtzCalendarBeanService> Clone for QrtzCalendarBeanServiceServer<T> {
+    impl<T: QrtzCalendarService> Clone for QrtzCalendarServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -620,7 +616,7 @@ pub mod qrtz_calendar_bean_service_server {
             }
         }
     }
-    impl<T: QrtzCalendarBeanService> Clone for _Inner<T> {
+    impl<T: QrtzCalendarService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -630,7 +626,7 @@ pub mod qrtz_calendar_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: QrtzCalendarBeanService> tonic::server::NamedService for QrtzCalendarBeanServiceServer<T> {
-        const NAME: &'static str = "qrtz_calendars.QrtzCalendarBeanService";
+    impl<T: QrtzCalendarService> tonic::server::NamedService for QrtzCalendarServiceServer<T> {
+        const NAME: &'static str = "qrtz_calendars.QrtzCalendarService";
     }
 }

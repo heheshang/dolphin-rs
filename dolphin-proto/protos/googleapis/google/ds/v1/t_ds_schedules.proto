@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 package ds_schedules;
 
-message DsSchedulesBean {
+message DsSchedules {
 
      int32 id=1 ;
      int64 process_definition_code=2 ;
@@ -29,45 +29,45 @@ message DsSchedulesBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsSchedulesBeanService {
-  rpc ListDsSchedulesBeans(ListDsSchedulesBeansRequest) returns (ListDsSchedulesBeansResponse) {
+service DsSchedulesService {
+  rpc ListDsScheduless(ListDsSchedulessRequest) returns (ListDsSchedulessResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsSchedulesBeans"
+      get: "/v1alpha1/DsScheduless"
     };
   }
 
-  rpc GetDsSchedulesBean(GetDsSchedulesBeanRequest) returns (DsSchedulesBean) {
+  rpc GetDsSchedules(GetDsSchedulesRequest) returns (DsSchedules) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsSchedulesBeans/*}"
+      get: "/v1alpha1/{name=DsScheduless/*}"
     };
   }
 
-  rpc CreateDsSchedulesBean(CreateDsSchedulesBeanRequest) returns (DsSchedulesBean) {
+  rpc CreateDsSchedules(CreateDsSchedulesRequest) returns (DsSchedules) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsSchedulesBeans"
-      body: "DsSchedulesBean"
+      post: "/v1alpha1/DsScheduless"
+      body: "DsSchedules"
     };
   }
 
-  rpc UpdateDsSchedulesBean(UpdateDsSchedulesBeanRequest) returns (DsSchedulesBean) {
+  rpc UpdateDsSchedules(UpdateDsSchedulesRequest) returns (DsSchedules) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsSchedulesBean.name=DsSchedulesBeans/*}"
-      body: "DsSchedulesBean"
+      patch: "/v1alpha1/{DsSchedules.name=DsScheduless/*}"
+      body: "DsSchedules"
     };
   }
 
-  rpc DeleteDsSchedulesBean(DeleteDsSchedulesBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsSchedules(DeleteDsSchedulesRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsSchedulesBeans/*}"
+      delete: "/v1alpha1/{name=DsScheduless/*}"
     };
   }
 }
 
-// message DsSchedulesBean {
+// message DsSchedules {
 // ! This should be defined elsewhere
 // }
 
-message ListDsSchedulesBeansRequest {
+message ListDsSchedulessRequest {
 
 
   // The maximum number of items to return.
@@ -76,42 +76,42 @@ message ListDsSchedulesBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsSchedulesBeansResponse {
-  // The field name should match the noun "DsSchedulesBean" in the method name.
+message ListDsSchedulessResponse {
+  // The field name should match the noun "DsSchedules" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsSchedulesBean DsSchedulesBeans = 1;
+  repeated DsSchedules DsScheduless = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsSchedulesBeanRequest {
+message GetDsSchedulesRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsSchedulesBeanRequest {
-  // The parent resource name where the DsSchedulesBean is to be created.
+message CreateDsSchedulesRequest {
+  // The parent resource name where the DsSchedules is to be created.
   string parent = 1;
 
-  // The DsSchedulesBean id to use for this DsSchedulesBean.
-  string DsSchedulesBean_id = 2;
+  // The DsSchedules id to use for this DsSchedules.
+  string DsSchedules_id = 2;
 
-  // The DsSchedulesBean resource to create.
+  // The DsSchedules resource to create.
   // The field name should match the Noun in the method name.
-  DsSchedulesBean DsSchedulesBean = 3;
+  DsSchedules DsSchedules = 3;
 }
 
-message UpdateDsSchedulesBeanRequest {
-  // The DsSchedulesBean resource which replaces the resource on the server.
-  DsSchedulesBean DsSchedulesBean = 1;
+message UpdateDsSchedulesRequest {
+  // The DsSchedules resource which replaces the resource on the server.
+  DsSchedules DsSchedules = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsSchedulesBeanRequest {
-  // The resource name of the DsSchedulesBean to be deleted.
+message DeleteDsSchedulesRequest {
+  // The resource name of the DsSchedules to be deleted.
   string name = 1;
 }

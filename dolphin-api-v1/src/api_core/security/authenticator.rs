@@ -1,7 +1,7 @@
-use crate::service::{session_service, user_service};
+use crate::api_core::service::{session_service, user_service};
 use async_trait::async_trait;
 use dolphin_common::{core_results::results::ApiResult, core_status::app_status::AppStatus};
-use proto::ds_user::{DsUserBean as UserInfo, Flag};
+use proto::ds_user::{DsUser as UserInfo, Flag};
 use std::collections::HashMap;
 use tracing::info;
 pub enum AuthenticatorType {

@@ -1,51 +1,51 @@
-use super::service::DolphinRpcServer;
-use proto::ds_relation_udfs_user::ds_relation_udfs_user_bean_service_server::DsRelationUdfsUserBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_relation_udfs_user::ds_relation_udfs_user_service_server::DsRelationUdfsUserService;
 
 #[tonic::async_trait]
-impl DsRelationUdfsUserBeanService for DolphinRpcServer {
-    async fn list_ds_relation_udfs_user_beans(
+impl DsRelationUdfsUserService for DolphinRpcServer {
+    async fn list_ds_relation_udfs_users(
         &self,
-        _req: tonic::Request<proto::ds_relation_udfs_user::ListDsRelationUdfsUserBeansRequest>,
+        _req: tonic::Request<proto::ds_relation_udfs_user::ListDsRelationUdfsUsersRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_relation_udfs_user::ListDsRelationUdfsUserBeansResponse>,
+        tonic::Response<proto::ds_relation_udfs_user::ListDsRelationUdfsUsersResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_relation_udfs_user_bean(
+    async fn get_ds_relation_udfs_user(
         &self,
-        _req: tonic::Request<proto::ds_relation_udfs_user::GetDsRelationUdfsUserBeanRequest>,
+        _req: tonic::Request<proto::ds_relation_udfs_user::GetDsRelationUdfsUserRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_relation_udfs_user::DsRelationUdfsUserBean>,
+        tonic::Response<proto::ds_relation_udfs_user::DsRelationUdfsUser>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn create_ds_relation_udfs_user_bean(
+    async fn create_ds_relation_udfs_user(
         &self,
-        _req: tonic::Request<proto::ds_relation_udfs_user::CreateDsRelationUdfsUserBeanRequest>,
+        _req: tonic::Request<proto::ds_relation_udfs_user::CreateDsRelationUdfsUserRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_relation_udfs_user::DsRelationUdfsUserBean>,
+        tonic::Response<proto::ds_relation_udfs_user::DsRelationUdfsUser>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn update_ds_relation_udfs_user_bean(
+    async fn update_ds_relation_udfs_user(
         &self,
-        _req: tonic::Request<proto::ds_relation_udfs_user::UpdateDsRelationUdfsUserBeanRequest>,
+        _req: tonic::Request<proto::ds_relation_udfs_user::UpdateDsRelationUdfsUserRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_relation_udfs_user::DsRelationUdfsUserBean>,
+        tonic::Response<proto::ds_relation_udfs_user::DsRelationUdfsUser>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn delete_ds_relation_udfs_user_bean(
+    async fn delete_ds_relation_udfs_user(
         &self,
-        _req: tonic::Request<proto::ds_relation_udfs_user::DeleteDsRelationUdfsUserBeanRequest>,
+        _req: tonic::Request<proto::ds_relation_udfs_user::DeleteDsRelationUdfsUserRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

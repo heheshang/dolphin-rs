@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsProcessInstanceBean {
+pub struct DsProcessInstance {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, optional, tag = "2")]
@@ -78,7 +78,7 @@ pub struct DsProcessInstanceBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsProcessInstanceBeansRequest {
+pub struct ListDsProcessInstancesRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -87,42 +87,42 @@ pub struct ListDsProcessInstanceBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsProcessInstanceBeansResponse {
-    /// The field name should match the noun "DsProcessInstanceBean" in the method name.
+pub struct ListDsProcessInstancesResponse {
+    /// The field name should match the noun "DsProcessInstance" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_process_instance_beans: ::prost::alloc::vec::Vec<DsProcessInstanceBean>,
+    pub ds_process_instances: ::prost::alloc::vec::Vec<DsProcessInstance>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsProcessInstanceBeanRequest {
+pub struct GetDsProcessInstanceRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsProcessInstanceBeanRequest {
-    /// The parent resource name where the DsProcessInstanceBean is to be created.
+pub struct CreateDsProcessInstanceRequest {
+    /// The parent resource name where the DsProcessInstance is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsProcessInstanceBean id to use for this DsProcessInstanceBean.
+    /// The DsProcessInstance id to use for this DsProcessInstance.
     #[prost(string, tag = "2")]
-    pub ds_process_instance_bean_id: ::prost::alloc::string::String,
-    /// The DsProcessInstanceBean resource to create.
+    pub ds_process_instance_id: ::prost::alloc::string::String,
+    /// The DsProcessInstance resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_process_instance_bean: ::core::option::Option<DsProcessInstanceBean>,
+    pub ds_process_instance: ::core::option::Option<DsProcessInstance>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsProcessInstanceBeanRequest {
-    /// The DsProcessInstanceBean resource which replaces the resource on the server.
+pub struct UpdateDsProcessInstanceRequest {
+    /// The DsProcessInstance resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_process_instance_bean: ::core::option::Option<DsProcessInstanceBean>,
+    pub ds_process_instance: ::core::option::Option<DsProcessInstance>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -130,21 +130,21 @@ pub struct UpdateDsProcessInstanceBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsProcessInstanceBeanRequest {
-    /// The resource name of the DsProcessInstanceBean to be deleted.
+pub struct DeleteDsProcessInstanceRequest {
+    /// The resource name of the DsProcessInstance to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_process_instance_bean_service_client {
+pub mod ds_process_instance_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsProcessInstanceBeanServiceClient<T> {
+    pub struct DsProcessInstanceServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsProcessInstanceBeanServiceClient<tonic::transport::Channel> {
+    impl DsProcessInstanceServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -155,7 +155,7 @@ pub mod ds_process_instance_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsProcessInstanceBeanServiceClient<T>
+    impl<T> DsProcessInstanceServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -175,7 +175,7 @@ pub mod ds_process_instance_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsProcessInstanceBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsProcessInstanceServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -188,7 +188,7 @@ pub mod ds_process_instance_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsProcessInstanceBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsProcessInstanceServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -226,11 +226,11 @@ pub mod ds_process_instance_bean_service_client {
             self
         }
 
-        pub async fn list_ds_process_instance_beans(
+        pub async fn list_ds_process_instances(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsProcessInstanceBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsProcessInstancesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsProcessInstanceBeansResponse>,
+            tonic::Response<super::ListDsProcessInstancesResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -241,21 +241,20 @@ pub mod ds_process_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_instance.DsProcessInstanceBeanService/ListDsProcessInstanceBeans",
+                "/ds_process_instance.DsProcessInstanceService/ListDsProcessInstances",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_instance.DsProcessInstanceBeanService",
-                "ListDsProcessInstanceBeans",
+                "ds_process_instance.DsProcessInstanceService",
+                "ListDsProcessInstances",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_process_instance_bean(
+        pub async fn get_ds_process_instance(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsProcessInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessInstanceBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::GetDsProcessInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessInstance>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -264,21 +263,20 @@ pub mod ds_process_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_instance.DsProcessInstanceBeanService/GetDsProcessInstanceBean",
+                "/ds_process_instance.DsProcessInstanceService/GetDsProcessInstance",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_instance.DsProcessInstanceBeanService",
-                "GetDsProcessInstanceBean",
+                "ds_process_instance.DsProcessInstanceService",
+                "GetDsProcessInstance",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_process_instance_bean(
+        pub async fn create_ds_process_instance(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsProcessInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessInstanceBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::CreateDsProcessInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessInstance>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -287,21 +285,20 @@ pub mod ds_process_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_instance.DsProcessInstanceBeanService/CreateDsProcessInstanceBean",
+                "/ds_process_instance.DsProcessInstanceService/CreateDsProcessInstance",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_instance.DsProcessInstanceBeanService",
-                "CreateDsProcessInstanceBean",
+                "ds_process_instance.DsProcessInstanceService",
+                "CreateDsProcessInstance",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_process_instance_bean(
+        pub async fn update_ds_process_instance(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsProcessInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessInstanceBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::UpdateDsProcessInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessInstance>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -310,19 +307,19 @@ pub mod ds_process_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_instance.DsProcessInstanceBeanService/UpdateDsProcessInstanceBean",
+                "/ds_process_instance.DsProcessInstanceService/UpdateDsProcessInstance",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_instance.DsProcessInstanceBeanService",
-                "UpdateDsProcessInstanceBean",
+                "ds_process_instance.DsProcessInstanceService",
+                "UpdateDsProcessInstance",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_process_instance_bean(
+        pub async fn delete_ds_process_instance(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsProcessInstanceBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsProcessInstanceRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -332,51 +329,51 @@ pub mod ds_process_instance_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_process_instance.DsProcessInstanceBeanService/DeleteDsProcessInstanceBean",
+                "/ds_process_instance.DsProcessInstanceService/DeleteDsProcessInstance",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_process_instance.DsProcessInstanceBeanService",
-                "DeleteDsProcessInstanceBean",
+                "ds_process_instance.DsProcessInstanceService",
+                "DeleteDsProcessInstance",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_process_instance_bean_service_server {
+pub mod ds_process_instance_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsProcessInstanceBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsProcessInstanceServiceServer.
     #[async_trait]
-    pub trait DsProcessInstanceBeanService: Send + Sync + 'static {
-        async fn list_ds_process_instance_beans(
+    pub trait DsProcessInstanceService: Send + Sync + 'static {
+        async fn list_ds_process_instances(
             &self,
-            request: tonic::Request<super::ListDsProcessInstanceBeansRequest>,
+            request: tonic::Request<super::ListDsProcessInstancesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsProcessInstanceBeansResponse>,
+            tonic::Response<super::ListDsProcessInstancesResponse>,
             tonic::Status,
         >;
-        async fn get_ds_process_instance_bean(
+        async fn get_ds_process_instance(
             &self,
-            request: tonic::Request<super::GetDsProcessInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessInstanceBean>, tonic::Status>;
-        async fn create_ds_process_instance_bean(
+            request: tonic::Request<super::GetDsProcessInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessInstance>, tonic::Status>;
+        async fn create_ds_process_instance(
             &self,
-            request: tonic::Request<super::CreateDsProcessInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessInstanceBean>, tonic::Status>;
-        async fn update_ds_process_instance_bean(
+            request: tonic::Request<super::CreateDsProcessInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessInstance>, tonic::Status>;
+        async fn update_ds_process_instance(
             &self,
-            request: tonic::Request<super::UpdateDsProcessInstanceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsProcessInstanceBean>, tonic::Status>;
-        async fn delete_ds_process_instance_bean(
+            request: tonic::Request<super::UpdateDsProcessInstanceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsProcessInstance>, tonic::Status>;
+        async fn delete_ds_process_instance(
             &self,
-            request: tonic::Request<super::DeleteDsProcessInstanceBeanRequest>,
+            request: tonic::Request<super::DeleteDsProcessInstanceRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsProcessInstanceBeanServiceServer<T: DsProcessInstanceBeanService> {
+    pub struct DsProcessInstanceServiceServer<T: DsProcessInstanceService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -384,7 +381,7 @@ pub mod ds_process_instance_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsProcessInstanceBeanService> DsProcessInstanceBeanServiceServer<T> {
+    impl<T: DsProcessInstanceService> DsProcessInstanceServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -437,9 +434,9 @@ pub mod ds_process_instance_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsProcessInstanceBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsProcessInstanceServiceServer<T>
     where
-        T: DsProcessInstanceBeanService,
+        T: DsProcessInstanceService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -457,69 +454,23 @@ pub mod ds_process_instance_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_process_instance.DsProcessInstanceBeanService/ListDsProcessInstanceBeans" => {
+                "/ds_process_instance.DsProcessInstanceService/ListDsProcessInstances" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsProcessInstanceBeansSvc<T: DsProcessInstanceBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsProcessInstanceBeanService>
-                        tonic::server::UnaryService<super::ListDsProcessInstanceBeansRequest>
-                        for ListDsProcessInstanceBeansSvc<T>
+                    struct ListDsProcessInstancesSvc<T: DsProcessInstanceService>(pub Arc<T>);
+                    impl<T: DsProcessInstanceService>
+                        tonic::server::UnaryService<super::ListDsProcessInstancesRequest>
+                        for ListDsProcessInstancesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsProcessInstanceBeansResponse;
+                        type Response = super::ListDsProcessInstancesResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsProcessInstanceBeansRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).list_ds_process_instance_beans(request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = ListDsProcessInstanceBeansSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/ds_process_instance.DsProcessInstanceBeanService/GetDsProcessInstanceBean" => {
-                    #[allow(non_camel_case_types)]
-                    struct GetDsProcessInstanceBeanSvc<T: DsProcessInstanceBeanService>(pub Arc<T>);
-                    impl<T: DsProcessInstanceBeanService>
-                        tonic::server::UnaryService<super::GetDsProcessInstanceBeanRequest>
-                        for GetDsProcessInstanceBeanSvc<T>
-                    {
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsProcessInstanceBean;
-
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::GetDsProcessInstanceBeanRequest>,
+                            request: tonic::Request<super::ListDsProcessInstancesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).get_ds_process_instance_bean(request).await };
+                                async move { (*inner).list_ds_process_instances(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -530,7 +481,7 @@ pub mod ds_process_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsProcessInstanceBeanSvc(inner);
+                        let method = ListDsProcessInstancesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -546,26 +497,23 @@ pub mod ds_process_instance_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_process_instance.DsProcessInstanceBeanService/CreateDsProcessInstanceBean" => {
+                "/ds_process_instance.DsProcessInstanceService/GetDsProcessInstance" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsProcessInstanceBeanSvc<T: DsProcessInstanceBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsProcessInstanceBeanService>
-                        tonic::server::UnaryService<super::CreateDsProcessInstanceBeanRequest>
-                        for CreateDsProcessInstanceBeanSvc<T>
+                    struct GetDsProcessInstanceSvc<T: DsProcessInstanceService>(pub Arc<T>);
+                    impl<T: DsProcessInstanceService>
+                        tonic::server::UnaryService<super::GetDsProcessInstanceRequest>
+                        for GetDsProcessInstanceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsProcessInstanceBean;
+                        type Response = super::DsProcessInstance;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsProcessInstanceBeanRequest>,
+                            request: tonic::Request<super::GetDsProcessInstanceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).create_ds_process_instance_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_ds_process_instance(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -576,7 +524,7 @@ pub mod ds_process_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsProcessInstanceBeanSvc(inner);
+                        let method = GetDsProcessInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -592,26 +540,23 @@ pub mod ds_process_instance_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_process_instance.DsProcessInstanceBeanService/UpdateDsProcessInstanceBean" => {
+                "/ds_process_instance.DsProcessInstanceService/CreateDsProcessInstance" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsProcessInstanceBeanSvc<T: DsProcessInstanceBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsProcessInstanceBeanService>
-                        tonic::server::UnaryService<super::UpdateDsProcessInstanceBeanRequest>
-                        for UpdateDsProcessInstanceBeanSvc<T>
+                    struct CreateDsProcessInstanceSvc<T: DsProcessInstanceService>(pub Arc<T>);
+                    impl<T: DsProcessInstanceService>
+                        tonic::server::UnaryService<super::CreateDsProcessInstanceRequest>
+                        for CreateDsProcessInstanceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsProcessInstanceBean;
+                        type Response = super::DsProcessInstance;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsProcessInstanceBeanRequest>,
+                            request: tonic::Request<super::CreateDsProcessInstanceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).update_ds_process_instance_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).create_ds_process_instance(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -622,7 +567,7 @@ pub mod ds_process_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsProcessInstanceBeanSvc(inner);
+                        let method = CreateDsProcessInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -638,26 +583,66 @@ pub mod ds_process_instance_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_process_instance.DsProcessInstanceBeanService/DeleteDsProcessInstanceBean" => {
+                "/ds_process_instance.DsProcessInstanceService/UpdateDsProcessInstance" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsProcessInstanceBeanSvc<T: DsProcessInstanceBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsProcessInstanceBeanService>
-                        tonic::server::UnaryService<super::DeleteDsProcessInstanceBeanRequest>
-                        for DeleteDsProcessInstanceBeanSvc<T>
+                    struct UpdateDsProcessInstanceSvc<T: DsProcessInstanceService>(pub Arc<T>);
+                    impl<T: DsProcessInstanceService>
+                        tonic::server::UnaryService<super::UpdateDsProcessInstanceRequest>
+                        for UpdateDsProcessInstanceSvc<T>
+                    {
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::DsProcessInstance;
+
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UpdateDsProcessInstanceRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut =
+                                async move { (*inner).update_ds_process_instance(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = UpdateDsProcessInstanceSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/ds_process_instance.DsProcessInstanceService/DeleteDsProcessInstance" => {
+                    #[allow(non_camel_case_types)]
+                    struct DeleteDsProcessInstanceSvc<T: DsProcessInstanceService>(pub Arc<T>);
+                    impl<T: DsProcessInstanceService>
+                        tonic::server::UnaryService<super::DeleteDsProcessInstanceRequest>
+                        for DeleteDsProcessInstanceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsProcessInstanceBeanRequest>,
+                            request: tonic::Request<super::DeleteDsProcessInstanceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).delete_ds_process_instance_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).delete_ds_process_instance(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -668,7 +653,7 @@ pub mod ds_process_instance_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsProcessInstanceBeanSvc(inner);
+                        let method = DeleteDsProcessInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -695,7 +680,7 @@ pub mod ds_process_instance_bean_service_server {
             }
         }
     }
-    impl<T: DsProcessInstanceBeanService> Clone for DsProcessInstanceBeanServiceServer<T> {
+    impl<T: DsProcessInstanceService> Clone for DsProcessInstanceServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -707,7 +692,7 @@ pub mod ds_process_instance_bean_service_server {
             }
         }
     }
-    impl<T: DsProcessInstanceBeanService> Clone for _Inner<T> {
+    impl<T: DsProcessInstanceService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -717,9 +702,9 @@ pub mod ds_process_instance_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsProcessInstanceBeanService> tonic::server::NamedService
-        for DsProcessInstanceBeanServiceServer<T>
+    impl<T: DsProcessInstanceService> tonic::server::NamedService
+        for DsProcessInstanceServiceServer<T>
     {
-        const NAME: &'static str = "ds_process_instance.DsProcessInstanceBeanService";
+        const NAME: &'static str = "ds_process_instance.DsProcessInstanceService";
     }
 }

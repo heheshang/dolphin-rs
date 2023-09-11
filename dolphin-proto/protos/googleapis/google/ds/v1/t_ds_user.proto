@@ -16,7 +16,7 @@ package ds_user;
 // option java_package = "io.g";
 // option java_outer_classname = "HelloWorldProto";
 
-message DsUserBean{
+message DsUser{
     int32 id=1;
     optional string user_name=2;
     optional string user_password=3;
@@ -46,16 +46,16 @@ message QueryUserByNamePasswordRequest{
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsUserBeanService {
-  rpc ListDsUserBeans(ListDsUserBeansRequest) returns (ListDsUserBeansResponse) {
+service DsUserService {
+  rpc ListDsUsers(ListDsUsersRequest) returns (ListDsUsersResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsUserBeans"
+      get: "/v1alpha1/DsUsers"
     };
   }
 
-  rpc GetDsUserBean(GetDsUserBeanRequest) returns (DsUserBean) {
+  rpc GetDsUser(GetDsUserRequest) returns (DsUser) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsUserBeans/*}"
+      get: "/v1alpha1/{name=DsUsers/*}"
     };
   }
   rpc GetDsUserById(GetDsUserByIdRequest) returns( GetDsUserByIdResponse){
@@ -64,7 +64,7 @@ service DsUserBeanService {
     };
   }
 
-  rpc QueryUserByNamePassword(QueryUserByNamePasswordRequest) returns (DsUserBean) {
+  rpc QueryUserByNamePassword(QueryUserByNamePasswordRequest) returns (DsUser) {
     option (google.api.http) = {
       post: "/v1alpha1/QueryUserByNamePassword"
       body: "QueryUserByNamePassword"
@@ -72,32 +72,32 @@ service DsUserBeanService {
   }
 
 
-  rpc CreateDsUserBean(CreateDsUserBeanRequest) returns (DsUserBean) {
+  rpc CreateDsUser(CreateDsUserRequest) returns (DsUser) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsUserBeans"
-      body: "DsUserBean"
+      post: "/v1alpha1/DsUsers"
+      body: "DsUser"
     };
   }
 
-  rpc UpdateDsUserBean(UpdateDsUserBeanRequest) returns (DsUserBean) {
+  rpc UpdateDsUser(UpdateDsUserRequest) returns (DsUser) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsUserBean.name=DsUserBeans/*}"
-      body: "DsUserBean"
+      patch: "/v1alpha1/{DsUser.name=DsUsers/*}"
+      body: "DsUser"
     };
   }
 
-  rpc DeleteDsUserBean(DeleteDsUserBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsUser(DeleteDsUserRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsUserBeans/*}"
+      delete: "/v1alpha1/{name=DsUsers/*}"
     };
   }
 }
 
-// message DsUserBean {
+// message DsUser {
 // ! This should be defined elsewhere
 // }
 
-message ListDsUserBeansRequest {
+message ListDsUsersRequest {
 
 
   // The maximum number of items to return.
@@ -106,16 +106,16 @@ message ListDsUserBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsUserBeansResponse {
-  // The field name should match the noun "DsUserBean" in the method name.
+message ListDsUsersResponse {
+  // The field name should match the noun "DsUser" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsUserBean DsUserBeans = 1;
+  repeated DsUser DsUsers = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 message GetDsUserByIdResponse{
-  optional DsUserBean DsUserBean=1;
+  optional DsUser DsUser=1;
 }
 
 message GetDsUserByIdRequest {
@@ -123,33 +123,33 @@ message GetDsUserByIdRequest {
   int32 id = 1;
 }
 
-message GetDsUserBeanRequest {
+message GetDsUserRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsUserBeanRequest {
-  // The parent resource name where the DsUserBean is to be created.
+message CreateDsUserRequest {
+  // The parent resource name where the DsUser is to be created.
   string parent = 1;
 
-  // The DsUserBean id to use for this DsUserBean.
-  string DsUserBean_id = 2;
+  // The DsUser id to use for this DsUser.
+  string DsUser_id = 2;
 
-  // The DsUserBean resource to create.
+  // The DsUser resource to create.
   // The field name should match the Noun in the method name.
-  DsUserBean DsUserBean = 3;
+  DsUser DsUser = 3;
 }
 
-message UpdateDsUserBeanRequest {
-  // The DsUserBean resource which replaces the resource on the server.
-  DsUserBean DsUserBean = 1;
+message UpdateDsUserRequest {
+  // The DsUser resource which replaces the resource on the server.
+  DsUser DsUser = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsUserBeanRequest {
-  // The resource name of the DsUserBean to be deleted.
+message DeleteDsUserRequest {
+  // The resource name of the DsUser to be deleted.
   string name = 1;
 }

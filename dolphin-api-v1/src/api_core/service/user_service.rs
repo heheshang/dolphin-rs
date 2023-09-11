@@ -1,13 +1,17 @@
-use crate::{
+use crate::api_core::{
     bean::{request::ds_user_req::UserInfoReq, response::ds_user_res::UserInfoRes},
-    client::service::{user_client, USER_SERVICE},
+    client::service::{_user_client, USER_SERVICE},
 };
 use dolphin_common::{
-    core_error::error::DolphinErrorInfo, core_results::results::ApiResult,
+    core_error::error::DolphinErrorInfo,
+    core_results::results::ApiResult,
     core_status::app_status::AppStatus,
 };
 use proto::ds_user::{
-    DsUserBean, GetDsUserBeanRequest, GetDsUserByIdRequest, QueryUserByNamePasswordRequest,
+    DsUser,
+    GetDsUserByIdRequest,
+    GetDsUserRequest,
+    QueryUserByNamePasswordRequest,
 };
 use serde::{Deserialize, Serialize};
 use tracing::{error, info};
@@ -18,16 +22,17 @@ pub struct User {
     pub password: String,
 }
 impl UserInfoReq {
+    #[allow(dead_code)]
     pub async fn user_info(&self) -> ApiResult<UserInfoRes> {
         let client = match client().await {
             Ok(value) => value,
             Err(value) => return value,
         };
 
-        let request = tonic::Request::new(GetDsUserBeanRequest {
+        let request = tonic::Request::new(GetDsUserRequest {
             name: self.user_name.clone(),
         });
-        let response = client.clone().get_ds_user_bean(request).await;
+        let response = client.clone().get_ds_user(request).await;
         match response {
             Ok(res) => {
                 let user = res.into_inner();
@@ -54,7 +59,8 @@ impl UserInfoReq {
     }
 }
 
-pub async fn get_user_by_id(id: i32) -> ApiResult<DsUserBean> {
+#[allow(dead_code)]
+pub async fn get_user_by_id(id: i32) -> ApiResult<DsUser> {
     let client = match client().await {
         Ok(value) => value,
         Err(value) => return value,
@@ -64,7 +70,7 @@ pub async fn get_user_by_id(id: i32) -> ApiResult<DsUserBean> {
         .clone()
         .get_ds_user_by_id(request)
         .await
-        .map(|res| ApiResult::build(Some(res.into_inner().ds_user_bean)))
+        .map(|res| ApiResult::build(Some(res.into_inner().ds_user)))
         .map_err(|e| {
             error!("get_user_by_id error: {:?}", e);
             ApiResult::new_with_err_status(None, AppStatus::InternalServerErrorArgs)
@@ -75,7 +81,7 @@ pub async fn query_user_by_name_password(
     user_name: String,
     user_password: String,
     extra: String,
-) -> ApiResult<DsUserBean> {
+) -> ApiResult<DsUser> {
     info!(
         "query_user_by_name_password user_name: {:?} ,user_password: {:?},extra: {:?}",
         user_name, user_password, extra
@@ -107,13 +113,11 @@ pub async fn query_user_by_name_password(
 }
 
 async fn client<T>() -> Result<
-    &'static proto::ds_user::ds_user_bean_service_client::DsUserBeanServiceClient<
-        tonic::transport::Channel,
-    >,
+    &'static proto::ds_user::ds_user_service_client::DsUserServiceClient<tonic::transport::Channel>,
     ApiResult<T>,
 > {
     let client = match USER_SERVICE
-        .get_or_init(|| async { user_client().await })
+        .get_or_init(|| async { _user_client().await })
         .await
     {
         Ok(client) => client,

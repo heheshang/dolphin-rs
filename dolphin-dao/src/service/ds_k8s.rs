@@ -1,41 +1,41 @@
-use super::service::DolphinRpcServer;
-use proto::ds_k8s::ds_k8s_bean_service_server::DsK8sBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_k8s::ds_k8s_service_server::DsK8sService;
 
 
 #[tonic::async_trait]
-impl DsK8sBeanService for DolphinRpcServer {
-    async fn list_ds_k8s_beans(
+impl DsK8sService for DolphinRpcServer {
+    async fn list_ds_k8ss(
         &self,
-        _req: tonic::Request<proto::ds_k8s::ListDsK8sBeansRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_k8s::ListDsK8sBeansResponse>, tonic::Status>
+        _req: tonic::Request<proto::ds_k8s::ListDsK8ssRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_k8s::ListDsK8ssResponse>, tonic::Status>
     {
         todo!()
     }
 
-    async fn get_ds_k8s_bean(
+    async fn get_ds_k8s(
         &self,
-        _req: tonic::Request<proto::ds_k8s::GetDsK8sBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_k8s::DsK8sBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_k8s::GetDsK8sRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_k8s::DsK8s>, tonic::Status> {
         todo!()
     }
 
-    async fn create_ds_k8s_bean(
+    async fn create_ds_k8s(
         &self,
-        _req: tonic::Request<proto::ds_k8s::CreateDsK8sBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_k8s::DsK8sBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_k8s::CreateDsK8sRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_k8s::DsK8s>, tonic::Status> {
         todo!()
     }
 
-    async fn update_ds_k8s_bean(
+    async fn update_ds_k8s(
         &self,
-        _req: tonic::Request<proto::ds_k8s::UpdateDsK8sBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_k8s::DsK8sBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_k8s::UpdateDsK8sRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_k8s::DsK8s>, tonic::Status> {
         todo!()
     }
 
-    async fn delete_ds_k8s_bean(
+    async fn delete_ds_k8s(
         &self,
-        _req: tonic::Request<proto::ds_k8s::DeleteDsK8sBeanRequest>,
+        _req: tonic::Request<proto::ds_k8s::DeleteDsK8sRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

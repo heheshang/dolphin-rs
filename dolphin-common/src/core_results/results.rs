@@ -8,7 +8,6 @@ use serde::{Deserialize, Serialize};
 pub type GrpcResponse<T> = Result<tonic::Response<T>, tonic::Status>;
 pub type GrpcRequest<T> = tonic::Request<T>;
 
-#[warn(dead_code)]
 #[serde_with::serde_as]
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct ApiResult<T> {

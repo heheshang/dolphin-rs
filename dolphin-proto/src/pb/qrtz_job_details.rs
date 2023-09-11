@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct QrtzJobDetailsBean {
+pub struct QrtzJobDetails {
     #[prost(string, tag = "1")]
     pub sched_name: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
@@ -26,7 +26,7 @@ pub struct QrtzJobDetailsBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQrtzJobDetailsBeansRequest {
+pub struct ListQrtzJobDetailssRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -35,42 +35,42 @@ pub struct ListQrtzJobDetailsBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQrtzJobDetailsBeansResponse {
-    /// The field name should match the noun "QrtzJobDetailsBean" in the method name.
+pub struct ListQrtzJobDetailssResponse {
+    /// The field name should match the noun "QrtzJobDetails" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub qrtz_job_details_beans: ::prost::alloc::vec::Vec<QrtzJobDetailsBean>,
+    pub qrtz_job_detailss: ::prost::alloc::vec::Vec<QrtzJobDetails>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetQrtzJobDetailsBeanRequest {
+pub struct GetQrtzJobDetailsRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateQrtzJobDetailsBeanRequest {
-    /// The parent resource name where the QrtzJobDetailsBean is to be created.
+pub struct CreateQrtzJobDetailsRequest {
+    /// The parent resource name where the QrtzJobDetails is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The QrtzJobDetailsBean id to use for this QrtzJobDetailsBean.
+    /// The QrtzJobDetails id to use for this QrtzJobDetails.
     #[prost(string, tag = "2")]
-    pub qrtz_job_details_bean_id: ::prost::alloc::string::String,
-    /// The QrtzJobDetailsBean resource to create.
+    pub qrtz_job_details_id: ::prost::alloc::string::String,
+    /// The QrtzJobDetails resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub qrtz_job_details_bean: ::core::option::Option<QrtzJobDetailsBean>,
+    pub qrtz_job_details: ::core::option::Option<QrtzJobDetails>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateQrtzJobDetailsBeanRequest {
-    /// The QrtzJobDetailsBean resource which replaces the resource on the server.
+pub struct UpdateQrtzJobDetailsRequest {
+    /// The QrtzJobDetails resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub qrtz_job_details_bean: ::core::option::Option<QrtzJobDetailsBean>,
+    pub qrtz_job_details: ::core::option::Option<QrtzJobDetails>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -78,21 +78,21 @@ pub struct UpdateQrtzJobDetailsBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteQrtzJobDetailsBeanRequest {
-    /// The resource name of the QrtzJobDetailsBean to be deleted.
+pub struct DeleteQrtzJobDetailsRequest {
+    /// The resource name of the QrtzJobDetails to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod qrtz_job_details_bean_service_client {
+pub mod qrtz_job_details_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct QrtzJobDetailsBeanServiceClient<T> {
+    pub struct QrtzJobDetailsServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl QrtzJobDetailsBeanServiceClient<tonic::transport::Channel> {
+    impl QrtzJobDetailsServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -103,7 +103,7 @@ pub mod qrtz_job_details_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> QrtzJobDetailsBeanServiceClient<T>
+    impl<T> QrtzJobDetailsServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -123,7 +123,7 @@ pub mod qrtz_job_details_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> QrtzJobDetailsBeanServiceClient<InterceptedService<T, F>>
+        ) -> QrtzJobDetailsServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -136,7 +136,7 @@ pub mod qrtz_job_details_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            QrtzJobDetailsBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            QrtzJobDetailsServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -174,35 +174,10 @@ pub mod qrtz_job_details_bean_service_client {
             self
         }
 
-        pub async fn list_qrtz_job_details_beans(
+        pub async fn list_qrtz_job_detailss(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListQrtzJobDetailsBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListQrtzJobDetailsBeansResponse>,
-            tonic::Status,
-        > {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_job_details.QrtzJobDetailsBeanService/ListQrtzJobDetailsBeans",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_job_details.QrtzJobDetailsBeanService",
-                "ListQrtzJobDetailsBeans",
-            ));
-            self.inner.unary(req, path, codec).await
-        }
-
-        pub async fn get_qrtz_job_details_bean(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetQrtzJobDetailsBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzJobDetailsBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListQrtzJobDetailssRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListQrtzJobDetailssResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -212,21 +187,20 @@ pub mod qrtz_job_details_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_job_details.QrtzJobDetailsBeanService/GetQrtzJobDetailsBean",
+                "/qrtz_job_details.QrtzJobDetailsService/ListQrtzJobDetailss",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_job_details.QrtzJobDetailsBeanService",
-                "GetQrtzJobDetailsBean",
+                "qrtz_job_details.QrtzJobDetailsService",
+                "ListQrtzJobDetailss",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_qrtz_job_details_bean(
+        pub async fn get_qrtz_job_details(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateQrtzJobDetailsBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzJobDetailsBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::GetQrtzJobDetailsRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzJobDetails>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -235,21 +209,20 @@ pub mod qrtz_job_details_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_job_details.QrtzJobDetailsBeanService/CreateQrtzJobDetailsBean",
+                "/qrtz_job_details.QrtzJobDetailsService/GetQrtzJobDetails",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_job_details.QrtzJobDetailsBeanService",
-                "CreateQrtzJobDetailsBean",
+                "qrtz_job_details.QrtzJobDetailsService",
+                "GetQrtzJobDetails",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_qrtz_job_details_bean(
+        pub async fn create_qrtz_job_details(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateQrtzJobDetailsBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzJobDetailsBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::CreateQrtzJobDetailsRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzJobDetails>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -258,19 +231,41 @@ pub mod qrtz_job_details_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_job_details.QrtzJobDetailsBeanService/UpdateQrtzJobDetailsBean",
+                "/qrtz_job_details.QrtzJobDetailsService/CreateQrtzJobDetails",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_job_details.QrtzJobDetailsBeanService",
-                "UpdateQrtzJobDetailsBean",
+                "qrtz_job_details.QrtzJobDetailsService",
+                "CreateQrtzJobDetails",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_qrtz_job_details_bean(
+        pub async fn update_qrtz_job_details(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteQrtzJobDetailsBeanRequest>,
+            request: impl tonic::IntoRequest<super::UpdateQrtzJobDetailsRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzJobDetails>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/qrtz_job_details.QrtzJobDetailsService/UpdateQrtzJobDetails",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new(
+                "qrtz_job_details.QrtzJobDetailsService",
+                "UpdateQrtzJobDetails",
+            ));
+            self.inner.unary(req, path, codec).await
+        }
+
+        pub async fn delete_qrtz_job_details(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteQrtzJobDetailsRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -280,51 +275,48 @@ pub mod qrtz_job_details_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_job_details.QrtzJobDetailsBeanService/DeleteQrtzJobDetailsBean",
+                "/qrtz_job_details.QrtzJobDetailsService/DeleteQrtzJobDetails",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_job_details.QrtzJobDetailsBeanService",
-                "DeleteQrtzJobDetailsBean",
+                "qrtz_job_details.QrtzJobDetailsService",
+                "DeleteQrtzJobDetails",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod qrtz_job_details_bean_service_server {
+pub mod qrtz_job_details_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with QrtzJobDetailsBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with QrtzJobDetailsServiceServer.
     #[async_trait]
-    pub trait QrtzJobDetailsBeanService: Send + Sync + 'static {
-        async fn list_qrtz_job_details_beans(
+    pub trait QrtzJobDetailsService: Send + Sync + 'static {
+        async fn list_qrtz_job_detailss(
             &self,
-            request: tonic::Request<super::ListQrtzJobDetailsBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListQrtzJobDetailsBeansResponse>,
-            tonic::Status,
-        >;
-        async fn get_qrtz_job_details_bean(
+            request: tonic::Request<super::ListQrtzJobDetailssRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListQrtzJobDetailssResponse>, tonic::Status>;
+        async fn get_qrtz_job_details(
             &self,
-            request: tonic::Request<super::GetQrtzJobDetailsBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzJobDetailsBean>, tonic::Status>;
-        async fn create_qrtz_job_details_bean(
+            request: tonic::Request<super::GetQrtzJobDetailsRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzJobDetails>, tonic::Status>;
+        async fn create_qrtz_job_details(
             &self,
-            request: tonic::Request<super::CreateQrtzJobDetailsBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzJobDetailsBean>, tonic::Status>;
-        async fn update_qrtz_job_details_bean(
+            request: tonic::Request<super::CreateQrtzJobDetailsRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzJobDetails>, tonic::Status>;
+        async fn update_qrtz_job_details(
             &self,
-            request: tonic::Request<super::UpdateQrtzJobDetailsBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzJobDetailsBean>, tonic::Status>;
-        async fn delete_qrtz_job_details_bean(
+            request: tonic::Request<super::UpdateQrtzJobDetailsRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzJobDetails>, tonic::Status>;
+        async fn delete_qrtz_job_details(
             &self,
-            request: tonic::Request<super::DeleteQrtzJobDetailsBeanRequest>,
+            request: tonic::Request<super::DeleteQrtzJobDetailsRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct QrtzJobDetailsBeanServiceServer<T: QrtzJobDetailsBeanService> {
+    pub struct QrtzJobDetailsServiceServer<T: QrtzJobDetailsService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -332,7 +324,7 @@ pub mod qrtz_job_details_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: QrtzJobDetailsBeanService> QrtzJobDetailsBeanServiceServer<T> {
+    impl<T: QrtzJobDetailsService> QrtzJobDetailsServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -385,9 +377,9 @@ pub mod qrtz_job_details_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for QrtzJobDetailsBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for QrtzJobDetailsServiceServer<T>
     where
-        T: QrtzJobDetailsBeanService,
+        T: QrtzJobDetailsService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -405,23 +397,22 @@ pub mod qrtz_job_details_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/qrtz_job_details.QrtzJobDetailsBeanService/ListQrtzJobDetailsBeans" => {
+                "/qrtz_job_details.QrtzJobDetailsService/ListQrtzJobDetailss" => {
                     #[allow(non_camel_case_types)]
-                    struct ListQrtzJobDetailsBeansSvc<T: QrtzJobDetailsBeanService>(pub Arc<T>);
-                    impl<T: QrtzJobDetailsBeanService>
-                        tonic::server::UnaryService<super::ListQrtzJobDetailsBeansRequest>
-                        for ListQrtzJobDetailsBeansSvc<T>
+                    struct ListQrtzJobDetailssSvc<T: QrtzJobDetailsService>(pub Arc<T>);
+                    impl<T: QrtzJobDetailsService>
+                        tonic::server::UnaryService<super::ListQrtzJobDetailssRequest>
+                        for ListQrtzJobDetailssSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListQrtzJobDetailsBeansResponse;
+                        type Response = super::ListQrtzJobDetailssResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListQrtzJobDetailsBeansRequest>,
+                            request: tonic::Request<super::ListQrtzJobDetailssRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_qrtz_job_details_beans(request).await };
+                            let fut = async move { (*inner).list_qrtz_job_detailss(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -432,7 +423,7 @@ pub mod qrtz_job_details_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListQrtzJobDetailsBeansSvc(inner);
+                        let method = ListQrtzJobDetailssSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -448,23 +439,22 @@ pub mod qrtz_job_details_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_job_details.QrtzJobDetailsBeanService/GetQrtzJobDetailsBean" => {
+                "/qrtz_job_details.QrtzJobDetailsService/GetQrtzJobDetails" => {
                     #[allow(non_camel_case_types)]
-                    struct GetQrtzJobDetailsBeanSvc<T: QrtzJobDetailsBeanService>(pub Arc<T>);
-                    impl<T: QrtzJobDetailsBeanService>
-                        tonic::server::UnaryService<super::GetQrtzJobDetailsBeanRequest>
-                        for GetQrtzJobDetailsBeanSvc<T>
+                    struct GetQrtzJobDetailsSvc<T: QrtzJobDetailsService>(pub Arc<T>);
+                    impl<T: QrtzJobDetailsService>
+                        tonic::server::UnaryService<super::GetQrtzJobDetailsRequest>
+                        for GetQrtzJobDetailsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzJobDetailsBean;
+                        type Response = super::QrtzJobDetails;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetQrtzJobDetailsBeanRequest>,
+                            request: tonic::Request<super::GetQrtzJobDetailsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).get_qrtz_job_details_bean(request).await };
+                            let fut = async move { (*inner).get_qrtz_job_details(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -475,7 +465,7 @@ pub mod qrtz_job_details_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetQrtzJobDetailsBeanSvc(inner);
+                        let method = GetQrtzJobDetailsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -491,23 +481,23 @@ pub mod qrtz_job_details_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_job_details.QrtzJobDetailsBeanService/CreateQrtzJobDetailsBean" => {
+                "/qrtz_job_details.QrtzJobDetailsService/CreateQrtzJobDetails" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateQrtzJobDetailsBeanSvc<T: QrtzJobDetailsBeanService>(pub Arc<T>);
-                    impl<T: QrtzJobDetailsBeanService>
-                        tonic::server::UnaryService<super::CreateQrtzJobDetailsBeanRequest>
-                        for CreateQrtzJobDetailsBeanSvc<T>
+                    struct CreateQrtzJobDetailsSvc<T: QrtzJobDetailsService>(pub Arc<T>);
+                    impl<T: QrtzJobDetailsService>
+                        tonic::server::UnaryService<super::CreateQrtzJobDetailsRequest>
+                        for CreateQrtzJobDetailsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzJobDetailsBean;
+                        type Response = super::QrtzJobDetails;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateQrtzJobDetailsBeanRequest>,
+                            request: tonic::Request<super::CreateQrtzJobDetailsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).create_qrtz_job_details_bean(request).await };
+                                async move { (*inner).create_qrtz_job_details(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -518,7 +508,7 @@ pub mod qrtz_job_details_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateQrtzJobDetailsBeanSvc(inner);
+                        let method = CreateQrtzJobDetailsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -534,23 +524,23 @@ pub mod qrtz_job_details_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_job_details.QrtzJobDetailsBeanService/UpdateQrtzJobDetailsBean" => {
+                "/qrtz_job_details.QrtzJobDetailsService/UpdateQrtzJobDetails" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateQrtzJobDetailsBeanSvc<T: QrtzJobDetailsBeanService>(pub Arc<T>);
-                    impl<T: QrtzJobDetailsBeanService>
-                        tonic::server::UnaryService<super::UpdateQrtzJobDetailsBeanRequest>
-                        for UpdateQrtzJobDetailsBeanSvc<T>
+                    struct UpdateQrtzJobDetailsSvc<T: QrtzJobDetailsService>(pub Arc<T>);
+                    impl<T: QrtzJobDetailsService>
+                        tonic::server::UnaryService<super::UpdateQrtzJobDetailsRequest>
+                        for UpdateQrtzJobDetailsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzJobDetailsBean;
+                        type Response = super::QrtzJobDetails;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateQrtzJobDetailsBeanRequest>,
+                            request: tonic::Request<super::UpdateQrtzJobDetailsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).update_qrtz_job_details_bean(request).await };
+                                async move { (*inner).update_qrtz_job_details(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -561,7 +551,7 @@ pub mod qrtz_job_details_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateQrtzJobDetailsBeanSvc(inner);
+                        let method = UpdateQrtzJobDetailsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -577,23 +567,23 @@ pub mod qrtz_job_details_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_job_details.QrtzJobDetailsBeanService/DeleteQrtzJobDetailsBean" => {
+                "/qrtz_job_details.QrtzJobDetailsService/DeleteQrtzJobDetails" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteQrtzJobDetailsBeanSvc<T: QrtzJobDetailsBeanService>(pub Arc<T>);
-                    impl<T: QrtzJobDetailsBeanService>
-                        tonic::server::UnaryService<super::DeleteQrtzJobDetailsBeanRequest>
-                        for DeleteQrtzJobDetailsBeanSvc<T>
+                    struct DeleteQrtzJobDetailsSvc<T: QrtzJobDetailsService>(pub Arc<T>);
+                    impl<T: QrtzJobDetailsService>
+                        tonic::server::UnaryService<super::DeleteQrtzJobDetailsRequest>
+                        for DeleteQrtzJobDetailsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteQrtzJobDetailsBeanRequest>,
+                            request: tonic::Request<super::DeleteQrtzJobDetailsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).delete_qrtz_job_details_bean(request).await };
+                                async move { (*inner).delete_qrtz_job_details(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -604,7 +594,7 @@ pub mod qrtz_job_details_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteQrtzJobDetailsBeanSvc(inner);
+                        let method = DeleteQrtzJobDetailsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -631,7 +621,7 @@ pub mod qrtz_job_details_bean_service_server {
             }
         }
     }
-    impl<T: QrtzJobDetailsBeanService> Clone for QrtzJobDetailsBeanServiceServer<T> {
+    impl<T: QrtzJobDetailsService> Clone for QrtzJobDetailsServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -643,7 +633,7 @@ pub mod qrtz_job_details_bean_service_server {
             }
         }
     }
-    impl<T: QrtzJobDetailsBeanService> Clone for _Inner<T> {
+    impl<T: QrtzJobDetailsService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -653,9 +643,7 @@ pub mod qrtz_job_details_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: QrtzJobDetailsBeanService> tonic::server::NamedService
-        for QrtzJobDetailsBeanServiceServer<T>
-    {
-        const NAME: &'static str = "qrtz_job_details.QrtzJobDetailsBeanService";
+    impl<T: QrtzJobDetailsService> tonic::server::NamedService for QrtzJobDetailsServiceServer<T> {
+        const NAME: &'static str = "qrtz_job_details.QrtzJobDetailsService";
     }
 }

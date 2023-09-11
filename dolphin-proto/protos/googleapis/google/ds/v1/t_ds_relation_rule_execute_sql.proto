@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 package ds_relation_rule_execute_sql;
 
-message DsRelationRuleExecuteSqlBean {
+message DsRelationRuleExecuteSql {
 
      int32 id= 1;
      optional int32 rule_id=2 ;
@@ -18,45 +18,45 @@ message DsRelationRuleExecuteSqlBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsRelationRuleExecuteSqlBeanService {
-  rpc ListDsRelationRuleExecuteSqlBeans(ListDsRelationRuleExecuteSqlBeansRequest) returns (ListDsRelationRuleExecuteSqlBeansResponse) {
+service DsRelationRuleExecuteSqlService {
+  rpc ListDsRelationRuleExecuteSqls(ListDsRelationRuleExecuteSqlsRequest) returns (ListDsRelationRuleExecuteSqlsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsRelationRuleExecuteSqlBeans"
+      get: "/v1alpha1/DsRelationRuleExecuteSqls"
     };
   }
 
-  rpc GetDsRelationRuleExecuteSqlBean(GetDsRelationRuleExecuteSqlBeanRequest) returns (DsRelationRuleExecuteSqlBean) {
+  rpc GetDsRelationRuleExecuteSql(GetDsRelationRuleExecuteSqlRequest) returns (DsRelationRuleExecuteSql) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsRelationRuleExecuteSqlBeans/*}"
+      get: "/v1alpha1/{name=DsRelationRuleExecuteSqls/*}"
     };
   }
 
-  rpc CreateDsRelationRuleExecuteSqlBean(CreateDsRelationRuleExecuteSqlBeanRequest) returns (DsRelationRuleExecuteSqlBean) {
+  rpc CreateDsRelationRuleExecuteSql(CreateDsRelationRuleExecuteSqlRequest) returns (DsRelationRuleExecuteSql) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsRelationRuleExecuteSqlBeans"
-      body: "DsRelationRuleExecuteSqlBean"
+      post: "/v1alpha1/DsRelationRuleExecuteSqls"
+      body: "DsRelationRuleExecuteSql"
     };
   }
 
-  rpc UpdateDsRelationRuleExecuteSqlBean(UpdateDsRelationRuleExecuteSqlBeanRequest) returns (DsRelationRuleExecuteSqlBean) {
+  rpc UpdateDsRelationRuleExecuteSql(UpdateDsRelationRuleExecuteSqlRequest) returns (DsRelationRuleExecuteSql) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsRelationRuleExecuteSqlBean.name=DsRelationRuleExecuteSqlBeans/*}"
-      body: "DsRelationRuleExecuteSqlBean"
+      patch: "/v1alpha1/{DsRelationRuleExecuteSql.name=DsRelationRuleExecuteSqls/*}"
+      body: "DsRelationRuleExecuteSql"
     };
   }
 
-  rpc DeleteDsRelationRuleExecuteSqlBean(DeleteDsRelationRuleExecuteSqlBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsRelationRuleExecuteSql(DeleteDsRelationRuleExecuteSqlRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsRelationRuleExecuteSqlBeans/*}"
+      delete: "/v1alpha1/{name=DsRelationRuleExecuteSqls/*}"
     };
   }
 }
 
-// message DsRelationRuleExecuteSqlBean {
+// message DsRelationRuleExecuteSql {
 // ! This should be defined elsewhere
 // }
 
-message ListDsRelationRuleExecuteSqlBeansRequest {
+message ListDsRelationRuleExecuteSqlsRequest {
 
 
   // The maximum number of items to return.
@@ -65,42 +65,42 @@ message ListDsRelationRuleExecuteSqlBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsRelationRuleExecuteSqlBeansResponse {
-  // The field name should match the noun "DsRelationRuleExecuteSqlBean" in the method name.
+message ListDsRelationRuleExecuteSqlsResponse {
+  // The field name should match the noun "DsRelationRuleExecuteSql" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsRelationRuleExecuteSqlBean DsRelationRuleExecuteSqlBeans = 1;
+  repeated DsRelationRuleExecuteSql DsRelationRuleExecuteSqls = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsRelationRuleExecuteSqlBeanRequest {
+message GetDsRelationRuleExecuteSqlRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsRelationRuleExecuteSqlBeanRequest {
-  // The parent resource name where the DsRelationRuleExecuteSqlBean is to be created.
+message CreateDsRelationRuleExecuteSqlRequest {
+  // The parent resource name where the DsRelationRuleExecuteSql is to be created.
   string parent = 1;
 
-  // The DsRelationRuleExecuteSqlBean id to use for this DsRelationRuleExecuteSqlBean.
-  string DsRelationRuleExecuteSqlBean_id = 2;
+  // The DsRelationRuleExecuteSql id to use for this DsRelationRuleExecuteSql.
+  string DsRelationRuleExecuteSql_id = 2;
 
-  // The DsRelationRuleExecuteSqlBean resource to create.
+  // The DsRelationRuleExecuteSql resource to create.
   // The field name should match the Noun in the method name.
-  DsRelationRuleExecuteSqlBean DsRelationRuleExecuteSqlBean = 3;
+  DsRelationRuleExecuteSql DsRelationRuleExecuteSql = 3;
 }
 
-message UpdateDsRelationRuleExecuteSqlBeanRequest {
-  // The DsRelationRuleExecuteSqlBean resource which replaces the resource on the server.
-  DsRelationRuleExecuteSqlBean DsRelationRuleExecuteSqlBean = 1;
+message UpdateDsRelationRuleExecuteSqlRequest {
+  // The DsRelationRuleExecuteSql resource which replaces the resource on the server.
+  DsRelationRuleExecuteSql DsRelationRuleExecuteSql = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsRelationRuleExecuteSqlBeanRequest {
-  // The resource name of the DsRelationRuleExecuteSqlBean to be deleted.
+message DeleteDsRelationRuleExecuteSqlRequest {
+  // The resource name of the DsRelationRuleExecuteSql to be deleted.
   string name = 1;
 }

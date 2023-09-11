@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsErrorCommandBean {
+pub struct DsErrorCommand {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int32, optional, tag = "2")]
@@ -44,7 +44,7 @@ pub struct DsErrorCommandBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsErrorCommandBeansRequest {
+pub struct ListDsErrorCommandsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -53,42 +53,42 @@ pub struct ListDsErrorCommandBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsErrorCommandBeansResponse {
-    /// The field name should match the noun "DsErrorCommandBean" in the method name.
+pub struct ListDsErrorCommandsResponse {
+    /// The field name should match the noun "DsErrorCommand" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_error_command_beans: ::prost::alloc::vec::Vec<DsErrorCommandBean>,
+    pub ds_error_commands: ::prost::alloc::vec::Vec<DsErrorCommand>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsErrorCommandBeanRequest {
+pub struct GetDsErrorCommandRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsErrorCommandBeanRequest {
-    /// The parent resource name where the DsErrorCommandBean is to be created.
+pub struct CreateDsErrorCommandRequest {
+    /// The parent resource name where the DsErrorCommand is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsErrorCommandBean id to use for this DsErrorCommandBean.
+    /// The DsErrorCommand id to use for this DsErrorCommand.
     #[prost(string, tag = "2")]
-    pub ds_error_command_bean_id: ::prost::alloc::string::String,
-    /// The DsErrorCommandBean resource to create.
+    pub ds_error_command_id: ::prost::alloc::string::String,
+    /// The DsErrorCommand resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_error_command_bean: ::core::option::Option<DsErrorCommandBean>,
+    pub ds_error_command: ::core::option::Option<DsErrorCommand>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsErrorCommandBeanRequest {
-    /// The DsErrorCommandBean resource which replaces the resource on the server.
+pub struct UpdateDsErrorCommandRequest {
+    /// The DsErrorCommand resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_error_command_bean: ::core::option::Option<DsErrorCommandBean>,
+    pub ds_error_command: ::core::option::Option<DsErrorCommand>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -96,21 +96,21 @@ pub struct UpdateDsErrorCommandBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsErrorCommandBeanRequest {
-    /// The resource name of the DsErrorCommandBean to be deleted.
+pub struct DeleteDsErrorCommandRequest {
+    /// The resource name of the DsErrorCommand to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_error_command_bean_service_client {
+pub mod ds_error_command_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsErrorCommandBeanServiceClient<T> {
+    pub struct DsErrorCommandServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsErrorCommandBeanServiceClient<tonic::transport::Channel> {
+    impl DsErrorCommandServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -121,7 +121,7 @@ pub mod ds_error_command_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsErrorCommandBeanServiceClient<T>
+    impl<T> DsErrorCommandServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -141,7 +141,7 @@ pub mod ds_error_command_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsErrorCommandBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsErrorCommandServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -154,7 +154,7 @@ pub mod ds_error_command_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsErrorCommandBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsErrorCommandServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -192,35 +192,10 @@ pub mod ds_error_command_bean_service_client {
             self
         }
 
-        pub async fn list_ds_error_command_beans(
+        pub async fn list_ds_error_commands(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsErrorCommandBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsErrorCommandBeansResponse>,
-            tonic::Status,
-        > {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_error_command.DsErrorCommandBeanService/ListDsErrorCommandBeans",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_error_command.DsErrorCommandBeanService",
-                "ListDsErrorCommandBeans",
-            ));
-            self.inner.unary(req, path, codec).await
-        }
-
-        pub async fn get_ds_error_command_bean(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetDsErrorCommandBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsErrorCommandBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsErrorCommandsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsErrorCommandsResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -230,21 +205,20 @@ pub mod ds_error_command_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_error_command.DsErrorCommandBeanService/GetDsErrorCommandBean",
+                "/ds_error_command.DsErrorCommandService/ListDsErrorCommands",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_error_command.DsErrorCommandBeanService",
-                "GetDsErrorCommandBean",
+                "ds_error_command.DsErrorCommandService",
+                "ListDsErrorCommands",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_error_command_bean(
+        pub async fn get_ds_error_command(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsErrorCommandBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsErrorCommandBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::GetDsErrorCommandRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsErrorCommand>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -253,21 +227,20 @@ pub mod ds_error_command_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_error_command.DsErrorCommandBeanService/CreateDsErrorCommandBean",
+                "/ds_error_command.DsErrorCommandService/GetDsErrorCommand",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_error_command.DsErrorCommandBeanService",
-                "CreateDsErrorCommandBean",
+                "ds_error_command.DsErrorCommandService",
+                "GetDsErrorCommand",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_error_command_bean(
+        pub async fn create_ds_error_command(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsErrorCommandBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsErrorCommandBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::CreateDsErrorCommandRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsErrorCommand>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -276,19 +249,41 @@ pub mod ds_error_command_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_error_command.DsErrorCommandBeanService/UpdateDsErrorCommandBean",
+                "/ds_error_command.DsErrorCommandService/CreateDsErrorCommand",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_error_command.DsErrorCommandBeanService",
-                "UpdateDsErrorCommandBean",
+                "ds_error_command.DsErrorCommandService",
+                "CreateDsErrorCommand",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_error_command_bean(
+        pub async fn update_ds_error_command(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsErrorCommandBeanRequest>,
+            request: impl tonic::IntoRequest<super::UpdateDsErrorCommandRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsErrorCommand>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/ds_error_command.DsErrorCommandService/UpdateDsErrorCommand",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new(
+                "ds_error_command.DsErrorCommandService",
+                "UpdateDsErrorCommand",
+            ));
+            self.inner.unary(req, path, codec).await
+        }
+
+        pub async fn delete_ds_error_command(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteDsErrorCommandRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -298,51 +293,48 @@ pub mod ds_error_command_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_error_command.DsErrorCommandBeanService/DeleteDsErrorCommandBean",
+                "/ds_error_command.DsErrorCommandService/DeleteDsErrorCommand",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_error_command.DsErrorCommandBeanService",
-                "DeleteDsErrorCommandBean",
+                "ds_error_command.DsErrorCommandService",
+                "DeleteDsErrorCommand",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_error_command_bean_service_server {
+pub mod ds_error_command_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsErrorCommandBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsErrorCommandServiceServer.
     #[async_trait]
-    pub trait DsErrorCommandBeanService: Send + Sync + 'static {
-        async fn list_ds_error_command_beans(
+    pub trait DsErrorCommandService: Send + Sync + 'static {
+        async fn list_ds_error_commands(
             &self,
-            request: tonic::Request<super::ListDsErrorCommandBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsErrorCommandBeansResponse>,
-            tonic::Status,
-        >;
-        async fn get_ds_error_command_bean(
+            request: tonic::Request<super::ListDsErrorCommandsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsErrorCommandsResponse>, tonic::Status>;
+        async fn get_ds_error_command(
             &self,
-            request: tonic::Request<super::GetDsErrorCommandBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsErrorCommandBean>, tonic::Status>;
-        async fn create_ds_error_command_bean(
+            request: tonic::Request<super::GetDsErrorCommandRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsErrorCommand>, tonic::Status>;
+        async fn create_ds_error_command(
             &self,
-            request: tonic::Request<super::CreateDsErrorCommandBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsErrorCommandBean>, tonic::Status>;
-        async fn update_ds_error_command_bean(
+            request: tonic::Request<super::CreateDsErrorCommandRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsErrorCommand>, tonic::Status>;
+        async fn update_ds_error_command(
             &self,
-            request: tonic::Request<super::UpdateDsErrorCommandBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsErrorCommandBean>, tonic::Status>;
-        async fn delete_ds_error_command_bean(
+            request: tonic::Request<super::UpdateDsErrorCommandRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsErrorCommand>, tonic::Status>;
+        async fn delete_ds_error_command(
             &self,
-            request: tonic::Request<super::DeleteDsErrorCommandBeanRequest>,
+            request: tonic::Request<super::DeleteDsErrorCommandRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsErrorCommandBeanServiceServer<T: DsErrorCommandBeanService> {
+    pub struct DsErrorCommandServiceServer<T: DsErrorCommandService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -350,7 +342,7 @@ pub mod ds_error_command_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsErrorCommandBeanService> DsErrorCommandBeanServiceServer<T> {
+    impl<T: DsErrorCommandService> DsErrorCommandServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -403,9 +395,9 @@ pub mod ds_error_command_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsErrorCommandBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsErrorCommandServiceServer<T>
     where
-        T: DsErrorCommandBeanService,
+        T: DsErrorCommandService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -423,23 +415,22 @@ pub mod ds_error_command_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_error_command.DsErrorCommandBeanService/ListDsErrorCommandBeans" => {
+                "/ds_error_command.DsErrorCommandService/ListDsErrorCommands" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsErrorCommandBeansSvc<T: DsErrorCommandBeanService>(pub Arc<T>);
-                    impl<T: DsErrorCommandBeanService>
-                        tonic::server::UnaryService<super::ListDsErrorCommandBeansRequest>
-                        for ListDsErrorCommandBeansSvc<T>
+                    struct ListDsErrorCommandsSvc<T: DsErrorCommandService>(pub Arc<T>);
+                    impl<T: DsErrorCommandService>
+                        tonic::server::UnaryService<super::ListDsErrorCommandsRequest>
+                        for ListDsErrorCommandsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsErrorCommandBeansResponse;
+                        type Response = super::ListDsErrorCommandsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsErrorCommandBeansRequest>,
+                            request: tonic::Request<super::ListDsErrorCommandsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_ds_error_command_beans(request).await };
+                            let fut = async move { (*inner).list_ds_error_commands(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -450,7 +441,7 @@ pub mod ds_error_command_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsErrorCommandBeansSvc(inner);
+                        let method = ListDsErrorCommandsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -466,23 +457,22 @@ pub mod ds_error_command_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_error_command.DsErrorCommandBeanService/GetDsErrorCommandBean" => {
+                "/ds_error_command.DsErrorCommandService/GetDsErrorCommand" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsErrorCommandBeanSvc<T: DsErrorCommandBeanService>(pub Arc<T>);
-                    impl<T: DsErrorCommandBeanService>
-                        tonic::server::UnaryService<super::GetDsErrorCommandBeanRequest>
-                        for GetDsErrorCommandBeanSvc<T>
+                    struct GetDsErrorCommandSvc<T: DsErrorCommandService>(pub Arc<T>);
+                    impl<T: DsErrorCommandService>
+                        tonic::server::UnaryService<super::GetDsErrorCommandRequest>
+                        for GetDsErrorCommandSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsErrorCommandBean;
+                        type Response = super::DsErrorCommand;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsErrorCommandBeanRequest>,
+                            request: tonic::Request<super::GetDsErrorCommandRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).get_ds_error_command_bean(request).await };
+                            let fut = async move { (*inner).get_ds_error_command(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -493,7 +483,7 @@ pub mod ds_error_command_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsErrorCommandBeanSvc(inner);
+                        let method = GetDsErrorCommandSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -509,23 +499,23 @@ pub mod ds_error_command_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_error_command.DsErrorCommandBeanService/CreateDsErrorCommandBean" => {
+                "/ds_error_command.DsErrorCommandService/CreateDsErrorCommand" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsErrorCommandBeanSvc<T: DsErrorCommandBeanService>(pub Arc<T>);
-                    impl<T: DsErrorCommandBeanService>
-                        tonic::server::UnaryService<super::CreateDsErrorCommandBeanRequest>
-                        for CreateDsErrorCommandBeanSvc<T>
+                    struct CreateDsErrorCommandSvc<T: DsErrorCommandService>(pub Arc<T>);
+                    impl<T: DsErrorCommandService>
+                        tonic::server::UnaryService<super::CreateDsErrorCommandRequest>
+                        for CreateDsErrorCommandSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsErrorCommandBean;
+                        type Response = super::DsErrorCommand;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsErrorCommandBeanRequest>,
+                            request: tonic::Request<super::CreateDsErrorCommandRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).create_ds_error_command_bean(request).await };
+                                async move { (*inner).create_ds_error_command(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -536,7 +526,7 @@ pub mod ds_error_command_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsErrorCommandBeanSvc(inner);
+                        let method = CreateDsErrorCommandSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -552,23 +542,23 @@ pub mod ds_error_command_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_error_command.DsErrorCommandBeanService/UpdateDsErrorCommandBean" => {
+                "/ds_error_command.DsErrorCommandService/UpdateDsErrorCommand" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsErrorCommandBeanSvc<T: DsErrorCommandBeanService>(pub Arc<T>);
-                    impl<T: DsErrorCommandBeanService>
-                        tonic::server::UnaryService<super::UpdateDsErrorCommandBeanRequest>
-                        for UpdateDsErrorCommandBeanSvc<T>
+                    struct UpdateDsErrorCommandSvc<T: DsErrorCommandService>(pub Arc<T>);
+                    impl<T: DsErrorCommandService>
+                        tonic::server::UnaryService<super::UpdateDsErrorCommandRequest>
+                        for UpdateDsErrorCommandSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsErrorCommandBean;
+                        type Response = super::DsErrorCommand;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsErrorCommandBeanRequest>,
+                            request: tonic::Request<super::UpdateDsErrorCommandRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).update_ds_error_command_bean(request).await };
+                                async move { (*inner).update_ds_error_command(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -579,7 +569,7 @@ pub mod ds_error_command_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsErrorCommandBeanSvc(inner);
+                        let method = UpdateDsErrorCommandSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -595,23 +585,23 @@ pub mod ds_error_command_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_error_command.DsErrorCommandBeanService/DeleteDsErrorCommandBean" => {
+                "/ds_error_command.DsErrorCommandService/DeleteDsErrorCommand" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsErrorCommandBeanSvc<T: DsErrorCommandBeanService>(pub Arc<T>);
-                    impl<T: DsErrorCommandBeanService>
-                        tonic::server::UnaryService<super::DeleteDsErrorCommandBeanRequest>
-                        for DeleteDsErrorCommandBeanSvc<T>
+                    struct DeleteDsErrorCommandSvc<T: DsErrorCommandService>(pub Arc<T>);
+                    impl<T: DsErrorCommandService>
+                        tonic::server::UnaryService<super::DeleteDsErrorCommandRequest>
+                        for DeleteDsErrorCommandSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsErrorCommandBeanRequest>,
+                            request: tonic::Request<super::DeleteDsErrorCommandRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).delete_ds_error_command_bean(request).await };
+                                async move { (*inner).delete_ds_error_command(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -622,7 +612,7 @@ pub mod ds_error_command_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsErrorCommandBeanSvc(inner);
+                        let method = DeleteDsErrorCommandSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -649,7 +639,7 @@ pub mod ds_error_command_bean_service_server {
             }
         }
     }
-    impl<T: DsErrorCommandBeanService> Clone for DsErrorCommandBeanServiceServer<T> {
+    impl<T: DsErrorCommandService> Clone for DsErrorCommandServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -661,7 +651,7 @@ pub mod ds_error_command_bean_service_server {
             }
         }
     }
-    impl<T: DsErrorCommandBeanService> Clone for _Inner<T> {
+    impl<T: DsErrorCommandService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -671,9 +661,7 @@ pub mod ds_error_command_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsErrorCommandBeanService> tonic::server::NamedService
-        for DsErrorCommandBeanServiceServer<T>
-    {
-        const NAME: &'static str = "ds_error_command.DsErrorCommandBeanService";
+    impl<T: DsErrorCommandService> tonic::server::NamedService for DsErrorCommandServiceServer<T> {
+        const NAME: &'static str = "ds_error_command.DsErrorCommandService";
     }
 }

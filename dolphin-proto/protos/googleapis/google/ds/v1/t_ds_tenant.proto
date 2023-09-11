@@ -6,7 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 package ds_tenant;
 
-message DsTenantBean {
+message DsTenant {
 
      int32  id=1 ;
      optional string tenant_code=2 ;
@@ -17,45 +17,45 @@ message DsTenantBean {
 }
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsTenantBeanService {
-  rpc ListDsTenantBeans(ListDsTenantBeansRequest) returns (ListDsTenantBeansResponse) {
+service DsTenantService {
+  rpc ListDsTenants(ListDsTenantsRequest) returns (ListDsTenantsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsTenantBeans"
+      get: "/v1alpha1/DsTenants"
     };
   }
 
-  rpc GetDsTenantBean(GetDsTenantBeanRequest) returns (DsTenantBean) {
+  rpc GetDsTenant(GetDsTenantRequest) returns (DsTenant) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsTenantBeans/*}"
+      get: "/v1alpha1/{name=DsTenants/*}"
     };
   }
 
-  rpc CreateDsTenantBean(CreateDsTenantBeanRequest) returns (DsTenantBean) {
+  rpc CreateDsTenant(CreateDsTenantRequest) returns (DsTenant) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsTenantBeans"
-      body: "DsTenantBean"
+      post: "/v1alpha1/DsTenants"
+      body: "DsTenant"
     };
   }
 
-  rpc UpdateDsTenantBean(UpdateDsTenantBeanRequest) returns (DsTenantBean) {
+  rpc UpdateDsTenant(UpdateDsTenantRequest) returns (DsTenant) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsTenantBean.name=DsTenantBeans/*}"
-      body: "DsTenantBean"
+      patch: "/v1alpha1/{DsTenant.name=DsTenants/*}"
+      body: "DsTenant"
     };
   }
 
-  rpc DeleteDsTenantBean(DeleteDsTenantBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsTenant(DeleteDsTenantRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsTenantBeans/*}"
+      delete: "/v1alpha1/{name=DsTenants/*}"
     };
   }
 }
 
-// message DsTenantBean {
+// message DsTenant {
 // ! This should be defined elsewhere
 // }
 
-message ListDsTenantBeansRequest {
+message ListDsTenantsRequest {
 
 
   // The maximum number of items to return.
@@ -64,42 +64,42 @@ message ListDsTenantBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsTenantBeansResponse {
-  // The field name should match the noun "DsTenantBean" in the method name.
+message ListDsTenantsResponse {
+  // The field name should match the noun "DsTenant" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsTenantBean DsTenantBeans = 1;
+  repeated DsTenant DsTenants = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsTenantBeanRequest {
+message GetDsTenantRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsTenantBeanRequest {
-  // The parent resource name where the DsTenantBean is to be created.
+message CreateDsTenantRequest {
+  // The parent resource name where the DsTenant is to be created.
   string parent = 1;
 
-  // The DsTenantBean id to use for this DsTenantBean.
-  string DsTenantBean_id = 2;
+  // The DsTenant id to use for this DsTenant.
+  string DsTenant_id = 2;
 
-  // The DsTenantBean resource to create.
+  // The DsTenant resource to create.
   // The field name should match the Noun in the method name.
-  DsTenantBean DsTenantBean = 3;
+  DsTenant DsTenant = 3;
 }
 
-message UpdateDsTenantBeanRequest {
-  // The DsTenantBean resource which replaces the resource on the server.
-  DsTenantBean DsTenantBean = 1;
+message UpdateDsTenantRequest {
+  // The DsTenant resource which replaces the resource on the server.
+  DsTenant DsTenant = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsTenantBeanRequest {
-  // The resource name of the DsTenantBean to be deleted.
+message DeleteDsTenantRequest {
+  // The resource name of the DsTenant to be deleted.
   string name = 1;
 }

@@ -11,16 +11,19 @@ members = [
     # "celery-demo",
     # "yaml_demo",
     # "rust-simple-code-layout",
-    # "dolphin-api-v1",
+    "dolphin-api-v1",
+    "dolphin-dao",
     "dolphin-entity",
     "dolphin-proto",
     "dolphin-common",
     "dolphin-config",
 ]
+
+
 [profile.dev]
 opt-level = 0
 debug = true
-split-debuginfo = '...'  # Platform-specific.
+split-debuginfo = '...' # Platform-specific.
 debug-assertions = true
 overflow-checks = false
 lto = false
@@ -42,13 +45,10 @@ codegen-units = 16
 rpath = false
 
 
-
-
-
 [profile.dev.build-override]
 opt-level = 0
 codegen-units = 256
-debug = false # when possible
+debug = false       # when possible
 
 [profile.release.build-override]
 opt-level = 0

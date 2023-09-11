@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsDqExecuteResultBean {
+pub struct DsDqExecuteResult {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int32, optional, tag = "2")]
@@ -42,7 +42,7 @@ pub struct DsDqExecuteResultBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsDqExecuteResultBeansRequest {
+pub struct ListDsDqExecuteResultsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -51,42 +51,42 @@ pub struct ListDsDqExecuteResultBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsDqExecuteResultBeansResponse {
-    /// The field name should match the noun "DsDqExecuteResultBean" in the method name.
+pub struct ListDsDqExecuteResultsResponse {
+    /// The field name should match the noun "DsDqExecuteResult" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_dq_execute_result_beans: ::prost::alloc::vec::Vec<DsDqExecuteResultBean>,
+    pub ds_dq_execute_results: ::prost::alloc::vec::Vec<DsDqExecuteResult>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsDqExecuteResultBeanRequest {
+pub struct GetDsDqExecuteResultRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsDqExecuteResultBeanRequest {
-    /// The parent resource name where the DsDqExecuteResultBean is to be created.
+pub struct CreateDsDqExecuteResultRequest {
+    /// The parent resource name where the DsDqExecuteResult is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsDqExecuteResultBean id to use for this DsDqExecuteResultBean.
+    /// The DsDqExecuteResult id to use for this DsDqExecuteResult.
     #[prost(string, tag = "2")]
-    pub ds_dq_execute_result_bean_id: ::prost::alloc::string::String,
-    /// The DsDqExecuteResultBean resource to create.
+    pub ds_dq_execute_result_id: ::prost::alloc::string::String,
+    /// The DsDqExecuteResult resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_dq_execute_result_bean: ::core::option::Option<DsDqExecuteResultBean>,
+    pub ds_dq_execute_result: ::core::option::Option<DsDqExecuteResult>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsDqExecuteResultBeanRequest {
-    /// The DsDqExecuteResultBean resource which replaces the resource on the server.
+pub struct UpdateDsDqExecuteResultRequest {
+    /// The DsDqExecuteResult resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_dq_execute_result_bean: ::core::option::Option<DsDqExecuteResultBean>,
+    pub ds_dq_execute_result: ::core::option::Option<DsDqExecuteResult>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -94,21 +94,21 @@ pub struct UpdateDsDqExecuteResultBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsDqExecuteResultBeanRequest {
-    /// The resource name of the DsDqExecuteResultBean to be deleted.
+pub struct DeleteDsDqExecuteResultRequest {
+    /// The resource name of the DsDqExecuteResult to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_dq_execute_result_bean_service_client {
+pub mod ds_dq_execute_result_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsDqExecuteResultBeanServiceClient<T> {
+    pub struct DsDqExecuteResultServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsDqExecuteResultBeanServiceClient<tonic::transport::Channel> {
+    impl DsDqExecuteResultServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -119,7 +119,7 @@ pub mod ds_dq_execute_result_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsDqExecuteResultBeanServiceClient<T>
+    impl<T> DsDqExecuteResultServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -139,7 +139,7 @@ pub mod ds_dq_execute_result_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsDqExecuteResultBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsDqExecuteResultServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -152,7 +152,7 @@ pub mod ds_dq_execute_result_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsDqExecuteResultBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsDqExecuteResultServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -190,11 +190,11 @@ pub mod ds_dq_execute_result_bean_service_client {
             self
         }
 
-        pub async fn list_ds_dq_execute_result_beans(
+        pub async fn list_ds_dq_execute_results(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsDqExecuteResultBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsDqExecuteResultsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsDqExecuteResultBeansResponse>,
+            tonic::Response<super::ListDsDqExecuteResultsResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -205,21 +205,20 @@ pub mod ds_dq_execute_result_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_execute_result.DsDqExecuteResultBeanService/ListDsDqExecuteResultBeans",
+                "/ds_dq_execute_result.DsDqExecuteResultService/ListDsDqExecuteResults",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_execute_result.DsDqExecuteResultBeanService",
-                "ListDsDqExecuteResultBeans",
+                "ds_dq_execute_result.DsDqExecuteResultService",
+                "ListDsDqExecuteResults",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_dq_execute_result_bean(
+        pub async fn get_ds_dq_execute_result(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsDqExecuteResultBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqExecuteResultBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::GetDsDqExecuteResultRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqExecuteResult>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -228,21 +227,20 @@ pub mod ds_dq_execute_result_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_execute_result.DsDqExecuteResultBeanService/GetDsDqExecuteResultBean",
+                "/ds_dq_execute_result.DsDqExecuteResultService/GetDsDqExecuteResult",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_execute_result.DsDqExecuteResultBeanService",
-                "GetDsDqExecuteResultBean",
+                "ds_dq_execute_result.DsDqExecuteResultService",
+                "GetDsDqExecuteResult",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_dq_execute_result_bean(
+        pub async fn create_ds_dq_execute_result(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsDqExecuteResultBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqExecuteResultBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::CreateDsDqExecuteResultRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqExecuteResult>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -251,21 +249,20 @@ pub mod ds_dq_execute_result_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_execute_result.DsDqExecuteResultBeanService/CreateDsDqExecuteResultBean",
+                "/ds_dq_execute_result.DsDqExecuteResultService/CreateDsDqExecuteResult",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_execute_result.DsDqExecuteResultBeanService",
-                "CreateDsDqExecuteResultBean",
+                "ds_dq_execute_result.DsDqExecuteResultService",
+                "CreateDsDqExecuteResult",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_dq_execute_result_bean(
+        pub async fn update_ds_dq_execute_result(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsDqExecuteResultBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqExecuteResultBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::UpdateDsDqExecuteResultRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqExecuteResult>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -274,19 +271,19 @@ pub mod ds_dq_execute_result_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_execute_result.DsDqExecuteResultBeanService/UpdateDsDqExecuteResultBean",
+                "/ds_dq_execute_result.DsDqExecuteResultService/UpdateDsDqExecuteResult",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_execute_result.DsDqExecuteResultBeanService",
-                "UpdateDsDqExecuteResultBean",
+                "ds_dq_execute_result.DsDqExecuteResultService",
+                "UpdateDsDqExecuteResult",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_dq_execute_result_bean(
+        pub async fn delete_ds_dq_execute_result(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsDqExecuteResultBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsDqExecuteResultRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -296,51 +293,51 @@ pub mod ds_dq_execute_result_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_dq_execute_result.DsDqExecuteResultBeanService/DeleteDsDqExecuteResultBean",
+                "/ds_dq_execute_result.DsDqExecuteResultService/DeleteDsDqExecuteResult",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_dq_execute_result.DsDqExecuteResultBeanService",
-                "DeleteDsDqExecuteResultBean",
+                "ds_dq_execute_result.DsDqExecuteResultService",
+                "DeleteDsDqExecuteResult",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_dq_execute_result_bean_service_server {
+pub mod ds_dq_execute_result_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsDqExecuteResultBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsDqExecuteResultServiceServer.
     #[async_trait]
-    pub trait DsDqExecuteResultBeanService: Send + Sync + 'static {
-        async fn list_ds_dq_execute_result_beans(
+    pub trait DsDqExecuteResultService: Send + Sync + 'static {
+        async fn list_ds_dq_execute_results(
             &self,
-            request: tonic::Request<super::ListDsDqExecuteResultBeansRequest>,
+            request: tonic::Request<super::ListDsDqExecuteResultsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsDqExecuteResultBeansResponse>,
+            tonic::Response<super::ListDsDqExecuteResultsResponse>,
             tonic::Status,
         >;
-        async fn get_ds_dq_execute_result_bean(
+        async fn get_ds_dq_execute_result(
             &self,
-            request: tonic::Request<super::GetDsDqExecuteResultBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqExecuteResultBean>, tonic::Status>;
-        async fn create_ds_dq_execute_result_bean(
+            request: tonic::Request<super::GetDsDqExecuteResultRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqExecuteResult>, tonic::Status>;
+        async fn create_ds_dq_execute_result(
             &self,
-            request: tonic::Request<super::CreateDsDqExecuteResultBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqExecuteResultBean>, tonic::Status>;
-        async fn update_ds_dq_execute_result_bean(
+            request: tonic::Request<super::CreateDsDqExecuteResultRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqExecuteResult>, tonic::Status>;
+        async fn update_ds_dq_execute_result(
             &self,
-            request: tonic::Request<super::UpdateDsDqExecuteResultBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDqExecuteResultBean>, tonic::Status>;
-        async fn delete_ds_dq_execute_result_bean(
+            request: tonic::Request<super::UpdateDsDqExecuteResultRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDqExecuteResult>, tonic::Status>;
+        async fn delete_ds_dq_execute_result(
             &self,
-            request: tonic::Request<super::DeleteDsDqExecuteResultBeanRequest>,
+            request: tonic::Request<super::DeleteDsDqExecuteResultRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsDqExecuteResultBeanServiceServer<T: DsDqExecuteResultBeanService> {
+    pub struct DsDqExecuteResultServiceServer<T: DsDqExecuteResultService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -348,7 +345,7 @@ pub mod ds_dq_execute_result_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsDqExecuteResultBeanService> DsDqExecuteResultBeanServiceServer<T> {
+    impl<T: DsDqExecuteResultService> DsDqExecuteResultServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -401,9 +398,9 @@ pub mod ds_dq_execute_result_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsDqExecuteResultBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsDqExecuteResultServiceServer<T>
     where
-        T: DsDqExecuteResultBeanService,
+        T: DsDqExecuteResultService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -421,26 +418,23 @@ pub mod ds_dq_execute_result_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_dq_execute_result.DsDqExecuteResultBeanService/ListDsDqExecuteResultBeans" => {
+                "/ds_dq_execute_result.DsDqExecuteResultService/ListDsDqExecuteResults" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsDqExecuteResultBeansSvc<T: DsDqExecuteResultBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqExecuteResultBeanService>
-                        tonic::server::UnaryService<super::ListDsDqExecuteResultBeansRequest>
-                        for ListDsDqExecuteResultBeansSvc<T>
+                    struct ListDsDqExecuteResultsSvc<T: DsDqExecuteResultService>(pub Arc<T>);
+                    impl<T: DsDqExecuteResultService>
+                        tonic::server::UnaryService<super::ListDsDqExecuteResultsRequest>
+                        for ListDsDqExecuteResultsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsDqExecuteResultBeansResponse;
+                        type Response = super::ListDsDqExecuteResultsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsDqExecuteResultBeansRequest>,
+                            request: tonic::Request<super::ListDsDqExecuteResultsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).list_ds_dq_execute_result_beans(request).await
-                            };
+                            let fut =
+                                async move { (*inner).list_ds_dq_execute_results(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -451,7 +445,7 @@ pub mod ds_dq_execute_result_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsDqExecuteResultBeansSvc(inner);
+                        let method = ListDsDqExecuteResultsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -467,24 +461,23 @@ pub mod ds_dq_execute_result_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_execute_result.DsDqExecuteResultBeanService/GetDsDqExecuteResultBean" => {
+                "/ds_dq_execute_result.DsDqExecuteResultService/GetDsDqExecuteResult" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsDqExecuteResultBeanSvc<T: DsDqExecuteResultBeanService>(pub Arc<T>);
-                    impl<T: DsDqExecuteResultBeanService>
-                        tonic::server::UnaryService<super::GetDsDqExecuteResultBeanRequest>
-                        for GetDsDqExecuteResultBeanSvc<T>
+                    struct GetDsDqExecuteResultSvc<T: DsDqExecuteResultService>(pub Arc<T>);
+                    impl<T: DsDqExecuteResultService>
+                        tonic::server::UnaryService<super::GetDsDqExecuteResultRequest>
+                        for GetDsDqExecuteResultSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDqExecuteResultBean;
+                        type Response = super::DsDqExecuteResult;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsDqExecuteResultBeanRequest>,
+                            request: tonic::Request<super::GetDsDqExecuteResultRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_ds_dq_execute_result_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_ds_dq_execute_result(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -495,7 +488,7 @@ pub mod ds_dq_execute_result_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsDqExecuteResultBeanSvc(inner);
+                        let method = GetDsDqExecuteResultSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -511,27 +504,23 @@ pub mod ds_dq_execute_result_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_execute_result.DsDqExecuteResultBeanService/\
-                 CreateDsDqExecuteResultBean" => {
+                "/ds_dq_execute_result.DsDqExecuteResultService/CreateDsDqExecuteResult" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsDqExecuteResultBeanSvc<T: DsDqExecuteResultBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqExecuteResultBeanService>
-                        tonic::server::UnaryService<super::CreateDsDqExecuteResultBeanRequest>
-                        for CreateDsDqExecuteResultBeanSvc<T>
+                    struct CreateDsDqExecuteResultSvc<T: DsDqExecuteResultService>(pub Arc<T>);
+                    impl<T: DsDqExecuteResultService>
+                        tonic::server::UnaryService<super::CreateDsDqExecuteResultRequest>
+                        for CreateDsDqExecuteResultSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDqExecuteResultBean;
+                        type Response = super::DsDqExecuteResult;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsDqExecuteResultBeanRequest>,
+                            request: tonic::Request<super::CreateDsDqExecuteResultRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).create_ds_dq_execute_result_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).create_ds_dq_execute_result(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -542,7 +531,7 @@ pub mod ds_dq_execute_result_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsDqExecuteResultBeanSvc(inner);
+                        let method = CreateDsDqExecuteResultSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -558,27 +547,23 @@ pub mod ds_dq_execute_result_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_execute_result.DsDqExecuteResultBeanService/\
-                 UpdateDsDqExecuteResultBean" => {
+                "/ds_dq_execute_result.DsDqExecuteResultService/UpdateDsDqExecuteResult" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsDqExecuteResultBeanSvc<T: DsDqExecuteResultBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqExecuteResultBeanService>
-                        tonic::server::UnaryService<super::UpdateDsDqExecuteResultBeanRequest>
-                        for UpdateDsDqExecuteResultBeanSvc<T>
+                    struct UpdateDsDqExecuteResultSvc<T: DsDqExecuteResultService>(pub Arc<T>);
+                    impl<T: DsDqExecuteResultService>
+                        tonic::server::UnaryService<super::UpdateDsDqExecuteResultRequest>
+                        for UpdateDsDqExecuteResultSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDqExecuteResultBean;
+                        type Response = super::DsDqExecuteResult;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsDqExecuteResultBeanRequest>,
+                            request: tonic::Request<super::UpdateDsDqExecuteResultRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).update_ds_dq_execute_result_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).update_ds_dq_execute_result(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -589,7 +574,7 @@ pub mod ds_dq_execute_result_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsDqExecuteResultBeanSvc(inner);
+                        let method = UpdateDsDqExecuteResultSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -605,27 +590,23 @@ pub mod ds_dq_execute_result_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_dq_execute_result.DsDqExecuteResultBeanService/\
-                 DeleteDsDqExecuteResultBean" => {
+                "/ds_dq_execute_result.DsDqExecuteResultService/DeleteDsDqExecuteResult" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsDqExecuteResultBeanSvc<T: DsDqExecuteResultBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsDqExecuteResultBeanService>
-                        tonic::server::UnaryService<super::DeleteDsDqExecuteResultBeanRequest>
-                        for DeleteDsDqExecuteResultBeanSvc<T>
+                    struct DeleteDsDqExecuteResultSvc<T: DsDqExecuteResultService>(pub Arc<T>);
+                    impl<T: DsDqExecuteResultService>
+                        tonic::server::UnaryService<super::DeleteDsDqExecuteResultRequest>
+                        for DeleteDsDqExecuteResultSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsDqExecuteResultBeanRequest>,
+                            request: tonic::Request<super::DeleteDsDqExecuteResultRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).delete_ds_dq_execute_result_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).delete_ds_dq_execute_result(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -636,7 +617,7 @@ pub mod ds_dq_execute_result_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsDqExecuteResultBeanSvc(inner);
+                        let method = DeleteDsDqExecuteResultSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -663,7 +644,7 @@ pub mod ds_dq_execute_result_bean_service_server {
             }
         }
     }
-    impl<T: DsDqExecuteResultBeanService> Clone for DsDqExecuteResultBeanServiceServer<T> {
+    impl<T: DsDqExecuteResultService> Clone for DsDqExecuteResultServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -675,7 +656,7 @@ pub mod ds_dq_execute_result_bean_service_server {
             }
         }
     }
-    impl<T: DsDqExecuteResultBeanService> Clone for _Inner<T> {
+    impl<T: DsDqExecuteResultService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -685,9 +666,9 @@ pub mod ds_dq_execute_result_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsDqExecuteResultBeanService> tonic::server::NamedService
-        for DsDqExecuteResultBeanServiceServer<T>
+    impl<T: DsDqExecuteResultService> tonic::server::NamedService
+        for DsDqExecuteResultServiceServer<T>
     {
-        const NAME: &'static str = "ds_dq_execute_result.DsDqExecuteResultBeanService";
+        const NAME: &'static str = "ds_dq_execute_result.DsDqExecuteResultService";
     }
 }

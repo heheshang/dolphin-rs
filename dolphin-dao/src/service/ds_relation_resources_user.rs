@@ -1,63 +1,59 @@
-use super::service::DolphinRpcServer;
-use proto::ds_relation_resources_user::ds_relation_resources_user_bean_service_server::DsRelationResourcesUserBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_relation_resources_user::ds_relation_resources_user_service_server::DsRelationResourcesUserService;
 
 
 #[tonic::async_trait]
-impl DsRelationResourcesUserBeanService for DolphinRpcServer {
-    async fn list_ds_relation_resources_user_beans(
+impl DsRelationResourcesUserService for DolphinRpcServer {
+    async fn list_ds_relation_resources_users(
         &self,
         _req: tonic::Request<
-            proto::ds_relation_resources_user::ListDsRelationResourcesUserBeansRequest,
+            proto::ds_relation_resources_user::ListDsRelationResourcesUsersRequest,
         >,
     ) -> std::result::Result<
-        tonic::Response<
-            proto::ds_relation_resources_user::ListDsRelationResourcesUserBeansResponse,
-        >,
+        tonic::Response<proto::ds_relation_resources_user::ListDsRelationResourcesUsersResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_relation_resources_user_bean(
+    async fn get_ds_relation_resources_user(
         &self,
-        _req: tonic::Request<
-            proto::ds_relation_resources_user::GetDsRelationResourcesUserBeanRequest,
-        >,
+        _req: tonic::Request<proto::ds_relation_resources_user::GetDsRelationResourcesUserRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_relation_resources_user::DsRelationResourcesUserBean>,
+        tonic::Response<proto::ds_relation_resources_user::DsRelationResourcesUser>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn create_ds_relation_resources_user_bean(
+    async fn create_ds_relation_resources_user(
         &self,
         _req: tonic::Request<
-            proto::ds_relation_resources_user::CreateDsRelationResourcesUserBeanRequest,
+            proto::ds_relation_resources_user::CreateDsRelationResourcesUserRequest,
         >,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_relation_resources_user::DsRelationResourcesUserBean>,
+        tonic::Response<proto::ds_relation_resources_user::DsRelationResourcesUser>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn update_ds_relation_resources_user_bean(
+    async fn update_ds_relation_resources_user(
         &self,
         _req: tonic::Request<
-            proto::ds_relation_resources_user::UpdateDsRelationResourcesUserBeanRequest,
+            proto::ds_relation_resources_user::UpdateDsRelationResourcesUserRequest,
         >,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_relation_resources_user::DsRelationResourcesUserBean>,
+        tonic::Response<proto::ds_relation_resources_user::DsRelationResourcesUser>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn delete_ds_relation_resources_user_bean(
+    async fn delete_ds_relation_resources_user(
         &self,
         _req: tonic::Request<
-            proto::ds_relation_resources_user::DeleteDsRelationResourcesUserBeanRequest,
+            proto::ds_relation_resources_user::DeleteDsRelationResourcesUserRequest,
         >,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()

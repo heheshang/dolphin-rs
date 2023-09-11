@@ -6,7 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 package ds_environment;
-message DsEnvironmentBean {
+message DsEnvironment {
 
      int32  id= 1;
      int64  code= 2;
@@ -20,45 +20,45 @@ message DsEnvironmentBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsEnvironmentBeanService {
-  rpc ListDsEnvironmentBeans(ListDsEnvironmentBeansRequest) returns (ListDsEnvironmentBeansResponse) {
+service DsEnvironmentService {
+  rpc ListDsEnvironments(ListDsEnvironmentsRequest) returns (ListDsEnvironmentsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsEnvironmentBeans"
+      get: "/v1alpha1/DsEnvironments"
     };
   }
 
-  rpc GetDsEnvironmentBean(GetDsEnvironmentBeanRequest) returns (DsEnvironmentBean) {
+  rpc GetDsEnvironment(GetDsEnvironmentRequest) returns (DsEnvironment) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsEnvironmentBeans/*}"
+      get: "/v1alpha1/{name=DsEnvironments/*}"
     };
   }
 
-  rpc CreateDsEnvironmentBean(CreateDsEnvironmentBeanRequest) returns (DsEnvironmentBean) {
+  rpc CreateDsEnvironment(CreateDsEnvironmentRequest) returns (DsEnvironment) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsEnvironmentBeans"
-      body: "DsEnvironmentBean"
+      post: "/v1alpha1/DsEnvironments"
+      body: "DsEnvironment"
     };
   }
 
-  rpc UpdateDsEnvironmentBean(UpdateDsEnvironmentBeanRequest) returns (DsEnvironmentBean) {
+  rpc UpdateDsEnvironment(UpdateDsEnvironmentRequest) returns (DsEnvironment) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsEnvironmentBean.name=DsEnvironmentBeans/*}"
-      body: "DsEnvironmentBean"
+      patch: "/v1alpha1/{DsEnvironment.name=DsEnvironments/*}"
+      body: "DsEnvironment"
     };
   }
 
-  rpc DeleteDsEnvironmentBean(DeleteDsEnvironmentBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsEnvironment(DeleteDsEnvironmentRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsEnvironmentBeans/*}"
+      delete: "/v1alpha1/{name=DsEnvironments/*}"
     };
   }
 }
 
-// message DsEnvironmentBean {
+// message DsEnvironment {
 // ! This should be defined elsewhere
 // }
 
-message ListDsEnvironmentBeansRequest {
+message ListDsEnvironmentsRequest {
 
 
   // The maximum number of items to return.
@@ -67,42 +67,42 @@ message ListDsEnvironmentBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsEnvironmentBeansResponse {
-  // The field name should match the noun "DsEnvironmentBean" in the method name.
+message ListDsEnvironmentsResponse {
+  // The field name should match the noun "DsEnvironment" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsEnvironmentBean DsEnvironmentBeans = 1;
+  repeated DsEnvironment DsEnvironments = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsEnvironmentBeanRequest {
+message GetDsEnvironmentRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsEnvironmentBeanRequest {
-  // The parent resource name where the DsEnvironmentBean is to be created.
+message CreateDsEnvironmentRequest {
+  // The parent resource name where the DsEnvironment is to be created.
   string parent = 1;
 
-  // The DsEnvironmentBean id to use for this DsEnvironmentBean.
-  string DsEnvironmentBean_id = 2;
+  // The DsEnvironment id to use for this DsEnvironment.
+  string DsEnvironment_id = 2;
 
-  // The DsEnvironmentBean resource to create.
+  // The DsEnvironment resource to create.
   // The field name should match the Noun in the method name.
-  DsEnvironmentBean DsEnvironmentBean = 3;
+  DsEnvironment DsEnvironment = 3;
 }
 
-message UpdateDsEnvironmentBeanRequest {
-  // The DsEnvironmentBean resource which replaces the resource on the server.
-  DsEnvironmentBean DsEnvironmentBean = 1;
+message UpdateDsEnvironmentRequest {
+  // The DsEnvironment resource which replaces the resource on the server.
+  DsEnvironment DsEnvironment = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsEnvironmentBeanRequest {
-  // The resource name of the DsEnvironmentBean to be deleted.
+message DeleteDsEnvironmentRequest {
+  // The resource name of the DsEnvironment to be deleted.
   string name = 1;
 }

@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 package ds_resources;
 
-message DsResourceBean {
+message DsResource {
 
      int32   id=1 ;
      optional string  alias=2 ;
@@ -25,45 +25,45 @@ message DsResourceBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsResourceBeanService {
-  rpc ListDsResourceBeans(ListDsResourceBeansRequest) returns (ListDsResourceBeansResponse) {
+service DsResourceService {
+  rpc ListDsResources(ListDsResourcesRequest) returns (ListDsResourcesResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsResourceBeans"
+      get: "/v1alpha1/DsResources"
     };
   }
 
-  rpc GetDsResourceBean(GetDsResourceBeanRequest) returns (DsResourceBean) {
+  rpc GetDsResource(GetDsResourceRequest) returns (DsResource) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsResourceBeans/*}"
+      get: "/v1alpha1/{name=DsResources/*}"
     };
   }
 
-  rpc CreateDsResourceBean(CreateDsResourceBeanRequest) returns (DsResourceBean) {
+  rpc CreateDsResource(CreateDsResourceRequest) returns (DsResource) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsResourceBeans"
-      body: "DsResourceBean"
+      post: "/v1alpha1/DsResources"
+      body: "DsResource"
     };
   }
 
-  rpc UpdateDsResourceBean(UpdateDsResourceBeanRequest) returns (DsResourceBean) {
+  rpc UpdateDsResource(UpdateDsResourceRequest) returns (DsResource) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsResourceBean.name=DsResourceBeans/*}"
-      body: "DsResourceBean"
+      patch: "/v1alpha1/{DsResource.name=DsResources/*}"
+      body: "DsResource"
     };
   }
 
-  rpc DeleteDsResourceBean(DeleteDsResourceBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsResource(DeleteDsResourceRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsResourceBeans/*}"
+      delete: "/v1alpha1/{name=DsResources/*}"
     };
   }
 }
 
-// message DsResourceBean {
+// message DsResource {
 // ! This should be defined elsewhere
 // }
 
-message ListDsResourceBeansRequest {
+message ListDsResourcesRequest {
 
 
   // The maximum number of items to return.
@@ -72,42 +72,42 @@ message ListDsResourceBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsResourceBeansResponse {
-  // The field name should match the noun "DsResourceBean" in the method name.
+message ListDsResourcesResponse {
+  // The field name should match the noun "DsResource" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsResourceBean DsResourceBeans = 1;
+  repeated DsResource DsResources = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsResourceBeanRequest {
+message GetDsResourceRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsResourceBeanRequest {
-  // The parent resource name where the DsResourceBean is to be created.
+message CreateDsResourceRequest {
+  // The parent resource name where the DsResource is to be created.
   string parent = 1;
 
-  // The DsResourceBean id to use for this DsResourceBean.
-  string DsResourceBean_id = 2;
+  // The DsResource id to use for this DsResource.
+  string DsResource_id = 2;
 
-  // The DsResourceBean resource to create.
+  // The DsResource resource to create.
   // The field name should match the Noun in the method name.
-  DsResourceBean DsResourceBean = 3;
+  DsResource DsResource = 3;
 }
 
-message UpdateDsResourceBeanRequest {
-  // The DsResourceBean resource which replaces the resource on the server.
-  DsResourceBean DsResourceBean = 1;
+message UpdateDsResourceRequest {
+  // The DsResource resource which replaces the resource on the server.
+  DsResource DsResource = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsResourceBeanRequest {
-  // The resource name of the DsResourceBean to be deleted.
+message DeleteDsResourceRequest {
+  // The resource name of the DsResource to be deleted.
   string name = 1;
 }

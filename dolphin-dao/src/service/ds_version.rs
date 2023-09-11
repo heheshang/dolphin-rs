@@ -1,42 +1,42 @@
-use super::service::DolphinRpcServer;
-use proto::ds_version::ds_version_bean_service_server::DsVersionBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_version::ds_version_service_server::DsVersionService;
 
 #[tonic::async_trait]
-impl DsVersionBeanService for DolphinRpcServer {
-    async fn list_ds_version_beans(
+impl DsVersionService for DolphinRpcServer {
+    async fn list_ds_versions(
         &self,
-        _req: tonic::Request<proto::ds_version::ListDsVersionBeansRequest>,
+        _req: tonic::Request<proto::ds_version::ListDsVersionsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_version::ListDsVersionBeansResponse>,
+        tonic::Response<proto::ds_version::ListDsVersionsResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_version_bean(
+    async fn get_ds_version(
         &self,
-        _req: tonic::Request<proto::ds_version::GetDsVersionBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_version::DsVersionBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_version::GetDsVersionRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_version::DsVersion>, tonic::Status> {
         todo!()
     }
 
-    async fn create_ds_version_bean(
+    async fn create_ds_version(
         &self,
-        _req: tonic::Request<proto::ds_version::CreateDsVersionBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_version::DsVersionBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_version::CreateDsVersionRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_version::DsVersion>, tonic::Status> {
         todo!()
     }
 
-    async fn update_ds_version_bean(
+    async fn update_ds_version(
         &self,
-        _req: tonic::Request<proto::ds_version::UpdateDsVersionBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_version::DsVersionBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_version::UpdateDsVersionRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_version::DsVersion>, tonic::Status> {
         todo!()
     }
 
-    async fn delete_ds_version_bean(
+    async fn delete_ds_version(
         &self,
-        _req: tonic::Request<proto::ds_version::DeleteDsVersionBeanRequest>,
+        _req: tonic::Request<proto::ds_version::DeleteDsVersionRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 package ds_process_definition_log;
 
 
-message DsProcessDefinitionLogBean {
+message DsProcessDefinitionLog {
 
 int32 id= 1;
 int64 code= 2;
@@ -33,45 +33,45 @@ optional string   update_time=19 ;
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsProcessDefinitionLogBeanService {
-  rpc ListDsProcessDefinitionLogBeans(ListDsProcessDefinitionLogBeansRequest) returns (ListDsProcessDefinitionLogBeansResponse) {
+service DsProcessDefinitionLogService {
+  rpc ListDsProcessDefinitionLogs(ListDsProcessDefinitionLogsRequest) returns (ListDsProcessDefinitionLogsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsProcessDefinitionLogBeans"
+      get: "/v1alpha1/DsProcessDefinitionLogs"
     };
   }
 
-  rpc GetDsProcessDefinitionLogBean(GetDsProcessDefinitionLogBeanRequest) returns (DsProcessDefinitionLogBean) {
+  rpc GetDsProcessDefinitionLog(GetDsProcessDefinitionLogRequest) returns (DsProcessDefinitionLog) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsProcessDefinitionLogBeans/*}"
+      get: "/v1alpha1/{name=DsProcessDefinitionLogs/*}"
     };
   }
 
-  rpc CreateDsProcessDefinitionLogBean(CreateDsProcessDefinitionLogBeanRequest) returns (DsProcessDefinitionLogBean) {
+  rpc CreateDsProcessDefinitionLog(CreateDsProcessDefinitionLogRequest) returns (DsProcessDefinitionLog) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsProcessDefinitionLogBeans"
-      body: "DsProcessDefinitionLogBean"
+      post: "/v1alpha1/DsProcessDefinitionLogs"
+      body: "DsProcessDefinitionLog"
     };
   }
 
-  rpc UpdateDsProcessDefinitionLogBean(UpdateDsProcessDefinitionLogBeanRequest) returns (DsProcessDefinitionLogBean) {
+  rpc UpdateDsProcessDefinitionLog(UpdateDsProcessDefinitionLogRequest) returns (DsProcessDefinitionLog) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsProcessDefinitionLogBean.name=DsProcessDefinitionLogBeans/*}"
-      body: "DsProcessDefinitionLogBean"
+      patch: "/v1alpha1/{DsProcessDefinitionLog.name=DsProcessDefinitionLogs/*}"
+      body: "DsProcessDefinitionLog"
     };
   }
 
-  rpc DeleteDsProcessDefinitionLogBean(DeleteDsProcessDefinitionLogBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsProcessDefinitionLog(DeleteDsProcessDefinitionLogRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsProcessDefinitionLogBeans/*}"
+      delete: "/v1alpha1/{name=DsProcessDefinitionLogs/*}"
     };
   }
 }
 
-// message DsProcessDefinitionLogBean {
+// message DsProcessDefinitionLog {
 // ! This should be defined elsewhere
 // }
 
-message ListDsProcessDefinitionLogBeansRequest {
+message ListDsProcessDefinitionLogsRequest {
 
 
   // The maximum number of items to return.
@@ -80,42 +80,42 @@ message ListDsProcessDefinitionLogBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsProcessDefinitionLogBeansResponse {
-  // The field name should match the noun "DsProcessDefinitionLogBean" in the method name.
+message ListDsProcessDefinitionLogsResponse {
+  // The field name should match the noun "DsProcessDefinitionLog" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsProcessDefinitionLogBean DsProcessDefinitionLogBeans = 1;
+  repeated DsProcessDefinitionLog DsProcessDefinitionLogs = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsProcessDefinitionLogBeanRequest {
+message GetDsProcessDefinitionLogRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsProcessDefinitionLogBeanRequest {
-  // The parent resource name where the DsProcessDefinitionLogBean is to be created.
+message CreateDsProcessDefinitionLogRequest {
+  // The parent resource name where the DsProcessDefinitionLog is to be created.
   string parent = 1;
 
-  // The DsProcessDefinitionLogBean id to use for this DsProcessDefinitionLogBean.
-  string DsProcessDefinitionLogBean_id = 2;
+  // The DsProcessDefinitionLog id to use for this DsProcessDefinitionLog.
+  string DsProcessDefinitionLog_id = 2;
 
-  // The DsProcessDefinitionLogBean resource to create.
+  // The DsProcessDefinitionLog resource to create.
   // The field name should match the Noun in the method name.
-  DsProcessDefinitionLogBean DsProcessDefinitionLogBean = 3;
+  DsProcessDefinitionLog DsProcessDefinitionLog = 3;
 }
 
-message UpdateDsProcessDefinitionLogBeanRequest {
-  // The DsProcessDefinitionLogBean resource which replaces the resource on the server.
-  DsProcessDefinitionLogBean DsProcessDefinitionLogBean = 1;
+message UpdateDsProcessDefinitionLogRequest {
+  // The DsProcessDefinitionLog resource which replaces the resource on the server.
+  DsProcessDefinitionLog DsProcessDefinitionLog = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsProcessDefinitionLogBeanRequest {
-  // The resource name of the DsProcessDefinitionLogBean to be deleted.
+message DeleteDsProcessDefinitionLogRequest {
+  // The resource name of the DsProcessDefinitionLog to be deleted.
   string name = 1;
 }

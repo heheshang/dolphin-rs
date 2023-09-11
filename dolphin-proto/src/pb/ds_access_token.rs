@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsAccessTokenBean {
+pub struct DsAccessToken {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int32, optional, tag = "2")]
@@ -18,7 +18,7 @@ pub struct DsAccessTokenBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsAccessTokenBeansRequest {
+pub struct ListDsAccessTokensRequest {
     /// The maximum number of items to return.
     #[prost(uint64, tag = "1")]
     pub page_size: u64,
@@ -27,39 +27,39 @@ pub struct ListDsAccessTokenBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsAccessTokenBeansResponse {
-    /// The field name should match the noun "DsAccessTokenBean" in the method name.
+pub struct ListDsAccessTokensResponse {
+    /// The field name should match the noun "DsAccessToken" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_access_token_beans: ::prost::alloc::vec::Vec<DsAccessTokenBean>,
+    pub ds_access_tokens: ::prost::alloc::vec::Vec<DsAccessToken>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsAccessTokenBeanRequest {
+pub struct GetDsAccessTokenRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsAccessTokenBeanRequest {
-    /// The parent resource name where the DsAccessTokenBean is to be created.
+pub struct CreateDsAccessTokenRequest {
+    /// The parent resource name where the DsAccessToken is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsAccessTokenBean id to use for this DsAccessTokenBean.
+    /// The DsAccessToken id to use for this DsAccessToken.
     #[prost(string, tag = "2")]
-    pub ds_access_token_bean_id: ::prost::alloc::string::String,
-    /// The DsAccessTokenBean resource to create.
+    pub ds_access_token_id: ::prost::alloc::string::String,
+    /// The DsAccessToken resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_access_token_bean: ::core::option::Option<DsAccessTokenBean>,
+    pub ds_access_token: ::core::option::Option<DsAccessToken>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsAccessTokenBeanRequest {
-    /// The DsAccessTokenBean resource which replaces the resource on the server.
+pub struct UpdateDsAccessTokenRequest {
+    /// The DsAccessToken resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_access_token_bean: ::core::option::Option<DsAccessTokenBean>,
+    pub ds_access_token: ::core::option::Option<DsAccessToken>,
     /// The update mask applies to the resource. For the `FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask>
     #[prost(message, optional, tag = "2")]
@@ -67,21 +67,21 @@ pub struct UpdateDsAccessTokenBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsAccessTokenBeanRequest {
-    /// The resource name of the DsAccessTokenBean to be deleted.
+pub struct DeleteDsAccessTokenRequest {
+    /// The resource name of the DsAccessToken to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_access_token_bean_service_client {
+pub mod ds_access_token_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsAccessTokenBeanServiceClient<T> {
+    pub struct DsAccessTokenServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsAccessTokenBeanServiceClient<tonic::transport::Channel> {
+    impl DsAccessTokenServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -92,7 +92,7 @@ pub mod ds_access_token_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsAccessTokenBeanServiceClient<T>
+    impl<T> DsAccessTokenServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -112,7 +112,7 @@ pub mod ds_access_token_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsAccessTokenBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsAccessTokenServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -125,7 +125,7 @@ pub mod ds_access_token_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsAccessTokenBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsAccessTokenServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -163,13 +163,11 @@ pub mod ds_access_token_bean_service_client {
             self
         }
 
-        pub async fn list_ds_access_token_beans(
+        pub async fn list_ds_access_tokens(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsAccessTokenBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsAccessTokenBeansResponse>,
-            tonic::Status,
-        > {
+            request: impl tonic::IntoRequest<super::ListDsAccessTokensRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsAccessTokensResponse>, tonic::Status>
+        {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -178,20 +176,20 @@ pub mod ds_access_token_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_access_token.DsAccessTokenBeanService/ListDsAccessTokenBeans",
+                "/ds_access_token.DsAccessTokenService/ListDsAccessTokens",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_access_token.DsAccessTokenBeanService",
-                "ListDsAccessTokenBeans",
+                "ds_access_token.DsAccessTokenService",
+                "ListDsAccessTokens",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_access_token_bean(
+        pub async fn get_ds_access_token(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsAccessTokenBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAccessTokenBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetDsAccessTokenRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAccessToken>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -200,20 +198,20 @@ pub mod ds_access_token_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_access_token.DsAccessTokenBeanService/GetDsAccessTokenBean",
+                "/ds_access_token.DsAccessTokenService/GetDsAccessToken",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_access_token.DsAccessTokenBeanService",
-                "GetDsAccessTokenBean",
+                "ds_access_token.DsAccessTokenService",
+                "GetDsAccessToken",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_access_token_bean(
+        pub async fn create_ds_access_token(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsAccessTokenBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAccessTokenBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::CreateDsAccessTokenRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAccessToken>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -222,20 +220,20 @@ pub mod ds_access_token_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_access_token.DsAccessTokenBeanService/CreateDsAccessTokenBean",
+                "/ds_access_token.DsAccessTokenService/CreateDsAccessToken",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_access_token.DsAccessTokenBeanService",
-                "CreateDsAccessTokenBean",
+                "ds_access_token.DsAccessTokenService",
+                "CreateDsAccessToken",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_access_token_bean(
+        pub async fn update_ds_access_token(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsAccessTokenBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAccessTokenBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateDsAccessTokenRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAccessToken>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -244,19 +242,19 @@ pub mod ds_access_token_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_access_token.DsAccessTokenBeanService/UpdateDsAccessTokenBean",
+                "/ds_access_token.DsAccessTokenService/UpdateDsAccessToken",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_access_token.DsAccessTokenBeanService",
-                "UpdateDsAccessTokenBean",
+                "ds_access_token.DsAccessTokenService",
+                "UpdateDsAccessToken",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_access_token_bean(
+        pub async fn delete_ds_access_token(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsAccessTokenBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsAccessTokenRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -266,51 +264,48 @@ pub mod ds_access_token_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_access_token.DsAccessTokenBeanService/DeleteDsAccessTokenBean",
+                "/ds_access_token.DsAccessTokenService/DeleteDsAccessToken",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_access_token.DsAccessTokenBeanService",
-                "DeleteDsAccessTokenBean",
+                "ds_access_token.DsAccessTokenService",
+                "DeleteDsAccessToken",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_access_token_bean_service_server {
+pub mod ds_access_token_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsAccessTokenBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsAccessTokenServiceServer.
     #[async_trait]
-    pub trait DsAccessTokenBeanService: Send + Sync + 'static {
-        async fn list_ds_access_token_beans(
+    pub trait DsAccessTokenService: Send + Sync + 'static {
+        async fn list_ds_access_tokens(
             &self,
-            request: tonic::Request<super::ListDsAccessTokenBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsAccessTokenBeansResponse>,
-            tonic::Status,
-        >;
-        async fn get_ds_access_token_bean(
+            request: tonic::Request<super::ListDsAccessTokensRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsAccessTokensResponse>, tonic::Status>;
+        async fn get_ds_access_token(
             &self,
-            request: tonic::Request<super::GetDsAccessTokenBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAccessTokenBean>, tonic::Status>;
-        async fn create_ds_access_token_bean(
+            request: tonic::Request<super::GetDsAccessTokenRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAccessToken>, tonic::Status>;
+        async fn create_ds_access_token(
             &self,
-            request: tonic::Request<super::CreateDsAccessTokenBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAccessTokenBean>, tonic::Status>;
-        async fn update_ds_access_token_bean(
+            request: tonic::Request<super::CreateDsAccessTokenRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAccessToken>, tonic::Status>;
+        async fn update_ds_access_token(
             &self,
-            request: tonic::Request<super::UpdateDsAccessTokenBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAccessTokenBean>, tonic::Status>;
-        async fn delete_ds_access_token_bean(
+            request: tonic::Request<super::UpdateDsAccessTokenRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAccessToken>, tonic::Status>;
+        async fn delete_ds_access_token(
             &self,
-            request: tonic::Request<super::DeleteDsAccessTokenBeanRequest>,
+            request: tonic::Request<super::DeleteDsAccessTokenRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsAccessTokenBeanServiceServer<T: DsAccessTokenBeanService> {
+    pub struct DsAccessTokenServiceServer<T: DsAccessTokenService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -318,7 +313,7 @@ pub mod ds_access_token_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsAccessTokenBeanService> DsAccessTokenBeanServiceServer<T> {
+    impl<T: DsAccessTokenService> DsAccessTokenServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -371,9 +366,9 @@ pub mod ds_access_token_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsAccessTokenBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsAccessTokenServiceServer<T>
     where
-        T: DsAccessTokenBeanService,
+        T: DsAccessTokenService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -391,23 +386,22 @@ pub mod ds_access_token_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_access_token.DsAccessTokenBeanService/ListDsAccessTokenBeans" => {
+                "/ds_access_token.DsAccessTokenService/ListDsAccessTokens" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsAccessTokenBeansSvc<T: DsAccessTokenBeanService>(pub Arc<T>);
-                    impl<T: DsAccessTokenBeanService>
-                        tonic::server::UnaryService<super::ListDsAccessTokenBeansRequest>
-                        for ListDsAccessTokenBeansSvc<T>
+                    struct ListDsAccessTokensSvc<T: DsAccessTokenService>(pub Arc<T>);
+                    impl<T: DsAccessTokenService>
+                        tonic::server::UnaryService<super::ListDsAccessTokensRequest>
+                        for ListDsAccessTokensSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsAccessTokenBeansResponse;
+                        type Response = super::ListDsAccessTokensResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsAccessTokenBeansRequest>,
+                            request: tonic::Request<super::ListDsAccessTokensRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_ds_access_token_beans(request).await };
+                            let fut = async move { (*inner).list_ds_access_tokens(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -418,7 +412,7 @@ pub mod ds_access_token_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsAccessTokenBeansSvc(inner);
+                        let method = ListDsAccessTokensSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -434,23 +428,22 @@ pub mod ds_access_token_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_access_token.DsAccessTokenBeanService/GetDsAccessTokenBean" => {
+                "/ds_access_token.DsAccessTokenService/GetDsAccessToken" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsAccessTokenBeanSvc<T: DsAccessTokenBeanService>(pub Arc<T>);
-                    impl<T: DsAccessTokenBeanService>
-                        tonic::server::UnaryService<super::GetDsAccessTokenBeanRequest>
-                        for GetDsAccessTokenBeanSvc<T>
+                    struct GetDsAccessTokenSvc<T: DsAccessTokenService>(pub Arc<T>);
+                    impl<T: DsAccessTokenService>
+                        tonic::server::UnaryService<super::GetDsAccessTokenRequest>
+                        for GetDsAccessTokenSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsAccessTokenBean;
+                        type Response = super::DsAccessToken;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsAccessTokenBeanRequest>,
+                            request: tonic::Request<super::GetDsAccessTokenRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).get_ds_access_token_bean(request).await };
+                            let fut = async move { (*inner).get_ds_access_token(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -461,7 +454,7 @@ pub mod ds_access_token_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsAccessTokenBeanSvc(inner);
+                        let method = GetDsAccessTokenSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -477,23 +470,22 @@ pub mod ds_access_token_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_access_token.DsAccessTokenBeanService/CreateDsAccessTokenBean" => {
+                "/ds_access_token.DsAccessTokenService/CreateDsAccessToken" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsAccessTokenBeanSvc<T: DsAccessTokenBeanService>(pub Arc<T>);
-                    impl<T: DsAccessTokenBeanService>
-                        tonic::server::UnaryService<super::CreateDsAccessTokenBeanRequest>
-                        for CreateDsAccessTokenBeanSvc<T>
+                    struct CreateDsAccessTokenSvc<T: DsAccessTokenService>(pub Arc<T>);
+                    impl<T: DsAccessTokenService>
+                        tonic::server::UnaryService<super::CreateDsAccessTokenRequest>
+                        for CreateDsAccessTokenSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsAccessTokenBean;
+                        type Response = super::DsAccessToken;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsAccessTokenBeanRequest>,
+                            request: tonic::Request<super::CreateDsAccessTokenRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).create_ds_access_token_bean(request).await };
+                            let fut = async move { (*inner).create_ds_access_token(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -504,7 +496,7 @@ pub mod ds_access_token_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsAccessTokenBeanSvc(inner);
+                        let method = CreateDsAccessTokenSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -520,23 +512,22 @@ pub mod ds_access_token_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_access_token.DsAccessTokenBeanService/UpdateDsAccessTokenBean" => {
+                "/ds_access_token.DsAccessTokenService/UpdateDsAccessToken" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsAccessTokenBeanSvc<T: DsAccessTokenBeanService>(pub Arc<T>);
-                    impl<T: DsAccessTokenBeanService>
-                        tonic::server::UnaryService<super::UpdateDsAccessTokenBeanRequest>
-                        for UpdateDsAccessTokenBeanSvc<T>
+                    struct UpdateDsAccessTokenSvc<T: DsAccessTokenService>(pub Arc<T>);
+                    impl<T: DsAccessTokenService>
+                        tonic::server::UnaryService<super::UpdateDsAccessTokenRequest>
+                        for UpdateDsAccessTokenSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsAccessTokenBean;
+                        type Response = super::DsAccessToken;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsAccessTokenBeanRequest>,
+                            request: tonic::Request<super::UpdateDsAccessTokenRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).update_ds_access_token_bean(request).await };
+                            let fut = async move { (*inner).update_ds_access_token(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -547,7 +538,7 @@ pub mod ds_access_token_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsAccessTokenBeanSvc(inner);
+                        let method = UpdateDsAccessTokenSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -563,23 +554,22 @@ pub mod ds_access_token_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_access_token.DsAccessTokenBeanService/DeleteDsAccessTokenBean" => {
+                "/ds_access_token.DsAccessTokenService/DeleteDsAccessToken" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsAccessTokenBeanSvc<T: DsAccessTokenBeanService>(pub Arc<T>);
-                    impl<T: DsAccessTokenBeanService>
-                        tonic::server::UnaryService<super::DeleteDsAccessTokenBeanRequest>
-                        for DeleteDsAccessTokenBeanSvc<T>
+                    struct DeleteDsAccessTokenSvc<T: DsAccessTokenService>(pub Arc<T>);
+                    impl<T: DsAccessTokenService>
+                        tonic::server::UnaryService<super::DeleteDsAccessTokenRequest>
+                        for DeleteDsAccessTokenSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsAccessTokenBeanRequest>,
+                            request: tonic::Request<super::DeleteDsAccessTokenRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).delete_ds_access_token_bean(request).await };
+                            let fut = async move { (*inner).delete_ds_access_token(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -590,7 +580,7 @@ pub mod ds_access_token_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsAccessTokenBeanSvc(inner);
+                        let method = DeleteDsAccessTokenSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -617,7 +607,7 @@ pub mod ds_access_token_bean_service_server {
             }
         }
     }
-    impl<T: DsAccessTokenBeanService> Clone for DsAccessTokenBeanServiceServer<T> {
+    impl<T: DsAccessTokenService> Clone for DsAccessTokenServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -629,7 +619,7 @@ pub mod ds_access_token_bean_service_server {
             }
         }
     }
-    impl<T: DsAccessTokenBeanService> Clone for _Inner<T> {
+    impl<T: DsAccessTokenService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -639,9 +629,7 @@ pub mod ds_access_token_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsAccessTokenBeanService> tonic::server::NamedService
-        for DsAccessTokenBeanServiceServer<T>
-    {
-        const NAME: &'static str = "ds_access_token.DsAccessTokenBeanService";
+    impl<T: DsAccessTokenService> tonic::server::NamedService for DsAccessTokenServiceServer<T> {
+        const NAME: &'static str = "ds_access_token.DsAccessTokenService";
     }
 }

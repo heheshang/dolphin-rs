@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 package ds_relation_udfs_user;
 
-message DsRelationUdfsUserBean {
+message DsRelationUdfsUser {
 
      int32 id=1 ;
      int32 user_id=2 ;
@@ -19,45 +19,45 @@ message DsRelationUdfsUserBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsRelationUdfsUserBeanService {
-  rpc ListDsRelationUdfsUserBeans(ListDsRelationUdfsUserBeansRequest) returns (ListDsRelationUdfsUserBeansResponse) {
+service DsRelationUdfsUserService {
+  rpc ListDsRelationUdfsUsers(ListDsRelationUdfsUsersRequest) returns (ListDsRelationUdfsUsersResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsRelationUdfsUserBeans"
+      get: "/v1alpha1/DsRelationUdfsUsers"
     };
   }
 
-  rpc GetDsRelationUdfsUserBean(GetDsRelationUdfsUserBeanRequest) returns (DsRelationUdfsUserBean) {
+  rpc GetDsRelationUdfsUser(GetDsRelationUdfsUserRequest) returns (DsRelationUdfsUser) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsRelationUdfsUserBeans/*}"
+      get: "/v1alpha1/{name=DsRelationUdfsUsers/*}"
     };
   }
 
-  rpc CreateDsRelationUdfsUserBean(CreateDsRelationUdfsUserBeanRequest) returns (DsRelationUdfsUserBean) {
+  rpc CreateDsRelationUdfsUser(CreateDsRelationUdfsUserRequest) returns (DsRelationUdfsUser) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsRelationUdfsUserBeans"
-      body: "DsRelationUdfsUserBean"
+      post: "/v1alpha1/DsRelationUdfsUsers"
+      body: "DsRelationUdfsUser"
     };
   }
 
-  rpc UpdateDsRelationUdfsUserBean(UpdateDsRelationUdfsUserBeanRequest) returns (DsRelationUdfsUserBean) {
+  rpc UpdateDsRelationUdfsUser(UpdateDsRelationUdfsUserRequest) returns (DsRelationUdfsUser) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsRelationUdfsUserBean.name=DsRelationUdfsUserBeans/*}"
-      body: "DsRelationUdfsUserBean"
+      patch: "/v1alpha1/{DsRelationUdfsUser.name=DsRelationUdfsUsers/*}"
+      body: "DsRelationUdfsUser"
     };
   }
 
-  rpc DeleteDsRelationUdfsUserBean(DeleteDsRelationUdfsUserBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsRelationUdfsUser(DeleteDsRelationUdfsUserRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsRelationUdfsUserBeans/*}"
+      delete: "/v1alpha1/{name=DsRelationUdfsUsers/*}"
     };
   }
 }
 
-// message DsRelationUdfsUserBean {
+// message DsRelationUdfsUser {
 // ! This should be defined elsewhere
 // }
 
-message ListDsRelationUdfsUserBeansRequest {
+message ListDsRelationUdfsUsersRequest {
 
 
   // The maximum number of items to return.
@@ -66,42 +66,42 @@ message ListDsRelationUdfsUserBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsRelationUdfsUserBeansResponse {
-  // The field name should match the noun "DsRelationUdfsUserBean" in the method name.
+message ListDsRelationUdfsUsersResponse {
+  // The field name should match the noun "DsRelationUdfsUser" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsRelationUdfsUserBean DsRelationUdfsUserBeans = 1;
+  repeated DsRelationUdfsUser DsRelationUdfsUsers = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsRelationUdfsUserBeanRequest {
+message GetDsRelationUdfsUserRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsRelationUdfsUserBeanRequest {
-  // The parent resource name where the DsRelationUdfsUserBean is to be created.
+message CreateDsRelationUdfsUserRequest {
+  // The parent resource name where the DsRelationUdfsUser is to be created.
   string parent = 1;
 
-  // The DsRelationUdfsUserBean id to use for this DsRelationUdfsUserBean.
-  string DsRelationUdfsUserBean_id = 2;
+  // The DsRelationUdfsUser id to use for this DsRelationUdfsUser.
+  string DsRelationUdfsUser_id = 2;
 
-  // The DsRelationUdfsUserBean resource to create.
+  // The DsRelationUdfsUser resource to create.
   // The field name should match the Noun in the method name.
-  DsRelationUdfsUserBean DsRelationUdfsUserBean = 3;
+  DsRelationUdfsUser DsRelationUdfsUser = 3;
 }
 
-message UpdateDsRelationUdfsUserBeanRequest {
-  // The DsRelationUdfsUserBean resource which replaces the resource on the server.
-  DsRelationUdfsUserBean DsRelationUdfsUserBean = 1;
+message UpdateDsRelationUdfsUserRequest {
+  // The DsRelationUdfsUser resource which replaces the resource on the server.
+  DsRelationUdfsUser DsRelationUdfsUser = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsRelationUdfsUserBeanRequest {
-  // The resource name of the DsRelationUdfsUserBean to be deleted.
+message DeleteDsRelationUdfsUserRequest {
+  // The resource name of the DsRelationUdfsUser to be deleted.
   string name = 1;
 }

@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 package ds_queue;
 
 
-message DsQueueBean {
+message DsQueue {
 
      int32 id=1 ;
      optional string queue_name=2 ;
@@ -19,45 +19,45 @@ message DsQueueBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsQueueBeanService {
-  rpc ListDsQueueBeans(ListDsQueueBeansRequest) returns (ListDsQueueBeansResponse) {
+service DsQueueService {
+  rpc ListDsQueues(ListDsQueuesRequest) returns (ListDsQueuesResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsQueueBeans"
+      get: "/v1alpha1/DsQueues"
     };
   }
 
-  rpc GetDsQueueBean(GetDsQueueBeanRequest) returns (DsQueueBean) {
+  rpc GetDsQueue(GetDsQueueRequest) returns (DsQueue) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsQueueBeans/*}"
+      get: "/v1alpha1/{name=DsQueues/*}"
     };
   }
 
-  rpc CreateDsQueueBean(CreateDsQueueBeanRequest) returns (DsQueueBean) {
+  rpc CreateDsQueue(CreateDsQueueRequest) returns (DsQueue) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsQueueBeans"
-      body: "DsQueueBean"
+      post: "/v1alpha1/DsQueues"
+      body: "DsQueue"
     };
   }
 
-  rpc UpdateDsQueueBean(UpdateDsQueueBeanRequest) returns (DsQueueBean) {
+  rpc UpdateDsQueue(UpdateDsQueueRequest) returns (DsQueue) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsQueueBean.name=DsQueueBeans/*}"
-      body: "DsQueueBean"
+      patch: "/v1alpha1/{DsQueue.name=DsQueues/*}"
+      body: "DsQueue"
     };
   }
 
-  rpc DeleteDsQueueBean(DeleteDsQueueBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsQueue(DeleteDsQueueRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsQueueBeans/*}"
+      delete: "/v1alpha1/{name=DsQueues/*}"
     };
   }
 }
 
-// message DsQueueBean {
+// message DsQueue {
 // ! This should be defined elsewhere
 // }
 
-message ListDsQueueBeansRequest {
+message ListDsQueuesRequest {
 
 
   // The maximum number of items to return.
@@ -66,42 +66,42 @@ message ListDsQueueBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsQueueBeansResponse {
-  // The field name should match the noun "DsQueueBean" in the method name.
+message ListDsQueuesResponse {
+  // The field name should match the noun "DsQueue" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsQueueBean DsQueueBeans = 1;
+  repeated DsQueue DsQueues = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsQueueBeanRequest {
+message GetDsQueueRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsQueueBeanRequest {
-  // The parent resource name where the DsQueueBean is to be created.
+message CreateDsQueueRequest {
+  // The parent resource name where the DsQueue is to be created.
   string parent = 1;
 
-  // The DsQueueBean id to use for this DsQueueBean.
-  string DsQueueBean_id = 2;
+  // The DsQueue id to use for this DsQueue.
+  string DsQueue_id = 2;
 
-  // The DsQueueBean resource to create.
+  // The DsQueue resource to create.
   // The field name should match the Noun in the method name.
-  DsQueueBean DsQueueBean = 3;
+  DsQueue DsQueue = 3;
 }
 
-message UpdateDsQueueBeanRequest {
-  // The DsQueueBean resource which replaces the resource on the server.
-  DsQueueBean DsQueueBean = 1;
+message UpdateDsQueueRequest {
+  // The DsQueue resource which replaces the resource on the server.
+  DsQueue DsQueue = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsQueueBeanRequest {
-  // The resource name of the DsQueueBean to be deleted.
+message DeleteDsQueueRequest {
+  // The resource name of the DsQueue to be deleted.
   string name = 1;
 }

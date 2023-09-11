@@ -1,60 +1,52 @@
-use super::service::DolphinRpcServer;
-use proto::qrtz_paused_trigger_grps::qrtz_paused_trigger_grps_bean_service_server::QrtzPausedTriggerGrpsBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::qrtz_paused_trigger_grps::qrtz_paused_trigger_grps_service_server::QrtzPausedTriggerGrpsService;
 
 
 #[tonic::async_trait]
-impl QrtzPausedTriggerGrpsBeanService for DolphinRpcServer {
-    async fn list_qrtz_paused_trigger_grps_beans(
+impl QrtzPausedTriggerGrpsService for DolphinRpcServer {
+    async fn list_qrtz_paused_trigger_grpss(
         &self,
-        _req: tonic::Request<
-            proto::qrtz_paused_trigger_grps::ListQrtzPausedTriggerGrpsBeansRequest,
-        >,
+        _req: tonic::Request<proto::qrtz_paused_trigger_grps::ListQrtzPausedTriggerGrpssRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_paused_trigger_grps::ListQrtzPausedTriggerGrpsBeansResponse>,
+        tonic::Response<proto::qrtz_paused_trigger_grps::ListQrtzPausedTriggerGrpssResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_qrtz_paused_trigger_grps_bean(
+    async fn get_qrtz_paused_trigger_grps(
         &self,
-        _req: tonic::Request<proto::qrtz_paused_trigger_grps::GetQrtzPausedTriggerGrpsBeanRequest>,
+        _req: tonic::Request<proto::qrtz_paused_trigger_grps::GetQrtzPausedTriggerGrpsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_paused_trigger_grps::QrtzPausedTriggerGrpsBean>,
+        tonic::Response<proto::qrtz_paused_trigger_grps::QrtzPausedTriggerGrps>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn create_qrtz_paused_trigger_grps_bean(
+    async fn create_qrtz_paused_trigger_grps(
         &self,
-        _req: tonic::Request<
-            proto::qrtz_paused_trigger_grps::CreateQrtzPausedTriggerGrpsBeanRequest,
-        >,
+        _req: tonic::Request<proto::qrtz_paused_trigger_grps::CreateQrtzPausedTriggerGrpsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_paused_trigger_grps::QrtzPausedTriggerGrpsBean>,
+        tonic::Response<proto::qrtz_paused_trigger_grps::QrtzPausedTriggerGrps>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn update_qrtz_paused_trigger_grps_bean(
+    async fn update_qrtz_paused_trigger_grps(
         &self,
-        _req: tonic::Request<
-            proto::qrtz_paused_trigger_grps::UpdateQrtzPausedTriggerGrpsBeanRequest,
-        >,
+        _req: tonic::Request<proto::qrtz_paused_trigger_grps::UpdateQrtzPausedTriggerGrpsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_paused_trigger_grps::QrtzPausedTriggerGrpsBean>,
+        tonic::Response<proto::qrtz_paused_trigger_grps::QrtzPausedTriggerGrps>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn delete_qrtz_paused_trigger_grps_bean(
+    async fn delete_qrtz_paused_trigger_grps(
         &self,
-        _req: tonic::Request<
-            proto::qrtz_paused_trigger_grps::DeleteQrtzPausedTriggerGrpsBeanRequest,
-        >,
+        _req: tonic::Request<proto::qrtz_paused_trigger_grps::DeleteQrtzPausedTriggerGrpsRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

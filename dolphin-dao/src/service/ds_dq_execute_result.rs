@@ -1,52 +1,52 @@
-use super::service::DolphinRpcServer;
-use proto::ds_dq_execute_result::ds_dq_execute_result_bean_service_server::DsDqExecuteResultBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_dq_execute_result::ds_dq_execute_result_service_server::DsDqExecuteResultService;
 
 
 #[tonic::async_trait]
-impl DsDqExecuteResultBeanService for DolphinRpcServer {
-    async fn list_ds_dq_execute_result_beans(
+impl DsDqExecuteResultService for DolphinRpcServer {
+    async fn list_ds_dq_execute_results(
         &self,
-        _req: tonic::Request<proto::ds_dq_execute_result::ListDsDqExecuteResultBeansRequest>,
+        _req: tonic::Request<proto::ds_dq_execute_result::ListDsDqExecuteResultsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_dq_execute_result::ListDsDqExecuteResultBeansResponse>,
+        tonic::Response<proto::ds_dq_execute_result::ListDsDqExecuteResultsResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_dq_execute_result_bean(
+    async fn get_ds_dq_execute_result(
         &self,
-        _req: tonic::Request<proto::ds_dq_execute_result::GetDsDqExecuteResultBeanRequest>,
+        _req: tonic::Request<proto::ds_dq_execute_result::GetDsDqExecuteResultRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_dq_execute_result::DsDqExecuteResultBean>,
+        tonic::Response<proto::ds_dq_execute_result::DsDqExecuteResult>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn create_ds_dq_execute_result_bean(
+    async fn create_ds_dq_execute_result(
         &self,
-        _req: tonic::Request<proto::ds_dq_execute_result::CreateDsDqExecuteResultBeanRequest>,
+        _req: tonic::Request<proto::ds_dq_execute_result::CreateDsDqExecuteResultRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_dq_execute_result::DsDqExecuteResultBean>,
+        tonic::Response<proto::ds_dq_execute_result::DsDqExecuteResult>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn update_ds_dq_execute_result_bean(
+    async fn update_ds_dq_execute_result(
         &self,
-        _req: tonic::Request<proto::ds_dq_execute_result::UpdateDsDqExecuteResultBeanRequest>,
+        _req: tonic::Request<proto::ds_dq_execute_result::UpdateDsDqExecuteResultRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_dq_execute_result::DsDqExecuteResultBean>,
+        tonic::Response<proto::ds_dq_execute_result::DsDqExecuteResult>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn delete_ds_dq_execute_result_bean(
+    async fn delete_ds_dq_execute_result(
         &self,
-        _req: tonic::Request<proto::ds_dq_execute_result::DeleteDsDqExecuteResultBeanRequest>,
+        _req: tonic::Request<proto::ds_dq_execute_result::DeleteDsDqExecuteResultRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

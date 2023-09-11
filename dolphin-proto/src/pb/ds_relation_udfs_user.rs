@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsRelationUdfsUserBean {
+pub struct DsRelationUdfsUser {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int32, tag = "2")]
@@ -18,7 +18,7 @@ pub struct DsRelationUdfsUserBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsRelationUdfsUserBeansRequest {
+pub struct ListDsRelationUdfsUsersRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -27,42 +27,42 @@ pub struct ListDsRelationUdfsUserBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsRelationUdfsUserBeansResponse {
-    /// The field name should match the noun "DsRelationUdfsUserBean" in the method name.
+pub struct ListDsRelationUdfsUsersResponse {
+    /// The field name should match the noun "DsRelationUdfsUser" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_relation_udfs_user_beans: ::prost::alloc::vec::Vec<DsRelationUdfsUserBean>,
+    pub ds_relation_udfs_users: ::prost::alloc::vec::Vec<DsRelationUdfsUser>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsRelationUdfsUserBeanRequest {
+pub struct GetDsRelationUdfsUserRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsRelationUdfsUserBeanRequest {
-    /// The parent resource name where the DsRelationUdfsUserBean is to be created.
+pub struct CreateDsRelationUdfsUserRequest {
+    /// The parent resource name where the DsRelationUdfsUser is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsRelationUdfsUserBean id to use for this DsRelationUdfsUserBean.
+    /// The DsRelationUdfsUser id to use for this DsRelationUdfsUser.
     #[prost(string, tag = "2")]
-    pub ds_relation_udfs_user_bean_id: ::prost::alloc::string::String,
-    /// The DsRelationUdfsUserBean resource to create.
+    pub ds_relation_udfs_user_id: ::prost::alloc::string::String,
+    /// The DsRelationUdfsUser resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_relation_udfs_user_bean: ::core::option::Option<DsRelationUdfsUserBean>,
+    pub ds_relation_udfs_user: ::core::option::Option<DsRelationUdfsUser>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsRelationUdfsUserBeanRequest {
-    /// The DsRelationUdfsUserBean resource which replaces the resource on the server.
+pub struct UpdateDsRelationUdfsUserRequest {
+    /// The DsRelationUdfsUser resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_relation_udfs_user_bean: ::core::option::Option<DsRelationUdfsUserBean>,
+    pub ds_relation_udfs_user: ::core::option::Option<DsRelationUdfsUser>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -70,21 +70,21 @@ pub struct UpdateDsRelationUdfsUserBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsRelationUdfsUserBeanRequest {
-    /// The resource name of the DsRelationUdfsUserBean to be deleted.
+pub struct DeleteDsRelationUdfsUserRequest {
+    /// The resource name of the DsRelationUdfsUser to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_relation_udfs_user_bean_service_client {
+pub mod ds_relation_udfs_user_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsRelationUdfsUserBeanServiceClient<T> {
+    pub struct DsRelationUdfsUserServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsRelationUdfsUserBeanServiceClient<tonic::transport::Channel> {
+    impl DsRelationUdfsUserServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -95,7 +95,7 @@ pub mod ds_relation_udfs_user_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsRelationUdfsUserBeanServiceClient<T>
+    impl<T> DsRelationUdfsUserServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -115,7 +115,7 @@ pub mod ds_relation_udfs_user_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsRelationUdfsUserBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsRelationUdfsUserServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -128,7 +128,7 @@ pub mod ds_relation_udfs_user_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsRelationUdfsUserBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsRelationUdfsUserServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -166,11 +166,11 @@ pub mod ds_relation_udfs_user_bean_service_client {
             self
         }
 
-        pub async fn list_ds_relation_udfs_user_beans(
+        pub async fn list_ds_relation_udfs_users(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsRelationUdfsUserBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsRelationUdfsUsersRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsRelationUdfsUserBeansResponse>,
+            tonic::Response<super::ListDsRelationUdfsUsersResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -181,20 +181,20 @@ pub mod ds_relation_udfs_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_udfs_user.DsRelationUdfsUserBeanService/ListDsRelationUdfsUserBeans",
+                "/ds_relation_udfs_user.DsRelationUdfsUserService/ListDsRelationUdfsUsers",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_udfs_user.DsRelationUdfsUserBeanService",
-                "ListDsRelationUdfsUserBeans",
+                "ds_relation_udfs_user.DsRelationUdfsUserService",
+                "ListDsRelationUdfsUsers",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_relation_udfs_user_bean(
+        pub async fn get_ds_relation_udfs_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsRelationUdfsUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationUdfsUserBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::GetDsRelationUdfsUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationUdfsUser>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -204,20 +204,20 @@ pub mod ds_relation_udfs_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_udfs_user.DsRelationUdfsUserBeanService/GetDsRelationUdfsUserBean",
+                "/ds_relation_udfs_user.DsRelationUdfsUserService/GetDsRelationUdfsUser",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_udfs_user.DsRelationUdfsUserBeanService",
-                "GetDsRelationUdfsUserBean",
+                "ds_relation_udfs_user.DsRelationUdfsUserService",
+                "GetDsRelationUdfsUser",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_relation_udfs_user_bean(
+        pub async fn create_ds_relation_udfs_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsRelationUdfsUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationUdfsUserBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::CreateDsRelationUdfsUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationUdfsUser>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -227,20 +227,20 @@ pub mod ds_relation_udfs_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_udfs_user.DsRelationUdfsUserBeanService/CreateDsRelationUdfsUserBean",
+                "/ds_relation_udfs_user.DsRelationUdfsUserService/CreateDsRelationUdfsUser",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_udfs_user.DsRelationUdfsUserBeanService",
-                "CreateDsRelationUdfsUserBean",
+                "ds_relation_udfs_user.DsRelationUdfsUserService",
+                "CreateDsRelationUdfsUser",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_relation_udfs_user_bean(
+        pub async fn update_ds_relation_udfs_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsRelationUdfsUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationUdfsUserBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::UpdateDsRelationUdfsUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationUdfsUser>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -250,19 +250,19 @@ pub mod ds_relation_udfs_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_udfs_user.DsRelationUdfsUserBeanService/UpdateDsRelationUdfsUserBean",
+                "/ds_relation_udfs_user.DsRelationUdfsUserService/UpdateDsRelationUdfsUser",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_udfs_user.DsRelationUdfsUserBeanService",
-                "UpdateDsRelationUdfsUserBean",
+                "ds_relation_udfs_user.DsRelationUdfsUserService",
+                "UpdateDsRelationUdfsUser",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_relation_udfs_user_bean(
+        pub async fn delete_ds_relation_udfs_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsRelationUdfsUserBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsRelationUdfsUserRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -272,51 +272,51 @@ pub mod ds_relation_udfs_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_udfs_user.DsRelationUdfsUserBeanService/DeleteDsRelationUdfsUserBean",
+                "/ds_relation_udfs_user.DsRelationUdfsUserService/DeleteDsRelationUdfsUser",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_udfs_user.DsRelationUdfsUserBeanService",
-                "DeleteDsRelationUdfsUserBean",
+                "ds_relation_udfs_user.DsRelationUdfsUserService",
+                "DeleteDsRelationUdfsUser",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_relation_udfs_user_bean_service_server {
+pub mod ds_relation_udfs_user_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsRelationUdfsUserBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsRelationUdfsUserServiceServer.
     #[async_trait]
-    pub trait DsRelationUdfsUserBeanService: Send + Sync + 'static {
-        async fn list_ds_relation_udfs_user_beans(
+    pub trait DsRelationUdfsUserService: Send + Sync + 'static {
+        async fn list_ds_relation_udfs_users(
             &self,
-            request: tonic::Request<super::ListDsRelationUdfsUserBeansRequest>,
+            request: tonic::Request<super::ListDsRelationUdfsUsersRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsRelationUdfsUserBeansResponse>,
+            tonic::Response<super::ListDsRelationUdfsUsersResponse>,
             tonic::Status,
         >;
-        async fn get_ds_relation_udfs_user_bean(
+        async fn get_ds_relation_udfs_user(
             &self,
-            request: tonic::Request<super::GetDsRelationUdfsUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationUdfsUserBean>, tonic::Status>;
-        async fn create_ds_relation_udfs_user_bean(
+            request: tonic::Request<super::GetDsRelationUdfsUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationUdfsUser>, tonic::Status>;
+        async fn create_ds_relation_udfs_user(
             &self,
-            request: tonic::Request<super::CreateDsRelationUdfsUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationUdfsUserBean>, tonic::Status>;
-        async fn update_ds_relation_udfs_user_bean(
+            request: tonic::Request<super::CreateDsRelationUdfsUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationUdfsUser>, tonic::Status>;
+        async fn update_ds_relation_udfs_user(
             &self,
-            request: tonic::Request<super::UpdateDsRelationUdfsUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationUdfsUserBean>, tonic::Status>;
-        async fn delete_ds_relation_udfs_user_bean(
+            request: tonic::Request<super::UpdateDsRelationUdfsUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationUdfsUser>, tonic::Status>;
+        async fn delete_ds_relation_udfs_user(
             &self,
-            request: tonic::Request<super::DeleteDsRelationUdfsUserBeanRequest>,
+            request: tonic::Request<super::DeleteDsRelationUdfsUserRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsRelationUdfsUserBeanServiceServer<T: DsRelationUdfsUserBeanService> {
+    pub struct DsRelationUdfsUserServiceServer<T: DsRelationUdfsUserService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -324,7 +324,7 @@ pub mod ds_relation_udfs_user_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsRelationUdfsUserBeanService> DsRelationUdfsUserBeanServiceServer<T> {
+    impl<T: DsRelationUdfsUserService> DsRelationUdfsUserServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -377,9 +377,9 @@ pub mod ds_relation_udfs_user_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsRelationUdfsUserBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsRelationUdfsUserServiceServer<T>
     where
-        T: DsRelationUdfsUserBeanService,
+        T: DsRelationUdfsUserService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -397,27 +397,23 @@ pub mod ds_relation_udfs_user_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_relation_udfs_user.DsRelationUdfsUserBeanService/\
-                 ListDsRelationUdfsUserBeans" => {
+                "/ds_relation_udfs_user.DsRelationUdfsUserService/ListDsRelationUdfsUsers" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsRelationUdfsUserBeansSvc<T: DsRelationUdfsUserBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsRelationUdfsUserBeanService>
-                        tonic::server::UnaryService<super::ListDsRelationUdfsUserBeansRequest>
-                        for ListDsRelationUdfsUserBeansSvc<T>
+                    struct ListDsRelationUdfsUsersSvc<T: DsRelationUdfsUserService>(pub Arc<T>);
+                    impl<T: DsRelationUdfsUserService>
+                        tonic::server::UnaryService<super::ListDsRelationUdfsUsersRequest>
+                        for ListDsRelationUdfsUsersSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsRelationUdfsUserBeansResponse;
+                        type Response = super::ListDsRelationUdfsUsersResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsRelationUdfsUserBeansRequest>,
+                            request: tonic::Request<super::ListDsRelationUdfsUsersRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).list_ds_relation_udfs_user_beans(request).await
-                            };
+                            let fut =
+                                async move { (*inner).list_ds_relation_udfs_users(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -428,7 +424,7 @@ pub mod ds_relation_udfs_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsRelationUdfsUserBeansSvc(inner);
+                        let method = ListDsRelationUdfsUsersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -444,27 +440,23 @@ pub mod ds_relation_udfs_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_udfs_user.DsRelationUdfsUserBeanService/\
-                 GetDsRelationUdfsUserBean" => {
+                "/ds_relation_udfs_user.DsRelationUdfsUserService/GetDsRelationUdfsUser" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsRelationUdfsUserBeanSvc<T: DsRelationUdfsUserBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsRelationUdfsUserBeanService>
-                        tonic::server::UnaryService<super::GetDsRelationUdfsUserBeanRequest>
-                        for GetDsRelationUdfsUserBeanSvc<T>
+                    struct GetDsRelationUdfsUserSvc<T: DsRelationUdfsUserService>(pub Arc<T>);
+                    impl<T: DsRelationUdfsUserService>
+                        tonic::server::UnaryService<super::GetDsRelationUdfsUserRequest>
+                        for GetDsRelationUdfsUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsRelationUdfsUserBean;
+                        type Response = super::DsRelationUdfsUser;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsRelationUdfsUserBeanRequest>,
+                            request: tonic::Request<super::GetDsRelationUdfsUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_ds_relation_udfs_user_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_ds_relation_udfs_user(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -475,7 +467,7 @@ pub mod ds_relation_udfs_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsRelationUdfsUserBeanSvc(inner);
+                        let method = GetDsRelationUdfsUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -491,27 +483,23 @@ pub mod ds_relation_udfs_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_udfs_user.DsRelationUdfsUserBeanService/\
-                 CreateDsRelationUdfsUserBean" => {
+                "/ds_relation_udfs_user.DsRelationUdfsUserService/CreateDsRelationUdfsUser" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsRelationUdfsUserBeanSvc<T: DsRelationUdfsUserBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsRelationUdfsUserBeanService>
-                        tonic::server::UnaryService<super::CreateDsRelationUdfsUserBeanRequest>
-                        for CreateDsRelationUdfsUserBeanSvc<T>
+                    struct CreateDsRelationUdfsUserSvc<T: DsRelationUdfsUserService>(pub Arc<T>);
+                    impl<T: DsRelationUdfsUserService>
+                        tonic::server::UnaryService<super::CreateDsRelationUdfsUserRequest>
+                        for CreateDsRelationUdfsUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsRelationUdfsUserBean;
+                        type Response = super::DsRelationUdfsUser;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsRelationUdfsUserBeanRequest>,
+                            request: tonic::Request<super::CreateDsRelationUdfsUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).create_ds_relation_udfs_user_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).create_ds_relation_udfs_user(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -522,7 +510,7 @@ pub mod ds_relation_udfs_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsRelationUdfsUserBeanSvc(inner);
+                        let method = CreateDsRelationUdfsUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -538,27 +526,23 @@ pub mod ds_relation_udfs_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_udfs_user.DsRelationUdfsUserBeanService/\
-                 UpdateDsRelationUdfsUserBean" => {
+                "/ds_relation_udfs_user.DsRelationUdfsUserService/UpdateDsRelationUdfsUser" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsRelationUdfsUserBeanSvc<T: DsRelationUdfsUserBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsRelationUdfsUserBeanService>
-                        tonic::server::UnaryService<super::UpdateDsRelationUdfsUserBeanRequest>
-                        for UpdateDsRelationUdfsUserBeanSvc<T>
+                    struct UpdateDsRelationUdfsUserSvc<T: DsRelationUdfsUserService>(pub Arc<T>);
+                    impl<T: DsRelationUdfsUserService>
+                        tonic::server::UnaryService<super::UpdateDsRelationUdfsUserRequest>
+                        for UpdateDsRelationUdfsUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsRelationUdfsUserBean;
+                        type Response = super::DsRelationUdfsUser;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsRelationUdfsUserBeanRequest>,
+                            request: tonic::Request<super::UpdateDsRelationUdfsUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).update_ds_relation_udfs_user_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).update_ds_relation_udfs_user(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -569,7 +553,7 @@ pub mod ds_relation_udfs_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsRelationUdfsUserBeanSvc(inner);
+                        let method = UpdateDsRelationUdfsUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -585,27 +569,23 @@ pub mod ds_relation_udfs_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_udfs_user.DsRelationUdfsUserBeanService/\
-                 DeleteDsRelationUdfsUserBean" => {
+                "/ds_relation_udfs_user.DsRelationUdfsUserService/DeleteDsRelationUdfsUser" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsRelationUdfsUserBeanSvc<T: DsRelationUdfsUserBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsRelationUdfsUserBeanService>
-                        tonic::server::UnaryService<super::DeleteDsRelationUdfsUserBeanRequest>
-                        for DeleteDsRelationUdfsUserBeanSvc<T>
+                    struct DeleteDsRelationUdfsUserSvc<T: DsRelationUdfsUserService>(pub Arc<T>);
+                    impl<T: DsRelationUdfsUserService>
+                        tonic::server::UnaryService<super::DeleteDsRelationUdfsUserRequest>
+                        for DeleteDsRelationUdfsUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsRelationUdfsUserBeanRequest>,
+                            request: tonic::Request<super::DeleteDsRelationUdfsUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).delete_ds_relation_udfs_user_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).delete_ds_relation_udfs_user(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -616,7 +596,7 @@ pub mod ds_relation_udfs_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsRelationUdfsUserBeanSvc(inner);
+                        let method = DeleteDsRelationUdfsUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -643,7 +623,7 @@ pub mod ds_relation_udfs_user_bean_service_server {
             }
         }
     }
-    impl<T: DsRelationUdfsUserBeanService> Clone for DsRelationUdfsUserBeanServiceServer<T> {
+    impl<T: DsRelationUdfsUserService> Clone for DsRelationUdfsUserServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -655,7 +635,7 @@ pub mod ds_relation_udfs_user_bean_service_server {
             }
         }
     }
-    impl<T: DsRelationUdfsUserBeanService> Clone for _Inner<T> {
+    impl<T: DsRelationUdfsUserService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -665,9 +645,9 @@ pub mod ds_relation_udfs_user_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsRelationUdfsUserBeanService> tonic::server::NamedService
-        for DsRelationUdfsUserBeanServiceServer<T>
+    impl<T: DsRelationUdfsUserService> tonic::server::NamedService
+        for DsRelationUdfsUserServiceServer<T>
     {
-        const NAME: &'static str = "ds_relation_udfs_user.DsRelationUdfsUserBeanService";
+        const NAME: &'static str = "ds_relation_udfs_user.DsRelationUdfsUserService";
     }
 }

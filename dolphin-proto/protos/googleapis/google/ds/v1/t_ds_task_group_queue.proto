@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 package ds_task_group_queue;
 
-message DsTaskGroupQueueBean {
+message DsTaskGroupQueue {
 
      int32  id=1 ;
      optional int32  task_id=2 ;
@@ -24,45 +24,45 @@ message DsTaskGroupQueueBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsTaskGroupQueueBeanService {
-  rpc ListDsTaskGroupQueueBeans(ListDsTaskGroupQueueBeansRequest) returns (ListDsTaskGroupQueueBeansResponse) {
+service DsTaskGroupQueueService {
+  rpc ListDsTaskGroupQueues(ListDsTaskGroupQueuesRequest) returns (ListDsTaskGroupQueuesResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsTaskGroupQueueBeans"
+      get: "/v1alpha1/DsTaskGroupQueues"
     };
   }
 
-  rpc GetDsTaskGroupQueueBean(GetDsTaskGroupQueueBeanRequest) returns (DsTaskGroupQueueBean) {
+  rpc GetDsTaskGroupQueue(GetDsTaskGroupQueueRequest) returns (DsTaskGroupQueue) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsTaskGroupQueueBeans/*}"
+      get: "/v1alpha1/{name=DsTaskGroupQueues/*}"
     };
   }
 
-  rpc CreateDsTaskGroupQueueBean(CreateDsTaskGroupQueueBeanRequest) returns (DsTaskGroupQueueBean) {
+  rpc CreateDsTaskGroupQueue(CreateDsTaskGroupQueueRequest) returns (DsTaskGroupQueue) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsTaskGroupQueueBeans"
-      body: "DsTaskGroupQueueBean"
+      post: "/v1alpha1/DsTaskGroupQueues"
+      body: "DsTaskGroupQueue"
     };
   }
 
-  rpc UpdateDsTaskGroupQueueBean(UpdateDsTaskGroupQueueBeanRequest) returns (DsTaskGroupQueueBean) {
+  rpc UpdateDsTaskGroupQueue(UpdateDsTaskGroupQueueRequest) returns (DsTaskGroupQueue) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsTaskGroupQueueBean.name=DsTaskGroupQueueBeans/*}"
-      body: "DsTaskGroupQueueBean"
+      patch: "/v1alpha1/{DsTaskGroupQueue.name=DsTaskGroupQueues/*}"
+      body: "DsTaskGroupQueue"
     };
   }
 
-  rpc DeleteDsTaskGroupQueueBean(DeleteDsTaskGroupQueueBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsTaskGroupQueue(DeleteDsTaskGroupQueueRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsTaskGroupQueueBeans/*}"
+      delete: "/v1alpha1/{name=DsTaskGroupQueues/*}"
     };
   }
 }
 
-// message DsTaskGroupQueueBean {
+// message DsTaskGroupQueue {
 // ! This should be defined elsewhere
 // }
 
-message ListDsTaskGroupQueueBeansRequest {
+message ListDsTaskGroupQueuesRequest {
 
 
   // The maximum number of items to return.
@@ -71,42 +71,42 @@ message ListDsTaskGroupQueueBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsTaskGroupQueueBeansResponse {
-  // The field name should match the noun "DsTaskGroupQueueBean" in the method name.
+message ListDsTaskGroupQueuesResponse {
+  // The field name should match the noun "DsTaskGroupQueue" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsTaskGroupQueueBean DsTaskGroupQueueBeans = 1;
+  repeated DsTaskGroupQueue DsTaskGroupQueues = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsTaskGroupQueueBeanRequest {
+message GetDsTaskGroupQueueRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsTaskGroupQueueBeanRequest {
-  // The parent resource name where the DsTaskGroupQueueBean is to be created.
+message CreateDsTaskGroupQueueRequest {
+  // The parent resource name where the DsTaskGroupQueue is to be created.
   string parent = 1;
 
-  // The DsTaskGroupQueueBean id to use for this DsTaskGroupQueueBean.
-  string DsTaskGroupQueueBean_id = 2;
+  // The DsTaskGroupQueue id to use for this DsTaskGroupQueue.
+  string DsTaskGroupQueue_id = 2;
 
-  // The DsTaskGroupQueueBean resource to create.
+  // The DsTaskGroupQueue resource to create.
   // The field name should match the Noun in the method name.
-  DsTaskGroupQueueBean DsTaskGroupQueueBean = 3;
+  DsTaskGroupQueue DsTaskGroupQueue = 3;
 }
 
-message UpdateDsTaskGroupQueueBeanRequest {
-  // The DsTaskGroupQueueBean resource which replaces the resource on the server.
-  DsTaskGroupQueueBean DsTaskGroupQueueBean = 1;
+message UpdateDsTaskGroupQueueRequest {
+  // The DsTaskGroupQueue resource which replaces the resource on the server.
+  DsTaskGroupQueue DsTaskGroupQueue = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsTaskGroupQueueBeanRequest {
-  // The resource name of the DsTaskGroupQueueBean to be deleted.
+message DeleteDsTaskGroupQueueRequest {
+  // The resource name of the DsTaskGroupQueue to be deleted.
   string name = 1;
 }

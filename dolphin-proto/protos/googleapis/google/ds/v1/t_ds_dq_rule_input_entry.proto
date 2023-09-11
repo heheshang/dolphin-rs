@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 package ds_dq_rule_input_entry;
 
 
-message DsDqRuleInputEntryBean {
+message DsDqRuleInputEntry {
 
      int32 id=1 ;
      optional string field=2 ;
@@ -30,45 +30,45 @@ message DsDqRuleInputEntryBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsDqRuleInputEntryBeanService {
-  rpc ListDsDqRuleInputEntryBeans(ListDsDqRuleInputEntryBeansRequest) returns (ListDsDqRuleInputEntryBeansResponse) {
+service DsDqRuleInputEntryService {
+  rpc ListDsDqRuleInputEntries(ListDsDqRuleInputEntriesRequest) returns (ListDsDqRuleInputEntriesResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsDqRuleInputEntryBeans"
+      get: "/v1alpha1/DsDqRuleInputEntries"
     };
   }
 
-  rpc GetDsDqRuleInputEntryBean(GetDsDqRuleInputEntryBeanRequest) returns (DsDqRuleInputEntryBean) {
+  rpc GetDsDqRuleInputEntry(GetDsDqRuleInputEntryRequest) returns (DsDqRuleInputEntry) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsDqRuleInputEntryBeans/*}"
+      get: "/v1alpha1/{name=DsDqRuleInputEntries/*}"
     };
   }
 
-  rpc CreateDsDqRuleInputEntryBean(CreateDsDqRuleInputEntryBeanRequest) returns (DsDqRuleInputEntryBean) {
+  rpc CreateDsDqRuleInputEntry(CreateDsDqRuleInputEntryRequest) returns (DsDqRuleInputEntry) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsDqRuleInputEntryBeans"
-      body: "DsDqRuleInputEntryBean"
+      post: "/v1alpha1/DsDqRuleInputEntries"
+      body: "DsDqRuleInputEntry"
     };
   }
 
-  rpc UpdateDsDqRuleInputEntryBean(UpdateDsDqRuleInputEntryBeanRequest) returns (DsDqRuleInputEntryBean) {
+  rpc UpdateDsDqRuleInputEntry(UpdateDsDqRuleInputEntryRequest) returns (DsDqRuleInputEntry) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsDqRuleInputEntryBean.name=DsDqRuleInputEntryBeans/*}"
-      body: "DsDqRuleInputEntryBean"
+      patch: "/v1alpha1/{DsDqRuleInputEntry.name=DsDqRuleInputEntries/*}"
+      body: "DsDqRuleInputEntry"
     };
   }
 
-  rpc DeleteDsDqRuleInputEntryBean(DeleteDsDqRuleInputEntryBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsDqRuleInputEntry(DeleteDsDqRuleInputEntryRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsDqRuleInputEntryBeans/*}"
+      delete: "/v1alpha1/{name=DsDqRuleInputEntries/*}"
     };
   }
 }
 
-// message DsDqRuleInputEntryBean {
+// message DsDqRuleInputEntry {
 // ! This should be defined elsewhere
 // }
 
-message ListDsDqRuleInputEntryBeansRequest {
+message ListDsDqRuleInputEntriesRequest {
 
 
   // The maximum number of items to return.
@@ -77,42 +77,42 @@ message ListDsDqRuleInputEntryBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsDqRuleInputEntryBeansResponse {
-  // The field name should match the noun "DsDqRuleInputEntryBean" in the method name.
+message ListDsDqRuleInputEntriesResponse {
+  // The field name should match the noun "DsDqRuleInputEntry" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsDqRuleInputEntryBean DsDqRuleInputEntryBeans = 1;
+  repeated DsDqRuleInputEntry DsDqRuleInputEntries = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsDqRuleInputEntryBeanRequest {
+message GetDsDqRuleInputEntryRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsDqRuleInputEntryBeanRequest {
-  // The parent resource name where the DsDqRuleInputEntryBean is to be created.
+message CreateDsDqRuleInputEntryRequest {
+  // The parent resource name where the DsDqRuleInputEntry is to be created.
   string parent = 1;
 
-  // The DsDqRuleInputEntryBean id to use for this DsDqRuleInputEntryBean.
-  string DsDqRuleInputEntryBean_id = 2;
+  // The DsDqRuleInputEntry id to use for this DsDqRuleInputEntry.
+  string DsDqRuleInputEntry_id = 2;
 
-  // The DsDqRuleInputEntryBean resource to create.
+  // The DsDqRuleInputEntry resource to create.
   // The field name should match the Noun in the method name.
-  DsDqRuleInputEntryBean DsDqRuleInputEntryBean = 3;
+  DsDqRuleInputEntry DsDqRuleInputEntry = 3;
 }
 
-message UpdateDsDqRuleInputEntryBeanRequest {
-  // The DsDqRuleInputEntryBean resource which replaces the resource on the server.
-  DsDqRuleInputEntryBean DsDqRuleInputEntryBean = 1;
+message UpdateDsDqRuleInputEntryRequest {
+  // The DsDqRuleInputEntry resource which replaces the resource on the server.
+  DsDqRuleInputEntry DsDqRuleInputEntry = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsDqRuleInputEntryBeanRequest {
-  // The resource name of the DsDqRuleInputEntryBean to be deleted.
+message DeleteDsDqRuleInputEntryRequest {
+  // The resource name of the DsDqRuleInputEntry to be deleted.
   string name = 1;
 }

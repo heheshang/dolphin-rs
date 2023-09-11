@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsEnvironmentWorkerGroupRelationBean {
+pub struct DsEnvironmentWorkerGroupRelation {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int64, tag = "2")]
@@ -18,7 +18,7 @@ pub struct DsEnvironmentWorkerGroupRelationBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsEnvironmentWorkerGroupRelationBeansRequest {
+pub struct ListDsEnvironmentWorkerGroupRelationsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -27,45 +27,45 @@ pub struct ListDsEnvironmentWorkerGroupRelationBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsEnvironmentWorkerGroupRelationBeansResponse {
-    /// The field name should match the noun "DsEnvironmentWorkerGroupRelationBean" in the method name.
+pub struct ListDsEnvironmentWorkerGroupRelationsResponse {
+    /// The field name should match the noun "DsEnvironmentWorkerGroupRelation" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_environment_worker_group_relation_beans:
-        ::prost::alloc::vec::Vec<DsEnvironmentWorkerGroupRelationBean>,
+    pub ds_environment_worker_group_relations:
+        ::prost::alloc::vec::Vec<DsEnvironmentWorkerGroupRelation>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsEnvironmentWorkerGroupRelationBeanRequest {
+pub struct GetDsEnvironmentWorkerGroupRelationRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsEnvironmentWorkerGroupRelationBeanRequest {
-    /// The parent resource name where the DsEnvironmentWorkerGroupRelationBean is to be created.
+pub struct CreateDsEnvironmentWorkerGroupRelationRequest {
+    /// The parent resource name where the DsEnvironmentWorkerGroupRelation is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsEnvironmentWorkerGroupRelationBean id to use for this DsEnvironmentWorkerGroupRelationBean.
+    /// The DsEnvironmentWorkerGroupRelation id to use for this DsEnvironmentWorkerGroupRelation.
     #[prost(string, tag = "2")]
-    pub ds_environment_worker_group_relation_bean_id: ::prost::alloc::string::String,
-    /// The DsEnvironmentWorkerGroupRelationBean resource to create.
+    pub ds_environment_worker_group_relation_id: ::prost::alloc::string::String,
+    /// The DsEnvironmentWorkerGroupRelation resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_environment_worker_group_relation_bean:
-        ::core::option::Option<DsEnvironmentWorkerGroupRelationBean>,
+    pub ds_environment_worker_group_relation:
+        ::core::option::Option<DsEnvironmentWorkerGroupRelation>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsEnvironmentWorkerGroupRelationBeanRequest {
-    /// The DsEnvironmentWorkerGroupRelationBean resource which replaces the resource on the server.
+pub struct UpdateDsEnvironmentWorkerGroupRelationRequest {
+    /// The DsEnvironmentWorkerGroupRelation resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_environment_worker_group_relation_bean:
-        ::core::option::Option<DsEnvironmentWorkerGroupRelationBean>,
+    pub ds_environment_worker_group_relation:
+        ::core::option::Option<DsEnvironmentWorkerGroupRelation>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -73,21 +73,21 @@ pub struct UpdateDsEnvironmentWorkerGroupRelationBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsEnvironmentWorkerGroupRelationBeanRequest {
-    /// The resource name of the DsEnvironmentWorkerGroupRelationBean to be deleted.
+pub struct DeleteDsEnvironmentWorkerGroupRelationRequest {
+    /// The resource name of the DsEnvironmentWorkerGroupRelation to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_environment_worker_group_relation_bean_service_client {
+pub mod ds_environment_worker_group_relation_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsEnvironmentWorkerGroupRelationBeanServiceClient<T> {
+    pub struct DsEnvironmentWorkerGroupRelationServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsEnvironmentWorkerGroupRelationBeanServiceClient<tonic::transport::Channel> {
+    impl DsEnvironmentWorkerGroupRelationServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -98,7 +98,7 @@ pub mod ds_environment_worker_group_relation_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsEnvironmentWorkerGroupRelationBeanServiceClient<T>
+    impl<T> DsEnvironmentWorkerGroupRelationServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -118,7 +118,7 @@ pub mod ds_environment_worker_group_relation_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsEnvironmentWorkerGroupRelationBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsEnvironmentWorkerGroupRelationServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -131,7 +131,7 @@ pub mod ds_environment_worker_group_relation_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsEnvironmentWorkerGroupRelationBeanServiceClient::new(InterceptedService::new(
+            DsEnvironmentWorkerGroupRelationServiceClient::new(InterceptedService::new(
                 inner,
                 interceptor,
             ))
@@ -172,11 +172,11 @@ pub mod ds_environment_worker_group_relation_bean_service_client {
             self
         }
 
-        pub async fn list_ds_environment_worker_group_relation_beans(
+        pub async fn list_ds_environment_worker_group_relations(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsEnvironmentWorkerGroupRelationBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsEnvironmentWorkerGroupRelationsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsEnvironmentWorkerGroupRelationBeansResponse>,
+            tonic::Response<super::ListDsEnvironmentWorkerGroupRelationsResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -187,23 +187,22 @@ pub mod ds_environment_worker_group_relation_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_environment_worker_group_relation.\
-                 DsEnvironmentWorkerGroupRelationBeanService/\
-                 ListDsEnvironmentWorkerGroupRelationBeans",
+                "/ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationService/\
+                 ListDsEnvironmentWorkerGroupRelations",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationBeanService",
-                "ListDsEnvironmentWorkerGroupRelationBeans",
+                "ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationService",
+                "ListDsEnvironmentWorkerGroupRelations",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_environment_worker_group_relation_bean(
+        pub async fn get_ds_environment_worker_group_relation(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsEnvironmentWorkerGroupRelationBeanRequest>,
+            request: impl tonic::IntoRequest<super::GetDsEnvironmentWorkerGroupRelationRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::DsEnvironmentWorkerGroupRelationBean>,
+            tonic::Response<super::DsEnvironmentWorkerGroupRelation>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -214,23 +213,22 @@ pub mod ds_environment_worker_group_relation_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_environment_worker_group_relation.\
-                 DsEnvironmentWorkerGroupRelationBeanService/\
-                 GetDsEnvironmentWorkerGroupRelationBean",
+                "/ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationService/\
+                 GetDsEnvironmentWorkerGroupRelation",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationBeanService",
-                "GetDsEnvironmentWorkerGroupRelationBean",
+                "ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationService",
+                "GetDsEnvironmentWorkerGroupRelation",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_environment_worker_group_relation_bean(
+        pub async fn create_ds_environment_worker_group_relation(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsEnvironmentWorkerGroupRelationBeanRequest>,
+            request: impl tonic::IntoRequest<super::CreateDsEnvironmentWorkerGroupRelationRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::DsEnvironmentWorkerGroupRelationBean>,
+            tonic::Response<super::DsEnvironmentWorkerGroupRelation>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -241,23 +239,22 @@ pub mod ds_environment_worker_group_relation_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_environment_worker_group_relation.\
-                 DsEnvironmentWorkerGroupRelationBeanService/\
-                 CreateDsEnvironmentWorkerGroupRelationBean",
+                "/ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationService/\
+                 CreateDsEnvironmentWorkerGroupRelation",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationBeanService",
-                "CreateDsEnvironmentWorkerGroupRelationBean",
+                "ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationService",
+                "CreateDsEnvironmentWorkerGroupRelation",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_environment_worker_group_relation_bean(
+        pub async fn update_ds_environment_worker_group_relation(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsEnvironmentWorkerGroupRelationBeanRequest>,
+            request: impl tonic::IntoRequest<super::UpdateDsEnvironmentWorkerGroupRelationRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::DsEnvironmentWorkerGroupRelationBean>,
+            tonic::Response<super::DsEnvironmentWorkerGroupRelation>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -268,21 +265,20 @@ pub mod ds_environment_worker_group_relation_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_environment_worker_group_relation.\
-                 DsEnvironmentWorkerGroupRelationBeanService/\
-                 UpdateDsEnvironmentWorkerGroupRelationBean",
+                "/ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationService/\
+                 UpdateDsEnvironmentWorkerGroupRelation",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationBeanService",
-                "UpdateDsEnvironmentWorkerGroupRelationBean",
+                "ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationService",
+                "UpdateDsEnvironmentWorkerGroupRelation",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_environment_worker_group_relation_bean(
+        pub async fn delete_ds_environment_worker_group_relation(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsEnvironmentWorkerGroupRelationBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsEnvironmentWorkerGroupRelationRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -292,63 +288,62 @@ pub mod ds_environment_worker_group_relation_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_environment_worker_group_relation.\
-                 DsEnvironmentWorkerGroupRelationBeanService/\
-                 DeleteDsEnvironmentWorkerGroupRelationBean",
+                "/ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationService/\
+                 DeleteDsEnvironmentWorkerGroupRelation",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationBeanService",
-                "DeleteDsEnvironmentWorkerGroupRelationBean",
+                "ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationService",
+                "DeleteDsEnvironmentWorkerGroupRelation",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_environment_worker_group_relation_bean_service_server {
+pub mod ds_environment_worker_group_relation_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsEnvironmentWorkerGroupRelationBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsEnvironmentWorkerGroupRelationServiceServer.
     #[async_trait]
-    pub trait DsEnvironmentWorkerGroupRelationBeanService: Send + Sync + 'static {
-        async fn list_ds_environment_worker_group_relation_beans(
+    pub trait DsEnvironmentWorkerGroupRelationService: Send + Sync + 'static {
+        async fn list_ds_environment_worker_group_relations(
             &self,
-            request: tonic::Request<super::ListDsEnvironmentWorkerGroupRelationBeansRequest>,
+            request: tonic::Request<super::ListDsEnvironmentWorkerGroupRelationsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsEnvironmentWorkerGroupRelationBeansResponse>,
+            tonic::Response<super::ListDsEnvironmentWorkerGroupRelationsResponse>,
             tonic::Status,
         >;
-        async fn get_ds_environment_worker_group_relation_bean(
+        async fn get_ds_environment_worker_group_relation(
             &self,
-            request: tonic::Request<super::GetDsEnvironmentWorkerGroupRelationBeanRequest>,
+            request: tonic::Request<super::GetDsEnvironmentWorkerGroupRelationRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::DsEnvironmentWorkerGroupRelationBean>,
+            tonic::Response<super::DsEnvironmentWorkerGroupRelation>,
             tonic::Status,
         >;
-        async fn create_ds_environment_worker_group_relation_bean(
+        async fn create_ds_environment_worker_group_relation(
             &self,
-            request: tonic::Request<super::CreateDsEnvironmentWorkerGroupRelationBeanRequest>,
+            request: tonic::Request<super::CreateDsEnvironmentWorkerGroupRelationRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::DsEnvironmentWorkerGroupRelationBean>,
+            tonic::Response<super::DsEnvironmentWorkerGroupRelation>,
             tonic::Status,
         >;
-        async fn update_ds_environment_worker_group_relation_bean(
+        async fn update_ds_environment_worker_group_relation(
             &self,
-            request: tonic::Request<super::UpdateDsEnvironmentWorkerGroupRelationBeanRequest>,
+            request: tonic::Request<super::UpdateDsEnvironmentWorkerGroupRelationRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::DsEnvironmentWorkerGroupRelationBean>,
+            tonic::Response<super::DsEnvironmentWorkerGroupRelation>,
             tonic::Status,
         >;
-        async fn delete_ds_environment_worker_group_relation_bean(
+        async fn delete_ds_environment_worker_group_relation(
             &self,
-            request: tonic::Request<super::DeleteDsEnvironmentWorkerGroupRelationBeanRequest>,
+            request: tonic::Request<super::DeleteDsEnvironmentWorkerGroupRelationRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsEnvironmentWorkerGroupRelationBeanServiceServer<
-        T: DsEnvironmentWorkerGroupRelationBeanService,
+    pub struct DsEnvironmentWorkerGroupRelationServiceServer<
+        T: DsEnvironmentWorkerGroupRelationService,
     > {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
@@ -357,9 +352,7 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsEnvironmentWorkerGroupRelationBeanService>
-        DsEnvironmentWorkerGroupRelationBeanServiceServer<T>
-    {
+    impl<T: DsEnvironmentWorkerGroupRelationService> DsEnvironmentWorkerGroupRelationServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -413,9 +406,9 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
         }
     }
     impl<T, B> tonic::codegen::Service<http::Request<B>>
-        for DsEnvironmentWorkerGroupRelationBeanServiceServer<T>
+        for DsEnvironmentWorkerGroupRelationServiceServer<T>
     where
-        T: DsEnvironmentWorkerGroupRelationBeanService,
+        T: DsEnvironmentWorkerGroupRelationService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -434,30 +427,29 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
             let inner = self.inner.clone();
             match req.uri().path() {
                 "/ds_environment_worker_group_relation.\
-                 DsEnvironmentWorkerGroupRelationBeanService/\
-                 ListDsEnvironmentWorkerGroupRelationBeans" => {
+                 DsEnvironmentWorkerGroupRelationService/ListDsEnvironmentWorkerGroupRelations" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsEnvironmentWorkerGroupRelationBeansSvc<T: DsEnvironmentWorkerGroupRelationBeanService>(
+                    struct ListDsEnvironmentWorkerGroupRelationsSvc<T: DsEnvironmentWorkerGroupRelationService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsEnvironmentWorkerGroupRelationBeanService>
+                    impl<T: DsEnvironmentWorkerGroupRelationService>
                         tonic::server::UnaryService<
-                            super::ListDsEnvironmentWorkerGroupRelationBeansRequest,
-                        > for ListDsEnvironmentWorkerGroupRelationBeansSvc<T>
+                            super::ListDsEnvironmentWorkerGroupRelationsRequest,
+                        > for ListDsEnvironmentWorkerGroupRelationsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsEnvironmentWorkerGroupRelationBeansResponse;
+                        type Response = super::ListDsEnvironmentWorkerGroupRelationsResponse;
 
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::ListDsEnvironmentWorkerGroupRelationBeansRequest,
+                                super::ListDsEnvironmentWorkerGroupRelationsRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
                                 (*inner)
-                                    .list_ds_environment_worker_group_relation_beans(request)
+                                    .list_ds_environment_worker_group_relations(request)
                                     .await
                             };
                             Box::pin(fut)
@@ -470,7 +462,7 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsEnvironmentWorkerGroupRelationBeansSvc(inner);
+                        let method = ListDsEnvironmentWorkerGroupRelationsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -487,30 +479,29 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
                     Box::pin(fut)
                 }
                 "/ds_environment_worker_group_relation.\
-                 DsEnvironmentWorkerGroupRelationBeanService/\
-                 GetDsEnvironmentWorkerGroupRelationBean" => {
+                 DsEnvironmentWorkerGroupRelationService/GetDsEnvironmentWorkerGroupRelation" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsEnvironmentWorkerGroupRelationBeanSvc<T: DsEnvironmentWorkerGroupRelationBeanService>(
+                    struct GetDsEnvironmentWorkerGroupRelationSvc<T: DsEnvironmentWorkerGroupRelationService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsEnvironmentWorkerGroupRelationBeanService>
+                    impl<T: DsEnvironmentWorkerGroupRelationService>
                         tonic::server::UnaryService<
-                            super::GetDsEnvironmentWorkerGroupRelationBeanRequest,
-                        > for GetDsEnvironmentWorkerGroupRelationBeanSvc<T>
+                            super::GetDsEnvironmentWorkerGroupRelationRequest,
+                        > for GetDsEnvironmentWorkerGroupRelationSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsEnvironmentWorkerGroupRelationBean;
+                        type Response = super::DsEnvironmentWorkerGroupRelation;
 
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::GetDsEnvironmentWorkerGroupRelationBeanRequest,
+                                super::GetDsEnvironmentWorkerGroupRelationRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
                                 (*inner)
-                                    .get_ds_environment_worker_group_relation_bean(request)
+                                    .get_ds_environment_worker_group_relation(request)
                                     .await
                             };
                             Box::pin(fut)
@@ -523,7 +514,7 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsEnvironmentWorkerGroupRelationBeanSvc(inner);
+                        let method = GetDsEnvironmentWorkerGroupRelationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -540,30 +531,30 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
                     Box::pin(fut)
                 }
                 "/ds_environment_worker_group_relation.\
-                 DsEnvironmentWorkerGroupRelationBeanService/\
-                 CreateDsEnvironmentWorkerGroupRelationBean" => {
+                 DsEnvironmentWorkerGroupRelationService/\
+                 CreateDsEnvironmentWorkerGroupRelation" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsEnvironmentWorkerGroupRelationBeanSvc<T: DsEnvironmentWorkerGroupRelationBeanService>(
+                    struct CreateDsEnvironmentWorkerGroupRelationSvc<T: DsEnvironmentWorkerGroupRelationService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsEnvironmentWorkerGroupRelationBeanService>
+                    impl<T: DsEnvironmentWorkerGroupRelationService>
                         tonic::server::UnaryService<
-                            super::CreateDsEnvironmentWorkerGroupRelationBeanRequest,
-                        > for CreateDsEnvironmentWorkerGroupRelationBeanSvc<T>
+                            super::CreateDsEnvironmentWorkerGroupRelationRequest,
+                        > for CreateDsEnvironmentWorkerGroupRelationSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsEnvironmentWorkerGroupRelationBean;
+                        type Response = super::DsEnvironmentWorkerGroupRelation;
 
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::CreateDsEnvironmentWorkerGroupRelationBeanRequest,
+                                super::CreateDsEnvironmentWorkerGroupRelationRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
                                 (*inner)
-                                    .create_ds_environment_worker_group_relation_bean(request)
+                                    .create_ds_environment_worker_group_relation(request)
                                     .await
                             };
                             Box::pin(fut)
@@ -576,7 +567,7 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsEnvironmentWorkerGroupRelationBeanSvc(inner);
+                        let method = CreateDsEnvironmentWorkerGroupRelationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -593,30 +584,30 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
                     Box::pin(fut)
                 }
                 "/ds_environment_worker_group_relation.\
-                 DsEnvironmentWorkerGroupRelationBeanService/\
-                 UpdateDsEnvironmentWorkerGroupRelationBean" => {
+                 DsEnvironmentWorkerGroupRelationService/\
+                 UpdateDsEnvironmentWorkerGroupRelation" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsEnvironmentWorkerGroupRelationBeanSvc<T: DsEnvironmentWorkerGroupRelationBeanService>(
+                    struct UpdateDsEnvironmentWorkerGroupRelationSvc<T: DsEnvironmentWorkerGroupRelationService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsEnvironmentWorkerGroupRelationBeanService>
+                    impl<T: DsEnvironmentWorkerGroupRelationService>
                         tonic::server::UnaryService<
-                            super::UpdateDsEnvironmentWorkerGroupRelationBeanRequest,
-                        > for UpdateDsEnvironmentWorkerGroupRelationBeanSvc<T>
+                            super::UpdateDsEnvironmentWorkerGroupRelationRequest,
+                        > for UpdateDsEnvironmentWorkerGroupRelationSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsEnvironmentWorkerGroupRelationBean;
+                        type Response = super::DsEnvironmentWorkerGroupRelation;
 
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::UpdateDsEnvironmentWorkerGroupRelationBeanRequest,
+                                super::UpdateDsEnvironmentWorkerGroupRelationRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
                                 (*inner)
-                                    .update_ds_environment_worker_group_relation_bean(request)
+                                    .update_ds_environment_worker_group_relation(request)
                                     .await
                             };
                             Box::pin(fut)
@@ -629,7 +620,7 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsEnvironmentWorkerGroupRelationBeanSvc(inner);
+                        let method = UpdateDsEnvironmentWorkerGroupRelationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -646,16 +637,16 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
                     Box::pin(fut)
                 }
                 "/ds_environment_worker_group_relation.\
-                 DsEnvironmentWorkerGroupRelationBeanService/\
-                 DeleteDsEnvironmentWorkerGroupRelationBean" => {
+                 DsEnvironmentWorkerGroupRelationService/\
+                 DeleteDsEnvironmentWorkerGroupRelation" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsEnvironmentWorkerGroupRelationBeanSvc<T: DsEnvironmentWorkerGroupRelationBeanService>(
+                    struct DeleteDsEnvironmentWorkerGroupRelationSvc<T: DsEnvironmentWorkerGroupRelationService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsEnvironmentWorkerGroupRelationBeanService>
+                    impl<T: DsEnvironmentWorkerGroupRelationService>
                         tonic::server::UnaryService<
-                            super::DeleteDsEnvironmentWorkerGroupRelationBeanRequest,
-                        > for DeleteDsEnvironmentWorkerGroupRelationBeanSvc<T>
+                            super::DeleteDsEnvironmentWorkerGroupRelationRequest,
+                        > for DeleteDsEnvironmentWorkerGroupRelationSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
@@ -663,13 +654,13 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::DeleteDsEnvironmentWorkerGroupRelationBeanRequest,
+                                super::DeleteDsEnvironmentWorkerGroupRelationRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
                                 (*inner)
-                                    .delete_ds_environment_worker_group_relation_bean(request)
+                                    .delete_ds_environment_worker_group_relation(request)
                                     .await
                             };
                             Box::pin(fut)
@@ -682,7 +673,7 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsEnvironmentWorkerGroupRelationBeanSvc(inner);
+                        let method = DeleteDsEnvironmentWorkerGroupRelationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -709,8 +700,8 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
             }
         }
     }
-    impl<T: DsEnvironmentWorkerGroupRelationBeanService> Clone
-        for DsEnvironmentWorkerGroupRelationBeanServiceServer<T>
+    impl<T: DsEnvironmentWorkerGroupRelationService> Clone
+        for DsEnvironmentWorkerGroupRelationServiceServer<T>
     {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
@@ -723,7 +714,7 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
             }
         }
     }
-    impl<T: DsEnvironmentWorkerGroupRelationBeanService> Clone for _Inner<T> {
+    impl<T: DsEnvironmentWorkerGroupRelationService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -733,10 +724,10 @@ pub mod ds_environment_worker_group_relation_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsEnvironmentWorkerGroupRelationBeanService> tonic::server::NamedService
-        for DsEnvironmentWorkerGroupRelationBeanServiceServer<T>
+    impl<T: DsEnvironmentWorkerGroupRelationService> tonic::server::NamedService
+        for DsEnvironmentWorkerGroupRelationServiceServer<T>
     {
         const NAME: &'static str =
-            "ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationBeanService";
+            "ds_environment_worker_group_relation.DsEnvironmentWorkerGroupRelationService";
     }
 }

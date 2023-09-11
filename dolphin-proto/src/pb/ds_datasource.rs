@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsDatasourceBean {
+pub struct DsDatasource {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, tag = "2")]
@@ -10,7 +10,7 @@ pub struct DsDatasourceBean {
     #[prost(string, optional, tag = "3")]
     pub note: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(int32, tag = "4")]
-    pub ds_datasource_bean: i32,
+    pub ds_datasource: i32,
     #[prost(int32, tag = "5")]
     pub user_id: i32,
     #[prost(string, tag = "6")]
@@ -22,7 +22,7 @@ pub struct DsDatasourceBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsDatasourceBeansRequest {
+pub struct ListDsDatasourcesRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -31,42 +31,42 @@ pub struct ListDsDatasourceBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsDatasourceBeansResponse {
-    /// The field name should match the noun "DsDatasourceBean" in the method name.
+pub struct ListDsDatasourcesResponse {
+    /// The field name should match the noun "DsDatasource" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_datasource_beans: ::prost::alloc::vec::Vec<DsDatasourceBean>,
+    pub ds_datasources: ::prost::alloc::vec::Vec<DsDatasource>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsDatasourceBeanRequest {
+pub struct GetDsDatasourceRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsDatasourceBeanRequest {
-    /// The parent resource name where the DsDatasourceBean is to be created.
+pub struct CreateDsDatasourceRequest {
+    /// The parent resource name where the DsDatasource is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsDatasourceBean id to use for this DsDatasourceBean.
+    /// The DsDatasource id to use for this DsDatasource.
     #[prost(string, tag = "2")]
-    pub ds_datasource_bean_id: ::prost::alloc::string::String,
-    /// The DsDatasourceBean resource to create.
+    pub ds_datasource_id: ::prost::alloc::string::String,
+    /// The DsDatasource resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_datasource_bean: ::core::option::Option<DsDatasourceBean>,
+    pub ds_datasource: ::core::option::Option<DsDatasource>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsDatasourceBeanRequest {
-    /// The DsDatasourceBean resource which replaces the resource on the server.
+pub struct UpdateDsDatasourceRequest {
+    /// The DsDatasource resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_datasource_bean: ::core::option::Option<DsDatasourceBean>,
+    pub ds_datasource: ::core::option::Option<DsDatasource>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -74,21 +74,21 @@ pub struct UpdateDsDatasourceBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsDatasourceBeanRequest {
-    /// The resource name of the DsDatasourceBean to be deleted.
+pub struct DeleteDsDatasourceRequest {
+    /// The resource name of the DsDatasource to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_datasource_bean_service_client {
+pub mod ds_datasource_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsDatasourceBeanServiceClient<T> {
+    pub struct DsDatasourceServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsDatasourceBeanServiceClient<tonic::transport::Channel> {
+    impl DsDatasourceServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -99,7 +99,7 @@ pub mod ds_datasource_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsDatasourceBeanServiceClient<T>
+    impl<T> DsDatasourceServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -119,7 +119,7 @@ pub mod ds_datasource_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsDatasourceBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsDatasourceServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -132,7 +132,7 @@ pub mod ds_datasource_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsDatasourceBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsDatasourceServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -170,10 +170,10 @@ pub mod ds_datasource_bean_service_client {
             self
         }
 
-        pub async fn list_ds_datasource_beans(
+        pub async fn list_ds_datasources(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsDatasourceBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsDatasourceBeansResponse>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsDatasourcesRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsDatasourcesResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -183,20 +183,20 @@ pub mod ds_datasource_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_datasource.DsDatasourceBeanService/ListDsDatasourceBeans",
+                "/ds_datasource.DsDatasourceService/ListDsDatasources",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_datasource.DsDatasourceBeanService",
-                "ListDsDatasourceBeans",
+                "ds_datasource.DsDatasourceService",
+                "ListDsDatasources",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_datasource_bean(
+        pub async fn get_ds_datasource(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsDatasourceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDatasourceBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetDsDatasourceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDatasource>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -205,20 +205,20 @@ pub mod ds_datasource_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_datasource.DsDatasourceBeanService/GetDsDatasourceBean",
+                "/ds_datasource.DsDatasourceService/GetDsDatasource",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_datasource.DsDatasourceBeanService",
-                "GetDsDatasourceBean",
+                "ds_datasource.DsDatasourceService",
+                "GetDsDatasource",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_datasource_bean(
+        pub async fn create_ds_datasource(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsDatasourceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDatasourceBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::CreateDsDatasourceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDatasource>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -227,20 +227,20 @@ pub mod ds_datasource_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_datasource.DsDatasourceBeanService/CreateDsDatasourceBean",
+                "/ds_datasource.DsDatasourceService/CreateDsDatasource",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_datasource.DsDatasourceBeanService",
-                "CreateDsDatasourceBean",
+                "ds_datasource.DsDatasourceService",
+                "CreateDsDatasource",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_datasource_bean(
+        pub async fn update_ds_datasource(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsDatasourceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDatasourceBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateDsDatasourceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDatasource>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -249,19 +249,19 @@ pub mod ds_datasource_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_datasource.DsDatasourceBeanService/UpdateDsDatasourceBean",
+                "/ds_datasource.DsDatasourceService/UpdateDsDatasource",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_datasource.DsDatasourceBeanService",
-                "UpdateDsDatasourceBean",
+                "ds_datasource.DsDatasourceService",
+                "UpdateDsDatasource",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_datasource_bean(
+        pub async fn delete_ds_datasource(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsDatasourceBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsDatasourceRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -271,48 +271,48 @@ pub mod ds_datasource_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_datasource.DsDatasourceBeanService/DeleteDsDatasourceBean",
+                "/ds_datasource.DsDatasourceService/DeleteDsDatasource",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_datasource.DsDatasourceBeanService",
-                "DeleteDsDatasourceBean",
+                "ds_datasource.DsDatasourceService",
+                "DeleteDsDatasource",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_datasource_bean_service_server {
+pub mod ds_datasource_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsDatasourceBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsDatasourceServiceServer.
     #[async_trait]
-    pub trait DsDatasourceBeanService: Send + Sync + 'static {
-        async fn list_ds_datasource_beans(
+    pub trait DsDatasourceService: Send + Sync + 'static {
+        async fn list_ds_datasources(
             &self,
-            request: tonic::Request<super::ListDsDatasourceBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsDatasourceBeansResponse>, tonic::Status>;
-        async fn get_ds_datasource_bean(
+            request: tonic::Request<super::ListDsDatasourcesRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsDatasourcesResponse>, tonic::Status>;
+        async fn get_ds_datasource(
             &self,
-            request: tonic::Request<super::GetDsDatasourceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDatasourceBean>, tonic::Status>;
-        async fn create_ds_datasource_bean(
+            request: tonic::Request<super::GetDsDatasourceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDatasource>, tonic::Status>;
+        async fn create_ds_datasource(
             &self,
-            request: tonic::Request<super::CreateDsDatasourceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDatasourceBean>, tonic::Status>;
-        async fn update_ds_datasource_bean(
+            request: tonic::Request<super::CreateDsDatasourceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDatasource>, tonic::Status>;
+        async fn update_ds_datasource(
             &self,
-            request: tonic::Request<super::UpdateDsDatasourceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsDatasourceBean>, tonic::Status>;
-        async fn delete_ds_datasource_bean(
+            request: tonic::Request<super::UpdateDsDatasourceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsDatasource>, tonic::Status>;
+        async fn delete_ds_datasource(
             &self,
-            request: tonic::Request<super::DeleteDsDatasourceBeanRequest>,
+            request: tonic::Request<super::DeleteDsDatasourceRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsDatasourceBeanServiceServer<T: DsDatasourceBeanService> {
+    pub struct DsDatasourceServiceServer<T: DsDatasourceService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -320,7 +320,7 @@ pub mod ds_datasource_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsDatasourceBeanService> DsDatasourceBeanServiceServer<T> {
+    impl<T: DsDatasourceService> DsDatasourceServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -373,9 +373,9 @@ pub mod ds_datasource_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsDatasourceBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsDatasourceServiceServer<T>
     where
-        T: DsDatasourceBeanService,
+        T: DsDatasourceService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -393,23 +393,22 @@ pub mod ds_datasource_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_datasource.DsDatasourceBeanService/ListDsDatasourceBeans" => {
+                "/ds_datasource.DsDatasourceService/ListDsDatasources" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsDatasourceBeansSvc<T: DsDatasourceBeanService>(pub Arc<T>);
-                    impl<T: DsDatasourceBeanService>
-                        tonic::server::UnaryService<super::ListDsDatasourceBeansRequest>
-                        for ListDsDatasourceBeansSvc<T>
+                    struct ListDsDatasourcesSvc<T: DsDatasourceService>(pub Arc<T>);
+                    impl<T: DsDatasourceService>
+                        tonic::server::UnaryService<super::ListDsDatasourcesRequest>
+                        for ListDsDatasourcesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsDatasourceBeansResponse;
+                        type Response = super::ListDsDatasourcesResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsDatasourceBeansRequest>,
+                            request: tonic::Request<super::ListDsDatasourcesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_ds_datasource_beans(request).await };
+                            let fut = async move { (*inner).list_ds_datasources(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -420,7 +419,7 @@ pub mod ds_datasource_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsDatasourceBeansSvc(inner);
+                        let method = ListDsDatasourcesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -436,22 +435,22 @@ pub mod ds_datasource_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_datasource.DsDatasourceBeanService/GetDsDatasourceBean" => {
+                "/ds_datasource.DsDatasourceService/GetDsDatasource" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsDatasourceBeanSvc<T: DsDatasourceBeanService>(pub Arc<T>);
-                    impl<T: DsDatasourceBeanService>
-                        tonic::server::UnaryService<super::GetDsDatasourceBeanRequest>
-                        for GetDsDatasourceBeanSvc<T>
+                    struct GetDsDatasourceSvc<T: DsDatasourceService>(pub Arc<T>);
+                    impl<T: DsDatasourceService>
+                        tonic::server::UnaryService<super::GetDsDatasourceRequest>
+                        for GetDsDatasourceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDatasourceBean;
+                        type Response = super::DsDatasource;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsDatasourceBeanRequest>,
+                            request: tonic::Request<super::GetDsDatasourceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_ds_datasource_bean(request).await };
+                            let fut = async move { (*inner).get_ds_datasource(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -462,7 +461,7 @@ pub mod ds_datasource_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsDatasourceBeanSvc(inner);
+                        let method = GetDsDatasourceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -478,23 +477,22 @@ pub mod ds_datasource_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_datasource.DsDatasourceBeanService/CreateDsDatasourceBean" => {
+                "/ds_datasource.DsDatasourceService/CreateDsDatasource" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsDatasourceBeanSvc<T: DsDatasourceBeanService>(pub Arc<T>);
-                    impl<T: DsDatasourceBeanService>
-                        tonic::server::UnaryService<super::CreateDsDatasourceBeanRequest>
-                        for CreateDsDatasourceBeanSvc<T>
+                    struct CreateDsDatasourceSvc<T: DsDatasourceService>(pub Arc<T>);
+                    impl<T: DsDatasourceService>
+                        tonic::server::UnaryService<super::CreateDsDatasourceRequest>
+                        for CreateDsDatasourceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDatasourceBean;
+                        type Response = super::DsDatasource;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsDatasourceBeanRequest>,
+                            request: tonic::Request<super::CreateDsDatasourceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).create_ds_datasource_bean(request).await };
+                            let fut = async move { (*inner).create_ds_datasource(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -505,7 +503,7 @@ pub mod ds_datasource_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsDatasourceBeanSvc(inner);
+                        let method = CreateDsDatasourceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -521,23 +519,22 @@ pub mod ds_datasource_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_datasource.DsDatasourceBeanService/UpdateDsDatasourceBean" => {
+                "/ds_datasource.DsDatasourceService/UpdateDsDatasource" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsDatasourceBeanSvc<T: DsDatasourceBeanService>(pub Arc<T>);
-                    impl<T: DsDatasourceBeanService>
-                        tonic::server::UnaryService<super::UpdateDsDatasourceBeanRequest>
-                        for UpdateDsDatasourceBeanSvc<T>
+                    struct UpdateDsDatasourceSvc<T: DsDatasourceService>(pub Arc<T>);
+                    impl<T: DsDatasourceService>
+                        tonic::server::UnaryService<super::UpdateDsDatasourceRequest>
+                        for UpdateDsDatasourceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsDatasourceBean;
+                        type Response = super::DsDatasource;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsDatasourceBeanRequest>,
+                            request: tonic::Request<super::UpdateDsDatasourceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).update_ds_datasource_bean(request).await };
+                            let fut = async move { (*inner).update_ds_datasource(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -548,7 +545,7 @@ pub mod ds_datasource_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsDatasourceBeanSvc(inner);
+                        let method = UpdateDsDatasourceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -564,23 +561,22 @@ pub mod ds_datasource_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_datasource.DsDatasourceBeanService/DeleteDsDatasourceBean" => {
+                "/ds_datasource.DsDatasourceService/DeleteDsDatasource" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsDatasourceBeanSvc<T: DsDatasourceBeanService>(pub Arc<T>);
-                    impl<T: DsDatasourceBeanService>
-                        tonic::server::UnaryService<super::DeleteDsDatasourceBeanRequest>
-                        for DeleteDsDatasourceBeanSvc<T>
+                    struct DeleteDsDatasourceSvc<T: DsDatasourceService>(pub Arc<T>);
+                    impl<T: DsDatasourceService>
+                        tonic::server::UnaryService<super::DeleteDsDatasourceRequest>
+                        for DeleteDsDatasourceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsDatasourceBeanRequest>,
+                            request: tonic::Request<super::DeleteDsDatasourceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).delete_ds_datasource_bean(request).await };
+                            let fut = async move { (*inner).delete_ds_datasource(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -591,7 +587,7 @@ pub mod ds_datasource_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsDatasourceBeanSvc(inner);
+                        let method = DeleteDsDatasourceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -618,7 +614,7 @@ pub mod ds_datasource_bean_service_server {
             }
         }
     }
-    impl<T: DsDatasourceBeanService> Clone for DsDatasourceBeanServiceServer<T> {
+    impl<T: DsDatasourceService> Clone for DsDatasourceServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -630,7 +626,7 @@ pub mod ds_datasource_bean_service_server {
             }
         }
     }
-    impl<T: DsDatasourceBeanService> Clone for _Inner<T> {
+    impl<T: DsDatasourceService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -640,7 +636,7 @@ pub mod ds_datasource_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsDatasourceBeanService> tonic::server::NamedService for DsDatasourceBeanServiceServer<T> {
-        const NAME: &'static str = "ds_datasource.DsDatasourceBeanService";
+    impl<T: DsDatasourceService> tonic::server::NamedService for DsDatasourceServiceServer<T> {
+        const NAME: &'static str = "ds_datasource.DsDatasourceService";
     }
 }

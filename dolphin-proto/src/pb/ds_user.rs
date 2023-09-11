@@ -1,8 +1,13 @@
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "snake_case")]
+#[serde_with::serde_as]
+#[serde_with::skip_serializing_none]
+#[derive(derive_builder::Builder)]
+#[builder(setter(into, strip_option), default)]
+#[builder(build_fn(name = "private_build"))]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsUserBean {
+pub struct DsUser {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, optional, tag = "2")]
@@ -19,9 +24,11 @@ pub struct DsUserBean {
     pub tenant_id: ::core::option::Option<i32>,
     /// google.protobuf.Timestamp create_time=8;
     #[prost(string, optional, tag = "8")]
+    #[serde_as(as = "DisplayFromStr")]
     pub create_time: ::core::option::Option<::prost::alloc::string::String>,
     /// optional google.protobuf.Timestamp update_time=9;
     #[prost(string, optional, tag = "9")]
+    #[serde_as(as = "DisplayFromStr")]
     pub update_time: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(string, optional, tag = "10")]
     pub queue: ::core::option::Option<::prost::alloc::string::String>,
@@ -40,7 +47,7 @@ pub struct QueryUserByNamePasswordRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsUserBeansRequest {
+pub struct ListDsUsersRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -49,11 +56,11 @@ pub struct ListDsUserBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsUserBeansResponse {
-    /// The field name should match the noun "DsUserBean" in the method name.
+pub struct ListDsUsersResponse {
+    /// The field name should match the noun "DsUser" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_user_beans: ::prost::alloc::vec::Vec<DsUserBean>,
+    pub ds_users: ::prost::alloc::vec::Vec<DsUser>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
@@ -62,7 +69,7 @@ pub struct ListDsUserBeansResponse {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDsUserByIdResponse {
     #[prost(message, optional, tag = "1")]
-    pub ds_user_bean: ::core::option::Option<DsUserBean>,
+    pub ds_user: ::core::option::Option<DsUser>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -73,31 +80,31 @@ pub struct GetDsUserByIdRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsUserBeanRequest {
+pub struct GetDsUserRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsUserBeanRequest {
-    /// The parent resource name where the DsUserBean is to be created.
+pub struct CreateDsUserRequest {
+    /// The parent resource name where the DsUser is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsUserBean id to use for this DsUserBean.
+    /// The DsUser id to use for this DsUser.
     #[prost(string, tag = "2")]
-    pub ds_user_bean_id: ::prost::alloc::string::String,
-    /// The DsUserBean resource to create.
+    pub ds_user_id: ::prost::alloc::string::String,
+    /// The DsUser resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_user_bean: ::core::option::Option<DsUserBean>,
+    pub ds_user: ::core::option::Option<DsUser>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsUserBeanRequest {
-    /// The DsUserBean resource which replaces the resource on the server.
+pub struct UpdateDsUserRequest {
+    /// The DsUser resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_user_bean: ::core::option::Option<DsUserBean>,
+    pub ds_user: ::core::option::Option<DsUser>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -105,8 +112,8 @@ pub struct UpdateDsUserBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsUserBeanRequest {
-    /// The resource name of the DsUserBean to be deleted.
+pub struct DeleteDsUserRequest {
+    /// The resource name of the DsUser to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -140,15 +147,15 @@ impl Flag {
     }
 }
 /// Generated client implementations.
-pub mod ds_user_bean_service_client {
+pub mod ds_user_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsUserBeanServiceClient<T> {
+    pub struct DsUserServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsUserBeanServiceClient<tonic::transport::Channel> {
+    impl DsUserServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -159,7 +166,7 @@ pub mod ds_user_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsUserBeanServiceClient<T>
+    impl<T> DsUserServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -179,7 +186,7 @@ pub mod ds_user_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsUserBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsUserServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -192,7 +199,7 @@ pub mod ds_user_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsUserBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsUserServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -230,10 +237,10 @@ pub mod ds_user_bean_service_client {
             self
         }
 
-        pub async fn list_ds_user_beans(
+        pub async fn list_ds_users(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsUserBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsUserBeansResponse>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsUsersRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsUsersResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -242,20 +249,17 @@ pub mod ds_user_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/ds_user.DsUserBeanService/ListDsUserBeans");
+            let path = http::uri::PathAndQuery::from_static("/ds_user.DsUserService/ListDsUsers");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_user.DsUserBeanService",
-                "ListDsUserBeans",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_user.DsUserService", "ListDsUsers"));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_user_bean(
+        pub async fn get_ds_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsUserBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetDsUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsUser>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -263,13 +267,10 @@ pub mod ds_user_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/ds_user.DsUserBeanService/GetDsUserBean");
+            let path = http::uri::PathAndQuery::from_static("/ds_user.DsUserService/GetDsUser");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_user.DsUserBeanService",
-                "GetDsUserBean",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_user.DsUserService", "GetDsUser"));
             self.inner.unary(req, path, codec).await
         }
 
@@ -285,20 +286,17 @@ pub mod ds_user_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/ds_user.DsUserBeanService/GetDsUserById");
+            let path = http::uri::PathAndQuery::from_static("/ds_user.DsUserService/GetDsUserById");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_user.DsUserBeanService",
-                "GetDsUserById",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_user.DsUserService", "GetDsUserById"));
             self.inner.unary(req, path, codec).await
         }
 
         pub async fn query_user_by_name_password(
             &mut self,
             request: impl tonic::IntoRequest<super::QueryUserByNamePasswordRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsUserBean>, tonic::Status> {
+        ) -> std::result::Result<tonic::Response<super::DsUser>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -307,20 +305,20 @@ pub mod ds_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_user.DsUserBeanService/QueryUserByNamePassword",
+                "/ds_user.DsUserService/QueryUserByNamePassword",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_user.DsUserBeanService",
+                "ds_user.DsUserService",
                 "QueryUserByNamePassword",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_user_bean(
+        pub async fn create_ds_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsUserBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::CreateDsUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsUser>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -328,20 +326,17 @@ pub mod ds_user_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/ds_user.DsUserBeanService/CreateDsUserBean");
+            let path = http::uri::PathAndQuery::from_static("/ds_user.DsUserService/CreateDsUser");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_user.DsUserBeanService",
-                "CreateDsUserBean",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_user.DsUserService", "CreateDsUser"));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_user_bean(
+        pub async fn update_ds_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsUserBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateDsUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsUser>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -349,19 +344,16 @@ pub mod ds_user_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/ds_user.DsUserBeanService/UpdateDsUserBean");
+            let path = http::uri::PathAndQuery::from_static("/ds_user.DsUserService/UpdateDsUser");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_user.DsUserBeanService",
-                "UpdateDsUserBean",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_user.DsUserService", "UpdateDsUser"));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_user_bean(
+        pub async fn delete_ds_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsUserBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsUserRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -370,32 +362,29 @@ pub mod ds_user_bean_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/ds_user.DsUserBeanService/DeleteDsUserBean");
+            let path = http::uri::PathAndQuery::from_static("/ds_user.DsUserService/DeleteDsUser");
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_user.DsUserBeanService",
-                "DeleteDsUserBean",
-            ));
+            req.extensions_mut()
+                .insert(GrpcMethod::new("ds_user.DsUserService", "DeleteDsUser"));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_user_bean_service_server {
+pub mod ds_user_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsUserBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsUserServiceServer.
     #[async_trait]
-    pub trait DsUserBeanService: Send + Sync + 'static {
-        async fn list_ds_user_beans(
+    pub trait DsUserService: Send + Sync + 'static {
+        async fn list_ds_users(
             &self,
-            request: tonic::Request<super::ListDsUserBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsUserBeansResponse>, tonic::Status>;
-        async fn get_ds_user_bean(
+            request: tonic::Request<super::ListDsUsersRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsUsersResponse>, tonic::Status>;
+        async fn get_ds_user(
             &self,
-            request: tonic::Request<super::GetDsUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsUserBean>, tonic::Status>;
+            request: tonic::Request<super::GetDsUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsUser>, tonic::Status>;
         async fn get_ds_user_by_id(
             &self,
             request: tonic::Request<super::GetDsUserByIdRequest>,
@@ -403,23 +392,23 @@ pub mod ds_user_bean_service_server {
         async fn query_user_by_name_password(
             &self,
             request: tonic::Request<super::QueryUserByNamePasswordRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsUserBean>, tonic::Status>;
-        async fn create_ds_user_bean(
+        ) -> std::result::Result<tonic::Response<super::DsUser>, tonic::Status>;
+        async fn create_ds_user(
             &self,
-            request: tonic::Request<super::CreateDsUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsUserBean>, tonic::Status>;
-        async fn update_ds_user_bean(
+            request: tonic::Request<super::CreateDsUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsUser>, tonic::Status>;
+        async fn update_ds_user(
             &self,
-            request: tonic::Request<super::UpdateDsUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsUserBean>, tonic::Status>;
-        async fn delete_ds_user_bean(
+            request: tonic::Request<super::UpdateDsUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsUser>, tonic::Status>;
+        async fn delete_ds_user(
             &self,
-            request: tonic::Request<super::DeleteDsUserBeanRequest>,
+            request: tonic::Request<super::DeleteDsUserRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsUserBeanServiceServer<T: DsUserBeanService> {
+    pub struct DsUserServiceServer<T: DsUserService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -427,7 +416,7 @@ pub mod ds_user_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsUserBeanService> DsUserBeanServiceServer<T> {
+    impl<T: DsUserService> DsUserServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -480,9 +469,9 @@ pub mod ds_user_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsUserBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsUserServiceServer<T>
     where
-        T: DsUserBeanService,
+        T: DsUserService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -500,22 +489,21 @@ pub mod ds_user_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_user.DsUserBeanService/ListDsUserBeans" => {
+                "/ds_user.DsUserService/ListDsUsers" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsUserBeansSvc<T: DsUserBeanService>(pub Arc<T>);
-                    impl<T: DsUserBeanService>
-                        tonic::server::UnaryService<super::ListDsUserBeansRequest>
-                        for ListDsUserBeansSvc<T>
+                    struct ListDsUsersSvc<T: DsUserService>(pub Arc<T>);
+                    impl<T: DsUserService> tonic::server::UnaryService<super::ListDsUsersRequest>
+                        for ListDsUsersSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsUserBeansResponse;
+                        type Response = super::ListDsUsersResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsUserBeansRequest>,
+                            request: tonic::Request<super::ListDsUsersRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).list_ds_user_beans(request).await };
+                            let fut = async move { (*inner).list_ds_users(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -526,7 +514,7 @@ pub mod ds_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsUserBeansSvc(inner);
+                        let method = ListDsUsersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -542,22 +530,19 @@ pub mod ds_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_user.DsUserBeanService/GetDsUserBean" => {
+                "/ds_user.DsUserService/GetDsUser" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsUserBeanSvc<T: DsUserBeanService>(pub Arc<T>);
-                    impl<T: DsUserBeanService>
-                        tonic::server::UnaryService<super::GetDsUserBeanRequest>
-                        for GetDsUserBeanSvc<T>
-                    {
+                    struct GetDsUserSvc<T: DsUserService>(pub Arc<T>);
+                    impl<T: DsUserService> tonic::server::UnaryService<super::GetDsUserRequest> for GetDsUserSvc<T> {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsUserBean;
+                        type Response = super::DsUser;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsUserBeanRequest>,
+                            request: tonic::Request<super::GetDsUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_ds_user_bean(request).await };
+                            let fut = async move { (*inner).get_ds_user(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -568,7 +553,7 @@ pub mod ds_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsUserBeanSvc(inner);
+                        let method = GetDsUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -584,11 +569,10 @@ pub mod ds_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_user.DsUserBeanService/GetDsUserById" => {
+                "/ds_user.DsUserService/GetDsUserById" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsUserByIdSvc<T: DsUserBeanService>(pub Arc<T>);
-                    impl<T: DsUserBeanService>
-                        tonic::server::UnaryService<super::GetDsUserByIdRequest>
+                    struct GetDsUserByIdSvc<T: DsUserService>(pub Arc<T>);
+                    impl<T: DsUserService> tonic::server::UnaryService<super::GetDsUserByIdRequest>
                         for GetDsUserByIdSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
@@ -626,15 +610,15 @@ pub mod ds_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_user.DsUserBeanService/QueryUserByNamePassword" => {
+                "/ds_user.DsUserService/QueryUserByNamePassword" => {
                     #[allow(non_camel_case_types)]
-                    struct QueryUserByNamePasswordSvc<T: DsUserBeanService>(pub Arc<T>);
-                    impl<T: DsUserBeanService>
+                    struct QueryUserByNamePasswordSvc<T: DsUserService>(pub Arc<T>);
+                    impl<T: DsUserService>
                         tonic::server::UnaryService<super::QueryUserByNamePasswordRequest>
                         for QueryUserByNamePasswordSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsUserBean;
+                        type Response = super::DsUser;
 
                         fn call(
                             &mut self,
@@ -669,22 +653,21 @@ pub mod ds_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_user.DsUserBeanService/CreateDsUserBean" => {
+                "/ds_user.DsUserService/CreateDsUser" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsUserBeanSvc<T: DsUserBeanService>(pub Arc<T>);
-                    impl<T: DsUserBeanService>
-                        tonic::server::UnaryService<super::CreateDsUserBeanRequest>
-                        for CreateDsUserBeanSvc<T>
+                    struct CreateDsUserSvc<T: DsUserService>(pub Arc<T>);
+                    impl<T: DsUserService> tonic::server::UnaryService<super::CreateDsUserRequest>
+                        for CreateDsUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsUserBean;
+                        type Response = super::DsUser;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsUserBeanRequest>,
+                            request: tonic::Request<super::CreateDsUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).create_ds_user_bean(request).await };
+                            let fut = async move { (*inner).create_ds_user(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -695,7 +678,7 @@ pub mod ds_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsUserBeanSvc(inner);
+                        let method = CreateDsUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -711,22 +694,21 @@ pub mod ds_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_user.DsUserBeanService/UpdateDsUserBean" => {
+                "/ds_user.DsUserService/UpdateDsUser" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsUserBeanSvc<T: DsUserBeanService>(pub Arc<T>);
-                    impl<T: DsUserBeanService>
-                        tonic::server::UnaryService<super::UpdateDsUserBeanRequest>
-                        for UpdateDsUserBeanSvc<T>
+                    struct UpdateDsUserSvc<T: DsUserService>(pub Arc<T>);
+                    impl<T: DsUserService> tonic::server::UnaryService<super::UpdateDsUserRequest>
+                        for UpdateDsUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsUserBean;
+                        type Response = super::DsUser;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsUserBeanRequest>,
+                            request: tonic::Request<super::UpdateDsUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).update_ds_user_bean(request).await };
+                            let fut = async move { (*inner).update_ds_user(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -737,7 +719,7 @@ pub mod ds_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsUserBeanSvc(inner);
+                        let method = UpdateDsUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -753,22 +735,21 @@ pub mod ds_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_user.DsUserBeanService/DeleteDsUserBean" => {
+                "/ds_user.DsUserService/DeleteDsUser" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsUserBeanSvc<T: DsUserBeanService>(pub Arc<T>);
-                    impl<T: DsUserBeanService>
-                        tonic::server::UnaryService<super::DeleteDsUserBeanRequest>
-                        for DeleteDsUserBeanSvc<T>
+                    struct DeleteDsUserSvc<T: DsUserService>(pub Arc<T>);
+                    impl<T: DsUserService> tonic::server::UnaryService<super::DeleteDsUserRequest>
+                        for DeleteDsUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsUserBeanRequest>,
+                            request: tonic::Request<super::DeleteDsUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).delete_ds_user_bean(request).await };
+                            let fut = async move { (*inner).delete_ds_user(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -779,7 +760,7 @@ pub mod ds_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsUserBeanSvc(inner);
+                        let method = DeleteDsUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -806,7 +787,7 @@ pub mod ds_user_bean_service_server {
             }
         }
     }
-    impl<T: DsUserBeanService> Clone for DsUserBeanServiceServer<T> {
+    impl<T: DsUserService> Clone for DsUserServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -818,7 +799,7 @@ pub mod ds_user_bean_service_server {
             }
         }
     }
-    impl<T: DsUserBeanService> Clone for _Inner<T> {
+    impl<T: DsUserService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -828,7 +809,7 @@ pub mod ds_user_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsUserBeanService> tonic::server::NamedService for DsUserBeanServiceServer<T> {
-        const NAME: &'static str = "ds_user.DsUserBeanService";
+    impl<T: DsUserService> tonic::server::NamedService for DsUserServiceServer<T> {
+        const NAME: &'static str = "ds_user.DsUserService";
     }
 }

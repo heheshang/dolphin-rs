@@ -6,7 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 package ds_relation_namespace_user;
 
-message DsRelationNamespaceUserBean {
+message DsRelationNamespaceUser {
 
      int32 id=1 ;
      optional int32  user_id=2 ;
@@ -18,45 +18,45 @@ message DsRelationNamespaceUserBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsRelationNamespaceUserBeanService {
-  rpc ListDsRelationNamespaceUserBeans(ListDsRelationNamespaceUserBeansRequest) returns (ListDsRelationNamespaceUserBeansResponse) {
+service DsRelationNamespaceUserService {
+  rpc ListDsRelationNamespaceUsers(ListDsRelationNamespaceUsersRequest) returns (ListDsRelationNamespaceUsersResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsRelationNamespaceUserBeans"
+      get: "/v1alpha1/DsRelationNamespaceUsers"
     };
   }
 
-  rpc GetDsRelationNamespaceUserBean(GetDsRelationNamespaceUserBeanRequest) returns (DsRelationNamespaceUserBean) {
+  rpc GetDsRelationNamespaceUser(GetDsRelationNamespaceUserRequest) returns (DsRelationNamespaceUser) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsRelationNamespaceUserBeans/*}"
+      get: "/v1alpha1/{name=DsRelationNamespaceUsers/*}"
     };
   }
 
-  rpc CreateDsRelationNamespaceUserBean(CreateDsRelationNamespaceUserBeanRequest) returns (DsRelationNamespaceUserBean) {
+  rpc CreateDsRelationNamespaceUser(CreateDsRelationNamespaceUserRequest) returns (DsRelationNamespaceUser) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsRelationNamespaceUserBeans"
-      body: "DsRelationNamespaceUserBean"
+      post: "/v1alpha1/DsRelationNamespaceUsers"
+      body: "DsRelationNamespaceUser"
     };
   }
 
-  rpc UpdateDsRelationNamespaceUserBean(UpdateDsRelationNamespaceUserBeanRequest) returns (DsRelationNamespaceUserBean) {
+  rpc UpdateDsRelationNamespaceUser(UpdateDsRelationNamespaceUserRequest) returns (DsRelationNamespaceUser) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsRelationNamespaceUserBean.name=DsRelationNamespaceUserBeans/*}"
-      body: "DsRelationNamespaceUserBean"
+      patch: "/v1alpha1/{DsRelationNamespaceUser.name=DsRelationNamespaceUsers/*}"
+      body: "DsRelationNamespaceUser"
     };
   }
 
-  rpc DeleteDsRelationNamespaceUserBean(DeleteDsRelationNamespaceUserBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsRelationNamespaceUser(DeleteDsRelationNamespaceUserRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsRelationNamespaceUserBeans/*}"
+      delete: "/v1alpha1/{name=DsRelationNamespaceUsers/*}"
     };
   }
 }
 
-// message DsRelationNamespaceUserBean {
+// message DsRelationNamespaceUser {
 // ! This should be defined elsewhere
 // }
 
-message ListDsRelationNamespaceUserBeansRequest {
+message ListDsRelationNamespaceUsersRequest {
 
 
   // The maximum number of items to return.
@@ -65,42 +65,42 @@ message ListDsRelationNamespaceUserBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsRelationNamespaceUserBeansResponse {
-  // The field name should match the noun "DsRelationNamespaceUserBean" in the method name.
+message ListDsRelationNamespaceUsersResponse {
+  // The field name should match the noun "DsRelationNamespaceUser" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsRelationNamespaceUserBean DsRelationNamespaceUserBeans = 1;
+  repeated DsRelationNamespaceUser DsRelationNamespaceUsers = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsRelationNamespaceUserBeanRequest {
+message GetDsRelationNamespaceUserRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsRelationNamespaceUserBeanRequest {
-  // The parent resource name where the DsRelationNamespaceUserBean is to be created.
+message CreateDsRelationNamespaceUserRequest {
+  // The parent resource name where the DsRelationNamespaceUser is to be created.
   string parent = 1;
 
-  // The DsRelationNamespaceUserBean id to use for this DsRelationNamespaceUserBean.
-  string DsRelationNamespaceUserBean_id = 2;
+  // The DsRelationNamespaceUser id to use for this DsRelationNamespaceUser.
+  string DsRelationNamespaceUser_id = 2;
 
-  // The DsRelationNamespaceUserBean resource to create.
+  // The DsRelationNamespaceUser resource to create.
   // The field name should match the Noun in the method name.
-  DsRelationNamespaceUserBean DsRelationNamespaceUserBean = 3;
+  DsRelationNamespaceUser DsRelationNamespaceUser = 3;
 }
 
-message UpdateDsRelationNamespaceUserBeanRequest {
-  // The DsRelationNamespaceUserBean resource which replaces the resource on the server.
-  DsRelationNamespaceUserBean DsRelationNamespaceUserBean = 1;
+message UpdateDsRelationNamespaceUserRequest {
+  // The DsRelationNamespaceUser resource which replaces the resource on the server.
+  DsRelationNamespaceUser DsRelationNamespaceUser = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsRelationNamespaceUserBeanRequest {
-  // The resource name of the DsRelationNamespaceUserBean to be deleted.
+message DeleteDsRelationNamespaceUserRequest {
+  // The resource name of the DsRelationNamespaceUser to be deleted.
   string name = 1;
 }

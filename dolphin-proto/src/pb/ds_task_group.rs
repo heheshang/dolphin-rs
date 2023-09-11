@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsTaskGroupBean {
+pub struct DsTaskGroup {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, optional, tag = "2")]
@@ -26,7 +26,7 @@ pub struct DsTaskGroupBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsTaskGroupBeansRequest {
+pub struct ListDsTaskGroupsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -35,42 +35,42 @@ pub struct ListDsTaskGroupBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsTaskGroupBeansResponse {
-    /// The field name should match the noun "DsTaskGroupBean" in the method name.
+pub struct ListDsTaskGroupsResponse {
+    /// The field name should match the noun "DsTaskGroup" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_task_group_beans: ::prost::alloc::vec::Vec<DsTaskGroupBean>,
+    pub ds_task_groups: ::prost::alloc::vec::Vec<DsTaskGroup>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsTaskGroupBeanRequest {
+pub struct GetDsTaskGroupRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsTaskGroupBeanRequest {
-    /// The parent resource name where the DsTaskGroupBean is to be created.
+pub struct CreateDsTaskGroupRequest {
+    /// The parent resource name where the DsTaskGroup is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsTaskGroupBean id to use for this DsTaskGroupBean.
+    /// The DsTaskGroup id to use for this DsTaskGroup.
     #[prost(string, tag = "2")]
-    pub ds_task_group_bean_id: ::prost::alloc::string::String,
-    /// The DsTaskGroupBean resource to create.
+    pub ds_task_group_id: ::prost::alloc::string::String,
+    /// The DsTaskGroup resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_task_group_bean: ::core::option::Option<DsTaskGroupBean>,
+    pub ds_task_group: ::core::option::Option<DsTaskGroup>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsTaskGroupBeanRequest {
-    /// The DsTaskGroupBean resource which replaces the resource on the server.
+pub struct UpdateDsTaskGroupRequest {
+    /// The DsTaskGroup resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_task_group_bean: ::core::option::Option<DsTaskGroupBean>,
+    pub ds_task_group: ::core::option::Option<DsTaskGroup>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -78,21 +78,21 @@ pub struct UpdateDsTaskGroupBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsTaskGroupBeanRequest {
-    /// The resource name of the DsTaskGroupBean to be deleted.
+pub struct DeleteDsTaskGroupRequest {
+    /// The resource name of the DsTaskGroup to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_task_group_bean_service_client {
+pub mod ds_task_group_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsTaskGroupBeanServiceClient<T> {
+    pub struct DsTaskGroupServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsTaskGroupBeanServiceClient<tonic::transport::Channel> {
+    impl DsTaskGroupServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -103,7 +103,7 @@ pub mod ds_task_group_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsTaskGroupBeanServiceClient<T>
+    impl<T> DsTaskGroupServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -123,7 +123,7 @@ pub mod ds_task_group_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsTaskGroupBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsTaskGroupServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -136,7 +136,7 @@ pub mod ds_task_group_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsTaskGroupBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsTaskGroupServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -174,10 +174,10 @@ pub mod ds_task_group_bean_service_client {
             self
         }
 
-        pub async fn list_ds_task_group_beans(
+        pub async fn list_ds_task_groups(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsTaskGroupBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsTaskGroupBeansResponse>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsTaskGroupsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsTaskGroupsResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -187,20 +187,20 @@ pub mod ds_task_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_group.DsTaskGroupBeanService/ListDsTaskGroupBeans",
+                "/ds_task_group.DsTaskGroupService/ListDsTaskGroups",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_group.DsTaskGroupBeanService",
-                "ListDsTaskGroupBeans",
+                "ds_task_group.DsTaskGroupService",
+                "ListDsTaskGroups",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_task_group_bean(
+        pub async fn get_ds_task_group(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsTaskGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskGroupBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetDsTaskGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskGroup>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -209,20 +209,20 @@ pub mod ds_task_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_group.DsTaskGroupBeanService/GetDsTaskGroupBean",
+                "/ds_task_group.DsTaskGroupService/GetDsTaskGroup",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_group.DsTaskGroupBeanService",
-                "GetDsTaskGroupBean",
+                "ds_task_group.DsTaskGroupService",
+                "GetDsTaskGroup",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_task_group_bean(
+        pub async fn create_ds_task_group(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsTaskGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskGroupBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::CreateDsTaskGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskGroup>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -231,20 +231,20 @@ pub mod ds_task_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_group.DsTaskGroupBeanService/CreateDsTaskGroupBean",
+                "/ds_task_group.DsTaskGroupService/CreateDsTaskGroup",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_group.DsTaskGroupBeanService",
-                "CreateDsTaskGroupBean",
+                "ds_task_group.DsTaskGroupService",
+                "CreateDsTaskGroup",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_task_group_bean(
+        pub async fn update_ds_task_group(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsTaskGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskGroupBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateDsTaskGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskGroup>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -253,19 +253,19 @@ pub mod ds_task_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_group.DsTaskGroupBeanService/UpdateDsTaskGroupBean",
+                "/ds_task_group.DsTaskGroupService/UpdateDsTaskGroup",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_group.DsTaskGroupBeanService",
-                "UpdateDsTaskGroupBean",
+                "ds_task_group.DsTaskGroupService",
+                "UpdateDsTaskGroup",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_task_group_bean(
+        pub async fn delete_ds_task_group(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsTaskGroupBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsTaskGroupRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -275,48 +275,48 @@ pub mod ds_task_group_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_task_group.DsTaskGroupBeanService/DeleteDsTaskGroupBean",
+                "/ds_task_group.DsTaskGroupService/DeleteDsTaskGroup",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_task_group.DsTaskGroupBeanService",
-                "DeleteDsTaskGroupBean",
+                "ds_task_group.DsTaskGroupService",
+                "DeleteDsTaskGroup",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_task_group_bean_service_server {
+pub mod ds_task_group_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsTaskGroupBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsTaskGroupServiceServer.
     #[async_trait]
-    pub trait DsTaskGroupBeanService: Send + Sync + 'static {
-        async fn list_ds_task_group_beans(
+    pub trait DsTaskGroupService: Send + Sync + 'static {
+        async fn list_ds_task_groups(
             &self,
-            request: tonic::Request<super::ListDsTaskGroupBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsTaskGroupBeansResponse>, tonic::Status>;
-        async fn get_ds_task_group_bean(
+            request: tonic::Request<super::ListDsTaskGroupsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsTaskGroupsResponse>, tonic::Status>;
+        async fn get_ds_task_group(
             &self,
-            request: tonic::Request<super::GetDsTaskGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskGroupBean>, tonic::Status>;
-        async fn create_ds_task_group_bean(
+            request: tonic::Request<super::GetDsTaskGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskGroup>, tonic::Status>;
+        async fn create_ds_task_group(
             &self,
-            request: tonic::Request<super::CreateDsTaskGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskGroupBean>, tonic::Status>;
-        async fn update_ds_task_group_bean(
+            request: tonic::Request<super::CreateDsTaskGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskGroup>, tonic::Status>;
+        async fn update_ds_task_group(
             &self,
-            request: tonic::Request<super::UpdateDsTaskGroupBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsTaskGroupBean>, tonic::Status>;
-        async fn delete_ds_task_group_bean(
+            request: tonic::Request<super::UpdateDsTaskGroupRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsTaskGroup>, tonic::Status>;
+        async fn delete_ds_task_group(
             &self,
-            request: tonic::Request<super::DeleteDsTaskGroupBeanRequest>,
+            request: tonic::Request<super::DeleteDsTaskGroupRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsTaskGroupBeanServiceServer<T: DsTaskGroupBeanService> {
+    pub struct DsTaskGroupServiceServer<T: DsTaskGroupService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -324,7 +324,7 @@ pub mod ds_task_group_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsTaskGroupBeanService> DsTaskGroupBeanServiceServer<T> {
+    impl<T: DsTaskGroupService> DsTaskGroupServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -377,9 +377,9 @@ pub mod ds_task_group_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsTaskGroupBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsTaskGroupServiceServer<T>
     where
-        T: DsTaskGroupBeanService,
+        T: DsTaskGroupService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -397,23 +397,22 @@ pub mod ds_task_group_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_task_group.DsTaskGroupBeanService/ListDsTaskGroupBeans" => {
+                "/ds_task_group.DsTaskGroupService/ListDsTaskGroups" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsTaskGroupBeansSvc<T: DsTaskGroupBeanService>(pub Arc<T>);
-                    impl<T: DsTaskGroupBeanService>
-                        tonic::server::UnaryService<super::ListDsTaskGroupBeansRequest>
-                        for ListDsTaskGroupBeansSvc<T>
+                    struct ListDsTaskGroupsSvc<T: DsTaskGroupService>(pub Arc<T>);
+                    impl<T: DsTaskGroupService>
+                        tonic::server::UnaryService<super::ListDsTaskGroupsRequest>
+                        for ListDsTaskGroupsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsTaskGroupBeansResponse;
+                        type Response = super::ListDsTaskGroupsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsTaskGroupBeansRequest>,
+                            request: tonic::Request<super::ListDsTaskGroupsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_ds_task_group_beans(request).await };
+                            let fut = async move { (*inner).list_ds_task_groups(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -424,7 +423,7 @@ pub mod ds_task_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsTaskGroupBeansSvc(inner);
+                        let method = ListDsTaskGroupsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -440,22 +439,22 @@ pub mod ds_task_group_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_group.DsTaskGroupBeanService/GetDsTaskGroupBean" => {
+                "/ds_task_group.DsTaskGroupService/GetDsTaskGroup" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsTaskGroupBeanSvc<T: DsTaskGroupBeanService>(pub Arc<T>);
-                    impl<T: DsTaskGroupBeanService>
-                        tonic::server::UnaryService<super::GetDsTaskGroupBeanRequest>
-                        for GetDsTaskGroupBeanSvc<T>
+                    struct GetDsTaskGroupSvc<T: DsTaskGroupService>(pub Arc<T>);
+                    impl<T: DsTaskGroupService>
+                        tonic::server::UnaryService<super::GetDsTaskGroupRequest>
+                        for GetDsTaskGroupSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsTaskGroupBean;
+                        type Response = super::DsTaskGroup;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsTaskGroupBeanRequest>,
+                            request: tonic::Request<super::GetDsTaskGroupRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_ds_task_group_bean(request).await };
+                            let fut = async move { (*inner).get_ds_task_group(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -466,7 +465,7 @@ pub mod ds_task_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsTaskGroupBeanSvc(inner);
+                        let method = GetDsTaskGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -482,23 +481,22 @@ pub mod ds_task_group_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_group.DsTaskGroupBeanService/CreateDsTaskGroupBean" => {
+                "/ds_task_group.DsTaskGroupService/CreateDsTaskGroup" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsTaskGroupBeanSvc<T: DsTaskGroupBeanService>(pub Arc<T>);
-                    impl<T: DsTaskGroupBeanService>
-                        tonic::server::UnaryService<super::CreateDsTaskGroupBeanRequest>
-                        for CreateDsTaskGroupBeanSvc<T>
+                    struct CreateDsTaskGroupSvc<T: DsTaskGroupService>(pub Arc<T>);
+                    impl<T: DsTaskGroupService>
+                        tonic::server::UnaryService<super::CreateDsTaskGroupRequest>
+                        for CreateDsTaskGroupSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsTaskGroupBean;
+                        type Response = super::DsTaskGroup;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsTaskGroupBeanRequest>,
+                            request: tonic::Request<super::CreateDsTaskGroupRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).create_ds_task_group_bean(request).await };
+                            let fut = async move { (*inner).create_ds_task_group(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -509,7 +507,7 @@ pub mod ds_task_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsTaskGroupBeanSvc(inner);
+                        let method = CreateDsTaskGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -525,23 +523,22 @@ pub mod ds_task_group_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_group.DsTaskGroupBeanService/UpdateDsTaskGroupBean" => {
+                "/ds_task_group.DsTaskGroupService/UpdateDsTaskGroup" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsTaskGroupBeanSvc<T: DsTaskGroupBeanService>(pub Arc<T>);
-                    impl<T: DsTaskGroupBeanService>
-                        tonic::server::UnaryService<super::UpdateDsTaskGroupBeanRequest>
-                        for UpdateDsTaskGroupBeanSvc<T>
+                    struct UpdateDsTaskGroupSvc<T: DsTaskGroupService>(pub Arc<T>);
+                    impl<T: DsTaskGroupService>
+                        tonic::server::UnaryService<super::UpdateDsTaskGroupRequest>
+                        for UpdateDsTaskGroupSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsTaskGroupBean;
+                        type Response = super::DsTaskGroup;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsTaskGroupBeanRequest>,
+                            request: tonic::Request<super::UpdateDsTaskGroupRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).update_ds_task_group_bean(request).await };
+                            let fut = async move { (*inner).update_ds_task_group(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -552,7 +549,7 @@ pub mod ds_task_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsTaskGroupBeanSvc(inner);
+                        let method = UpdateDsTaskGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -568,23 +565,22 @@ pub mod ds_task_group_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_task_group.DsTaskGroupBeanService/DeleteDsTaskGroupBean" => {
+                "/ds_task_group.DsTaskGroupService/DeleteDsTaskGroup" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsTaskGroupBeanSvc<T: DsTaskGroupBeanService>(pub Arc<T>);
-                    impl<T: DsTaskGroupBeanService>
-                        tonic::server::UnaryService<super::DeleteDsTaskGroupBeanRequest>
-                        for DeleteDsTaskGroupBeanSvc<T>
+                    struct DeleteDsTaskGroupSvc<T: DsTaskGroupService>(pub Arc<T>);
+                    impl<T: DsTaskGroupService>
+                        tonic::server::UnaryService<super::DeleteDsTaskGroupRequest>
+                        for DeleteDsTaskGroupSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsTaskGroupBeanRequest>,
+                            request: tonic::Request<super::DeleteDsTaskGroupRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).delete_ds_task_group_bean(request).await };
+                            let fut = async move { (*inner).delete_ds_task_group(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -595,7 +591,7 @@ pub mod ds_task_group_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsTaskGroupBeanSvc(inner);
+                        let method = DeleteDsTaskGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -622,7 +618,7 @@ pub mod ds_task_group_bean_service_server {
             }
         }
     }
-    impl<T: DsTaskGroupBeanService> Clone for DsTaskGroupBeanServiceServer<T> {
+    impl<T: DsTaskGroupService> Clone for DsTaskGroupServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -634,7 +630,7 @@ pub mod ds_task_group_bean_service_server {
             }
         }
     }
-    impl<T: DsTaskGroupBeanService> Clone for _Inner<T> {
+    impl<T: DsTaskGroupService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -644,7 +640,7 @@ pub mod ds_task_group_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsTaskGroupBeanService> tonic::server::NamedService for DsTaskGroupBeanServiceServer<T> {
-        const NAME: &'static str = "ds_task_group.DsTaskGroupBeanService";
+    impl<T: DsTaskGroupService> tonic::server::NamedService for DsTaskGroupServiceServer<T> {
+        const NAME: &'static str = "ds_task_group.DsTaskGroupService";
     }
 }

@@ -1,59 +1,51 @@
-use super::service::DolphinRpcServer;
-use proto::ds_process_task_relation::ds_process_task_relation_bean_service_server::DsProcessTaskRelationBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_process_task_relation::ds_process_task_relation_service_server::DsProcessTaskRelationService;
 
 #[tonic::async_trait]
-impl DsProcessTaskRelationBeanService for DolphinRpcServer {
-    async fn list_ds_process_task_relation_beans(
+impl DsProcessTaskRelationService for DolphinRpcServer {
+    async fn list_ds_process_task_relations(
         &self,
-        _req: tonic::Request<
-            proto::ds_process_task_relation::ListDsProcessTaskRelationBeansRequest,
-        >,
+        _req: tonic::Request<proto::ds_process_task_relation::ListDsProcessTaskRelationsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_process_task_relation::ListDsProcessTaskRelationBeansResponse>,
+        tonic::Response<proto::ds_process_task_relation::ListDsProcessTaskRelationsResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_process_task_relation_bean(
+    async fn get_ds_process_task_relation(
         &self,
-        _req: tonic::Request<proto::ds_process_task_relation::GetDsProcessTaskRelationBeanRequest>,
+        _req: tonic::Request<proto::ds_process_task_relation::GetDsProcessTaskRelationRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_process_task_relation::DsProcessTaskRelationBean>,
+        tonic::Response<proto::ds_process_task_relation::DsProcessTaskRelation>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn create_ds_process_task_relation_bean(
+    async fn create_ds_process_task_relation(
         &self,
-        _req: tonic::Request<
-            proto::ds_process_task_relation::CreateDsProcessTaskRelationBeanRequest,
-        >,
+        _req: tonic::Request<proto::ds_process_task_relation::CreateDsProcessTaskRelationRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_process_task_relation::DsProcessTaskRelationBean>,
+        tonic::Response<proto::ds_process_task_relation::DsProcessTaskRelation>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn update_ds_process_task_relation_bean(
+    async fn update_ds_process_task_relation(
         &self,
-        _req: tonic::Request<
-            proto::ds_process_task_relation::UpdateDsProcessTaskRelationBeanRequest,
-        >,
+        _req: tonic::Request<proto::ds_process_task_relation::UpdateDsProcessTaskRelationRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_process_task_relation::DsProcessTaskRelationBean>,
+        tonic::Response<proto::ds_process_task_relation::DsProcessTaskRelation>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn delete_ds_process_task_relation_bean(
+    async fn delete_ds_process_task_relation(
         &self,
-        _req: tonic::Request<
-            proto::ds_process_task_relation::DeleteDsProcessTaskRelationBeanRequest,
-        >,
+        _req: tonic::Request<proto::ds_process_task_relation::DeleteDsProcessTaskRelationRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

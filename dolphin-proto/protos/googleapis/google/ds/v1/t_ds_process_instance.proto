@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 package ds_process_instance;
 
 
-message DsProcessInstanceBean {
+message DsProcessInstance {
 
     int32 id=1 ;
     optional string name=2 ;
@@ -51,45 +51,45 @@ message DsProcessInstanceBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsProcessInstanceBeanService {
-  rpc ListDsProcessInstanceBeans(ListDsProcessInstanceBeansRequest) returns (ListDsProcessInstanceBeansResponse) {
+service DsProcessInstanceService {
+  rpc ListDsProcessInstances(ListDsProcessInstancesRequest) returns (ListDsProcessInstancesResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsProcessInstanceBeans"
+      get: "/v1alpha1/DsProcessInstances"
     };
   }
 
-  rpc GetDsProcessInstanceBean(GetDsProcessInstanceBeanRequest) returns (DsProcessInstanceBean) {
+  rpc GetDsProcessInstance(GetDsProcessInstanceRequest) returns (DsProcessInstance) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsProcessInstanceBeans/*}"
+      get: "/v1alpha1/{name=DsProcessInstances/*}"
     };
   }
 
-  rpc CreateDsProcessInstanceBean(CreateDsProcessInstanceBeanRequest) returns (DsProcessInstanceBean) {
+  rpc CreateDsProcessInstance(CreateDsProcessInstanceRequest) returns (DsProcessInstance) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsProcessInstanceBeans"
-      body: "DsProcessInstanceBean"
+      post: "/v1alpha1/DsProcessInstances"
+      body: "DsProcessInstance"
     };
   }
 
-  rpc UpdateDsProcessInstanceBean(UpdateDsProcessInstanceBeanRequest) returns (DsProcessInstanceBean) {
+  rpc UpdateDsProcessInstance(UpdateDsProcessInstanceRequest) returns (DsProcessInstance) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsProcessInstanceBean.name=DsProcessInstanceBeans/*}"
-      body: "DsProcessInstanceBean"
+      patch: "/v1alpha1/{DsProcessInstance.name=DsProcessInstances/*}"
+      body: "DsProcessInstance"
     };
   }
 
-  rpc DeleteDsProcessInstanceBean(DeleteDsProcessInstanceBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsProcessInstance(DeleteDsProcessInstanceRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsProcessInstanceBeans/*}"
+      delete: "/v1alpha1/{name=DsProcessInstances/*}"
     };
   }
 }
 
-// message DsProcessInstanceBean {
+// message DsProcessInstance {
 // ! This should be defined elsewhere
 // }
 
-message ListDsProcessInstanceBeansRequest {
+message ListDsProcessInstancesRequest {
 
 
   // The maximum number of items to return.
@@ -98,42 +98,42 @@ message ListDsProcessInstanceBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsProcessInstanceBeansResponse {
-  // The field name should match the noun "DsProcessInstanceBean" in the method name.
+message ListDsProcessInstancesResponse {
+  // The field name should match the noun "DsProcessInstance" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsProcessInstanceBean DsProcessInstanceBeans = 1;
+  repeated DsProcessInstance DsProcessInstances = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsProcessInstanceBeanRequest {
+message GetDsProcessInstanceRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsProcessInstanceBeanRequest {
-  // The parent resource name where the DsProcessInstanceBean is to be created.
+message CreateDsProcessInstanceRequest {
+  // The parent resource name where the DsProcessInstance is to be created.
   string parent = 1;
 
-  // The DsProcessInstanceBean id to use for this DsProcessInstanceBean.
-  string DsProcessInstanceBean_id = 2;
+  // The DsProcessInstance id to use for this DsProcessInstance.
+  string DsProcessInstance_id = 2;
 
-  // The DsProcessInstanceBean resource to create.
+  // The DsProcessInstance resource to create.
   // The field name should match the Noun in the method name.
-  DsProcessInstanceBean DsProcessInstanceBean = 3;
+  DsProcessInstance DsProcessInstance = 3;
 }
 
-message UpdateDsProcessInstanceBeanRequest {
-  // The DsProcessInstanceBean resource which replaces the resource on the server.
-  DsProcessInstanceBean DsProcessInstanceBean = 1;
+message UpdateDsProcessInstanceRequest {
+  // The DsProcessInstance resource which replaces the resource on the server.
+  DsProcessInstance DsProcessInstance = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsProcessInstanceBeanRequest {
-  // The resource name of the DsProcessInstanceBean to be deleted.
+message DeleteDsProcessInstanceRequest {
+  // The resource name of the DsProcessInstance to be deleted.
   string name = 1;
 }

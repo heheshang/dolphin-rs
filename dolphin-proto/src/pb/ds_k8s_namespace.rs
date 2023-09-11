@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsK8sNamespaceBean {
+pub struct DsK8sNamespace {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int32, optional, tag = "2")]
@@ -30,7 +30,7 @@ pub struct DsK8sNamespaceBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsK8sNamespaceBeansRequest {
+pub struct ListDsK8sNamespacesRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -39,42 +39,42 @@ pub struct ListDsK8sNamespaceBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsK8sNamespaceBeansResponse {
-    /// The field name should match the noun "DsK8sNamespaceBean" in the method name.
+pub struct ListDsK8sNamespacesResponse {
+    /// The field name should match the noun "DsK8sNamespace" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_k8s_namespace_beans: ::prost::alloc::vec::Vec<DsK8sNamespaceBean>,
+    pub ds_k8s_namespaces: ::prost::alloc::vec::Vec<DsK8sNamespace>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsK8sNamespaceBeanRequest {
+pub struct GetDsK8sNamespaceRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsK8sNamespaceBeanRequest {
-    /// The parent resource name where the DsK8sNamespaceBean is to be created.
+pub struct CreateDsK8sNamespaceRequest {
+    /// The parent resource name where the DsK8sNamespace is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsK8sNamespaceBean id to use for this DsK8sNamespaceBean.
+    /// The DsK8sNamespace id to use for this DsK8sNamespace.
     #[prost(string, tag = "2")]
-    pub ds_k8s_namespace_bean_id: ::prost::alloc::string::String,
-    /// The DsK8sNamespaceBean resource to create.
+    pub ds_k8s_namespace_id: ::prost::alloc::string::String,
+    /// The DsK8sNamespace resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_k8s_namespace_bean: ::core::option::Option<DsK8sNamespaceBean>,
+    pub ds_k8s_namespace: ::core::option::Option<DsK8sNamespace>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsK8sNamespaceBeanRequest {
-    /// The DsK8sNamespaceBean resource which replaces the resource on the server.
+pub struct UpdateDsK8sNamespaceRequest {
+    /// The DsK8sNamespace resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_k8s_namespace_bean: ::core::option::Option<DsK8sNamespaceBean>,
+    pub ds_k8s_namespace: ::core::option::Option<DsK8sNamespace>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -82,21 +82,21 @@ pub struct UpdateDsK8sNamespaceBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsK8sNamespaceBeanRequest {
-    /// The resource name of the DsK8sNamespaceBean to be deleted.
+pub struct DeleteDsK8sNamespaceRequest {
+    /// The resource name of the DsK8sNamespace to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_k8s_namespace_bean_service_client {
+pub mod ds_k8s_namespace_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsK8sNamespaceBeanServiceClient<T> {
+    pub struct DsK8sNamespaceServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsK8sNamespaceBeanServiceClient<tonic::transport::Channel> {
+    impl DsK8sNamespaceServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -107,7 +107,7 @@ pub mod ds_k8s_namespace_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsK8sNamespaceBeanServiceClient<T>
+    impl<T> DsK8sNamespaceServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -127,7 +127,7 @@ pub mod ds_k8s_namespace_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsK8sNamespaceBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsK8sNamespaceServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -140,7 +140,7 @@ pub mod ds_k8s_namespace_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsK8sNamespaceBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsK8sNamespaceServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -178,35 +178,10 @@ pub mod ds_k8s_namespace_bean_service_client {
             self
         }
 
-        pub async fn list_ds_k8s_namespace_beans(
+        pub async fn list_ds_k8s_namespaces(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsK8sNamespaceBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsK8sNamespaceBeansResponse>,
-            tonic::Status,
-        > {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_k8s_namespace.DsK8sNamespaceBeanService/ListDsK8sNamespaceBeans",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_k8s_namespace.DsK8sNamespaceBeanService",
-                "ListDsK8sNamespaceBeans",
-            ));
-            self.inner.unary(req, path, codec).await
-        }
-
-        pub async fn get_ds_k8s_namespace_bean(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetDsK8sNamespaceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsK8sNamespaceBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsK8sNamespacesRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsK8sNamespacesResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -216,21 +191,20 @@ pub mod ds_k8s_namespace_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_k8s_namespace.DsK8sNamespaceBeanService/GetDsK8sNamespaceBean",
+                "/ds_k8s_namespace.DsK8sNamespaceService/ListDsK8sNamespaces",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_k8s_namespace.DsK8sNamespaceBeanService",
-                "GetDsK8sNamespaceBean",
+                "ds_k8s_namespace.DsK8sNamespaceService",
+                "ListDsK8sNamespaces",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_k8s_namespace_bean(
+        pub async fn get_ds_k8s_namespace(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsK8sNamespaceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsK8sNamespaceBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::GetDsK8sNamespaceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsK8sNamespace>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -239,21 +213,20 @@ pub mod ds_k8s_namespace_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_k8s_namespace.DsK8sNamespaceBeanService/CreateDsK8sNamespaceBean",
+                "/ds_k8s_namespace.DsK8sNamespaceService/GetDsK8sNamespace",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_k8s_namespace.DsK8sNamespaceBeanService",
-                "CreateDsK8sNamespaceBean",
+                "ds_k8s_namespace.DsK8sNamespaceService",
+                "GetDsK8sNamespace",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_k8s_namespace_bean(
+        pub async fn create_ds_k8s_namespace(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsK8sNamespaceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsK8sNamespaceBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::CreateDsK8sNamespaceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsK8sNamespace>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -262,19 +235,41 @@ pub mod ds_k8s_namespace_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_k8s_namespace.DsK8sNamespaceBeanService/UpdateDsK8sNamespaceBean",
+                "/ds_k8s_namespace.DsK8sNamespaceService/CreateDsK8sNamespace",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_k8s_namespace.DsK8sNamespaceBeanService",
-                "UpdateDsK8sNamespaceBean",
+                "ds_k8s_namespace.DsK8sNamespaceService",
+                "CreateDsK8sNamespace",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_k8s_namespace_bean(
+        pub async fn update_ds_k8s_namespace(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsK8sNamespaceBeanRequest>,
+            request: impl tonic::IntoRequest<super::UpdateDsK8sNamespaceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsK8sNamespace>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/ds_k8s_namespace.DsK8sNamespaceService/UpdateDsK8sNamespace",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new(
+                "ds_k8s_namespace.DsK8sNamespaceService",
+                "UpdateDsK8sNamespace",
+            ));
+            self.inner.unary(req, path, codec).await
+        }
+
+        pub async fn delete_ds_k8s_namespace(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteDsK8sNamespaceRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -284,51 +279,48 @@ pub mod ds_k8s_namespace_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_k8s_namespace.DsK8sNamespaceBeanService/DeleteDsK8sNamespaceBean",
+                "/ds_k8s_namespace.DsK8sNamespaceService/DeleteDsK8sNamespace",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_k8s_namespace.DsK8sNamespaceBeanService",
-                "DeleteDsK8sNamespaceBean",
+                "ds_k8s_namespace.DsK8sNamespaceService",
+                "DeleteDsK8sNamespace",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_k8s_namespace_bean_service_server {
+pub mod ds_k8s_namespace_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsK8sNamespaceBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsK8sNamespaceServiceServer.
     #[async_trait]
-    pub trait DsK8sNamespaceBeanService: Send + Sync + 'static {
-        async fn list_ds_k8s_namespace_beans(
+    pub trait DsK8sNamespaceService: Send + Sync + 'static {
+        async fn list_ds_k8s_namespaces(
             &self,
-            request: tonic::Request<super::ListDsK8sNamespaceBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsK8sNamespaceBeansResponse>,
-            tonic::Status,
-        >;
-        async fn get_ds_k8s_namespace_bean(
+            request: tonic::Request<super::ListDsK8sNamespacesRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsK8sNamespacesResponse>, tonic::Status>;
+        async fn get_ds_k8s_namespace(
             &self,
-            request: tonic::Request<super::GetDsK8sNamespaceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsK8sNamespaceBean>, tonic::Status>;
-        async fn create_ds_k8s_namespace_bean(
+            request: tonic::Request<super::GetDsK8sNamespaceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsK8sNamespace>, tonic::Status>;
+        async fn create_ds_k8s_namespace(
             &self,
-            request: tonic::Request<super::CreateDsK8sNamespaceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsK8sNamespaceBean>, tonic::Status>;
-        async fn update_ds_k8s_namespace_bean(
+            request: tonic::Request<super::CreateDsK8sNamespaceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsK8sNamespace>, tonic::Status>;
+        async fn update_ds_k8s_namespace(
             &self,
-            request: tonic::Request<super::UpdateDsK8sNamespaceBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsK8sNamespaceBean>, tonic::Status>;
-        async fn delete_ds_k8s_namespace_bean(
+            request: tonic::Request<super::UpdateDsK8sNamespaceRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsK8sNamespace>, tonic::Status>;
+        async fn delete_ds_k8s_namespace(
             &self,
-            request: tonic::Request<super::DeleteDsK8sNamespaceBeanRequest>,
+            request: tonic::Request<super::DeleteDsK8sNamespaceRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsK8sNamespaceBeanServiceServer<T: DsK8sNamespaceBeanService> {
+    pub struct DsK8sNamespaceServiceServer<T: DsK8sNamespaceService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -336,7 +328,7 @@ pub mod ds_k8s_namespace_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsK8sNamespaceBeanService> DsK8sNamespaceBeanServiceServer<T> {
+    impl<T: DsK8sNamespaceService> DsK8sNamespaceServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -389,9 +381,9 @@ pub mod ds_k8s_namespace_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsK8sNamespaceBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsK8sNamespaceServiceServer<T>
     where
-        T: DsK8sNamespaceBeanService,
+        T: DsK8sNamespaceService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -409,23 +401,22 @@ pub mod ds_k8s_namespace_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_k8s_namespace.DsK8sNamespaceBeanService/ListDsK8sNamespaceBeans" => {
+                "/ds_k8s_namespace.DsK8sNamespaceService/ListDsK8sNamespaces" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsK8sNamespaceBeansSvc<T: DsK8sNamespaceBeanService>(pub Arc<T>);
-                    impl<T: DsK8sNamespaceBeanService>
-                        tonic::server::UnaryService<super::ListDsK8sNamespaceBeansRequest>
-                        for ListDsK8sNamespaceBeansSvc<T>
+                    struct ListDsK8sNamespacesSvc<T: DsK8sNamespaceService>(pub Arc<T>);
+                    impl<T: DsK8sNamespaceService>
+                        tonic::server::UnaryService<super::ListDsK8sNamespacesRequest>
+                        for ListDsK8sNamespacesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsK8sNamespaceBeansResponse;
+                        type Response = super::ListDsK8sNamespacesResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsK8sNamespaceBeansRequest>,
+                            request: tonic::Request<super::ListDsK8sNamespacesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_ds_k8s_namespace_beans(request).await };
+                            let fut = async move { (*inner).list_ds_k8s_namespaces(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -436,7 +427,7 @@ pub mod ds_k8s_namespace_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsK8sNamespaceBeansSvc(inner);
+                        let method = ListDsK8sNamespacesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -452,23 +443,22 @@ pub mod ds_k8s_namespace_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_k8s_namespace.DsK8sNamespaceBeanService/GetDsK8sNamespaceBean" => {
+                "/ds_k8s_namespace.DsK8sNamespaceService/GetDsK8sNamespace" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsK8sNamespaceBeanSvc<T: DsK8sNamespaceBeanService>(pub Arc<T>);
-                    impl<T: DsK8sNamespaceBeanService>
-                        tonic::server::UnaryService<super::GetDsK8sNamespaceBeanRequest>
-                        for GetDsK8sNamespaceBeanSvc<T>
+                    struct GetDsK8sNamespaceSvc<T: DsK8sNamespaceService>(pub Arc<T>);
+                    impl<T: DsK8sNamespaceService>
+                        tonic::server::UnaryService<super::GetDsK8sNamespaceRequest>
+                        for GetDsK8sNamespaceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsK8sNamespaceBean;
+                        type Response = super::DsK8sNamespace;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsK8sNamespaceBeanRequest>,
+                            request: tonic::Request<super::GetDsK8sNamespaceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).get_ds_k8s_namespace_bean(request).await };
+                            let fut = async move { (*inner).get_ds_k8s_namespace(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -479,7 +469,7 @@ pub mod ds_k8s_namespace_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsK8sNamespaceBeanSvc(inner);
+                        let method = GetDsK8sNamespaceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -495,23 +485,23 @@ pub mod ds_k8s_namespace_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_k8s_namespace.DsK8sNamespaceBeanService/CreateDsK8sNamespaceBean" => {
+                "/ds_k8s_namespace.DsK8sNamespaceService/CreateDsK8sNamespace" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsK8sNamespaceBeanSvc<T: DsK8sNamespaceBeanService>(pub Arc<T>);
-                    impl<T: DsK8sNamespaceBeanService>
-                        tonic::server::UnaryService<super::CreateDsK8sNamespaceBeanRequest>
-                        for CreateDsK8sNamespaceBeanSvc<T>
+                    struct CreateDsK8sNamespaceSvc<T: DsK8sNamespaceService>(pub Arc<T>);
+                    impl<T: DsK8sNamespaceService>
+                        tonic::server::UnaryService<super::CreateDsK8sNamespaceRequest>
+                        for CreateDsK8sNamespaceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsK8sNamespaceBean;
+                        type Response = super::DsK8sNamespace;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsK8sNamespaceBeanRequest>,
+                            request: tonic::Request<super::CreateDsK8sNamespaceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).create_ds_k8s_namespace_bean(request).await };
+                                async move { (*inner).create_ds_k8s_namespace(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -522,7 +512,7 @@ pub mod ds_k8s_namespace_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsK8sNamespaceBeanSvc(inner);
+                        let method = CreateDsK8sNamespaceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -538,23 +528,23 @@ pub mod ds_k8s_namespace_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_k8s_namespace.DsK8sNamespaceBeanService/UpdateDsK8sNamespaceBean" => {
+                "/ds_k8s_namespace.DsK8sNamespaceService/UpdateDsK8sNamespace" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsK8sNamespaceBeanSvc<T: DsK8sNamespaceBeanService>(pub Arc<T>);
-                    impl<T: DsK8sNamespaceBeanService>
-                        tonic::server::UnaryService<super::UpdateDsK8sNamespaceBeanRequest>
-                        for UpdateDsK8sNamespaceBeanSvc<T>
+                    struct UpdateDsK8sNamespaceSvc<T: DsK8sNamespaceService>(pub Arc<T>);
+                    impl<T: DsK8sNamespaceService>
+                        tonic::server::UnaryService<super::UpdateDsK8sNamespaceRequest>
+                        for UpdateDsK8sNamespaceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsK8sNamespaceBean;
+                        type Response = super::DsK8sNamespace;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsK8sNamespaceBeanRequest>,
+                            request: tonic::Request<super::UpdateDsK8sNamespaceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).update_ds_k8s_namespace_bean(request).await };
+                                async move { (*inner).update_ds_k8s_namespace(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -565,7 +555,7 @@ pub mod ds_k8s_namespace_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsK8sNamespaceBeanSvc(inner);
+                        let method = UpdateDsK8sNamespaceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -581,23 +571,23 @@ pub mod ds_k8s_namespace_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_k8s_namespace.DsK8sNamespaceBeanService/DeleteDsK8sNamespaceBean" => {
+                "/ds_k8s_namespace.DsK8sNamespaceService/DeleteDsK8sNamespace" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsK8sNamespaceBeanSvc<T: DsK8sNamespaceBeanService>(pub Arc<T>);
-                    impl<T: DsK8sNamespaceBeanService>
-                        tonic::server::UnaryService<super::DeleteDsK8sNamespaceBeanRequest>
-                        for DeleteDsK8sNamespaceBeanSvc<T>
+                    struct DeleteDsK8sNamespaceSvc<T: DsK8sNamespaceService>(pub Arc<T>);
+                    impl<T: DsK8sNamespaceService>
+                        tonic::server::UnaryService<super::DeleteDsK8sNamespaceRequest>
+                        for DeleteDsK8sNamespaceSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsK8sNamespaceBeanRequest>,
+                            request: tonic::Request<super::DeleteDsK8sNamespaceRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).delete_ds_k8s_namespace_bean(request).await };
+                                async move { (*inner).delete_ds_k8s_namespace(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -608,7 +598,7 @@ pub mod ds_k8s_namespace_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsK8sNamespaceBeanSvc(inner);
+                        let method = DeleteDsK8sNamespaceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -635,7 +625,7 @@ pub mod ds_k8s_namespace_bean_service_server {
             }
         }
     }
-    impl<T: DsK8sNamespaceBeanService> Clone for DsK8sNamespaceBeanServiceServer<T> {
+    impl<T: DsK8sNamespaceService> Clone for DsK8sNamespaceServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -647,7 +637,7 @@ pub mod ds_k8s_namespace_bean_service_server {
             }
         }
     }
-    impl<T: DsK8sNamespaceBeanService> Clone for _Inner<T> {
+    impl<T: DsK8sNamespaceService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -657,9 +647,7 @@ pub mod ds_k8s_namespace_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsK8sNamespaceBeanService> tonic::server::NamedService
-        for DsK8sNamespaceBeanServiceServer<T>
-    {
-        const NAME: &'static str = "ds_k8s_namespace.DsK8sNamespaceBeanService";
+    impl<T: DsK8sNamespaceService> tonic::server::NamedService for DsK8sNamespaceServiceServer<T> {
+        const NAME: &'static str = "ds_k8s_namespace.DsK8sNamespaceService";
     }
 }

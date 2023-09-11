@@ -8,14 +8,14 @@ import "google/protobuf/timestamp.proto";
 package ds_alert;
 
 
-message DsAlertBean {
+message DsAlert {
 
     int32 id=1;
     optional string title=2;
     string sign=3;
     optional string content=4;
     optional int32 alert_status=5;
-    optional int32 warning_DsAlertBean=6;
+    optional int32 warning_DsAlert=6;
     optional string log=7;
     optional int32 alertgroup_id=8;
     optional string create_time=9;
@@ -23,50 +23,50 @@ message DsAlertBean {
     optional int64 project_code=11;
     optional int64 process_definition_code=12;
     optional int32 process_instance_id=13;
-    optional int32 alert_DsAlertBean=14;
+    optional int32 alert_DsAlert=14;
 }
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsAlertBeanService {
-  rpc ListDsAlertBeans(ListDsAlertBeansRequest) returns (ListDsAlertBeansResponse) {
+service DsAlertService {
+  rpc ListDsAlerts(ListDsAlertsRequest) returns (ListDsAlertsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsAlertBeans"
+      get: "/v1alpha1/DsAlerts"
     };
   }
 
-  rpc GetDsAlertBean(GetDsAlertBeanRequest) returns (DsAlertBean) {
+  rpc GetDsAlert(GetDsAlertRequest) returns (DsAlert) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsAlertBeans/*}"
+      get: "/v1alpha1/{name=DsAlerts/*}"
     };
   }
 
-  rpc CreateDsAlertBean(CreateDsAlertBeanRequest) returns (DsAlertBean) {
+  rpc CreateDsAlert(CreateDsAlertRequest) returns (DsAlert) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsAlertBeans"
-      body: "DsAlertBean"
+      post: "/v1alpha1/DsAlerts"
+      body: "DsAlert"
     };
   }
 
-  rpc UpdateDsAlertBean(UpdateDsAlertBeanRequest) returns (DsAlertBean) {
+  rpc UpdateDsAlert(UpdateDsAlertRequest) returns (DsAlert) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsAlertBean.name=DsAlertBeans/*}"
-      body: "DsAlertBean"
+      patch: "/v1alpha1/{DsAlert.name=DsAlerts/*}"
+      body: "DsAlert"
     };
   }
 
-  rpc DeleteDsAlertBean(DeleteDsAlertBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsAlert(DeleteDsAlertRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsAlertBeans/*}"
+      delete: "/v1alpha1/{name=DsAlerts/*}"
     };
   }
 }
 
-// message DsAlertBean {
+// message DsAlert {
 // ! This should be defined elsewhere
 // }
 
-message ListDsAlertBeansRequest {
+message ListDsAlertsRequest {
 
 
   // The maximum number of items to return.
@@ -75,42 +75,42 @@ message ListDsAlertBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsAlertBeansResponse {
-  // The field name should match the noun "DsAlertBean" in the method name.
+message ListDsAlertsResponse {
+  // The field name should match the noun "DsAlert" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsAlertBean DsAlertBeans = 1;
+  repeated DsAlert DsAlerts = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsAlertBeanRequest {
+message GetDsAlertRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsAlertBeanRequest {
-  // The parent resource name where the DsAlertBean is to be created.
+message CreateDsAlertRequest {
+  // The parent resource name where the DsAlert is to be created.
   string parent = 1;
 
-  // The DsAlertBean id to use for this DsAlertBean.
-  string DsAlertBean_id = 2;
+  // The DsAlert id to use for this DsAlert.
+  string DsAlert_id = 2;
 
-  // The DsAlertBean resource to create.
+  // The DsAlert resource to create.
   // The field name should match the Noun in the method name.
-  DsAlertBean DsAlertBean = 3;
+  DsAlert DsAlert = 3;
 }
 
-message UpdateDsAlertBeanRequest {
-  // The DsAlertBean resource which replaces the resource on the server.
-  DsAlertBean DsAlertBean = 1;
+message UpdateDsAlertRequest {
+  // The DsAlert resource which replaces the resource on the server.
+  DsAlert DsAlert = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsAlertBeanRequest {
-  // The resource name of the DsAlertBean to be deleted.
+message DeleteDsAlertRequest {
+  // The resource name of the DsAlert to be deleted.
   string name = 1;
 }

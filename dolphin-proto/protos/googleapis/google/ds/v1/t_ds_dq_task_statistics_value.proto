@@ -9,7 +9,7 @@ package ds_dq_task_statistics_value;
 
 
 
-message DsDqTaskStatisticsValueBean {
+message DsDqTaskStatisticsValue {
 
      int32 id=1 ;
      int32 process_definition_id=2 ;
@@ -25,45 +25,45 @@ message DsDqTaskStatisticsValueBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsDqTaskStatisticsValueBeanService {
-  rpc ListDsDqTaskStatisticsValueBeans(ListDsDqTaskStatisticsValueBeansRequest) returns (ListDsDqTaskStatisticsValueBeansResponse) {
+service DsDqTaskStatisticsValueService {
+  rpc ListDsDqTaskStatisticsValues(ListDsDqTaskStatisticsValuesRequest) returns (ListDsDqTaskStatisticsValuesResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsDqTaskStatisticsValueBeans"
+      get: "/v1alpha1/DsDqTaskStatisticsValues"
     };
   }
 
-  rpc GetDsDqTaskStatisticsValueBean(GetDsDqTaskStatisticsValueBeanRequest) returns (DsDqTaskStatisticsValueBean) {
+  rpc GetDsDqTaskStatisticsValue(GetDsDqTaskStatisticsValueRequest) returns (DsDqTaskStatisticsValue) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsDqTaskStatisticsValueBeans/*}"
+      get: "/v1alpha1/{name=DsDqTaskStatisticsValues/*}"
     };
   }
 
-  rpc CreateDsDqTaskStatisticsValueBean(CreateDsDqTaskStatisticsValueBeanRequest) returns (DsDqTaskStatisticsValueBean) {
+  rpc CreateDsDqTaskStatisticsValue(CreateDsDqTaskStatisticsValueRequest) returns (DsDqTaskStatisticsValue) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsDqTaskStatisticsValueBeans"
-      body: "DsDqTaskStatisticsValueBean"
+      post: "/v1alpha1/DsDqTaskStatisticsValues"
+      body: "DsDqTaskStatisticsValue"
     };
   }
 
-  rpc UpdateDsDqTaskStatisticsValueBean(UpdateDsDqTaskStatisticsValueBeanRequest) returns (DsDqTaskStatisticsValueBean) {
+  rpc UpdateDsDqTaskStatisticsValue(UpdateDsDqTaskStatisticsValueRequest) returns (DsDqTaskStatisticsValue) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsDqTaskStatisticsValueBean.name=DsDqTaskStatisticsValueBeans/*}"
-      body: "DsDqTaskStatisticsValueBean"
+      patch: "/v1alpha1/{DsDqTaskStatisticsValue.name=DsDqTaskStatisticsValues/*}"
+      body: "DsDqTaskStatisticsValue"
     };
   }
 
-  rpc DeleteDsDqTaskStatisticsValueBean(DeleteDsDqTaskStatisticsValueBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsDqTaskStatisticsValue(DeleteDsDqTaskStatisticsValueRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsDqTaskStatisticsValueBeans/*}"
+      delete: "/v1alpha1/{name=DsDqTaskStatisticsValues/*}"
     };
   }
 }
 
-// message DsDqTaskStatisticsValueBean {
+// message DsDqTaskStatisticsValue {
 // ! This should be defined elsewhere
 // }
 
-message ListDsDqTaskStatisticsValueBeansRequest {
+message ListDsDqTaskStatisticsValuesRequest {
 
 
   // The maximum number of items to return.
@@ -72,42 +72,42 @@ message ListDsDqTaskStatisticsValueBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsDqTaskStatisticsValueBeansResponse {
-  // The field name should match the noun "DsDqTaskStatisticsValueBean" in the method name.
+message ListDsDqTaskStatisticsValuesResponse {
+  // The field name should match the noun "DsDqTaskStatisticsValue" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsDqTaskStatisticsValueBean DsDqTaskStatisticsValueBeans = 1;
+  repeated DsDqTaskStatisticsValue DsDqTaskStatisticsValues = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsDqTaskStatisticsValueBeanRequest {
+message GetDsDqTaskStatisticsValueRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsDqTaskStatisticsValueBeanRequest {
-  // The parent resource name where the DsDqTaskStatisticsValueBean is to be created.
+message CreateDsDqTaskStatisticsValueRequest {
+  // The parent resource name where the DsDqTaskStatisticsValue is to be created.
   string parent = 1;
 
-  // The DsDqTaskStatisticsValueBean id to use for this DsDqTaskStatisticsValueBean.
-  string DsDqTaskStatisticsValueBean_id = 2;
+  // The DsDqTaskStatisticsValue id to use for this DsDqTaskStatisticsValue.
+  string DsDqTaskStatisticsValue_id = 2;
 
-  // The DsDqTaskStatisticsValueBean resource to create.
+  // The DsDqTaskStatisticsValue resource to create.
   // The field name should match the Noun in the method name.
-  DsDqTaskStatisticsValueBean DsDqTaskStatisticsValueBean = 3;
+  DsDqTaskStatisticsValue DsDqTaskStatisticsValue = 3;
 }
 
-message UpdateDsDqTaskStatisticsValueBeanRequest {
-  // The DsDqTaskStatisticsValueBean resource which replaces the resource on the server.
-  DsDqTaskStatisticsValueBean DsDqTaskStatisticsValueBean = 1;
+message UpdateDsDqTaskStatisticsValueRequest {
+  // The DsDqTaskStatisticsValue resource which replaces the resource on the server.
+  DsDqTaskStatisticsValue DsDqTaskStatisticsValue = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsDqTaskStatisticsValueBeanRequest {
-  // The resource name of the DsDqTaskStatisticsValueBean to be deleted.
+message DeleteDsDqTaskStatisticsValueRequest {
+  // The resource name of the DsDqTaskStatisticsValue to be deleted.
   string name = 1;
 }

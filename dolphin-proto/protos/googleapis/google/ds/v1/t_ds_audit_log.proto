@@ -7,11 +7,11 @@ import "google/protobuf/timestamp.proto";
 
 package ds_audit_log;
 
-message DsAuditLogBean {
+message DsAuditLog {
 
     int32 id= 1;
     int32 user_id=2;
-    int32 resource_DsAuditLogBean=3;
+    int32 resource_DsAuditLog=3;
     int32 operation= 4;
     optional string time=5;
     int32 resource_id= 6;
@@ -19,45 +19,45 @@ message DsAuditLogBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsAuditLogBeanService {
-  rpc ListDsAuditLogBeans(ListDsAuditLogBeansRequest) returns (ListDsAuditLogBeansResponse) {
+service DsAuditLogService {
+  rpc ListDsAuditLogs(ListDsAuditLogsRequest) returns (ListDsAuditLogsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsAuditLogBeans"
+      get: "/v1alpha1/DsAuditLogs"
     };
   }
 
-  rpc GetDsAuditLogBean(GetDsAuditLogBeanRequest) returns (DsAuditLogBean) {
+  rpc GetDsAuditLog(GetDsAuditLogRequest) returns (DsAuditLog) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsAuditLogBeans/*}"
+      get: "/v1alpha1/{name=DsAuditLogs/*}"
     };
   }
 
-  rpc CreateDsAuditLogBean(CreateDsAuditLogBeanRequest) returns (DsAuditLogBean) {
+  rpc CreateDsAuditLog(CreateDsAuditLogRequest) returns (DsAuditLog) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsAuditLogBeans"
-      body: "DsAuditLogBean"
+      post: "/v1alpha1/DsAuditLogs"
+      body: "DsAuditLog"
     };
   }
 
-  rpc UpdateDsAuditLogBean(UpdateDsAuditLogBeanRequest) returns (DsAuditLogBean) {
+  rpc UpdateDsAuditLog(UpdateDsAuditLogRequest) returns (DsAuditLog) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsAuditLogBean.name=DsAuditLogBeans/*}"
-      body: "DsAuditLogBean"
+      patch: "/v1alpha1/{DsAuditLog.name=DsAuditLogs/*}"
+      body: "DsAuditLog"
     };
   }
 
-  rpc DeleteDsAuditLogBean(DeleteDsAuditLogBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsAuditLog(DeleteDsAuditLogRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsAuditLogBeans/*}"
+      delete: "/v1alpha1/{name=DsAuditLogs/*}"
     };
   }
 }
 
-// message DsAuditLogBean {
+// message DsAuditLog {
 // ! This should be defined elsewhere
 // }
 
-message ListDsAuditLogBeansRequest {
+message ListDsAuditLogsRequest {
 
 
   // The maximum number of items to return.
@@ -66,42 +66,42 @@ message ListDsAuditLogBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsAuditLogBeansResponse {
-  // The field name should match the noun "DsAuditLogBean" in the method name.
+message ListDsAuditLogsResponse {
+  // The field name should match the noun "DsAuditLog" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsAuditLogBean DsAuditLogBeans = 1;
+  repeated DsAuditLog DsAuditLogs = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsAuditLogBeanRequest {
+message GetDsAuditLogRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsAuditLogBeanRequest {
-  // The parent resource name where the DsAuditLogBean is to be created.
+message CreateDsAuditLogRequest {
+  // The parent resource name where the DsAuditLog is to be created.
   string parent = 1;
 
-  // The DsAuditLogBean id to use for this DsAuditLogBean.
-  string DsAuditLogBean_id = 2;
+  // The DsAuditLog id to use for this DsAuditLog.
+  string DsAuditLog_id = 2;
 
-  // The DsAuditLogBean resource to create.
+  // The DsAuditLog resource to create.
   // The field name should match the Noun in the method name.
-  DsAuditLogBean DsAuditLogBean = 3;
+  DsAuditLog DsAuditLog = 3;
 }
 
-message UpdateDsAuditLogBeanRequest {
-  // The DsAuditLogBean resource which replaces the resource on the server.
-  DsAuditLogBean DsAuditLogBean = 1;
+message UpdateDsAuditLogRequest {
+  // The DsAuditLog resource which replaces the resource on the server.
+  DsAuditLog DsAuditLog = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsAuditLogBeanRequest {
-  // The resource name of the DsAuditLogBean to be deleted.
+message DeleteDsAuditLogRequest {
+  // The resource name of the DsAuditLog to be deleted.
   string name = 1;
 }

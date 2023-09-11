@@ -6,7 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 package ds_relation_project_user;
 
-message DsRelationProjectUserBean {
+message DsRelationProjectUser {
 
      int32 id= 1;
      int32 user_id=2 ;
@@ -18,45 +18,45 @@ message DsRelationProjectUserBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsRelationProjectUserBeanService {
-  rpc ListDsRelationProjectUserBeans(ListDsRelationProjectUserBeansRequest) returns (ListDsRelationProjectUserBeansResponse) {
+service DsRelationProjectUserService {
+  rpc ListDsRelationProjectUsers(ListDsRelationProjectUsersRequest) returns (ListDsRelationProjectUsersResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsRelationProjectUserBeans"
+      get: "/v1alpha1/DsRelationProjectUsers"
     };
   }
 
-  rpc GetDsRelationProjectUserBean(GetDsRelationProjectUserBeanRequest) returns (DsRelationProjectUserBean) {
+  rpc GetDsRelationProjectUser(GetDsRelationProjectUserRequest) returns (DsRelationProjectUser) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsRelationProjectUserBeans/*}"
+      get: "/v1alpha1/{name=DsRelationProjectUsers/*}"
     };
   }
 
-  rpc CreateDsRelationProjectUserBean(CreateDsRelationProjectUserBeanRequest) returns (DsRelationProjectUserBean) {
+  rpc CreateDsRelationProjectUser(CreateDsRelationProjectUserRequest) returns (DsRelationProjectUser) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsRelationProjectUserBeans"
-      body: "DsRelationProjectUserBean"
+      post: "/v1alpha1/DsRelationProjectUsers"
+      body: "DsRelationProjectUser"
     };
   }
 
-  rpc UpdateDsRelationProjectUserBean(UpdateDsRelationProjectUserBeanRequest) returns (DsRelationProjectUserBean) {
+  rpc UpdateDsRelationProjectUser(UpdateDsRelationProjectUserRequest) returns (DsRelationProjectUser) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsRelationProjectUserBean.name=DsRelationProjectUserBeans/*}"
-      body: "DsRelationProjectUserBean"
+      patch: "/v1alpha1/{DsRelationProjectUser.name=DsRelationProjectUsers/*}"
+      body: "DsRelationProjectUser"
     };
   }
 
-  rpc DeleteDsRelationProjectUserBean(DeleteDsRelationProjectUserBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsRelationProjectUser(DeleteDsRelationProjectUserRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsRelationProjectUserBeans/*}"
+      delete: "/v1alpha1/{name=DsRelationProjectUsers/*}"
     };
   }
 }
 
-// message DsRelationProjectUserBean {
+// message DsRelationProjectUser {
 // ! This should be defined elsewhere
 // }
 
-message ListDsRelationProjectUserBeansRequest {
+message ListDsRelationProjectUsersRequest {
 
 
   // The maximum number of items to return.
@@ -65,42 +65,42 @@ message ListDsRelationProjectUserBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsRelationProjectUserBeansResponse {
-  // The field name should match the noun "DsRelationProjectUserBean" in the method name.
+message ListDsRelationProjectUsersResponse {
+  // The field name should match the noun "DsRelationProjectUser" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsRelationProjectUserBean DsRelationProjectUserBeans = 1;
+  repeated DsRelationProjectUser DsRelationProjectUsers = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsRelationProjectUserBeanRequest {
+message GetDsRelationProjectUserRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsRelationProjectUserBeanRequest {
-  // The parent resource name where the DsRelationProjectUserBean is to be created.
+message CreateDsRelationProjectUserRequest {
+  // The parent resource name where the DsRelationProjectUser is to be created.
   string parent = 1;
 
-  // The DsRelationProjectUserBean id to use for this DsRelationProjectUserBean.
-  string DsRelationProjectUserBean_id = 2;
+  // The DsRelationProjectUser id to use for this DsRelationProjectUser.
+  string DsRelationProjectUser_id = 2;
 
-  // The DsRelationProjectUserBean resource to create.
+  // The DsRelationProjectUser resource to create.
   // The field name should match the Noun in the method name.
-  DsRelationProjectUserBean DsRelationProjectUserBean = 3;
+  DsRelationProjectUser DsRelationProjectUser = 3;
 }
 
-message UpdateDsRelationProjectUserBeanRequest {
-  // The DsRelationProjectUserBean resource which replaces the resource on the server.
-  DsRelationProjectUserBean DsRelationProjectUserBean = 1;
+message UpdateDsRelationProjectUserRequest {
+  // The DsRelationProjectUser resource which replaces the resource on the server.
+  DsRelationProjectUser DsRelationProjectUser = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsRelationProjectUserBeanRequest {
-  // The resource name of the DsRelationProjectUserBean to be deleted.
+message DeleteDsRelationProjectUserRequest {
+  // The resource name of the DsRelationProjectUser to be deleted.
   string name = 1;
 }

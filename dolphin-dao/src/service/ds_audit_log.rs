@@ -1,46 +1,43 @@
-use super::service::DolphinRpcServer;
-use proto::ds_audit_log::ds_audit_log_bean_service_server::DsAuditLogBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_audit_log::ds_audit_log_service_server::DsAuditLogService;
 
 
 #[tonic::async_trait]
-impl DsAuditLogBeanService for DolphinRpcServer {
-    async fn list_ds_audit_log_beans(
+impl DsAuditLogService for DolphinRpcServer {
+    async fn list_ds_audit_logs(
         &self,
-        _req: tonic::Request<proto::ds_audit_log::ListDsAuditLogBeansRequest>,
+        _req: tonic::Request<proto::ds_audit_log::ListDsAuditLogsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_audit_log::ListDsAuditLogBeansResponse>,
+        tonic::Response<proto::ds_audit_log::ListDsAuditLogsResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_audit_log_bean(
+    async fn get_ds_audit_log(
         &self,
-        _req: tonic::Request<proto::ds_audit_log::GetDsAuditLogBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_audit_log::DsAuditLogBean>, tonic::Status>
-    {
+        _req: tonic::Request<proto::ds_audit_log::GetDsAuditLogRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_audit_log::DsAuditLog>, tonic::Status> {
         todo!()
     }
 
-    async fn create_ds_audit_log_bean(
+    async fn create_ds_audit_log(
         &self,
-        _req: tonic::Request<proto::ds_audit_log::CreateDsAuditLogBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_audit_log::DsAuditLogBean>, tonic::Status>
-    {
+        _req: tonic::Request<proto::ds_audit_log::CreateDsAuditLogRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_audit_log::DsAuditLog>, tonic::Status> {
         todo!()
     }
 
-    async fn update_ds_audit_log_bean(
+    async fn update_ds_audit_log(
         &self,
-        _req: tonic::Request<proto::ds_audit_log::UpdateDsAuditLogBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_audit_log::DsAuditLogBean>, tonic::Status>
-    {
+        _req: tonic::Request<proto::ds_audit_log::UpdateDsAuditLogRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_audit_log::DsAuditLog>, tonic::Status> {
         todo!()
     }
 
-    async fn delete_ds_audit_log_bean(
+    async fn delete_ds_audit_log(
         &self,
-        _req: tonic::Request<proto::ds_audit_log::DeleteDsAuditLogBeanRequest>,
+        _req: tonic::Request<proto::ds_audit_log::DeleteDsAuditLogRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

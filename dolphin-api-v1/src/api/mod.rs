@@ -62,9 +62,8 @@ async fn start_server() -> Result<()> {
             "/dolphinscheduler",
             Router::new()
                 .route("/login", post(user_login))
-                .route_layer(CookieManagerLayer::new(),)
-                .route("/authorize", post(authorize))
-                .route("/get_user", post(get_user)),
+                .route_layer(CookieManagerLayer::new()), // .route("/authorize", post(authorize))
+                                                         // .route("/get_user", post(get_user)),
         )
         .layer(
             ServiceBuilder::new()
@@ -75,29 +74,7 @@ async fn start_server() -> Result<()> {
                 .layer(GovernorLayer {
                     config: Box::leak(governor_conf),
                 }),
-        )
-        // .layer(CookieManagerLayer::new())
-        ;
-
-    // .route("/", get(list_posts).post(create_post))
-    // .route("/:id", get(edit_post).post(update_post))
-    // .route("/new", get(new_post))
-    // .route("/delete/:id", post(delete_post))
-    // .nest_service(
-    //     "/static",
-    //     get_service(ServeDir::new(concat!(
-    //         env!("CARGO_MANIFEST_DIR"),
-    //         "/static"
-    //     )))
-    //     .handle_error(|error: std::io::Error| async move {
-    //         (
-    //             StatusCode::INTERNAL_SERVER_ERROR,
-    //             format!("Unhandled internal error: {error}"),
-    //         )
-    //     }),
-    // )
-    // .layer(CookieManagerLayer::new())
-    // .with_state(state)
+        );
 
     let addr = SocketAddr::from_str(&server_url).unwrap();
     Server::bind(&addr)

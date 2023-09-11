@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsPluginDefineBean {
+pub struct DsPluginDefine {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(string, tag = "2")]
@@ -18,7 +18,7 @@ pub struct DsPluginDefineBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsPluginDefineBeansRequest {
+pub struct ListDsPluginDefinesRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -27,42 +27,42 @@ pub struct ListDsPluginDefineBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsPluginDefineBeansResponse {
-    /// The field name should match the noun "DsPluginDefineBean" in the method name.
+pub struct ListDsPluginDefinesResponse {
+    /// The field name should match the noun "DsPluginDefine" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_plugin_define_beans: ::prost::alloc::vec::Vec<DsPluginDefineBean>,
+    pub ds_plugin_defines: ::prost::alloc::vec::Vec<DsPluginDefine>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsPluginDefineBeanRequest {
+pub struct GetDsPluginDefineRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsPluginDefineBeanRequest {
-    /// The parent resource name where the DsPluginDefineBean is to be created.
+pub struct CreateDsPluginDefineRequest {
+    /// The parent resource name where the DsPluginDefine is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsPluginDefineBean id to use for this DsPluginDefineBean.
+    /// The DsPluginDefine id to use for this DsPluginDefine.
     #[prost(string, tag = "2")]
-    pub ds_plugin_define_bean_id: ::prost::alloc::string::String,
-    /// The DsPluginDefineBean resource to create.
+    pub ds_plugin_define_id: ::prost::alloc::string::String,
+    /// The DsPluginDefine resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_plugin_define_bean: ::core::option::Option<DsPluginDefineBean>,
+    pub ds_plugin_define: ::core::option::Option<DsPluginDefine>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsPluginDefineBeanRequest {
-    /// The DsPluginDefineBean resource which replaces the resource on the server.
+pub struct UpdateDsPluginDefineRequest {
+    /// The DsPluginDefine resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_plugin_define_bean: ::core::option::Option<DsPluginDefineBean>,
+    pub ds_plugin_define: ::core::option::Option<DsPluginDefine>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -70,21 +70,21 @@ pub struct UpdateDsPluginDefineBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsPluginDefineBeanRequest {
-    /// The resource name of the DsPluginDefineBean to be deleted.
+pub struct DeleteDsPluginDefineRequest {
+    /// The resource name of the DsPluginDefine to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_plugin_define_bean_service_client {
+pub mod ds_plugin_define_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsPluginDefineBeanServiceClient<T> {
+    pub struct DsPluginDefineServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsPluginDefineBeanServiceClient<tonic::transport::Channel> {
+    impl DsPluginDefineServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -95,7 +95,7 @@ pub mod ds_plugin_define_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsPluginDefineBeanServiceClient<T>
+    impl<T> DsPluginDefineServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -115,7 +115,7 @@ pub mod ds_plugin_define_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsPluginDefineBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsPluginDefineServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -128,7 +128,7 @@ pub mod ds_plugin_define_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsPluginDefineBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsPluginDefineServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -166,35 +166,10 @@ pub mod ds_plugin_define_bean_service_client {
             self
         }
 
-        pub async fn list_ds_plugin_define_beans(
+        pub async fn list_ds_plugin_defines(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsPluginDefineBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsPluginDefineBeansResponse>,
-            tonic::Status,
-        > {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/ds_plugin_define.DsPluginDefineBeanService/ListDsPluginDefineBeans",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "ds_plugin_define.DsPluginDefineBeanService",
-                "ListDsPluginDefineBeans",
-            ));
-            self.inner.unary(req, path, codec).await
-        }
-
-        pub async fn get_ds_plugin_define_bean(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetDsPluginDefineBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsPluginDefineBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsPluginDefinesRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsPluginDefinesResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -204,21 +179,20 @@ pub mod ds_plugin_define_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_plugin_define.DsPluginDefineBeanService/GetDsPluginDefineBean",
+                "/ds_plugin_define.DsPluginDefineService/ListDsPluginDefines",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_plugin_define.DsPluginDefineBeanService",
-                "GetDsPluginDefineBean",
+                "ds_plugin_define.DsPluginDefineService",
+                "ListDsPluginDefines",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_plugin_define_bean(
+        pub async fn get_ds_plugin_define(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsPluginDefineBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsPluginDefineBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::GetDsPluginDefineRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsPluginDefine>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -227,21 +201,20 @@ pub mod ds_plugin_define_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_plugin_define.DsPluginDefineBeanService/CreateDsPluginDefineBean",
+                "/ds_plugin_define.DsPluginDefineService/GetDsPluginDefine",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_plugin_define.DsPluginDefineBeanService",
-                "CreateDsPluginDefineBean",
+                "ds_plugin_define.DsPluginDefineService",
+                "GetDsPluginDefine",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_plugin_define_bean(
+        pub async fn create_ds_plugin_define(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsPluginDefineBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsPluginDefineBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::CreateDsPluginDefineRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsPluginDefine>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -250,19 +223,41 @@ pub mod ds_plugin_define_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_plugin_define.DsPluginDefineBeanService/UpdateDsPluginDefineBean",
+                "/ds_plugin_define.DsPluginDefineService/CreateDsPluginDefine",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_plugin_define.DsPluginDefineBeanService",
-                "UpdateDsPluginDefineBean",
+                "ds_plugin_define.DsPluginDefineService",
+                "CreateDsPluginDefine",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_plugin_define_bean(
+        pub async fn update_ds_plugin_define(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsPluginDefineBeanRequest>,
+            request: impl tonic::IntoRequest<super::UpdateDsPluginDefineRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsPluginDefine>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/ds_plugin_define.DsPluginDefineService/UpdateDsPluginDefine",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new(
+                "ds_plugin_define.DsPluginDefineService",
+                "UpdateDsPluginDefine",
+            ));
+            self.inner.unary(req, path, codec).await
+        }
+
+        pub async fn delete_ds_plugin_define(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteDsPluginDefineRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -272,51 +267,48 @@ pub mod ds_plugin_define_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_plugin_define.DsPluginDefineBeanService/DeleteDsPluginDefineBean",
+                "/ds_plugin_define.DsPluginDefineService/DeleteDsPluginDefine",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_plugin_define.DsPluginDefineBeanService",
-                "DeleteDsPluginDefineBean",
+                "ds_plugin_define.DsPluginDefineService",
+                "DeleteDsPluginDefine",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_plugin_define_bean_service_server {
+pub mod ds_plugin_define_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsPluginDefineBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsPluginDefineServiceServer.
     #[async_trait]
-    pub trait DsPluginDefineBeanService: Send + Sync + 'static {
-        async fn list_ds_plugin_define_beans(
+    pub trait DsPluginDefineService: Send + Sync + 'static {
+        async fn list_ds_plugin_defines(
             &self,
-            request: tonic::Request<super::ListDsPluginDefineBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListDsPluginDefineBeansResponse>,
-            tonic::Status,
-        >;
-        async fn get_ds_plugin_define_bean(
+            request: tonic::Request<super::ListDsPluginDefinesRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsPluginDefinesResponse>, tonic::Status>;
+        async fn get_ds_plugin_define(
             &self,
-            request: tonic::Request<super::GetDsPluginDefineBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsPluginDefineBean>, tonic::Status>;
-        async fn create_ds_plugin_define_bean(
+            request: tonic::Request<super::GetDsPluginDefineRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsPluginDefine>, tonic::Status>;
+        async fn create_ds_plugin_define(
             &self,
-            request: tonic::Request<super::CreateDsPluginDefineBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsPluginDefineBean>, tonic::Status>;
-        async fn update_ds_plugin_define_bean(
+            request: tonic::Request<super::CreateDsPluginDefineRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsPluginDefine>, tonic::Status>;
+        async fn update_ds_plugin_define(
             &self,
-            request: tonic::Request<super::UpdateDsPluginDefineBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsPluginDefineBean>, tonic::Status>;
-        async fn delete_ds_plugin_define_bean(
+            request: tonic::Request<super::UpdateDsPluginDefineRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsPluginDefine>, tonic::Status>;
+        async fn delete_ds_plugin_define(
             &self,
-            request: tonic::Request<super::DeleteDsPluginDefineBeanRequest>,
+            request: tonic::Request<super::DeleteDsPluginDefineRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsPluginDefineBeanServiceServer<T: DsPluginDefineBeanService> {
+    pub struct DsPluginDefineServiceServer<T: DsPluginDefineService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -324,7 +316,7 @@ pub mod ds_plugin_define_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsPluginDefineBeanService> DsPluginDefineBeanServiceServer<T> {
+    impl<T: DsPluginDefineService> DsPluginDefineServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -377,9 +369,9 @@ pub mod ds_plugin_define_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsPluginDefineBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsPluginDefineServiceServer<T>
     where
-        T: DsPluginDefineBeanService,
+        T: DsPluginDefineService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -397,23 +389,22 @@ pub mod ds_plugin_define_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_plugin_define.DsPluginDefineBeanService/ListDsPluginDefineBeans" => {
+                "/ds_plugin_define.DsPluginDefineService/ListDsPluginDefines" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsPluginDefineBeansSvc<T: DsPluginDefineBeanService>(pub Arc<T>);
-                    impl<T: DsPluginDefineBeanService>
-                        tonic::server::UnaryService<super::ListDsPluginDefineBeansRequest>
-                        for ListDsPluginDefineBeansSvc<T>
+                    struct ListDsPluginDefinesSvc<T: DsPluginDefineService>(pub Arc<T>);
+                    impl<T: DsPluginDefineService>
+                        tonic::server::UnaryService<super::ListDsPluginDefinesRequest>
+                        for ListDsPluginDefinesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsPluginDefineBeansResponse;
+                        type Response = super::ListDsPluginDefinesResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsPluginDefineBeansRequest>,
+                            request: tonic::Request<super::ListDsPluginDefinesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_ds_plugin_define_beans(request).await };
+                            let fut = async move { (*inner).list_ds_plugin_defines(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -424,7 +415,7 @@ pub mod ds_plugin_define_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsPluginDefineBeansSvc(inner);
+                        let method = ListDsPluginDefinesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -440,23 +431,22 @@ pub mod ds_plugin_define_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_plugin_define.DsPluginDefineBeanService/GetDsPluginDefineBean" => {
+                "/ds_plugin_define.DsPluginDefineService/GetDsPluginDefine" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsPluginDefineBeanSvc<T: DsPluginDefineBeanService>(pub Arc<T>);
-                    impl<T: DsPluginDefineBeanService>
-                        tonic::server::UnaryService<super::GetDsPluginDefineBeanRequest>
-                        for GetDsPluginDefineBeanSvc<T>
+                    struct GetDsPluginDefineSvc<T: DsPluginDefineService>(pub Arc<T>);
+                    impl<T: DsPluginDefineService>
+                        tonic::server::UnaryService<super::GetDsPluginDefineRequest>
+                        for GetDsPluginDefineSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsPluginDefineBean;
+                        type Response = super::DsPluginDefine;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsPluginDefineBeanRequest>,
+                            request: tonic::Request<super::GetDsPluginDefineRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).get_ds_plugin_define_bean(request).await };
+                            let fut = async move { (*inner).get_ds_plugin_define(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -467,7 +457,7 @@ pub mod ds_plugin_define_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsPluginDefineBeanSvc(inner);
+                        let method = GetDsPluginDefineSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -483,23 +473,23 @@ pub mod ds_plugin_define_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_plugin_define.DsPluginDefineBeanService/CreateDsPluginDefineBean" => {
+                "/ds_plugin_define.DsPluginDefineService/CreateDsPluginDefine" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsPluginDefineBeanSvc<T: DsPluginDefineBeanService>(pub Arc<T>);
-                    impl<T: DsPluginDefineBeanService>
-                        tonic::server::UnaryService<super::CreateDsPluginDefineBeanRequest>
-                        for CreateDsPluginDefineBeanSvc<T>
+                    struct CreateDsPluginDefineSvc<T: DsPluginDefineService>(pub Arc<T>);
+                    impl<T: DsPluginDefineService>
+                        tonic::server::UnaryService<super::CreateDsPluginDefineRequest>
+                        for CreateDsPluginDefineSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsPluginDefineBean;
+                        type Response = super::DsPluginDefine;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsPluginDefineBeanRequest>,
+                            request: tonic::Request<super::CreateDsPluginDefineRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).create_ds_plugin_define_bean(request).await };
+                                async move { (*inner).create_ds_plugin_define(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -510,7 +500,7 @@ pub mod ds_plugin_define_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsPluginDefineBeanSvc(inner);
+                        let method = CreateDsPluginDefineSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -526,23 +516,23 @@ pub mod ds_plugin_define_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_plugin_define.DsPluginDefineBeanService/UpdateDsPluginDefineBean" => {
+                "/ds_plugin_define.DsPluginDefineService/UpdateDsPluginDefine" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsPluginDefineBeanSvc<T: DsPluginDefineBeanService>(pub Arc<T>);
-                    impl<T: DsPluginDefineBeanService>
-                        tonic::server::UnaryService<super::UpdateDsPluginDefineBeanRequest>
-                        for UpdateDsPluginDefineBeanSvc<T>
+                    struct UpdateDsPluginDefineSvc<T: DsPluginDefineService>(pub Arc<T>);
+                    impl<T: DsPluginDefineService>
+                        tonic::server::UnaryService<super::UpdateDsPluginDefineRequest>
+                        for UpdateDsPluginDefineSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsPluginDefineBean;
+                        type Response = super::DsPluginDefine;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsPluginDefineBeanRequest>,
+                            request: tonic::Request<super::UpdateDsPluginDefineRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).update_ds_plugin_define_bean(request).await };
+                                async move { (*inner).update_ds_plugin_define(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -553,7 +543,7 @@ pub mod ds_plugin_define_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsPluginDefineBeanSvc(inner);
+                        let method = UpdateDsPluginDefineSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -569,23 +559,23 @@ pub mod ds_plugin_define_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_plugin_define.DsPluginDefineBeanService/DeleteDsPluginDefineBean" => {
+                "/ds_plugin_define.DsPluginDefineService/DeleteDsPluginDefine" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsPluginDefineBeanSvc<T: DsPluginDefineBeanService>(pub Arc<T>);
-                    impl<T: DsPluginDefineBeanService>
-                        tonic::server::UnaryService<super::DeleteDsPluginDefineBeanRequest>
-                        for DeleteDsPluginDefineBeanSvc<T>
+                    struct DeleteDsPluginDefineSvc<T: DsPluginDefineService>(pub Arc<T>);
+                    impl<T: DsPluginDefineService>
+                        tonic::server::UnaryService<super::DeleteDsPluginDefineRequest>
+                        for DeleteDsPluginDefineSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsPluginDefineBeanRequest>,
+                            request: tonic::Request<super::DeleteDsPluginDefineRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).delete_ds_plugin_define_bean(request).await };
+                                async move { (*inner).delete_ds_plugin_define(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -596,7 +586,7 @@ pub mod ds_plugin_define_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsPluginDefineBeanSvc(inner);
+                        let method = DeleteDsPluginDefineSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -623,7 +613,7 @@ pub mod ds_plugin_define_bean_service_server {
             }
         }
     }
-    impl<T: DsPluginDefineBeanService> Clone for DsPluginDefineBeanServiceServer<T> {
+    impl<T: DsPluginDefineService> Clone for DsPluginDefineServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -635,7 +625,7 @@ pub mod ds_plugin_define_bean_service_server {
             }
         }
     }
-    impl<T: DsPluginDefineBeanService> Clone for _Inner<T> {
+    impl<T: DsPluginDefineService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -645,9 +635,7 @@ pub mod ds_plugin_define_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsPluginDefineBeanService> tonic::server::NamedService
-        for DsPluginDefineBeanServiceServer<T>
-    {
-        const NAME: &'static str = "ds_plugin_define.DsPluginDefineBeanService";
+    impl<T: DsPluginDefineService> tonic::server::NamedService for DsPluginDefineServiceServer<T> {
+        const NAME: &'static str = "ds_plugin_define.DsPluginDefineService";
     }
 }

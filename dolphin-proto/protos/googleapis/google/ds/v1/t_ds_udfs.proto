@@ -8,7 +8,7 @@ import "google/api/annotations.proto";
 //import "google/protobuf/timestamp.proto";
 
 
-message DsUdfsBean {
+message DsUdfs {
     string id=1;
     int32 user_id=2;
     optional int32 ip=3;
@@ -16,45 +16,45 @@ message DsUdfsBean {
     optional string last_login_time=4 ;
 }
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsUdfsBeanService {
-  rpc ListDsUdfsBeans(ListDsUdfsBeansRequest) returns (ListDsUdfsBeansResponse) {
+service DsUdfsService {
+  rpc ListDsUdfss(ListDsUdfssRequest) returns (ListDsUdfssResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsUdfsBeans"
+      get: "/v1alpha1/DsUdfss"
     };
   }
 
-  rpc GetDsUdfsBean(GetDsUdfsBeanRequest) returns (DsUdfsBean) {
+  rpc GetDsUdfs(GetDsUdfsRequest) returns (DsUdfs) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsUdfsBeans/*}"
+      get: "/v1alpha1/{name=DsUdfss/*}"
     };
   }
 
-  rpc CreateDsUdfsBean(CreateDsUdfsBeanRequest) returns (DsUdfsBean) {
+  rpc CreateDsUdfs(CreateDsUdfsRequest) returns (DsUdfs) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsUdfsBeans"
-      body: "DsUdfsBean"
+      post: "/v1alpha1/DsUdfss"
+      body: "DsUdfs"
     };
   }
 
-  rpc UpdateDsUdfsBean(UpdateDsUdfsBeanRequest) returns (DsUdfsBean) {
+  rpc UpdateDsUdfs(UpdateDsUdfsRequest) returns (DsUdfs) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsUdfsBean.name=DsUdfsBeans/*}"
-      body: "DsUdfsBean"
+      patch: "/v1alpha1/{DsUdfs.name=DsUdfss/*}"
+      body: "DsUdfs"
     };
   }
 
-  rpc DeleteDsUdfsBean(DeleteDsUdfsBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsUdfs(DeleteDsUdfsRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsUdfsBeans/*}"
+      delete: "/v1alpha1/{name=DsUdfss/*}"
     };
   }
 }
 
-// message DsUdfsBean {
+// message DsUdfs {
 // ! This should be defined elsewhere
 // }
 
-message ListDsUdfsBeansRequest {
+message ListDsUdfssRequest {
 
 
   // The maximum number of items to return.
@@ -63,42 +63,42 @@ message ListDsUdfsBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsUdfsBeansResponse {
-  // The field name should match the noun "DsUdfsBean" in the method name.
+message ListDsUdfssResponse {
+  // The field name should match the noun "DsUdfs" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsUdfsBean DsUdfsBeans = 1;
+  repeated DsUdfs DsUdfss = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsUdfsBeanRequest {
+message GetDsUdfsRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsUdfsBeanRequest {
-  // The parent resource name where the DsUdfsBean is to be created.
+message CreateDsUdfsRequest {
+  // The parent resource name where the DsUdfs is to be created.
   string parent = 1;
 
-  // The DsUdfsBean id to use for this DsUdfsBean.
-  string DsUdfsBean_id = 2;
+  // The DsUdfs id to use for this DsUdfs.
+  string DsUdfs_id = 2;
 
-  // The DsUdfsBean resource to create.
+  // The DsUdfs resource to create.
   // The field name should match the Noun in the method name.
-  DsUdfsBean DsUdfsBean = 3;
+  DsUdfs DsUdfs = 3;
 }
 
-message UpdateDsUdfsBeanRequest {
-  // The DsUdfsBean resource which replaces the resource on the server.
-  DsUdfsBean DsUdfsBean = 1;
+message UpdateDsUdfsRequest {
+  // The DsUdfs resource which replaces the resource on the server.
+  DsUdfs DsUdfs = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsUdfsBeanRequest {
-  // The resource name of the DsUdfsBean to be deleted.
+message DeleteDsUdfsRequest {
+  // The resource name of the DsUdfs to be deleted.
   string name = 1;
 }

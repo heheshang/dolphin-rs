@@ -2,13 +2,13 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsAuditLogBean {
+pub struct DsAuditLog {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int32, tag = "2")]
     pub user_id: i32,
     #[prost(int32, tag = "3")]
-    pub resource_ds_audit_log_bean: i32,
+    pub resource_ds_audit_log: i32,
     #[prost(int32, tag = "4")]
     pub operation: i32,
     #[prost(string, optional, tag = "5")]
@@ -18,7 +18,7 @@ pub struct DsAuditLogBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsAuditLogBeansRequest {
+pub struct ListDsAuditLogsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -27,42 +27,42 @@ pub struct ListDsAuditLogBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsAuditLogBeansResponse {
-    /// The field name should match the noun "DsAuditLogBean" in the method name.
+pub struct ListDsAuditLogsResponse {
+    /// The field name should match the noun "DsAuditLog" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_audit_log_beans: ::prost::alloc::vec::Vec<DsAuditLogBean>,
+    pub ds_audit_logs: ::prost::alloc::vec::Vec<DsAuditLog>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsAuditLogBeanRequest {
+pub struct GetDsAuditLogRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsAuditLogBeanRequest {
-    /// The parent resource name where the DsAuditLogBean is to be created.
+pub struct CreateDsAuditLogRequest {
+    /// The parent resource name where the DsAuditLog is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsAuditLogBean id to use for this DsAuditLogBean.
+    /// The DsAuditLog id to use for this DsAuditLog.
     #[prost(string, tag = "2")]
-    pub ds_audit_log_bean_id: ::prost::alloc::string::String,
-    /// The DsAuditLogBean resource to create.
+    pub ds_audit_log_id: ::prost::alloc::string::String,
+    /// The DsAuditLog resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_audit_log_bean: ::core::option::Option<DsAuditLogBean>,
+    pub ds_audit_log: ::core::option::Option<DsAuditLog>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsAuditLogBeanRequest {
-    /// The DsAuditLogBean resource which replaces the resource on the server.
+pub struct UpdateDsAuditLogRequest {
+    /// The DsAuditLog resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_audit_log_bean: ::core::option::Option<DsAuditLogBean>,
+    pub ds_audit_log: ::core::option::Option<DsAuditLog>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -70,21 +70,21 @@ pub struct UpdateDsAuditLogBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsAuditLogBeanRequest {
-    /// The resource name of the DsAuditLogBean to be deleted.
+pub struct DeleteDsAuditLogRequest {
+    /// The resource name of the DsAuditLog to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_audit_log_bean_service_client {
+pub mod ds_audit_log_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsAuditLogBeanServiceClient<T> {
+    pub struct DsAuditLogServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsAuditLogBeanServiceClient<tonic::transport::Channel> {
+    impl DsAuditLogServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -95,7 +95,7 @@ pub mod ds_audit_log_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsAuditLogBeanServiceClient<T>
+    impl<T> DsAuditLogServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -115,7 +115,7 @@ pub mod ds_audit_log_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsAuditLogBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsAuditLogServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -128,7 +128,7 @@ pub mod ds_audit_log_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsAuditLogBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsAuditLogServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -166,10 +166,10 @@ pub mod ds_audit_log_bean_service_client {
             self
         }
 
-        pub async fn list_ds_audit_log_beans(
+        pub async fn list_ds_audit_logs(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsAuditLogBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsAuditLogBeansResponse>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsAuditLogsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsAuditLogsResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -179,20 +179,20 @@ pub mod ds_audit_log_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_audit_log.DsAuditLogBeanService/ListDsAuditLogBeans",
+                "/ds_audit_log.DsAuditLogService/ListDsAuditLogs",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_audit_log.DsAuditLogBeanService",
-                "ListDsAuditLogBeans",
+                "ds_audit_log.DsAuditLogService",
+                "ListDsAuditLogs",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_audit_log_bean(
+        pub async fn get_ds_audit_log(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsAuditLogBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAuditLogBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetDsAuditLogRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAuditLog>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -201,20 +201,20 @@ pub mod ds_audit_log_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_audit_log.DsAuditLogBeanService/GetDsAuditLogBean",
+                "/ds_audit_log.DsAuditLogService/GetDsAuditLog",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_audit_log.DsAuditLogBeanService",
-                "GetDsAuditLogBean",
+                "ds_audit_log.DsAuditLogService",
+                "GetDsAuditLog",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_audit_log_bean(
+        pub async fn create_ds_audit_log(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsAuditLogBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAuditLogBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::CreateDsAuditLogRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAuditLog>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -223,20 +223,20 @@ pub mod ds_audit_log_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_audit_log.DsAuditLogBeanService/CreateDsAuditLogBean",
+                "/ds_audit_log.DsAuditLogService/CreateDsAuditLog",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_audit_log.DsAuditLogBeanService",
-                "CreateDsAuditLogBean",
+                "ds_audit_log.DsAuditLogService",
+                "CreateDsAuditLog",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_audit_log_bean(
+        pub async fn update_ds_audit_log(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsAuditLogBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAuditLogBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateDsAuditLogRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAuditLog>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -245,19 +245,19 @@ pub mod ds_audit_log_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_audit_log.DsAuditLogBeanService/UpdateDsAuditLogBean",
+                "/ds_audit_log.DsAuditLogService/UpdateDsAuditLog",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_audit_log.DsAuditLogBeanService",
-                "UpdateDsAuditLogBean",
+                "ds_audit_log.DsAuditLogService",
+                "UpdateDsAuditLog",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_audit_log_bean(
+        pub async fn delete_ds_audit_log(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsAuditLogBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsAuditLogRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -267,48 +267,48 @@ pub mod ds_audit_log_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_audit_log.DsAuditLogBeanService/DeleteDsAuditLogBean",
+                "/ds_audit_log.DsAuditLogService/DeleteDsAuditLog",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_audit_log.DsAuditLogBeanService",
-                "DeleteDsAuditLogBean",
+                "ds_audit_log.DsAuditLogService",
+                "DeleteDsAuditLog",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_audit_log_bean_service_server {
+pub mod ds_audit_log_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsAuditLogBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsAuditLogServiceServer.
     #[async_trait]
-    pub trait DsAuditLogBeanService: Send + Sync + 'static {
-        async fn list_ds_audit_log_beans(
+    pub trait DsAuditLogService: Send + Sync + 'static {
+        async fn list_ds_audit_logs(
             &self,
-            request: tonic::Request<super::ListDsAuditLogBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsAuditLogBeansResponse>, tonic::Status>;
-        async fn get_ds_audit_log_bean(
+            request: tonic::Request<super::ListDsAuditLogsRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsAuditLogsResponse>, tonic::Status>;
+        async fn get_ds_audit_log(
             &self,
-            request: tonic::Request<super::GetDsAuditLogBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAuditLogBean>, tonic::Status>;
-        async fn create_ds_audit_log_bean(
+            request: tonic::Request<super::GetDsAuditLogRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAuditLog>, tonic::Status>;
+        async fn create_ds_audit_log(
             &self,
-            request: tonic::Request<super::CreateDsAuditLogBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAuditLogBean>, tonic::Status>;
-        async fn update_ds_audit_log_bean(
+            request: tonic::Request<super::CreateDsAuditLogRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAuditLog>, tonic::Status>;
+        async fn update_ds_audit_log(
             &self,
-            request: tonic::Request<super::UpdateDsAuditLogBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsAuditLogBean>, tonic::Status>;
-        async fn delete_ds_audit_log_bean(
+            request: tonic::Request<super::UpdateDsAuditLogRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsAuditLog>, tonic::Status>;
+        async fn delete_ds_audit_log(
             &self,
-            request: tonic::Request<super::DeleteDsAuditLogBeanRequest>,
+            request: tonic::Request<super::DeleteDsAuditLogRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsAuditLogBeanServiceServer<T: DsAuditLogBeanService> {
+    pub struct DsAuditLogServiceServer<T: DsAuditLogService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -316,7 +316,7 @@ pub mod ds_audit_log_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsAuditLogBeanService> DsAuditLogBeanServiceServer<T> {
+    impl<T: DsAuditLogService> DsAuditLogServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -369,9 +369,9 @@ pub mod ds_audit_log_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsAuditLogBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsAuditLogServiceServer<T>
     where
-        T: DsAuditLogBeanService,
+        T: DsAuditLogService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -389,23 +389,22 @@ pub mod ds_audit_log_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_audit_log.DsAuditLogBeanService/ListDsAuditLogBeans" => {
+                "/ds_audit_log.DsAuditLogService/ListDsAuditLogs" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsAuditLogBeansSvc<T: DsAuditLogBeanService>(pub Arc<T>);
-                    impl<T: DsAuditLogBeanService>
-                        tonic::server::UnaryService<super::ListDsAuditLogBeansRequest>
-                        for ListDsAuditLogBeansSvc<T>
+                    struct ListDsAuditLogsSvc<T: DsAuditLogService>(pub Arc<T>);
+                    impl<T: DsAuditLogService>
+                        tonic::server::UnaryService<super::ListDsAuditLogsRequest>
+                        for ListDsAuditLogsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsAuditLogBeansResponse;
+                        type Response = super::ListDsAuditLogsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsAuditLogBeansRequest>,
+                            request: tonic::Request<super::ListDsAuditLogsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_ds_audit_log_beans(request).await };
+                            let fut = async move { (*inner).list_ds_audit_logs(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -416,7 +415,7 @@ pub mod ds_audit_log_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsAuditLogBeansSvc(inner);
+                        let method = ListDsAuditLogsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -432,22 +431,22 @@ pub mod ds_audit_log_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_audit_log.DsAuditLogBeanService/GetDsAuditLogBean" => {
+                "/ds_audit_log.DsAuditLogService/GetDsAuditLog" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsAuditLogBeanSvc<T: DsAuditLogBeanService>(pub Arc<T>);
-                    impl<T: DsAuditLogBeanService>
-                        tonic::server::UnaryService<super::GetDsAuditLogBeanRequest>
-                        for GetDsAuditLogBeanSvc<T>
+                    struct GetDsAuditLogSvc<T: DsAuditLogService>(pub Arc<T>);
+                    impl<T: DsAuditLogService>
+                        tonic::server::UnaryService<super::GetDsAuditLogRequest>
+                        for GetDsAuditLogSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsAuditLogBean;
+                        type Response = super::DsAuditLog;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsAuditLogBeanRequest>,
+                            request: tonic::Request<super::GetDsAuditLogRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_ds_audit_log_bean(request).await };
+                            let fut = async move { (*inner).get_ds_audit_log(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -458,7 +457,7 @@ pub mod ds_audit_log_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsAuditLogBeanSvc(inner);
+                        let method = GetDsAuditLogSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -474,23 +473,22 @@ pub mod ds_audit_log_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_audit_log.DsAuditLogBeanService/CreateDsAuditLogBean" => {
+                "/ds_audit_log.DsAuditLogService/CreateDsAuditLog" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsAuditLogBeanSvc<T: DsAuditLogBeanService>(pub Arc<T>);
-                    impl<T: DsAuditLogBeanService>
-                        tonic::server::UnaryService<super::CreateDsAuditLogBeanRequest>
-                        for CreateDsAuditLogBeanSvc<T>
+                    struct CreateDsAuditLogSvc<T: DsAuditLogService>(pub Arc<T>);
+                    impl<T: DsAuditLogService>
+                        tonic::server::UnaryService<super::CreateDsAuditLogRequest>
+                        for CreateDsAuditLogSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsAuditLogBean;
+                        type Response = super::DsAuditLog;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsAuditLogBeanRequest>,
+                            request: tonic::Request<super::CreateDsAuditLogRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).create_ds_audit_log_bean(request).await };
+                            let fut = async move { (*inner).create_ds_audit_log(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -501,7 +499,7 @@ pub mod ds_audit_log_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsAuditLogBeanSvc(inner);
+                        let method = CreateDsAuditLogSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -517,23 +515,22 @@ pub mod ds_audit_log_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_audit_log.DsAuditLogBeanService/UpdateDsAuditLogBean" => {
+                "/ds_audit_log.DsAuditLogService/UpdateDsAuditLog" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsAuditLogBeanSvc<T: DsAuditLogBeanService>(pub Arc<T>);
-                    impl<T: DsAuditLogBeanService>
-                        tonic::server::UnaryService<super::UpdateDsAuditLogBeanRequest>
-                        for UpdateDsAuditLogBeanSvc<T>
+                    struct UpdateDsAuditLogSvc<T: DsAuditLogService>(pub Arc<T>);
+                    impl<T: DsAuditLogService>
+                        tonic::server::UnaryService<super::UpdateDsAuditLogRequest>
+                        for UpdateDsAuditLogSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsAuditLogBean;
+                        type Response = super::DsAuditLog;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsAuditLogBeanRequest>,
+                            request: tonic::Request<super::UpdateDsAuditLogRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).update_ds_audit_log_bean(request).await };
+                            let fut = async move { (*inner).update_ds_audit_log(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -544,7 +541,7 @@ pub mod ds_audit_log_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsAuditLogBeanSvc(inner);
+                        let method = UpdateDsAuditLogSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -560,23 +557,22 @@ pub mod ds_audit_log_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_audit_log.DsAuditLogBeanService/DeleteDsAuditLogBean" => {
+                "/ds_audit_log.DsAuditLogService/DeleteDsAuditLog" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsAuditLogBeanSvc<T: DsAuditLogBeanService>(pub Arc<T>);
-                    impl<T: DsAuditLogBeanService>
-                        tonic::server::UnaryService<super::DeleteDsAuditLogBeanRequest>
-                        for DeleteDsAuditLogBeanSvc<T>
+                    struct DeleteDsAuditLogSvc<T: DsAuditLogService>(pub Arc<T>);
+                    impl<T: DsAuditLogService>
+                        tonic::server::UnaryService<super::DeleteDsAuditLogRequest>
+                        for DeleteDsAuditLogSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsAuditLogBeanRequest>,
+                            request: tonic::Request<super::DeleteDsAuditLogRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).delete_ds_audit_log_bean(request).await };
+                            let fut = async move { (*inner).delete_ds_audit_log(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -587,7 +583,7 @@ pub mod ds_audit_log_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsAuditLogBeanSvc(inner);
+                        let method = DeleteDsAuditLogSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -614,7 +610,7 @@ pub mod ds_audit_log_bean_service_server {
             }
         }
     }
-    impl<T: DsAuditLogBeanService> Clone for DsAuditLogBeanServiceServer<T> {
+    impl<T: DsAuditLogService> Clone for DsAuditLogServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -626,7 +622,7 @@ pub mod ds_audit_log_bean_service_server {
             }
         }
     }
-    impl<T: DsAuditLogBeanService> Clone for _Inner<T> {
+    impl<T: DsAuditLogService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -636,7 +632,7 @@ pub mod ds_audit_log_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsAuditLogBeanService> tonic::server::NamedService for DsAuditLogBeanServiceServer<T> {
-        const NAME: &'static str = "ds_audit_log.DsAuditLogBeanService";
+    impl<T: DsAuditLogService> tonic::server::NamedService for DsAuditLogServiceServer<T> {
+        const NAME: &'static str = "ds_audit_log.DsAuditLogService";
     }
 }

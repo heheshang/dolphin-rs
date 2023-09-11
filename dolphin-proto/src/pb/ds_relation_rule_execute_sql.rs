@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsRelationRuleExecuteSqlBean {
+pub struct DsRelationRuleExecuteSql {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int32, optional, tag = "2")]
@@ -16,7 +16,7 @@ pub struct DsRelationRuleExecuteSqlBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsRelationRuleExecuteSqlBeansRequest {
+pub struct ListDsRelationRuleExecuteSqlsRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -25,42 +25,42 @@ pub struct ListDsRelationRuleExecuteSqlBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsRelationRuleExecuteSqlBeansResponse {
-    /// The field name should match the noun "DsRelationRuleExecuteSqlBean" in the method name.
+pub struct ListDsRelationRuleExecuteSqlsResponse {
+    /// The field name should match the noun "DsRelationRuleExecuteSql" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_relation_rule_execute_sql_beans: ::prost::alloc::vec::Vec<DsRelationRuleExecuteSqlBean>,
+    pub ds_relation_rule_execute_sqls: ::prost::alloc::vec::Vec<DsRelationRuleExecuteSql>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsRelationRuleExecuteSqlBeanRequest {
+pub struct GetDsRelationRuleExecuteSqlRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsRelationRuleExecuteSqlBeanRequest {
-    /// The parent resource name where the DsRelationRuleExecuteSqlBean is to be created.
+pub struct CreateDsRelationRuleExecuteSqlRequest {
+    /// The parent resource name where the DsRelationRuleExecuteSql is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsRelationRuleExecuteSqlBean id to use for this DsRelationRuleExecuteSqlBean.
+    /// The DsRelationRuleExecuteSql id to use for this DsRelationRuleExecuteSql.
     #[prost(string, tag = "2")]
-    pub ds_relation_rule_execute_sql_bean_id: ::prost::alloc::string::String,
-    /// The DsRelationRuleExecuteSqlBean resource to create.
+    pub ds_relation_rule_execute_sql_id: ::prost::alloc::string::String,
+    /// The DsRelationRuleExecuteSql resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_relation_rule_execute_sql_bean: ::core::option::Option<DsRelationRuleExecuteSqlBean>,
+    pub ds_relation_rule_execute_sql: ::core::option::Option<DsRelationRuleExecuteSql>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsRelationRuleExecuteSqlBeanRequest {
-    /// The DsRelationRuleExecuteSqlBean resource which replaces the resource on the server.
+pub struct UpdateDsRelationRuleExecuteSqlRequest {
+    /// The DsRelationRuleExecuteSql resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_relation_rule_execute_sql_bean: ::core::option::Option<DsRelationRuleExecuteSqlBean>,
+    pub ds_relation_rule_execute_sql: ::core::option::Option<DsRelationRuleExecuteSql>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -68,21 +68,21 @@ pub struct UpdateDsRelationRuleExecuteSqlBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsRelationRuleExecuteSqlBeanRequest {
-    /// The resource name of the DsRelationRuleExecuteSqlBean to be deleted.
+pub struct DeleteDsRelationRuleExecuteSqlRequest {
+    /// The resource name of the DsRelationRuleExecuteSql to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_relation_rule_execute_sql_bean_service_client {
+pub mod ds_relation_rule_execute_sql_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsRelationRuleExecuteSqlBeanServiceClient<T> {
+    pub struct DsRelationRuleExecuteSqlServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsRelationRuleExecuteSqlBeanServiceClient<tonic::transport::Channel> {
+    impl DsRelationRuleExecuteSqlServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -93,7 +93,7 @@ pub mod ds_relation_rule_execute_sql_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsRelationRuleExecuteSqlBeanServiceClient<T>
+    impl<T> DsRelationRuleExecuteSqlServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -113,7 +113,7 @@ pub mod ds_relation_rule_execute_sql_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsRelationRuleExecuteSqlBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsRelationRuleExecuteSqlServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -126,10 +126,7 @@ pub mod ds_relation_rule_execute_sql_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsRelationRuleExecuteSqlBeanServiceClient::new(InterceptedService::new(
-                inner,
-                interceptor,
-            ))
+            DsRelationRuleExecuteSqlServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -167,11 +164,11 @@ pub mod ds_relation_rule_execute_sql_bean_service_client {
             self
         }
 
-        pub async fn list_ds_relation_rule_execute_sql_beans(
+        pub async fn list_ds_relation_rule_execute_sqls(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsRelationRuleExecuteSqlBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsRelationRuleExecuteSqlsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsRelationRuleExecuteSqlBeansResponse>,
+            tonic::Response<super::ListDsRelationRuleExecuteSqlsResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -182,21 +179,21 @@ pub mod ds_relation_rule_execute_sql_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService/\
-                 ListDsRelationRuleExecuteSqlBeans",
+                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService/\
+                 ListDsRelationRuleExecuteSqls",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService",
-                "ListDsRelationRuleExecuteSqlBeans",
+                "ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService",
+                "ListDsRelationRuleExecuteSqls",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_relation_rule_execute_sql_bean(
+        pub async fn get_ds_relation_rule_execute_sql(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsRelationRuleExecuteSqlBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationRuleExecuteSqlBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::GetDsRelationRuleExecuteSqlRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationRuleExecuteSql>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -206,21 +203,21 @@ pub mod ds_relation_rule_execute_sql_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService/\
-                 GetDsRelationRuleExecuteSqlBean",
+                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService/\
+                 GetDsRelationRuleExecuteSql",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService",
-                "GetDsRelationRuleExecuteSqlBean",
+                "ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService",
+                "GetDsRelationRuleExecuteSql",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_relation_rule_execute_sql_bean(
+        pub async fn create_ds_relation_rule_execute_sql(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsRelationRuleExecuteSqlBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationRuleExecuteSqlBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::CreateDsRelationRuleExecuteSqlRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationRuleExecuteSql>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -230,21 +227,21 @@ pub mod ds_relation_rule_execute_sql_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService/\
-                 CreateDsRelationRuleExecuteSqlBean",
+                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService/\
+                 CreateDsRelationRuleExecuteSql",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService",
-                "CreateDsRelationRuleExecuteSqlBean",
+                "ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService",
+                "CreateDsRelationRuleExecuteSql",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_relation_rule_execute_sql_bean(
+        pub async fn update_ds_relation_rule_execute_sql(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsRelationRuleExecuteSqlBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationRuleExecuteSqlBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::UpdateDsRelationRuleExecuteSqlRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationRuleExecuteSql>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -254,20 +251,20 @@ pub mod ds_relation_rule_execute_sql_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService/\
-                 UpdateDsRelationRuleExecuteSqlBean",
+                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService/\
+                 UpdateDsRelationRuleExecuteSql",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService",
-                "UpdateDsRelationRuleExecuteSqlBean",
+                "ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService",
+                "UpdateDsRelationRuleExecuteSql",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_relation_rule_execute_sql_bean(
+        pub async fn delete_ds_relation_rule_execute_sql(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsRelationRuleExecuteSqlBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsRelationRuleExecuteSqlRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -277,52 +274,52 @@ pub mod ds_relation_rule_execute_sql_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService/\
-                 DeleteDsRelationRuleExecuteSqlBean",
+                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService/\
+                 DeleteDsRelationRuleExecuteSql",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService",
-                "DeleteDsRelationRuleExecuteSqlBean",
+                "ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService",
+                "DeleteDsRelationRuleExecuteSql",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_relation_rule_execute_sql_bean_service_server {
+pub mod ds_relation_rule_execute_sql_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsRelationRuleExecuteSqlBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsRelationRuleExecuteSqlServiceServer.
     #[async_trait]
-    pub trait DsRelationRuleExecuteSqlBeanService: Send + Sync + 'static {
-        async fn list_ds_relation_rule_execute_sql_beans(
+    pub trait DsRelationRuleExecuteSqlService: Send + Sync + 'static {
+        async fn list_ds_relation_rule_execute_sqls(
             &self,
-            request: tonic::Request<super::ListDsRelationRuleExecuteSqlBeansRequest>,
+            request: tonic::Request<super::ListDsRelationRuleExecuteSqlsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsRelationRuleExecuteSqlBeansResponse>,
+            tonic::Response<super::ListDsRelationRuleExecuteSqlsResponse>,
             tonic::Status,
         >;
-        async fn get_ds_relation_rule_execute_sql_bean(
+        async fn get_ds_relation_rule_execute_sql(
             &self,
-            request: tonic::Request<super::GetDsRelationRuleExecuteSqlBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationRuleExecuteSqlBean>, tonic::Status>;
-        async fn create_ds_relation_rule_execute_sql_bean(
+            request: tonic::Request<super::GetDsRelationRuleExecuteSqlRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationRuleExecuteSql>, tonic::Status>;
+        async fn create_ds_relation_rule_execute_sql(
             &self,
-            request: tonic::Request<super::CreateDsRelationRuleExecuteSqlBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationRuleExecuteSqlBean>, tonic::Status>;
-        async fn update_ds_relation_rule_execute_sql_bean(
+            request: tonic::Request<super::CreateDsRelationRuleExecuteSqlRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationRuleExecuteSql>, tonic::Status>;
+        async fn update_ds_relation_rule_execute_sql(
             &self,
-            request: tonic::Request<super::UpdateDsRelationRuleExecuteSqlBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationRuleExecuteSqlBean>, tonic::Status>;
-        async fn delete_ds_relation_rule_execute_sql_bean(
+            request: tonic::Request<super::UpdateDsRelationRuleExecuteSqlRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationRuleExecuteSql>, tonic::Status>;
+        async fn delete_ds_relation_rule_execute_sql(
             &self,
-            request: tonic::Request<super::DeleteDsRelationRuleExecuteSqlBeanRequest>,
+            request: tonic::Request<super::DeleteDsRelationRuleExecuteSqlRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsRelationRuleExecuteSqlBeanServiceServer<T: DsRelationRuleExecuteSqlBeanService> {
+    pub struct DsRelationRuleExecuteSqlServiceServer<T: DsRelationRuleExecuteSqlService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -330,7 +327,7 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsRelationRuleExecuteSqlBeanService> DsRelationRuleExecuteSqlBeanServiceServer<T> {
+    impl<T: DsRelationRuleExecuteSqlService> DsRelationRuleExecuteSqlServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -383,10 +380,9 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>>
-        for DsRelationRuleExecuteSqlBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsRelationRuleExecuteSqlServiceServer<T>
     where
-        T: DsRelationRuleExecuteSqlBeanService,
+        T: DsRelationRuleExecuteSqlService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -404,30 +400,26 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService/\
-                 ListDsRelationRuleExecuteSqlBeans" => {
+                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService/\
+                 ListDsRelationRuleExecuteSqls" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsRelationRuleExecuteSqlBeansSvc<T: DsRelationRuleExecuteSqlBeanService>(
+                    struct ListDsRelationRuleExecuteSqlsSvc<T: DsRelationRuleExecuteSqlService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationRuleExecuteSqlBeanService>
-                        tonic::server::UnaryService<super::ListDsRelationRuleExecuteSqlBeansRequest>
-                        for ListDsRelationRuleExecuteSqlBeansSvc<T>
+                    impl<T: DsRelationRuleExecuteSqlService>
+                        tonic::server::UnaryService<super::ListDsRelationRuleExecuteSqlsRequest>
+                        for ListDsRelationRuleExecuteSqlsSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsRelationRuleExecuteSqlBeansResponse;
+                        type Response = super::ListDsRelationRuleExecuteSqlsResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<
-                                super::ListDsRelationRuleExecuteSqlBeansRequest,
-                            >,
+                            request: tonic::Request<super::ListDsRelationRuleExecuteSqlsRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner)
-                                    .list_ds_relation_rule_execute_sql_beans(request)
-                                    .await
+                                (*inner).list_ds_relation_rule_execute_sqls(request).await
                             };
                             Box::pin(fut)
                         }
@@ -439,7 +431,7 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsRelationRuleExecuteSqlBeansSvc(inner);
+                        let method = ListDsRelationRuleExecuteSqlsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -455,28 +447,26 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService/\
-                 GetDsRelationRuleExecuteSqlBean" => {
+                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService/\
+                 GetDsRelationRuleExecuteSql" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsRelationRuleExecuteSqlBeanSvc<T: DsRelationRuleExecuteSqlBeanService>(
+                    struct GetDsRelationRuleExecuteSqlSvc<T: DsRelationRuleExecuteSqlService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationRuleExecuteSqlBeanService>
-                        tonic::server::UnaryService<super::GetDsRelationRuleExecuteSqlBeanRequest>
-                        for GetDsRelationRuleExecuteSqlBeanSvc<T>
+                    impl<T: DsRelationRuleExecuteSqlService>
+                        tonic::server::UnaryService<super::GetDsRelationRuleExecuteSqlRequest>
+                        for GetDsRelationRuleExecuteSqlSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsRelationRuleExecuteSqlBean;
+                        type Response = super::DsRelationRuleExecuteSql;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsRelationRuleExecuteSqlBeanRequest>,
+                            request: tonic::Request<super::GetDsRelationRuleExecuteSqlRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner)
-                                    .get_ds_relation_rule_execute_sql_bean(request)
-                                    .await
+                                (*inner).get_ds_relation_rule_execute_sql(request).await
                             };
                             Box::pin(fut)
                         }
@@ -488,7 +478,7 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsRelationRuleExecuteSqlBeanSvc(inner);
+                        let method = GetDsRelationRuleExecuteSqlSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -504,31 +494,26 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService/\
-                 CreateDsRelationRuleExecuteSqlBean" => {
+                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService/\
+                 CreateDsRelationRuleExecuteSql" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsRelationRuleExecuteSqlBeanSvc<T: DsRelationRuleExecuteSqlBeanService>(
+                    struct CreateDsRelationRuleExecuteSqlSvc<T: DsRelationRuleExecuteSqlService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationRuleExecuteSqlBeanService>
-                        tonic::server::UnaryService<
-                            super::CreateDsRelationRuleExecuteSqlBeanRequest,
-                        > for CreateDsRelationRuleExecuteSqlBeanSvc<T>
+                    impl<T: DsRelationRuleExecuteSqlService>
+                        tonic::server::UnaryService<super::CreateDsRelationRuleExecuteSqlRequest>
+                        for CreateDsRelationRuleExecuteSqlSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsRelationRuleExecuteSqlBean;
+                        type Response = super::DsRelationRuleExecuteSql;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<
-                                super::CreateDsRelationRuleExecuteSqlBeanRequest,
-                            >,
+                            request: tonic::Request<super::CreateDsRelationRuleExecuteSqlRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner)
-                                    .create_ds_relation_rule_execute_sql_bean(request)
-                                    .await
+                                (*inner).create_ds_relation_rule_execute_sql(request).await
                             };
                             Box::pin(fut)
                         }
@@ -540,7 +525,7 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsRelationRuleExecuteSqlBeanSvc(inner);
+                        let method = CreateDsRelationRuleExecuteSqlSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -556,31 +541,26 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService/\
-                 UpdateDsRelationRuleExecuteSqlBean" => {
+                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService/\
+                 UpdateDsRelationRuleExecuteSql" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsRelationRuleExecuteSqlBeanSvc<T: DsRelationRuleExecuteSqlBeanService>(
+                    struct UpdateDsRelationRuleExecuteSqlSvc<T: DsRelationRuleExecuteSqlService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationRuleExecuteSqlBeanService>
-                        tonic::server::UnaryService<
-                            super::UpdateDsRelationRuleExecuteSqlBeanRequest,
-                        > for UpdateDsRelationRuleExecuteSqlBeanSvc<T>
+                    impl<T: DsRelationRuleExecuteSqlService>
+                        tonic::server::UnaryService<super::UpdateDsRelationRuleExecuteSqlRequest>
+                        for UpdateDsRelationRuleExecuteSqlSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsRelationRuleExecuteSqlBean;
+                        type Response = super::DsRelationRuleExecuteSql;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<
-                                super::UpdateDsRelationRuleExecuteSqlBeanRequest,
-                            >,
+                            request: tonic::Request<super::UpdateDsRelationRuleExecuteSqlRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner)
-                                    .update_ds_relation_rule_execute_sql_bean(request)
-                                    .await
+                                (*inner).update_ds_relation_rule_execute_sql(request).await
                             };
                             Box::pin(fut)
                         }
@@ -592,7 +572,7 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsRelationRuleExecuteSqlBeanSvc(inner);
+                        let method = UpdateDsRelationRuleExecuteSqlSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -608,31 +588,26 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService/\
-                 DeleteDsRelationRuleExecuteSqlBean" => {
+                "/ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService/\
+                 DeleteDsRelationRuleExecuteSql" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsRelationRuleExecuteSqlBeanSvc<T: DsRelationRuleExecuteSqlBeanService>(
+                    struct DeleteDsRelationRuleExecuteSqlSvc<T: DsRelationRuleExecuteSqlService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationRuleExecuteSqlBeanService>
-                        tonic::server::UnaryService<
-                            super::DeleteDsRelationRuleExecuteSqlBeanRequest,
-                        > for DeleteDsRelationRuleExecuteSqlBeanSvc<T>
+                    impl<T: DsRelationRuleExecuteSqlService>
+                        tonic::server::UnaryService<super::DeleteDsRelationRuleExecuteSqlRequest>
+                        for DeleteDsRelationRuleExecuteSqlSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<
-                                super::DeleteDsRelationRuleExecuteSqlBeanRequest,
-                            >,
+                            request: tonic::Request<super::DeleteDsRelationRuleExecuteSqlRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner)
-                                    .delete_ds_relation_rule_execute_sql_bean(request)
-                                    .await
+                                (*inner).delete_ds_relation_rule_execute_sql(request).await
                             };
                             Box::pin(fut)
                         }
@@ -644,7 +619,7 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsRelationRuleExecuteSqlBeanSvc(inner);
+                        let method = DeleteDsRelationRuleExecuteSqlSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -671,9 +646,7 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
             }
         }
     }
-    impl<T: DsRelationRuleExecuteSqlBeanService> Clone
-        for DsRelationRuleExecuteSqlBeanServiceServer<T>
-    {
+    impl<T: DsRelationRuleExecuteSqlService> Clone for DsRelationRuleExecuteSqlServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -685,7 +658,7 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
             }
         }
     }
-    impl<T: DsRelationRuleExecuteSqlBeanService> Clone for _Inner<T> {
+    impl<T: DsRelationRuleExecuteSqlService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -695,10 +668,9 @@ pub mod ds_relation_rule_execute_sql_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsRelationRuleExecuteSqlBeanService> tonic::server::NamedService
-        for DsRelationRuleExecuteSqlBeanServiceServer<T>
+    impl<T: DsRelationRuleExecuteSqlService> tonic::server::NamedService
+        for DsRelationRuleExecuteSqlServiceServer<T>
     {
-        const NAME: &'static str =
-            "ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlBeanService";
+        const NAME: &'static str = "ds_relation_rule_execute_sql.DsRelationRuleExecuteSqlService";
     }
 }

@@ -7,52 +7,52 @@ import "google/protobuf/timestamp.proto";
 
 package ds_version;
 
-message DsVersionBean {
+message DsVersion {
 
    int32  id=1 ;
    string  version=2 ;
 }
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsVersionBeanService {
-  rpc ListDsVersionBeans(ListDsVersionBeansRequest) returns (ListDsVersionBeansResponse) {
+service DsVersionService {
+  rpc ListDsVersions(ListDsVersionsRequest) returns (ListDsVersionsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsVersionBeans"
+      get: "/v1alpha1/DsVersions"
     };
   }
 
-  rpc GetDsVersionBean(GetDsVersionBeanRequest) returns (DsVersionBean) {
+  rpc GetDsVersion(GetDsVersionRequest) returns (DsVersion) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsVersionBeans/*}"
+      get: "/v1alpha1/{name=DsVersions/*}"
     };
   }
 
-  rpc CreateDsVersionBean(CreateDsVersionBeanRequest) returns (DsVersionBean) {
+  rpc CreateDsVersion(CreateDsVersionRequest) returns (DsVersion) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsVersionBeans"
-      body: "DsVersionBean"
+      post: "/v1alpha1/DsVersions"
+      body: "DsVersion"
     };
   }
 
-  rpc UpdateDsVersionBean(UpdateDsVersionBeanRequest) returns (DsVersionBean) {
+  rpc UpdateDsVersion(UpdateDsVersionRequest) returns (DsVersion) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsVersionBean.name=DsVersionBeans/*}"
-      body: "DsVersionBean"
+      patch: "/v1alpha1/{DsVersion.name=DsVersions/*}"
+      body: "DsVersion"
     };
   }
 
-  rpc DeleteDsVersionBean(DeleteDsVersionBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsVersion(DeleteDsVersionRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsVersionBeans/*}"
+      delete: "/v1alpha1/{name=DsVersions/*}"
     };
   }
 }
 
-// message DsVersionBean {
+// message DsVersion {
 // ! This should be defined elsewhere
 // }
 
-message ListDsVersionBeansRequest {
+message ListDsVersionsRequest {
 
 
   // The maximum number of items to return.
@@ -61,42 +61,42 @@ message ListDsVersionBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsVersionBeansResponse {
-  // The field name should match the noun "DsVersionBean" in the method name.
+message ListDsVersionsResponse {
+  // The field name should match the noun "DsVersion" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsVersionBean DsVersionBeans = 1;
+  repeated DsVersion DsVersions = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsVersionBeanRequest {
+message GetDsVersionRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsVersionBeanRequest {
-  // The parent resource name where the DsVersionBean is to be created.
+message CreateDsVersionRequest {
+  // The parent resource name where the DsVersion is to be created.
   string parent = 1;
 
-  // The DsVersionBean id to use for this DsVersionBean.
-  string DsVersionBean_id = 2;
+  // The DsVersion id to use for this DsVersion.
+  string DsVersion_id = 2;
 
-  // The DsVersionBean resource to create.
+  // The DsVersion resource to create.
   // The field name should match the Noun in the method name.
-  DsVersionBean DsVersionBean = 3;
+  DsVersion DsVersion = 3;
 }
 
-message UpdateDsVersionBeanRequest {
-  // The DsVersionBean resource which replaces the resource on the server.
-  DsVersionBean DsVersionBean = 1;
+message UpdateDsVersionRequest {
+  // The DsVersion resource which replaces the resource on the server.
+  DsVersion DsVersion = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsVersionBeanRequest {
-  // The resource name of the DsVersionBean to be deleted.
+message DeleteDsVersionRequest {
+  // The resource name of the DsVersion to be deleted.
   string name = 1;
 }

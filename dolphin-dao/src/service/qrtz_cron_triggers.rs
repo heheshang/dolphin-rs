@@ -1,51 +1,51 @@
-use super::service::DolphinRpcServer;
-use proto::qrtz_cron_triggers::qrtz_cron_triggers_bean_service_server::QrtzCronTriggersBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::qrtz_cron_triggers::qrtz_cron_triggers_service_server::QrtzCronTriggersService;
 
 #[tonic::async_trait]
-impl QrtzCronTriggersBeanService for DolphinRpcServer {
-    async fn list_qrtz_cron_triggers_beans(
+impl QrtzCronTriggersService for DolphinRpcServer {
+    async fn list_qrtz_cron_triggerss(
         &self,
-        _req: tonic::Request<proto::qrtz_cron_triggers::ListQrtzCronTriggersBeansRequest>,
+        _req: tonic::Request<proto::qrtz_cron_triggers::ListQrtzCronTriggerssRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_cron_triggers::ListQrtzCronTriggersBeansResponse>,
+        tonic::Response<proto::qrtz_cron_triggers::ListQrtzCronTriggerssResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_qrtz_cron_triggers_bean(
+    async fn get_qrtz_cron_triggers(
         &self,
-        _req: tonic::Request<proto::qrtz_cron_triggers::GetQrtzCronTriggersBeanRequest>,
+        _req: tonic::Request<proto::qrtz_cron_triggers::GetQrtzCronTriggersRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_cron_triggers::QrtzCronTriggersBean>,
+        tonic::Response<proto::qrtz_cron_triggers::QrtzCronTriggers>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn create_qrtz_cron_triggers_bean(
+    async fn create_qrtz_cron_triggers(
         &self,
-        _req: tonic::Request<proto::qrtz_cron_triggers::CreateQrtzCronTriggersBeanRequest>,
+        _req: tonic::Request<proto::qrtz_cron_triggers::CreateQrtzCronTriggersRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_cron_triggers::QrtzCronTriggersBean>,
+        tonic::Response<proto::qrtz_cron_triggers::QrtzCronTriggers>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn update_qrtz_cron_triggers_bean(
+    async fn update_qrtz_cron_triggers(
         &self,
-        _req: tonic::Request<proto::qrtz_cron_triggers::UpdateQrtzCronTriggersBeanRequest>,
+        _req: tonic::Request<proto::qrtz_cron_triggers::UpdateQrtzCronTriggersRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_cron_triggers::QrtzCronTriggersBean>,
+        tonic::Response<proto::qrtz_cron_triggers::QrtzCronTriggers>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn delete_qrtz_cron_triggers_bean(
+    async fn delete_qrtz_cron_triggers(
         &self,
-        _req: tonic::Request<proto::qrtz_cron_triggers::DeleteQrtzCronTriggersBeanRequest>,
+        _req: tonic::Request<proto::qrtz_cron_triggers::DeleteQrtzCronTriggersRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

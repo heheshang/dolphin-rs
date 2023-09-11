@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsRelationNamespaceUserBean {
+pub struct DsRelationNamespaceUser {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int32, optional, tag = "2")]
@@ -18,7 +18,7 @@ pub struct DsRelationNamespaceUserBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsRelationNamespaceUserBeansRequest {
+pub struct ListDsRelationNamespaceUsersRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -27,42 +27,42 @@ pub struct ListDsRelationNamespaceUserBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsRelationNamespaceUserBeansResponse {
-    /// The field name should match the noun "DsRelationNamespaceUserBean" in the method name.
+pub struct ListDsRelationNamespaceUsersResponse {
+    /// The field name should match the noun "DsRelationNamespaceUser" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_relation_namespace_user_beans: ::prost::alloc::vec::Vec<DsRelationNamespaceUserBean>,
+    pub ds_relation_namespace_users: ::prost::alloc::vec::Vec<DsRelationNamespaceUser>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsRelationNamespaceUserBeanRequest {
+pub struct GetDsRelationNamespaceUserRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsRelationNamespaceUserBeanRequest {
-    /// The parent resource name where the DsRelationNamespaceUserBean is to be created.
+pub struct CreateDsRelationNamespaceUserRequest {
+    /// The parent resource name where the DsRelationNamespaceUser is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsRelationNamespaceUserBean id to use for this DsRelationNamespaceUserBean.
+    /// The DsRelationNamespaceUser id to use for this DsRelationNamespaceUser.
     #[prost(string, tag = "2")]
-    pub ds_relation_namespace_user_bean_id: ::prost::alloc::string::String,
-    /// The DsRelationNamespaceUserBean resource to create.
+    pub ds_relation_namespace_user_id: ::prost::alloc::string::String,
+    /// The DsRelationNamespaceUser resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_relation_namespace_user_bean: ::core::option::Option<DsRelationNamespaceUserBean>,
+    pub ds_relation_namespace_user: ::core::option::Option<DsRelationNamespaceUser>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsRelationNamespaceUserBeanRequest {
-    /// The DsRelationNamespaceUserBean resource which replaces the resource on the server.
+pub struct UpdateDsRelationNamespaceUserRequest {
+    /// The DsRelationNamespaceUser resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_relation_namespace_user_bean: ::core::option::Option<DsRelationNamespaceUserBean>,
+    pub ds_relation_namespace_user: ::core::option::Option<DsRelationNamespaceUser>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -70,21 +70,21 @@ pub struct UpdateDsRelationNamespaceUserBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsRelationNamespaceUserBeanRequest {
-    /// The resource name of the DsRelationNamespaceUserBean to be deleted.
+pub struct DeleteDsRelationNamespaceUserRequest {
+    /// The resource name of the DsRelationNamespaceUser to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_relation_namespace_user_bean_service_client {
+pub mod ds_relation_namespace_user_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsRelationNamespaceUserBeanServiceClient<T> {
+    pub struct DsRelationNamespaceUserServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsRelationNamespaceUserBeanServiceClient<tonic::transport::Channel> {
+    impl DsRelationNamespaceUserServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -95,7 +95,7 @@ pub mod ds_relation_namespace_user_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsRelationNamespaceUserBeanServiceClient<T>
+    impl<T> DsRelationNamespaceUserServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -115,7 +115,7 @@ pub mod ds_relation_namespace_user_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsRelationNamespaceUserBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsRelationNamespaceUserServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -128,10 +128,7 @@ pub mod ds_relation_namespace_user_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsRelationNamespaceUserBeanServiceClient::new(InterceptedService::new(
-                inner,
-                interceptor,
-            ))
+            DsRelationNamespaceUserServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -169,11 +166,11 @@ pub mod ds_relation_namespace_user_bean_service_client {
             self
         }
 
-        pub async fn list_ds_relation_namespace_user_beans(
+        pub async fn list_ds_relation_namespace_users(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsRelationNamespaceUserBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsRelationNamespaceUsersRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsRelationNamespaceUserBeansResponse>,
+            tonic::Response<super::ListDsRelationNamespaceUsersResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -184,21 +181,21 @@ pub mod ds_relation_namespace_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_namespace_user.DsRelationNamespaceUserBeanService/\
-                 ListDsRelationNamespaceUserBeans",
+                "/ds_relation_namespace_user.DsRelationNamespaceUserService/\
+                 ListDsRelationNamespaceUsers",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_namespace_user.DsRelationNamespaceUserBeanService",
-                "ListDsRelationNamespaceUserBeans",
+                "ds_relation_namespace_user.DsRelationNamespaceUserService",
+                "ListDsRelationNamespaceUsers",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_relation_namespace_user_bean(
+        pub async fn get_ds_relation_namespace_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsRelationNamespaceUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationNamespaceUserBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::GetDsRelationNamespaceUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationNamespaceUser>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -208,21 +205,21 @@ pub mod ds_relation_namespace_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_namespace_user.DsRelationNamespaceUserBeanService/\
-                 GetDsRelationNamespaceUserBean",
+                "/ds_relation_namespace_user.DsRelationNamespaceUserService/\
+                 GetDsRelationNamespaceUser",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_namespace_user.DsRelationNamespaceUserBeanService",
-                "GetDsRelationNamespaceUserBean",
+                "ds_relation_namespace_user.DsRelationNamespaceUserService",
+                "GetDsRelationNamespaceUser",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_relation_namespace_user_bean(
+        pub async fn create_ds_relation_namespace_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsRelationNamespaceUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationNamespaceUserBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::CreateDsRelationNamespaceUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationNamespaceUser>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -232,21 +229,21 @@ pub mod ds_relation_namespace_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_namespace_user.DsRelationNamespaceUserBeanService/\
-                 CreateDsRelationNamespaceUserBean",
+                "/ds_relation_namespace_user.DsRelationNamespaceUserService/\
+                 CreateDsRelationNamespaceUser",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_namespace_user.DsRelationNamespaceUserBeanService",
-                "CreateDsRelationNamespaceUserBean",
+                "ds_relation_namespace_user.DsRelationNamespaceUserService",
+                "CreateDsRelationNamespaceUser",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_relation_namespace_user_bean(
+        pub async fn update_ds_relation_namespace_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsRelationNamespaceUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationNamespaceUserBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::UpdateDsRelationNamespaceUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationNamespaceUser>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -256,20 +253,20 @@ pub mod ds_relation_namespace_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_namespace_user.DsRelationNamespaceUserBeanService/\
-                 UpdateDsRelationNamespaceUserBean",
+                "/ds_relation_namespace_user.DsRelationNamespaceUserService/\
+                 UpdateDsRelationNamespaceUser",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_namespace_user.DsRelationNamespaceUserBeanService",
-                "UpdateDsRelationNamespaceUserBean",
+                "ds_relation_namespace_user.DsRelationNamespaceUserService",
+                "UpdateDsRelationNamespaceUser",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_relation_namespace_user_bean(
+        pub async fn delete_ds_relation_namespace_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsRelationNamespaceUserBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsRelationNamespaceUserRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -279,52 +276,52 @@ pub mod ds_relation_namespace_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_namespace_user.DsRelationNamespaceUserBeanService/\
-                 DeleteDsRelationNamespaceUserBean",
+                "/ds_relation_namespace_user.DsRelationNamespaceUserService/\
+                 DeleteDsRelationNamespaceUser",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_namespace_user.DsRelationNamespaceUserBeanService",
-                "DeleteDsRelationNamespaceUserBean",
+                "ds_relation_namespace_user.DsRelationNamespaceUserService",
+                "DeleteDsRelationNamespaceUser",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_relation_namespace_user_bean_service_server {
+pub mod ds_relation_namespace_user_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsRelationNamespaceUserBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsRelationNamespaceUserServiceServer.
     #[async_trait]
-    pub trait DsRelationNamespaceUserBeanService: Send + Sync + 'static {
-        async fn list_ds_relation_namespace_user_beans(
+    pub trait DsRelationNamespaceUserService: Send + Sync + 'static {
+        async fn list_ds_relation_namespace_users(
             &self,
-            request: tonic::Request<super::ListDsRelationNamespaceUserBeansRequest>,
+            request: tonic::Request<super::ListDsRelationNamespaceUsersRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsRelationNamespaceUserBeansResponse>,
+            tonic::Response<super::ListDsRelationNamespaceUsersResponse>,
             tonic::Status,
         >;
-        async fn get_ds_relation_namespace_user_bean(
+        async fn get_ds_relation_namespace_user(
             &self,
-            request: tonic::Request<super::GetDsRelationNamespaceUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationNamespaceUserBean>, tonic::Status>;
-        async fn create_ds_relation_namespace_user_bean(
+            request: tonic::Request<super::GetDsRelationNamespaceUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationNamespaceUser>, tonic::Status>;
+        async fn create_ds_relation_namespace_user(
             &self,
-            request: tonic::Request<super::CreateDsRelationNamespaceUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationNamespaceUserBean>, tonic::Status>;
-        async fn update_ds_relation_namespace_user_bean(
+            request: tonic::Request<super::CreateDsRelationNamespaceUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationNamespaceUser>, tonic::Status>;
+        async fn update_ds_relation_namespace_user(
             &self,
-            request: tonic::Request<super::UpdateDsRelationNamespaceUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationNamespaceUserBean>, tonic::Status>;
-        async fn delete_ds_relation_namespace_user_bean(
+            request: tonic::Request<super::UpdateDsRelationNamespaceUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationNamespaceUser>, tonic::Status>;
+        async fn delete_ds_relation_namespace_user(
             &self,
-            request: tonic::Request<super::DeleteDsRelationNamespaceUserBeanRequest>,
+            request: tonic::Request<super::DeleteDsRelationNamespaceUserRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsRelationNamespaceUserBeanServiceServer<T: DsRelationNamespaceUserBeanService> {
+    pub struct DsRelationNamespaceUserServiceServer<T: DsRelationNamespaceUserService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -332,7 +329,7 @@ pub mod ds_relation_namespace_user_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsRelationNamespaceUserBeanService> DsRelationNamespaceUserBeanServiceServer<T> {
+    impl<T: DsRelationNamespaceUserService> DsRelationNamespaceUserServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -385,9 +382,9 @@ pub mod ds_relation_namespace_user_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsRelationNamespaceUserBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsRelationNamespaceUserServiceServer<T>
     where
-        T: DsRelationNamespaceUserBeanService,
+        T: DsRelationNamespaceUserService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -405,28 +402,26 @@ pub mod ds_relation_namespace_user_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_relation_namespace_user.DsRelationNamespaceUserBeanService/\
-                 ListDsRelationNamespaceUserBeans" => {
+                "/ds_relation_namespace_user.DsRelationNamespaceUserService/\
+                 ListDsRelationNamespaceUsers" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsRelationNamespaceUserBeansSvc<T: DsRelationNamespaceUserBeanService>(
+                    struct ListDsRelationNamespaceUsersSvc<T: DsRelationNamespaceUserService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationNamespaceUserBeanService>
-                        tonic::server::UnaryService<super::ListDsRelationNamespaceUserBeansRequest>
-                        for ListDsRelationNamespaceUserBeansSvc<T>
+                    impl<T: DsRelationNamespaceUserService>
+                        tonic::server::UnaryService<super::ListDsRelationNamespaceUsersRequest>
+                        for ListDsRelationNamespaceUsersSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsRelationNamespaceUserBeansResponse;
+                        type Response = super::ListDsRelationNamespaceUsersResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsRelationNamespaceUserBeansRequest>,
+                            request: tonic::Request<super::ListDsRelationNamespaceUsersRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner)
-                                    .list_ds_relation_namespace_user_beans(request)
-                                    .await
+                                (*inner).list_ds_relation_namespace_users(request).await
                             };
                             Box::pin(fut)
                         }
@@ -438,7 +433,7 @@ pub mod ds_relation_namespace_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsRelationNamespaceUserBeansSvc(inner);
+                        let method = ListDsRelationNamespaceUsersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -454,26 +449,26 @@ pub mod ds_relation_namespace_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_namespace_user.DsRelationNamespaceUserBeanService/\
-                 GetDsRelationNamespaceUserBean" => {
+                "/ds_relation_namespace_user.DsRelationNamespaceUserService/\
+                 GetDsRelationNamespaceUser" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsRelationNamespaceUserBeanSvc<T: DsRelationNamespaceUserBeanService>(
+                    struct GetDsRelationNamespaceUserSvc<T: DsRelationNamespaceUserService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationNamespaceUserBeanService>
-                        tonic::server::UnaryService<super::GetDsRelationNamespaceUserBeanRequest>
-                        for GetDsRelationNamespaceUserBeanSvc<T>
+                    impl<T: DsRelationNamespaceUserService>
+                        tonic::server::UnaryService<super::GetDsRelationNamespaceUserRequest>
+                        for GetDsRelationNamespaceUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsRelationNamespaceUserBean;
+                        type Response = super::DsRelationNamespaceUser;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsRelationNamespaceUserBeanRequest>,
+                            request: tonic::Request<super::GetDsRelationNamespaceUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_ds_relation_namespace_user_bean(request).await
+                                (*inner).get_ds_relation_namespace_user(request).await
                             };
                             Box::pin(fut)
                         }
@@ -485,7 +480,7 @@ pub mod ds_relation_namespace_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsRelationNamespaceUserBeanSvc(inner);
+                        let method = GetDsRelationNamespaceUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -501,30 +496,26 @@ pub mod ds_relation_namespace_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_namespace_user.DsRelationNamespaceUserBeanService/\
-                 CreateDsRelationNamespaceUserBean" => {
+                "/ds_relation_namespace_user.DsRelationNamespaceUserService/\
+                 CreateDsRelationNamespaceUser" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsRelationNamespaceUserBeanSvc<T: DsRelationNamespaceUserBeanService>(
+                    struct CreateDsRelationNamespaceUserSvc<T: DsRelationNamespaceUserService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationNamespaceUserBeanService>
-                        tonic::server::UnaryService<super::CreateDsRelationNamespaceUserBeanRequest>
-                        for CreateDsRelationNamespaceUserBeanSvc<T>
+                    impl<T: DsRelationNamespaceUserService>
+                        tonic::server::UnaryService<super::CreateDsRelationNamespaceUserRequest>
+                        for CreateDsRelationNamespaceUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsRelationNamespaceUserBean;
+                        type Response = super::DsRelationNamespaceUser;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<
-                                super::CreateDsRelationNamespaceUserBeanRequest,
-                            >,
+                            request: tonic::Request<super::CreateDsRelationNamespaceUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner)
-                                    .create_ds_relation_namespace_user_bean(request)
-                                    .await
+                                (*inner).create_ds_relation_namespace_user(request).await
                             };
                             Box::pin(fut)
                         }
@@ -536,7 +527,7 @@ pub mod ds_relation_namespace_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsRelationNamespaceUserBeanSvc(inner);
+                        let method = CreateDsRelationNamespaceUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -552,30 +543,26 @@ pub mod ds_relation_namespace_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_namespace_user.DsRelationNamespaceUserBeanService/\
-                 UpdateDsRelationNamespaceUserBean" => {
+                "/ds_relation_namespace_user.DsRelationNamespaceUserService/\
+                 UpdateDsRelationNamespaceUser" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsRelationNamespaceUserBeanSvc<T: DsRelationNamespaceUserBeanService>(
+                    struct UpdateDsRelationNamespaceUserSvc<T: DsRelationNamespaceUserService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationNamespaceUserBeanService>
-                        tonic::server::UnaryService<super::UpdateDsRelationNamespaceUserBeanRequest>
-                        for UpdateDsRelationNamespaceUserBeanSvc<T>
+                    impl<T: DsRelationNamespaceUserService>
+                        tonic::server::UnaryService<super::UpdateDsRelationNamespaceUserRequest>
+                        for UpdateDsRelationNamespaceUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsRelationNamespaceUserBean;
+                        type Response = super::DsRelationNamespaceUser;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<
-                                super::UpdateDsRelationNamespaceUserBeanRequest,
-                            >,
+                            request: tonic::Request<super::UpdateDsRelationNamespaceUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner)
-                                    .update_ds_relation_namespace_user_bean(request)
-                                    .await
+                                (*inner).update_ds_relation_namespace_user(request).await
                             };
                             Box::pin(fut)
                         }
@@ -587,7 +574,7 @@ pub mod ds_relation_namespace_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsRelationNamespaceUserBeanSvc(inner);
+                        let method = UpdateDsRelationNamespaceUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -603,30 +590,26 @@ pub mod ds_relation_namespace_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_namespace_user.DsRelationNamespaceUserBeanService/\
-                 DeleteDsRelationNamespaceUserBean" => {
+                "/ds_relation_namespace_user.DsRelationNamespaceUserService/\
+                 DeleteDsRelationNamespaceUser" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsRelationNamespaceUserBeanSvc<T: DsRelationNamespaceUserBeanService>(
+                    struct DeleteDsRelationNamespaceUserSvc<T: DsRelationNamespaceUserService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationNamespaceUserBeanService>
-                        tonic::server::UnaryService<super::DeleteDsRelationNamespaceUserBeanRequest>
-                        for DeleteDsRelationNamespaceUserBeanSvc<T>
+                    impl<T: DsRelationNamespaceUserService>
+                        tonic::server::UnaryService<super::DeleteDsRelationNamespaceUserRequest>
+                        for DeleteDsRelationNamespaceUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<
-                                super::DeleteDsRelationNamespaceUserBeanRequest,
-                            >,
+                            request: tonic::Request<super::DeleteDsRelationNamespaceUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner)
-                                    .delete_ds_relation_namespace_user_bean(request)
-                                    .await
+                                (*inner).delete_ds_relation_namespace_user(request).await
                             };
                             Box::pin(fut)
                         }
@@ -638,7 +621,7 @@ pub mod ds_relation_namespace_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsRelationNamespaceUserBeanSvc(inner);
+                        let method = DeleteDsRelationNamespaceUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -665,7 +648,7 @@ pub mod ds_relation_namespace_user_bean_service_server {
             }
         }
     }
-    impl<T: DsRelationNamespaceUserBeanService> Clone for DsRelationNamespaceUserBeanServiceServer<T> {
+    impl<T: DsRelationNamespaceUserService> Clone for DsRelationNamespaceUserServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -677,7 +660,7 @@ pub mod ds_relation_namespace_user_bean_service_server {
             }
         }
     }
-    impl<T: DsRelationNamespaceUserBeanService> Clone for _Inner<T> {
+    impl<T: DsRelationNamespaceUserService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -687,9 +670,9 @@ pub mod ds_relation_namespace_user_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsRelationNamespaceUserBeanService> tonic::server::NamedService
-        for DsRelationNamespaceUserBeanServiceServer<T>
+    impl<T: DsRelationNamespaceUserService> tonic::server::NamedService
+        for DsRelationNamespaceUserServiceServer<T>
     {
-        const NAME: &'static str = "ds_relation_namespace_user.DsRelationNamespaceUserBeanService";
+        const NAME: &'static str = "ds_relation_namespace_user.DsRelationNamespaceUserService";
     }
 }

@@ -8,7 +8,7 @@ import "google/api/annotations.proto";
 //import "google/protobuf/timestamp.proto";
 package ds_session;
 
-message DsSessionBean{
+message DsSession{
     string id=1;
     int32 user_id=2;
     optional string ip=3;
@@ -17,55 +17,55 @@ message DsSessionBean{
 }
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsSessionBeanService {
-  rpc ListDsSessionBeans(ListDsSessionBeansRequest) returns (ListDsSessionBeansResponse) {
+service DsSessionService {
+  rpc ListDsSessions(ListDsSessionsRequest) returns (ListDsSessionsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsSessionBeans"
+      get: "/v1alpha1/DsSessions"
     };
   }
 
-  rpc GetDsSessionBean(GetDsSessionByIRequest) returns (DsSessionBean) {
+  rpc GetDsSession(GetDsSessionByIRequest) returns (DsSession) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsSessionBeans/*}"
+      get: "/v1alpha1/{name=DsSessions/*}"
     };
   }
-    rpc GetDsSessionById(GetDsSessionBeanByIdRequest) returns (DsSessionBean) {
+    rpc GetDsSessionById(GetDsSessionByIdRequest) returns (DsSession) {
     option (google.api.http) = {
       get: "/v1alpha1/{name=GetDsSessionById/*}"
     };
   }
-  rpc GetDsSessionByUserId(GetDsSessionBeanUserIdRequest) returns (GetDsSessionBeanUserIdResponse) {
+  rpc GetDsSessionByUserId(GetDsSessionUserIdRequest) returns (GetDsSessionUserIdResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=GetDsSessionBeanUserId/*}"
+      get: "/v1alpha1/{name=GetDsSessionUserId/*}"
     };
   }
 
-  rpc CreateDsSessionBean(CreateDsSessionBeanRequest) returns (DsSessionBean) {
+  rpc CreateDsSession(CreateDsSessionRequest) returns (DsSession) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsSessionBeans"
-      body: "DsSessionBean"
+      post: "/v1alpha1/DsSessions"
+      body: "DsSession"
     };
   }
 
-  rpc UpdateDsSessionBean(UpdateDsSessionBeanRequest) returns (DsSessionBean) {
+  rpc UpdateDsSession(UpdateDsSessionRequest) returns (DsSession) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsSessionBean.name=DsSessionBeans/*}"
-      body: "DsSessionBean"
+      patch: "/v1alpha1/{DsSession.name=DsSessions/*}"
+      body: "DsSession"
     };
   }
 
-  rpc DeleteDsSessionBean(DeleteDsSessionBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsSession(DeleteDsSessionRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsSessionBeans/*}"
+      delete: "/v1alpha1/{name=DsSessions/*}"
     };
   }
 }
 
-// message DsSessionBean {
+// message DsSession {
 // ! This should be defined elsewhere
 // }
 
-message ListDsSessionBeansRequest {
+message ListDsSessionsRequest {
 
 
   // The maximum number of items to return.
@@ -74,10 +74,10 @@ message ListDsSessionBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsSessionBeansResponse {
-  // The field name should match the noun "DsSessionBean" in the method name.
+message ListDsSessionsResponse {
+  // The field name should match the noun "DsSession" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsSessionBean DsSessionBeans = 1;
+  repeated DsSession DsSessions = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
@@ -88,35 +88,35 @@ message GetDsSessionByIRequest {
   string id = 1;
 }
 
-message GetDsSessionBeanByIdRequest {
+message GetDsSessionByIdRequest {
   // The field will contain name of the resource requested.
   string id = 1;
 }
-message GetDsSessionBeanUserIdRequest {
+message GetDsSessionUserIdRequest {
   // The field will contain name of the resource requested.
   int32 userId = 1;
 }
 
-message GetDsSessionBeanUserIdResponse {
+message GetDsSessionUserIdResponse {
   // The field will contain name of the resource requested.
-  repeated DsSessionBean  DsSessionBeans= 1;
+  repeated DsSession  DsSessions= 1;
 }
 
 
 
-message CreateDsSessionBeanRequest {
-  // The DsSessionBean resource to create.
+message CreateDsSessionRequest {
+  // The DsSession resource to create.
   // The field name should match the Noun in the method name.
-  DsSessionBean DsSessionBean = 3;
+  DsSession DsSession = 3;
 }
 
-message UpdateDsSessionBeanRequest {
-  // The DsSessionBean resource which replaces the resource on the server.
-  DsSessionBean DsSessionBean = 1;
+message UpdateDsSessionRequest {
+  // The DsSession resource which replaces the resource on the server.
+  DsSession DsSession = 1;
 
 }
 
-message DeleteDsSessionBeanRequest {
-  // The resource name of the DsSessionBean to be deleted.
+message DeleteDsSessionRequest {
+  // The resource name of the DsSession to be deleted.
   string id = 1;
 }

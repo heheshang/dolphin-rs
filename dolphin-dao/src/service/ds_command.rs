@@ -1,43 +1,43 @@
-use super::service::DolphinRpcServer;
-use proto::ds_command::ds_command_bean_service_server::DsCommandBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_command::ds_command_service_server::DsCommandService;
 
 
 #[tonic::async_trait]
-impl DsCommandBeanService for DolphinRpcServer {
-    async fn list_ds_command_beans(
+impl DsCommandService for DolphinRpcServer {
+    async fn list_ds_commands(
         &self,
-        _req: tonic::Request<proto::ds_command::ListDsCommandBeansRequest>,
+        _req: tonic::Request<proto::ds_command::ListDsCommandsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_command::ListDsCommandBeansResponse>,
+        tonic::Response<proto::ds_command::ListDsCommandsResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_command_bean(
+    async fn get_ds_command(
         &self,
-        _req: tonic::Request<proto::ds_command::GetDsCommandBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_command::DsCommandBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_command::GetDsCommandRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_command::DsCommand>, tonic::Status> {
         todo!()
     }
 
-    async fn create_ds_command_bean(
+    async fn create_ds_command(
         &self,
-        _req: tonic::Request<proto::ds_command::CreateDsCommandBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_command::DsCommandBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_command::CreateDsCommandRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_command::DsCommand>, tonic::Status> {
         todo!()
     }
 
-    async fn update_ds_command_bean(
+    async fn update_ds_command(
         &self,
-        _req: tonic::Request<proto::ds_command::UpdateDsCommandBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_command::DsCommandBean>, tonic::Status> {
+        _req: tonic::Request<proto::ds_command::UpdateDsCommandRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_command::DsCommand>, tonic::Status> {
         todo!()
     }
 
-    async fn delete_ds_command_bean(
+    async fn delete_ds_command(
         &self,
-        _req: tonic::Request<proto::ds_command::DeleteDsCommandBeanRequest>,
+        _req: tonic::Request<proto::ds_command::DeleteDsCommandRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

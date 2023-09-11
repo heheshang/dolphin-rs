@@ -1,62 +1,56 @@
-use proto::ds_alert_plugin_instance::ds_alert_plugin_instance_bean_service_server::DsAlertPluginInstanceBeanService;
+use proto::ds_alert_plugin_instance::ds_alert_plugin_instance_service_server::DsAlertPluginInstanceService;
 // use sea_orm::entity::prelude::*;
 
-use super::service::DolphinRpcServer;
+use super::dao_service::DolphinRpcServer;
 
 
 #[tonic::async_trait]
-impl DsAlertPluginInstanceBeanService for DolphinRpcServer {
-    async fn list_ds_alert_plugin_instance_beans(
+impl DsAlertPluginInstanceService for DolphinRpcServer {
+    async fn list_ds_alert_plugin_instances(
         &self,
         _request: tonic::Request<
-            proto::ds_alert_plugin_instance::ListDsAlertPluginInstanceBeansRequest,
+            proto::ds_alert_plugin_instance::ListDsAlertPluginInstancesRequest,
         >,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_alert_plugin_instance::ListDsAlertPluginInstanceBeansResponse>,
+        tonic::Response<proto::ds_alert_plugin_instance::ListDsAlertPluginInstancesResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_alert_plugin_instance_bean(
+    async fn get_ds_alert_plugin_instance(
         &self,
-        _req: tonic::Request<proto::ds_alert_plugin_instance::GetDsAlertPluginInstanceBeanRequest>,
+        _req: tonic::Request<proto::ds_alert_plugin_instance::GetDsAlertPluginInstanceRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_alert_plugin_instance::DsAlertPluginInstanceBean>,
+        tonic::Response<proto::ds_alert_plugin_instance::DsAlertPluginInstance>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn create_ds_alert_plugin_instance_bean(
+    async fn create_ds_alert_plugin_instance(
         &self,
-        _req: tonic::Request<
-            proto::ds_alert_plugin_instance::CreateDsAlertPluginInstanceBeanRequest,
-        >,
+        _req: tonic::Request<proto::ds_alert_plugin_instance::CreateDsAlertPluginInstanceRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_alert_plugin_instance::DsAlertPluginInstanceBean>,
+        tonic::Response<proto::ds_alert_plugin_instance::DsAlertPluginInstance>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn update_ds_alert_plugin_instance_bean(
+    async fn update_ds_alert_plugin_instance(
         &self,
-        _req: tonic::Request<
-            proto::ds_alert_plugin_instance::UpdateDsAlertPluginInstanceBeanRequest,
-        >,
+        _req: tonic::Request<proto::ds_alert_plugin_instance::UpdateDsAlertPluginInstanceRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_alert_plugin_instance::DsAlertPluginInstanceBean>,
+        tonic::Response<proto::ds_alert_plugin_instance::DsAlertPluginInstance>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn delete_ds_alert_plugin_instance_bean(
+    async fn delete_ds_alert_plugin_instance(
         &self,
-        _req: tonic::Request<
-            proto::ds_alert_plugin_instance::DeleteDsAlertPluginInstanceBeanRequest,
-        >,
+        _req: tonic::Request<proto::ds_alert_plugin_instance::DeleteDsAlertPluginInstanceRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

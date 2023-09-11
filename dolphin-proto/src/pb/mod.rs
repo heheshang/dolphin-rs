@@ -31,7 +31,7 @@ pub mod ds_relation_process_instance;
 pub mod ds_relation_project_user;
 pub mod ds_relation_resources_user;
 pub mod ds_relation_rule_execute_sql;
-pub mod ds_relation_rule_input_entry;
+pub mod ds_relation_rule_input;
 pub mod ds_relation_udfs_user;
 pub mod ds_resources;
 pub mod ds_schedules;

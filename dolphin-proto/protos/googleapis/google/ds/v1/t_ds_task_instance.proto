@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 package ds_task_instance;
 
 
-message DsTaskInstanceBean {
+message DsTaskInstance {
 
     int32  id= 1;
     optional string name=2 ;
@@ -46,45 +46,45 @@ message DsTaskInstanceBean {
 
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service DsTaskInstanceBeanService {
-  rpc ListDsTaskInstanceBeans(ListDsTaskInstanceBeansRequest) returns (ListDsTaskInstanceBeansResponse) {
+service DsTaskInstanceService {
+  rpc ListDsTaskInstances(ListDsTaskInstancesRequest) returns (ListDsTaskInstancesResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/DsTaskInstanceBeans"
+      get: "/v1alpha1/DsTaskInstances"
     };
   }
 
-  rpc GetDsTaskInstanceBean(GetDsTaskInstanceBeanRequest) returns (DsTaskInstanceBean) {
+  rpc GetDsTaskInstance(GetDsTaskInstanceRequest) returns (DsTaskInstance) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=DsTaskInstanceBeans/*}"
+      get: "/v1alpha1/{name=DsTaskInstances/*}"
     };
   }
 
-  rpc CreateDsTaskInstanceBean(CreateDsTaskInstanceBeanRequest) returns (DsTaskInstanceBean) {
+  rpc CreateDsTaskInstance(CreateDsTaskInstanceRequest) returns (DsTaskInstance) {
     option (google.api.http) = {
-      post: "/v1alpha1/DsTaskInstanceBeans"
-      body: "DsTaskInstanceBean"
+      post: "/v1alpha1/DsTaskInstances"
+      body: "DsTaskInstance"
     };
   }
 
-  rpc UpdateDsTaskInstanceBean(UpdateDsTaskInstanceBeanRequest) returns (DsTaskInstanceBean) {
+  rpc UpdateDsTaskInstance(UpdateDsTaskInstanceRequest) returns (DsTaskInstance) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{DsTaskInstanceBean.name=DsTaskInstanceBeans/*}"
-      body: "DsTaskInstanceBean"
+      patch: "/v1alpha1/{DsTaskInstance.name=DsTaskInstances/*}"
+      body: "DsTaskInstance"
     };
   }
 
-  rpc DeleteDsTaskInstanceBean(DeleteDsTaskInstanceBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteDsTaskInstance(DeleteDsTaskInstanceRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=DsTaskInstanceBeans/*}"
+      delete: "/v1alpha1/{name=DsTaskInstances/*}"
     };
   }
 }
 
-// message DsTaskInstanceBean {
+// message DsTaskInstance {
 // ! This should be defined elsewhere
 // }
 
-message ListDsTaskInstanceBeansRequest {
+message ListDsTaskInstancesRequest {
 
 
   // The maximum number of items to return.
@@ -93,42 +93,42 @@ message ListDsTaskInstanceBeansRequest {
  int32 page_num = 2;
 }
 
-message ListDsTaskInstanceBeansResponse {
-  // The field name should match the noun "DsTaskInstanceBean" in the method name.
+message ListDsTaskInstancesResponse {
+  // The field name should match the noun "DsTaskInstance" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated DsTaskInstanceBean DsTaskInstanceBeans = 1;
+  repeated DsTaskInstance DsTaskInstances = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetDsTaskInstanceBeanRequest {
+message GetDsTaskInstanceRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateDsTaskInstanceBeanRequest {
-  // The parent resource name where the DsTaskInstanceBean is to be created.
+message CreateDsTaskInstanceRequest {
+  // The parent resource name where the DsTaskInstance is to be created.
   string parent = 1;
 
-  // The DsTaskInstanceBean id to use for this DsTaskInstanceBean.
-  string DsTaskInstanceBean_id = 2;
+  // The DsTaskInstance id to use for this DsTaskInstance.
+  string DsTaskInstance_id = 2;
 
-  // The DsTaskInstanceBean resource to create.
+  // The DsTaskInstance resource to create.
   // The field name should match the Noun in the method name.
-  DsTaskInstanceBean DsTaskInstanceBean = 3;
+  DsTaskInstance DsTaskInstance = 3;
 }
 
-message UpdateDsTaskInstanceBeanRequest {
-  // The DsTaskInstanceBean resource which replaces the resource on the server.
-  DsTaskInstanceBean DsTaskInstanceBean = 1;
+message UpdateDsTaskInstanceRequest {
+  // The DsTaskInstance resource which replaces the resource on the server.
+  DsTaskInstance DsTaskInstance = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteDsTaskInstanceBeanRequest {
-  // The resource name of the DsTaskInstanceBean to be deleted.
+message DeleteDsTaskInstanceRequest {
+  // The resource name of the DsTaskInstance to be deleted.
   string name = 1;
 }

@@ -1,46 +1,46 @@
-use super::service::DolphinRpcServer;
-use proto::ds_environment::ds_environment_bean_service_server::DsEnvironmentBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_environment::ds_environment_service_server::DsEnvironmentService;
 
 
 #[tonic::async_trait]
-impl DsEnvironmentBeanService for DolphinRpcServer {
-    async fn list_ds_environment_beans(
+impl DsEnvironmentService for DolphinRpcServer {
+    async fn list_ds_environments(
         &self,
-        _req: tonic::Request<proto::ds_environment::ListDsEnvironmentBeansRequest>,
+        _req: tonic::Request<proto::ds_environment::ListDsEnvironmentsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_environment::ListDsEnvironmentBeansResponse>,
+        tonic::Response<proto::ds_environment::ListDsEnvironmentsResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_environment_bean(
+    async fn get_ds_environment(
         &self,
-        _req: tonic::Request<proto::ds_environment::GetDsEnvironmentBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_environment::DsEnvironmentBean>, tonic::Status>
+        _req: tonic::Request<proto::ds_environment::GetDsEnvironmentRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_environment::DsEnvironment>, tonic::Status>
     {
         todo!()
     }
 
-    async fn create_ds_environment_bean(
+    async fn create_ds_environment(
         &self,
-        _req: tonic::Request<proto::ds_environment::CreateDsEnvironmentBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_environment::DsEnvironmentBean>, tonic::Status>
+        _req: tonic::Request<proto::ds_environment::CreateDsEnvironmentRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_environment::DsEnvironment>, tonic::Status>
     {
         todo!()
     }
 
-    async fn update_ds_environment_bean(
+    async fn update_ds_environment(
         &self,
-        _req: tonic::Request<proto::ds_environment::UpdateDsEnvironmentBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_environment::DsEnvironmentBean>, tonic::Status>
+        _req: tonic::Request<proto::ds_environment::UpdateDsEnvironmentRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_environment::DsEnvironment>, tonic::Status>
     {
         todo!()
     }
 
-    async fn delete_ds_environment_bean(
+    async fn delete_ds_environment(
         &self,
-        _req: tonic::Request<proto::ds_environment::DeleteDsEnvironmentBeanRequest>,
+        _req: tonic::Request<proto::ds_environment::DeleteDsEnvironmentRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

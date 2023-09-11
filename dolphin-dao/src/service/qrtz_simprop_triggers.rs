@@ -1,51 +1,51 @@
-use super::service::DolphinRpcServer;
-use proto::qrtz_simprop_triggers::qrtz_simprop_trigger_bean_service_server::QrtzSimpropTriggerBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::qrtz_simprop_triggers::qrtz_simprop_trigger_service_server::QrtzSimpropTriggerService;
 
 #[tonic::async_trait]
-impl QrtzSimpropTriggerBeanService for DolphinRpcServer {
-    async fn list_qrtz_simprop_trigger_beans(
+impl QrtzSimpropTriggerService for DolphinRpcServer {
+    async fn list_qrtz_simprop_triggers(
         &self,
-        _req: tonic::Request<proto::qrtz_simprop_triggers::ListQrtzSimpropTriggerBeansRequest>,
+        _req: tonic::Request<proto::qrtz_simprop_triggers::ListQrtzSimpropTriggersRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_simprop_triggers::ListQrtzSimpropTriggerBeansResponse>,
+        tonic::Response<proto::qrtz_simprop_triggers::ListQrtzSimpropTriggersResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_qrtz_simprop_trigger_bean(
+    async fn get_qrtz_simprop_trigger(
         &self,
-        _req: tonic::Request<proto::qrtz_simprop_triggers::GetQrtzSimpropTriggerBeanRequest>,
+        _req: tonic::Request<proto::qrtz_simprop_triggers::GetQrtzSimpropTriggerRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_simprop_triggers::QrtzSimpropTriggerBean>,
+        tonic::Response<proto::qrtz_simprop_triggers::QrtzSimpropTrigger>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn create_qrtz_simprop_trigger_bean(
+    async fn create_qrtz_simprop_trigger(
         &self,
-        _req: tonic::Request<proto::qrtz_simprop_triggers::CreateQrtzSimpropTriggerBeanRequest>,
+        _req: tonic::Request<proto::qrtz_simprop_triggers::CreateQrtzSimpropTriggerRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_simprop_triggers::QrtzSimpropTriggerBean>,
+        tonic::Response<proto::qrtz_simprop_triggers::QrtzSimpropTrigger>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn update_qrtz_simprop_trigger_bean(
+    async fn update_qrtz_simprop_trigger(
         &self,
-        _req: tonic::Request<proto::qrtz_simprop_triggers::UpdateQrtzSimpropTriggerBeanRequest>,
+        _req: tonic::Request<proto::qrtz_simprop_triggers::UpdateQrtzSimpropTriggerRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::qrtz_simprop_triggers::QrtzSimpropTriggerBean>,
+        tonic::Response<proto::qrtz_simprop_triggers::QrtzSimpropTrigger>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn delete_qrtz_simprop_trigger_bean(
+    async fn delete_qrtz_simprop_trigger(
         &self,
-        _req: tonic::Request<proto::qrtz_simprop_triggers::DeleteQrtzSimpropTriggerBeanRequest>,
+        _req: tonic::Request<proto::qrtz_simprop_triggers::DeleteQrtzSimpropTriggerRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

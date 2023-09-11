@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsSchedulesBean {
+pub struct DsSchedules {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int64, tag = "2")]
@@ -38,7 +38,7 @@ pub struct DsSchedulesBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsSchedulesBeansRequest {
+pub struct ListDsSchedulessRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -47,42 +47,42 @@ pub struct ListDsSchedulesBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsSchedulesBeansResponse {
-    /// The field name should match the noun "DsSchedulesBean" in the method name.
+pub struct ListDsSchedulessResponse {
+    /// The field name should match the noun "DsSchedules" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_schedules_beans: ::prost::alloc::vec::Vec<DsSchedulesBean>,
+    pub ds_scheduless: ::prost::alloc::vec::Vec<DsSchedules>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsSchedulesBeanRequest {
+pub struct GetDsSchedulesRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsSchedulesBeanRequest {
-    /// The parent resource name where the DsSchedulesBean is to be created.
+pub struct CreateDsSchedulesRequest {
+    /// The parent resource name where the DsSchedules is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsSchedulesBean id to use for this DsSchedulesBean.
+    /// The DsSchedules id to use for this DsSchedules.
     #[prost(string, tag = "2")]
-    pub ds_schedules_bean_id: ::prost::alloc::string::String,
-    /// The DsSchedulesBean resource to create.
+    pub ds_schedules_id: ::prost::alloc::string::String,
+    /// The DsSchedules resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_schedules_bean: ::core::option::Option<DsSchedulesBean>,
+    pub ds_schedules: ::core::option::Option<DsSchedules>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsSchedulesBeanRequest {
-    /// The DsSchedulesBean resource which replaces the resource on the server.
+pub struct UpdateDsSchedulesRequest {
+    /// The DsSchedules resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_schedules_bean: ::core::option::Option<DsSchedulesBean>,
+    pub ds_schedules: ::core::option::Option<DsSchedules>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -90,21 +90,21 @@ pub struct UpdateDsSchedulesBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsSchedulesBeanRequest {
-    /// The resource name of the DsSchedulesBean to be deleted.
+pub struct DeleteDsSchedulesRequest {
+    /// The resource name of the DsSchedules to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_schedules_bean_service_client {
+pub mod ds_schedules_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsSchedulesBeanServiceClient<T> {
+    pub struct DsSchedulesServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsSchedulesBeanServiceClient<tonic::transport::Channel> {
+    impl DsSchedulesServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -115,7 +115,7 @@ pub mod ds_schedules_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsSchedulesBeanServiceClient<T>
+    impl<T> DsSchedulesServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -135,7 +135,7 @@ pub mod ds_schedules_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsSchedulesBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsSchedulesServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -148,7 +148,7 @@ pub mod ds_schedules_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsSchedulesBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsSchedulesServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -186,10 +186,10 @@ pub mod ds_schedules_bean_service_client {
             self
         }
 
-        pub async fn list_ds_schedules_beans(
+        pub async fn list_ds_scheduless(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsSchedulesBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsSchedulesBeansResponse>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListDsSchedulessRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsSchedulessResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -199,20 +199,20 @@ pub mod ds_schedules_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_schedules.DsSchedulesBeanService/ListDsSchedulesBeans",
+                "/ds_schedules.DsSchedulesService/ListDsScheduless",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_schedules.DsSchedulesBeanService",
-                "ListDsSchedulesBeans",
+                "ds_schedules.DsSchedulesService",
+                "ListDsScheduless",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_schedules_bean(
+        pub async fn get_ds_schedules(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsSchedulesBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsSchedulesBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetDsSchedulesRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsSchedules>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -221,20 +221,20 @@ pub mod ds_schedules_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_schedules.DsSchedulesBeanService/GetDsSchedulesBean",
+                "/ds_schedules.DsSchedulesService/GetDsSchedules",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_schedules.DsSchedulesBeanService",
-                "GetDsSchedulesBean",
+                "ds_schedules.DsSchedulesService",
+                "GetDsSchedules",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_schedules_bean(
+        pub async fn create_ds_schedules(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsSchedulesBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsSchedulesBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::CreateDsSchedulesRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsSchedules>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -243,20 +243,20 @@ pub mod ds_schedules_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_schedules.DsSchedulesBeanService/CreateDsSchedulesBean",
+                "/ds_schedules.DsSchedulesService/CreateDsSchedules",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_schedules.DsSchedulesBeanService",
-                "CreateDsSchedulesBean",
+                "ds_schedules.DsSchedulesService",
+                "CreateDsSchedules",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_schedules_bean(
+        pub async fn update_ds_schedules(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsSchedulesBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsSchedulesBean>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::UpdateDsSchedulesRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsSchedules>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -265,19 +265,19 @@ pub mod ds_schedules_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_schedules.DsSchedulesBeanService/UpdateDsSchedulesBean",
+                "/ds_schedules.DsSchedulesService/UpdateDsSchedules",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_schedules.DsSchedulesBeanService",
-                "UpdateDsSchedulesBean",
+                "ds_schedules.DsSchedulesService",
+                "UpdateDsSchedules",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_schedules_bean(
+        pub async fn delete_ds_schedules(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsSchedulesBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsSchedulesRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -287,48 +287,48 @@ pub mod ds_schedules_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_schedules.DsSchedulesBeanService/DeleteDsSchedulesBean",
+                "/ds_schedules.DsSchedulesService/DeleteDsSchedules",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_schedules.DsSchedulesBeanService",
-                "DeleteDsSchedulesBean",
+                "ds_schedules.DsSchedulesService",
+                "DeleteDsSchedules",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_schedules_bean_service_server {
+pub mod ds_schedules_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsSchedulesBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsSchedulesServiceServer.
     #[async_trait]
-    pub trait DsSchedulesBeanService: Send + Sync + 'static {
-        async fn list_ds_schedules_beans(
+    pub trait DsSchedulesService: Send + Sync + 'static {
+        async fn list_ds_scheduless(
             &self,
-            request: tonic::Request<super::ListDsSchedulesBeansRequest>,
-        ) -> std::result::Result<tonic::Response<super::ListDsSchedulesBeansResponse>, tonic::Status>;
-        async fn get_ds_schedules_bean(
+            request: tonic::Request<super::ListDsSchedulessRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListDsSchedulessResponse>, tonic::Status>;
+        async fn get_ds_schedules(
             &self,
-            request: tonic::Request<super::GetDsSchedulesBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsSchedulesBean>, tonic::Status>;
-        async fn create_ds_schedules_bean(
+            request: tonic::Request<super::GetDsSchedulesRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsSchedules>, tonic::Status>;
+        async fn create_ds_schedules(
             &self,
-            request: tonic::Request<super::CreateDsSchedulesBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsSchedulesBean>, tonic::Status>;
-        async fn update_ds_schedules_bean(
+            request: tonic::Request<super::CreateDsSchedulesRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsSchedules>, tonic::Status>;
+        async fn update_ds_schedules(
             &self,
-            request: tonic::Request<super::UpdateDsSchedulesBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsSchedulesBean>, tonic::Status>;
-        async fn delete_ds_schedules_bean(
+            request: tonic::Request<super::UpdateDsSchedulesRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsSchedules>, tonic::Status>;
+        async fn delete_ds_schedules(
             &self,
-            request: tonic::Request<super::DeleteDsSchedulesBeanRequest>,
+            request: tonic::Request<super::DeleteDsSchedulesRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsSchedulesBeanServiceServer<T: DsSchedulesBeanService> {
+    pub struct DsSchedulesServiceServer<T: DsSchedulesService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -336,7 +336,7 @@ pub mod ds_schedules_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsSchedulesBeanService> DsSchedulesBeanServiceServer<T> {
+    impl<T: DsSchedulesService> DsSchedulesServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -389,9 +389,9 @@ pub mod ds_schedules_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsSchedulesBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsSchedulesServiceServer<T>
     where
-        T: DsSchedulesBeanService,
+        T: DsSchedulesService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -409,23 +409,22 @@ pub mod ds_schedules_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_schedules.DsSchedulesBeanService/ListDsSchedulesBeans" => {
+                "/ds_schedules.DsSchedulesService/ListDsScheduless" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsSchedulesBeansSvc<T: DsSchedulesBeanService>(pub Arc<T>);
-                    impl<T: DsSchedulesBeanService>
-                        tonic::server::UnaryService<super::ListDsSchedulesBeansRequest>
-                        for ListDsSchedulesBeansSvc<T>
+                    struct ListDsSchedulessSvc<T: DsSchedulesService>(pub Arc<T>);
+                    impl<T: DsSchedulesService>
+                        tonic::server::UnaryService<super::ListDsSchedulessRequest>
+                        for ListDsSchedulessSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsSchedulesBeansResponse;
+                        type Response = super::ListDsSchedulessResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsSchedulesBeansRequest>,
+                            request: tonic::Request<super::ListDsSchedulessRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).list_ds_schedules_beans(request).await };
+                            let fut = async move { (*inner).list_ds_scheduless(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -436,7 +435,7 @@ pub mod ds_schedules_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsSchedulesBeansSvc(inner);
+                        let method = ListDsSchedulessSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -452,22 +451,22 @@ pub mod ds_schedules_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_schedules.DsSchedulesBeanService/GetDsSchedulesBean" => {
+                "/ds_schedules.DsSchedulesService/GetDsSchedules" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsSchedulesBeanSvc<T: DsSchedulesBeanService>(pub Arc<T>);
-                    impl<T: DsSchedulesBeanService>
-                        tonic::server::UnaryService<super::GetDsSchedulesBeanRequest>
-                        for GetDsSchedulesBeanSvc<T>
+                    struct GetDsSchedulesSvc<T: DsSchedulesService>(pub Arc<T>);
+                    impl<T: DsSchedulesService>
+                        tonic::server::UnaryService<super::GetDsSchedulesRequest>
+                        for GetDsSchedulesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsSchedulesBean;
+                        type Response = super::DsSchedules;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsSchedulesBeanRequest>,
+                            request: tonic::Request<super::GetDsSchedulesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_ds_schedules_bean(request).await };
+                            let fut = async move { (*inner).get_ds_schedules(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -478,7 +477,7 @@ pub mod ds_schedules_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsSchedulesBeanSvc(inner);
+                        let method = GetDsSchedulesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -494,23 +493,22 @@ pub mod ds_schedules_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_schedules.DsSchedulesBeanService/CreateDsSchedulesBean" => {
+                "/ds_schedules.DsSchedulesService/CreateDsSchedules" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsSchedulesBeanSvc<T: DsSchedulesBeanService>(pub Arc<T>);
-                    impl<T: DsSchedulesBeanService>
-                        tonic::server::UnaryService<super::CreateDsSchedulesBeanRequest>
-                        for CreateDsSchedulesBeanSvc<T>
+                    struct CreateDsSchedulesSvc<T: DsSchedulesService>(pub Arc<T>);
+                    impl<T: DsSchedulesService>
+                        tonic::server::UnaryService<super::CreateDsSchedulesRequest>
+                        for CreateDsSchedulesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsSchedulesBean;
+                        type Response = super::DsSchedules;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsSchedulesBeanRequest>,
+                            request: tonic::Request<super::CreateDsSchedulesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).create_ds_schedules_bean(request).await };
+                            let fut = async move { (*inner).create_ds_schedules(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -521,7 +519,7 @@ pub mod ds_schedules_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsSchedulesBeanSvc(inner);
+                        let method = CreateDsSchedulesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -537,23 +535,22 @@ pub mod ds_schedules_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_schedules.DsSchedulesBeanService/UpdateDsSchedulesBean" => {
+                "/ds_schedules.DsSchedulesService/UpdateDsSchedules" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsSchedulesBeanSvc<T: DsSchedulesBeanService>(pub Arc<T>);
-                    impl<T: DsSchedulesBeanService>
-                        tonic::server::UnaryService<super::UpdateDsSchedulesBeanRequest>
-                        for UpdateDsSchedulesBeanSvc<T>
+                    struct UpdateDsSchedulesSvc<T: DsSchedulesService>(pub Arc<T>);
+                    impl<T: DsSchedulesService>
+                        tonic::server::UnaryService<super::UpdateDsSchedulesRequest>
+                        for UpdateDsSchedulesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsSchedulesBean;
+                        type Response = super::DsSchedules;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsSchedulesBeanRequest>,
+                            request: tonic::Request<super::UpdateDsSchedulesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).update_ds_schedules_bean(request).await };
+                            let fut = async move { (*inner).update_ds_schedules(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -564,7 +561,7 @@ pub mod ds_schedules_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsSchedulesBeanSvc(inner);
+                        let method = UpdateDsSchedulesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -580,23 +577,22 @@ pub mod ds_schedules_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_schedules.DsSchedulesBeanService/DeleteDsSchedulesBean" => {
+                "/ds_schedules.DsSchedulesService/DeleteDsSchedules" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsSchedulesBeanSvc<T: DsSchedulesBeanService>(pub Arc<T>);
-                    impl<T: DsSchedulesBeanService>
-                        tonic::server::UnaryService<super::DeleteDsSchedulesBeanRequest>
-                        for DeleteDsSchedulesBeanSvc<T>
+                    struct DeleteDsSchedulesSvc<T: DsSchedulesService>(pub Arc<T>);
+                    impl<T: DsSchedulesService>
+                        tonic::server::UnaryService<super::DeleteDsSchedulesRequest>
+                        for DeleteDsSchedulesSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsSchedulesBeanRequest>,
+                            request: tonic::Request<super::DeleteDsSchedulesRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut =
-                                async move { (*inner).delete_ds_schedules_bean(request).await };
+                            let fut = async move { (*inner).delete_ds_schedules(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -607,7 +603,7 @@ pub mod ds_schedules_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsSchedulesBeanSvc(inner);
+                        let method = DeleteDsSchedulesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -634,7 +630,7 @@ pub mod ds_schedules_bean_service_server {
             }
         }
     }
-    impl<T: DsSchedulesBeanService> Clone for DsSchedulesBeanServiceServer<T> {
+    impl<T: DsSchedulesService> Clone for DsSchedulesServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -646,7 +642,7 @@ pub mod ds_schedules_bean_service_server {
             }
         }
     }
-    impl<T: DsSchedulesBeanService> Clone for _Inner<T> {
+    impl<T: DsSchedulesService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -656,7 +652,7 @@ pub mod ds_schedules_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsSchedulesBeanService> tonic::server::NamedService for DsSchedulesBeanServiceServer<T> {
-        const NAME: &'static str = "ds_schedules.DsSchedulesBeanService";
+    impl<T: DsSchedulesService> tonic::server::NamedService for DsSchedulesServiceServer<T> {
+        const NAME: &'static str = "ds_schedules.DsSchedulesService";
     }
 }

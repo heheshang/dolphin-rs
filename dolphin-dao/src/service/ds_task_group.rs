@@ -1,45 +1,45 @@
-use super::service::DolphinRpcServer;
-use proto::ds_task_group::ds_task_group_bean_service_server::DsTaskGroupBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_task_group::ds_task_group_service_server::DsTaskGroupService;
 
 #[tonic::async_trait]
-impl DsTaskGroupBeanService for DolphinRpcServer {
-    async fn list_ds_task_group_beans(
+impl DsTaskGroupService for DolphinRpcServer {
+    async fn list_ds_task_groups(
         &self,
-        _req: tonic::Request<proto::ds_task_group::ListDsTaskGroupBeansRequest>,
+        _req: tonic::Request<proto::ds_task_group::ListDsTaskGroupsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_task_group::ListDsTaskGroupBeansResponse>,
+        tonic::Response<proto::ds_task_group::ListDsTaskGroupsResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_task_group_bean(
+    async fn get_ds_task_group(
         &self,
-        _req: tonic::Request<proto::ds_task_group::GetDsTaskGroupBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_task_group::DsTaskGroupBean>, tonic::Status>
+        _req: tonic::Request<proto::ds_task_group::GetDsTaskGroupRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_task_group::DsTaskGroup>, tonic::Status>
     {
         todo!()
     }
 
-    async fn create_ds_task_group_bean(
+    async fn create_ds_task_group(
         &self,
-        _req: tonic::Request<proto::ds_task_group::CreateDsTaskGroupBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_task_group::DsTaskGroupBean>, tonic::Status>
+        _req: tonic::Request<proto::ds_task_group::CreateDsTaskGroupRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_task_group::DsTaskGroup>, tonic::Status>
     {
         todo!()
     }
 
-    async fn update_ds_task_group_bean(
+    async fn update_ds_task_group(
         &self,
-        _req: tonic::Request<proto::ds_task_group::UpdateDsTaskGroupBeanRequest>,
-    ) -> std::result::Result<tonic::Response<proto::ds_task_group::DsTaskGroupBean>, tonic::Status>
+        _req: tonic::Request<proto::ds_task_group::UpdateDsTaskGroupRequest>,
+    ) -> std::result::Result<tonic::Response<proto::ds_task_group::DsTaskGroup>, tonic::Status>
     {
         todo!()
     }
 
-    async fn delete_ds_task_group_bean(
+    async fn delete_ds_task_group(
         &self,
-        _req: tonic::Request<proto::ds_task_group::DeleteDsTaskGroupBeanRequest>,
+        _req: tonic::Request<proto::ds_task_group::DeleteDsTaskGroupRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }

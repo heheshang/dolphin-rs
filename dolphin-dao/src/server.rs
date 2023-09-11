@@ -8,7 +8,8 @@ pub mod service;
 
 pub use service::*;
 
-use crate::service::service::DolphinRpcServer;
+use crate::service::dao_service::DolphinRpcServer;
+
 
 
 #[tokio::main]
@@ -65,7 +66,7 @@ async fn main() -> Result<()> {
         .add_optional_service(Some(grpc_server.clone().ds_relation_project_user()))
         .add_optional_service(Some(grpc_server.clone().ds_relation_resources_user()))
         .add_optional_service(Some(grpc_server.clone().ds_relation_rule_execute_sql()))
-        .add_optional_service(Some(grpc_server.clone().ds_relation_rule_input_entry()))
+        .add_optional_service(Some(grpc_server.clone().ds_relation_rule_input()))
         .add_optional_service(Some(grpc_server.clone().ds_relation_udfs_user()))
         .add_optional_service(Some(grpc_server.clone().ds_resources()))
         .add_optional_service(Some(grpc_server.clone().ds_schedules()))

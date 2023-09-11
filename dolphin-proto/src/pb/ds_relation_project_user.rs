@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DsRelationProjectUserBean {
+pub struct DsRelationProjectUser {
     #[prost(int32, tag = "1")]
     pub id: i32,
     #[prost(int32, tag = "2")]
@@ -18,7 +18,7 @@ pub struct DsRelationProjectUserBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsRelationProjectUserBeansRequest {
+pub struct ListDsRelationProjectUsersRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -27,42 +27,42 @@ pub struct ListDsRelationProjectUserBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListDsRelationProjectUserBeansResponse {
-    /// The field name should match the noun "DsRelationProjectUserBean" in the method name.
+pub struct ListDsRelationProjectUsersResponse {
+    /// The field name should match the noun "DsRelationProjectUser" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub ds_relation_project_user_beans: ::prost::alloc::vec::Vec<DsRelationProjectUserBean>,
+    pub ds_relation_project_users: ::prost::alloc::vec::Vec<DsRelationProjectUser>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetDsRelationProjectUserBeanRequest {
+pub struct GetDsRelationProjectUserRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateDsRelationProjectUserBeanRequest {
-    /// The parent resource name where the DsRelationProjectUserBean is to be created.
+pub struct CreateDsRelationProjectUserRequest {
+    /// The parent resource name where the DsRelationProjectUser is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The DsRelationProjectUserBean id to use for this DsRelationProjectUserBean.
+    /// The DsRelationProjectUser id to use for this DsRelationProjectUser.
     #[prost(string, tag = "2")]
-    pub ds_relation_project_user_bean_id: ::prost::alloc::string::String,
-    /// The DsRelationProjectUserBean resource to create.
+    pub ds_relation_project_user_id: ::prost::alloc::string::String,
+    /// The DsRelationProjectUser resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub ds_relation_project_user_bean: ::core::option::Option<DsRelationProjectUserBean>,
+    pub ds_relation_project_user: ::core::option::Option<DsRelationProjectUser>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateDsRelationProjectUserBeanRequest {
-    /// The DsRelationProjectUserBean resource which replaces the resource on the server.
+pub struct UpdateDsRelationProjectUserRequest {
+    /// The DsRelationProjectUser resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub ds_relation_project_user_bean: ::core::option::Option<DsRelationProjectUserBean>,
+    pub ds_relation_project_user: ::core::option::Option<DsRelationProjectUser>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -70,21 +70,21 @@ pub struct UpdateDsRelationProjectUserBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteDsRelationProjectUserBeanRequest {
-    /// The resource name of the DsRelationProjectUserBean to be deleted.
+pub struct DeleteDsRelationProjectUserRequest {
+    /// The resource name of the DsRelationProjectUser to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod ds_relation_project_user_bean_service_client {
+pub mod ds_relation_project_user_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct DsRelationProjectUserBeanServiceClient<T> {
+    pub struct DsRelationProjectUserServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl DsRelationProjectUserBeanServiceClient<tonic::transport::Channel> {
+    impl DsRelationProjectUserServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -95,7 +95,7 @@ pub mod ds_relation_project_user_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> DsRelationProjectUserBeanServiceClient<T>
+    impl<T> DsRelationProjectUserServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -115,7 +115,7 @@ pub mod ds_relation_project_user_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> DsRelationProjectUserBeanServiceClient<InterceptedService<T, F>>
+        ) -> DsRelationProjectUserServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -128,7 +128,7 @@ pub mod ds_relation_project_user_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            DsRelationProjectUserBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            DsRelationProjectUserServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -166,11 +166,11 @@ pub mod ds_relation_project_user_bean_service_client {
             self
         }
 
-        pub async fn list_ds_relation_project_user_beans(
+        pub async fn list_ds_relation_project_users(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListDsRelationProjectUserBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListDsRelationProjectUsersRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsRelationProjectUserBeansResponse>,
+            tonic::Response<super::ListDsRelationProjectUsersResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -181,21 +181,20 @@ pub mod ds_relation_project_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_project_user.DsRelationProjectUserBeanService/\
-                 ListDsRelationProjectUserBeans",
+                "/ds_relation_project_user.DsRelationProjectUserService/ListDsRelationProjectUsers",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_project_user.DsRelationProjectUserBeanService",
-                "ListDsRelationProjectUserBeans",
+                "ds_relation_project_user.DsRelationProjectUserService",
+                "ListDsRelationProjectUsers",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_ds_relation_project_user_bean(
+        pub async fn get_ds_relation_project_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetDsRelationProjectUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationProjectUserBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::GetDsRelationProjectUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationProjectUser>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -205,21 +204,20 @@ pub mod ds_relation_project_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_project_user.DsRelationProjectUserBeanService/\
-                 GetDsRelationProjectUserBean",
+                "/ds_relation_project_user.DsRelationProjectUserService/GetDsRelationProjectUser",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_project_user.DsRelationProjectUserBeanService",
-                "GetDsRelationProjectUserBean",
+                "ds_relation_project_user.DsRelationProjectUserService",
+                "GetDsRelationProjectUser",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_ds_relation_project_user_bean(
+        pub async fn create_ds_relation_project_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateDsRelationProjectUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationProjectUserBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::CreateDsRelationProjectUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationProjectUser>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -229,21 +227,21 @@ pub mod ds_relation_project_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_project_user.DsRelationProjectUserBeanService/\
-                 CreateDsRelationProjectUserBean",
+                "/ds_relation_project_user.DsRelationProjectUserService/\
+                 CreateDsRelationProjectUser",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_project_user.DsRelationProjectUserBeanService",
-                "CreateDsRelationProjectUserBean",
+                "ds_relation_project_user.DsRelationProjectUserService",
+                "CreateDsRelationProjectUser",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_ds_relation_project_user_bean(
+        pub async fn update_ds_relation_project_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateDsRelationProjectUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationProjectUserBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::UpdateDsRelationProjectUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationProjectUser>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -253,20 +251,20 @@ pub mod ds_relation_project_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_project_user.DsRelationProjectUserBeanService/\
-                 UpdateDsRelationProjectUserBean",
+                "/ds_relation_project_user.DsRelationProjectUserService/\
+                 UpdateDsRelationProjectUser",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_project_user.DsRelationProjectUserBeanService",
-                "UpdateDsRelationProjectUserBean",
+                "ds_relation_project_user.DsRelationProjectUserService",
+                "UpdateDsRelationProjectUser",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_ds_relation_project_user_bean(
+        pub async fn delete_ds_relation_project_user(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteDsRelationProjectUserBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteDsRelationProjectUserRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -276,52 +274,52 @@ pub mod ds_relation_project_user_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/ds_relation_project_user.DsRelationProjectUserBeanService/\
-                 DeleteDsRelationProjectUserBean",
+                "/ds_relation_project_user.DsRelationProjectUserService/\
+                 DeleteDsRelationProjectUser",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "ds_relation_project_user.DsRelationProjectUserBeanService",
-                "DeleteDsRelationProjectUserBean",
+                "ds_relation_project_user.DsRelationProjectUserService",
+                "DeleteDsRelationProjectUser",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod ds_relation_project_user_bean_service_server {
+pub mod ds_relation_project_user_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with DsRelationProjectUserBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with DsRelationProjectUserServiceServer.
     #[async_trait]
-    pub trait DsRelationProjectUserBeanService: Send + Sync + 'static {
-        async fn list_ds_relation_project_user_beans(
+    pub trait DsRelationProjectUserService: Send + Sync + 'static {
+        async fn list_ds_relation_project_users(
             &self,
-            request: tonic::Request<super::ListDsRelationProjectUserBeansRequest>,
+            request: tonic::Request<super::ListDsRelationProjectUsersRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListDsRelationProjectUserBeansResponse>,
+            tonic::Response<super::ListDsRelationProjectUsersResponse>,
             tonic::Status,
         >;
-        async fn get_ds_relation_project_user_bean(
+        async fn get_ds_relation_project_user(
             &self,
-            request: tonic::Request<super::GetDsRelationProjectUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationProjectUserBean>, tonic::Status>;
-        async fn create_ds_relation_project_user_bean(
+            request: tonic::Request<super::GetDsRelationProjectUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationProjectUser>, tonic::Status>;
+        async fn create_ds_relation_project_user(
             &self,
-            request: tonic::Request<super::CreateDsRelationProjectUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationProjectUserBean>, tonic::Status>;
-        async fn update_ds_relation_project_user_bean(
+            request: tonic::Request<super::CreateDsRelationProjectUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationProjectUser>, tonic::Status>;
+        async fn update_ds_relation_project_user(
             &self,
-            request: tonic::Request<super::UpdateDsRelationProjectUserBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::DsRelationProjectUserBean>, tonic::Status>;
-        async fn delete_ds_relation_project_user_bean(
+            request: tonic::Request<super::UpdateDsRelationProjectUserRequest>,
+        ) -> std::result::Result<tonic::Response<super::DsRelationProjectUser>, tonic::Status>;
+        async fn delete_ds_relation_project_user(
             &self,
-            request: tonic::Request<super::DeleteDsRelationProjectUserBeanRequest>,
+            request: tonic::Request<super::DeleteDsRelationProjectUserRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct DsRelationProjectUserBeanServiceServer<T: DsRelationProjectUserBeanService> {
+    pub struct DsRelationProjectUserServiceServer<T: DsRelationProjectUserService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -329,7 +327,7 @@ pub mod ds_relation_project_user_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: DsRelationProjectUserBeanService> DsRelationProjectUserBeanServiceServer<T> {
+    impl<T: DsRelationProjectUserService> DsRelationProjectUserServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -382,9 +380,9 @@ pub mod ds_relation_project_user_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsRelationProjectUserBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for DsRelationProjectUserServiceServer<T>
     where
-        T: DsRelationProjectUserBeanService,
+        T: DsRelationProjectUserService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -402,26 +400,26 @@ pub mod ds_relation_project_user_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/ds_relation_project_user.DsRelationProjectUserBeanService/\
-                 ListDsRelationProjectUserBeans" => {
+                "/ds_relation_project_user.DsRelationProjectUserService/\
+                 ListDsRelationProjectUsers" => {
                     #[allow(non_camel_case_types)]
-                    struct ListDsRelationProjectUserBeansSvc<T: DsRelationProjectUserBeanService>(
+                    struct ListDsRelationProjectUsersSvc<T: DsRelationProjectUserService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationProjectUserBeanService>
-                        tonic::server::UnaryService<super::ListDsRelationProjectUserBeansRequest>
-                        for ListDsRelationProjectUserBeansSvc<T>
+                    impl<T: DsRelationProjectUserService>
+                        tonic::server::UnaryService<super::ListDsRelationProjectUsersRequest>
+                        for ListDsRelationProjectUsersSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListDsRelationProjectUserBeansResponse;
+                        type Response = super::ListDsRelationProjectUsersResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListDsRelationProjectUserBeansRequest>,
+                            request: tonic::Request<super::ListDsRelationProjectUsersRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).list_ds_relation_project_user_beans(request).await
+                                (*inner).list_ds_relation_project_users(request).await
                             };
                             Box::pin(fut)
                         }
@@ -433,7 +431,7 @@ pub mod ds_relation_project_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListDsRelationProjectUserBeansSvc(inner);
+                        let method = ListDsRelationProjectUsersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -449,27 +447,24 @@ pub mod ds_relation_project_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_project_user.DsRelationProjectUserBeanService/\
-                 GetDsRelationProjectUserBean" => {
+                "/ds_relation_project_user.DsRelationProjectUserService/\
+                 GetDsRelationProjectUser" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDsRelationProjectUserBeanSvc<T: DsRelationProjectUserBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: DsRelationProjectUserBeanService>
-                        tonic::server::UnaryService<super::GetDsRelationProjectUserBeanRequest>
-                        for GetDsRelationProjectUserBeanSvc<T>
+                    struct GetDsRelationProjectUserSvc<T: DsRelationProjectUserService>(pub Arc<T>);
+                    impl<T: DsRelationProjectUserService>
+                        tonic::server::UnaryService<super::GetDsRelationProjectUserRequest>
+                        for GetDsRelationProjectUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsRelationProjectUserBean;
+                        type Response = super::DsRelationProjectUser;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetDsRelationProjectUserBeanRequest>,
+                            request: tonic::Request<super::GetDsRelationProjectUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_ds_relation_project_user_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_ds_relation_project_user(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -480,7 +475,7 @@ pub mod ds_relation_project_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetDsRelationProjectUserBeanSvc(inner);
+                        let method = GetDsRelationProjectUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -496,26 +491,26 @@ pub mod ds_relation_project_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_project_user.DsRelationProjectUserBeanService/\
-                 CreateDsRelationProjectUserBean" => {
+                "/ds_relation_project_user.DsRelationProjectUserService/\
+                 CreateDsRelationProjectUser" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateDsRelationProjectUserBeanSvc<T: DsRelationProjectUserBeanService>(
+                    struct CreateDsRelationProjectUserSvc<T: DsRelationProjectUserService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationProjectUserBeanService>
-                        tonic::server::UnaryService<super::CreateDsRelationProjectUserBeanRequest>
-                        for CreateDsRelationProjectUserBeanSvc<T>
+                    impl<T: DsRelationProjectUserService>
+                        tonic::server::UnaryService<super::CreateDsRelationProjectUserRequest>
+                        for CreateDsRelationProjectUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsRelationProjectUserBean;
+                        type Response = super::DsRelationProjectUser;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateDsRelationProjectUserBeanRequest>,
+                            request: tonic::Request<super::CreateDsRelationProjectUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).create_ds_relation_project_user_bean(request).await
+                                (*inner).create_ds_relation_project_user(request).await
                             };
                             Box::pin(fut)
                         }
@@ -527,7 +522,7 @@ pub mod ds_relation_project_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateDsRelationProjectUserBeanSvc(inner);
+                        let method = CreateDsRelationProjectUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -543,26 +538,26 @@ pub mod ds_relation_project_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_project_user.DsRelationProjectUserBeanService/\
-                 UpdateDsRelationProjectUserBean" => {
+                "/ds_relation_project_user.DsRelationProjectUserService/\
+                 UpdateDsRelationProjectUser" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateDsRelationProjectUserBeanSvc<T: DsRelationProjectUserBeanService>(
+                    struct UpdateDsRelationProjectUserSvc<T: DsRelationProjectUserService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationProjectUserBeanService>
-                        tonic::server::UnaryService<super::UpdateDsRelationProjectUserBeanRequest>
-                        for UpdateDsRelationProjectUserBeanSvc<T>
+                    impl<T: DsRelationProjectUserService>
+                        tonic::server::UnaryService<super::UpdateDsRelationProjectUserRequest>
+                        for UpdateDsRelationProjectUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::DsRelationProjectUserBean;
+                        type Response = super::DsRelationProjectUser;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateDsRelationProjectUserBeanRequest>,
+                            request: tonic::Request<super::UpdateDsRelationProjectUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).update_ds_relation_project_user_bean(request).await
+                                (*inner).update_ds_relation_project_user(request).await
                             };
                             Box::pin(fut)
                         }
@@ -574,7 +569,7 @@ pub mod ds_relation_project_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateDsRelationProjectUserBeanSvc(inner);
+                        let method = UpdateDsRelationProjectUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -590,26 +585,26 @@ pub mod ds_relation_project_user_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/ds_relation_project_user.DsRelationProjectUserBeanService/\
-                 DeleteDsRelationProjectUserBean" => {
+                "/ds_relation_project_user.DsRelationProjectUserService/\
+                 DeleteDsRelationProjectUser" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteDsRelationProjectUserBeanSvc<T: DsRelationProjectUserBeanService>(
+                    struct DeleteDsRelationProjectUserSvc<T: DsRelationProjectUserService>(
                         pub Arc<T>,
                     );
-                    impl<T: DsRelationProjectUserBeanService>
-                        tonic::server::UnaryService<super::DeleteDsRelationProjectUserBeanRequest>
-                        for DeleteDsRelationProjectUserBeanSvc<T>
+                    impl<T: DsRelationProjectUserService>
+                        tonic::server::UnaryService<super::DeleteDsRelationProjectUserRequest>
+                        for DeleteDsRelationProjectUserSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteDsRelationProjectUserBeanRequest>,
+                            request: tonic::Request<super::DeleteDsRelationProjectUserRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).delete_ds_relation_project_user_bean(request).await
+                                (*inner).delete_ds_relation_project_user(request).await
                             };
                             Box::pin(fut)
                         }
@@ -621,7 +616,7 @@ pub mod ds_relation_project_user_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteDsRelationProjectUserBeanSvc(inner);
+                        let method = DeleteDsRelationProjectUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -648,7 +643,7 @@ pub mod ds_relation_project_user_bean_service_server {
             }
         }
     }
-    impl<T: DsRelationProjectUserBeanService> Clone for DsRelationProjectUserBeanServiceServer<T> {
+    impl<T: DsRelationProjectUserService> Clone for DsRelationProjectUserServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -660,7 +655,7 @@ pub mod ds_relation_project_user_bean_service_server {
             }
         }
     }
-    impl<T: DsRelationProjectUserBeanService> Clone for _Inner<T> {
+    impl<T: DsRelationProjectUserService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -670,9 +665,9 @@ pub mod ds_relation_project_user_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: DsRelationProjectUserBeanService> tonic::server::NamedService
-        for DsRelationProjectUserBeanServiceServer<T>
+    impl<T: DsRelationProjectUserService> tonic::server::NamedService
+        for DsRelationProjectUserServiceServer<T>
     {
-        const NAME: &'static str = "ds_relation_project_user.DsRelationProjectUserBeanService";
+        const NAME: &'static str = "ds_relation_project_user.DsRelationProjectUserService";
     }
 }

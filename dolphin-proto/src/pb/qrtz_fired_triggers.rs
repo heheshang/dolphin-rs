@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct QrtzFiredTriggersBean {
+pub struct QrtzFiredTriggers {
     #[prost(string, tag = "1")]
     pub sched_name: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
@@ -32,7 +32,7 @@ pub struct QrtzFiredTriggersBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQrtzFiredTriggersBeansRequest {
+pub struct ListQrtzFiredTriggerssRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -41,42 +41,42 @@ pub struct ListQrtzFiredTriggersBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQrtzFiredTriggersBeansResponse {
-    /// The field name should match the noun "QrtzFiredTriggersBean" in the method name.
+pub struct ListQrtzFiredTriggerssResponse {
+    /// The field name should match the noun "QrtzFiredTriggers" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub qrtz_fired_triggers_beans: ::prost::alloc::vec::Vec<QrtzFiredTriggersBean>,
+    pub qrtz_fired_triggerss: ::prost::alloc::vec::Vec<QrtzFiredTriggers>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetQrtzFiredTriggersBeanRequest {
+pub struct GetQrtzFiredTriggersRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateQrtzFiredTriggersBeanRequest {
-    /// The parent resource name where the QrtzFiredTriggersBean is to be created.
+pub struct CreateQrtzFiredTriggersRequest {
+    /// The parent resource name where the QrtzFiredTriggers is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The QrtzFiredTriggersBean id to use for this QrtzFiredTriggersBean.
+    /// The QrtzFiredTriggers id to use for this QrtzFiredTriggers.
     #[prost(string, tag = "2")]
-    pub qrtz_fired_triggers_bean_id: ::prost::alloc::string::String,
-    /// The QrtzFiredTriggersBean resource to create.
+    pub qrtz_fired_triggers_id: ::prost::alloc::string::String,
+    /// The QrtzFiredTriggers resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub qrtz_fired_triggers_bean: ::core::option::Option<QrtzFiredTriggersBean>,
+    pub qrtz_fired_triggers: ::core::option::Option<QrtzFiredTriggers>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateQrtzFiredTriggersBeanRequest {
-    /// The QrtzFiredTriggersBean resource which replaces the resource on the server.
+pub struct UpdateQrtzFiredTriggersRequest {
+    /// The QrtzFiredTriggers resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub qrtz_fired_triggers_bean: ::core::option::Option<QrtzFiredTriggersBean>,
+    pub qrtz_fired_triggers: ::core::option::Option<QrtzFiredTriggers>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -84,21 +84,21 @@ pub struct UpdateQrtzFiredTriggersBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteQrtzFiredTriggersBeanRequest {
-    /// The resource name of the QrtzFiredTriggersBean to be deleted.
+pub struct DeleteQrtzFiredTriggersRequest {
+    /// The resource name of the QrtzFiredTriggers to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod qrtz_fired_triggers_bean_service_client {
+pub mod qrtz_fired_triggers_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct QrtzFiredTriggersBeanServiceClient<T> {
+    pub struct QrtzFiredTriggersServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl QrtzFiredTriggersBeanServiceClient<tonic::transport::Channel> {
+    impl QrtzFiredTriggersServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -109,7 +109,7 @@ pub mod qrtz_fired_triggers_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> QrtzFiredTriggersBeanServiceClient<T>
+    impl<T> QrtzFiredTriggersServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -129,7 +129,7 @@ pub mod qrtz_fired_triggers_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> QrtzFiredTriggersBeanServiceClient<InterceptedService<T, F>>
+        ) -> QrtzFiredTriggersServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -142,7 +142,7 @@ pub mod qrtz_fired_triggers_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            QrtzFiredTriggersBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            QrtzFiredTriggersServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -180,11 +180,11 @@ pub mod qrtz_fired_triggers_bean_service_client {
             self
         }
 
-        pub async fn list_qrtz_fired_triggers_beans(
+        pub async fn list_qrtz_fired_triggerss(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListQrtzFiredTriggersBeansRequest>,
+            request: impl tonic::IntoRequest<super::ListQrtzFiredTriggerssRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListQrtzFiredTriggersBeansResponse>,
+            tonic::Response<super::ListQrtzFiredTriggerssResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -195,21 +195,20 @@ pub mod qrtz_fired_triggers_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_fired_triggers.QrtzFiredTriggersBeanService/ListQrtzFiredTriggersBeans",
+                "/qrtz_fired_triggers.QrtzFiredTriggersService/ListQrtzFiredTriggerss",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_fired_triggers.QrtzFiredTriggersBeanService",
-                "ListQrtzFiredTriggersBeans",
+                "qrtz_fired_triggers.QrtzFiredTriggersService",
+                "ListQrtzFiredTriggerss",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn get_qrtz_fired_triggers_bean(
+        pub async fn get_qrtz_fired_triggers(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetQrtzFiredTriggersBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzFiredTriggersBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::GetQrtzFiredTriggersRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzFiredTriggers>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -218,21 +217,20 @@ pub mod qrtz_fired_triggers_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_fired_triggers.QrtzFiredTriggersBeanService/GetQrtzFiredTriggersBean",
+                "/qrtz_fired_triggers.QrtzFiredTriggersService/GetQrtzFiredTriggers",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_fired_triggers.QrtzFiredTriggersBeanService",
-                "GetQrtzFiredTriggersBean",
+                "qrtz_fired_triggers.QrtzFiredTriggersService",
+                "GetQrtzFiredTriggers",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_qrtz_fired_triggers_bean(
+        pub async fn create_qrtz_fired_triggers(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateQrtzFiredTriggersBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzFiredTriggersBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::CreateQrtzFiredTriggersRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzFiredTriggers>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -241,21 +239,20 @@ pub mod qrtz_fired_triggers_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_fired_triggers.QrtzFiredTriggersBeanService/CreateQrtzFiredTriggersBean",
+                "/qrtz_fired_triggers.QrtzFiredTriggersService/CreateQrtzFiredTriggers",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_fired_triggers.QrtzFiredTriggersBeanService",
-                "CreateQrtzFiredTriggersBean",
+                "qrtz_fired_triggers.QrtzFiredTriggersService",
+                "CreateQrtzFiredTriggers",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_qrtz_fired_triggers_bean(
+        pub async fn update_qrtz_fired_triggers(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateQrtzFiredTriggersBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzFiredTriggersBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::UpdateQrtzFiredTriggersRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzFiredTriggers>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -264,19 +261,19 @@ pub mod qrtz_fired_triggers_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_fired_triggers.QrtzFiredTriggersBeanService/UpdateQrtzFiredTriggersBean",
+                "/qrtz_fired_triggers.QrtzFiredTriggersService/UpdateQrtzFiredTriggers",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_fired_triggers.QrtzFiredTriggersBeanService",
-                "UpdateQrtzFiredTriggersBean",
+                "qrtz_fired_triggers.QrtzFiredTriggersService",
+                "UpdateQrtzFiredTriggers",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_qrtz_fired_triggers_bean(
+        pub async fn delete_qrtz_fired_triggers(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteQrtzFiredTriggersBeanRequest>,
+            request: impl tonic::IntoRequest<super::DeleteQrtzFiredTriggersRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -286,51 +283,51 @@ pub mod qrtz_fired_triggers_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_fired_triggers.QrtzFiredTriggersBeanService/DeleteQrtzFiredTriggersBean",
+                "/qrtz_fired_triggers.QrtzFiredTriggersService/DeleteQrtzFiredTriggers",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_fired_triggers.QrtzFiredTriggersBeanService",
-                "DeleteQrtzFiredTriggersBean",
+                "qrtz_fired_triggers.QrtzFiredTriggersService",
+                "DeleteQrtzFiredTriggers",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod qrtz_fired_triggers_bean_service_server {
+pub mod qrtz_fired_triggers_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with QrtzFiredTriggersBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with QrtzFiredTriggersServiceServer.
     #[async_trait]
-    pub trait QrtzFiredTriggersBeanService: Send + Sync + 'static {
-        async fn list_qrtz_fired_triggers_beans(
+    pub trait QrtzFiredTriggersService: Send + Sync + 'static {
+        async fn list_qrtz_fired_triggerss(
             &self,
-            request: tonic::Request<super::ListQrtzFiredTriggersBeansRequest>,
+            request: tonic::Request<super::ListQrtzFiredTriggerssRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListQrtzFiredTriggersBeansResponse>,
+            tonic::Response<super::ListQrtzFiredTriggerssResponse>,
             tonic::Status,
         >;
-        async fn get_qrtz_fired_triggers_bean(
+        async fn get_qrtz_fired_triggers(
             &self,
-            request: tonic::Request<super::GetQrtzFiredTriggersBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzFiredTriggersBean>, tonic::Status>;
-        async fn create_qrtz_fired_triggers_bean(
+            request: tonic::Request<super::GetQrtzFiredTriggersRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzFiredTriggers>, tonic::Status>;
+        async fn create_qrtz_fired_triggers(
             &self,
-            request: tonic::Request<super::CreateQrtzFiredTriggersBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzFiredTriggersBean>, tonic::Status>;
-        async fn update_qrtz_fired_triggers_bean(
+            request: tonic::Request<super::CreateQrtzFiredTriggersRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzFiredTriggers>, tonic::Status>;
+        async fn update_qrtz_fired_triggers(
             &self,
-            request: tonic::Request<super::UpdateQrtzFiredTriggersBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzFiredTriggersBean>, tonic::Status>;
-        async fn delete_qrtz_fired_triggers_bean(
+            request: tonic::Request<super::UpdateQrtzFiredTriggersRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzFiredTriggers>, tonic::Status>;
+        async fn delete_qrtz_fired_triggers(
             &self,
-            request: tonic::Request<super::DeleteQrtzFiredTriggersBeanRequest>,
+            request: tonic::Request<super::DeleteQrtzFiredTriggersRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct QrtzFiredTriggersBeanServiceServer<T: QrtzFiredTriggersBeanService> {
+    pub struct QrtzFiredTriggersServiceServer<T: QrtzFiredTriggersService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -338,7 +335,7 @@ pub mod qrtz_fired_triggers_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: QrtzFiredTriggersBeanService> QrtzFiredTriggersBeanServiceServer<T> {
+    impl<T: QrtzFiredTriggersService> QrtzFiredTriggersServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -391,9 +388,9 @@ pub mod qrtz_fired_triggers_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for QrtzFiredTriggersBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for QrtzFiredTriggersServiceServer<T>
     where
-        T: QrtzFiredTriggersBeanService,
+        T: QrtzFiredTriggersService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -411,69 +408,23 @@ pub mod qrtz_fired_triggers_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/qrtz_fired_triggers.QrtzFiredTriggersBeanService/ListQrtzFiredTriggersBeans" => {
+                "/qrtz_fired_triggers.QrtzFiredTriggersService/ListQrtzFiredTriggerss" => {
                     #[allow(non_camel_case_types)]
-                    struct ListQrtzFiredTriggersBeansSvc<T: QrtzFiredTriggersBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: QrtzFiredTriggersBeanService>
-                        tonic::server::UnaryService<super::ListQrtzFiredTriggersBeansRequest>
-                        for ListQrtzFiredTriggersBeansSvc<T>
+                    struct ListQrtzFiredTriggerssSvc<T: QrtzFiredTriggersService>(pub Arc<T>);
+                    impl<T: QrtzFiredTriggersService>
+                        tonic::server::UnaryService<super::ListQrtzFiredTriggerssRequest>
+                        for ListQrtzFiredTriggerssSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListQrtzFiredTriggersBeansResponse;
+                        type Response = super::ListQrtzFiredTriggerssResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListQrtzFiredTriggersBeansRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).list_qrtz_fired_triggers_beans(request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = ListQrtzFiredTriggersBeansSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/qrtz_fired_triggers.QrtzFiredTriggersBeanService/GetQrtzFiredTriggersBean" => {
-                    #[allow(non_camel_case_types)]
-                    struct GetQrtzFiredTriggersBeanSvc<T: QrtzFiredTriggersBeanService>(pub Arc<T>);
-                    impl<T: QrtzFiredTriggersBeanService>
-                        tonic::server::UnaryService<super::GetQrtzFiredTriggersBeanRequest>
-                        for GetQrtzFiredTriggersBeanSvc<T>
-                    {
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzFiredTriggersBean;
-
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::GetQrtzFiredTriggersBeanRequest>,
+                            request: tonic::Request<super::ListQrtzFiredTriggerssRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).get_qrtz_fired_triggers_bean(request).await };
+                                async move { (*inner).list_qrtz_fired_triggerss(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -484,7 +435,7 @@ pub mod qrtz_fired_triggers_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetQrtzFiredTriggersBeanSvc(inner);
+                        let method = ListQrtzFiredTriggerssSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -500,26 +451,23 @@ pub mod qrtz_fired_triggers_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_fired_triggers.QrtzFiredTriggersBeanService/CreateQrtzFiredTriggersBean" => {
+                "/qrtz_fired_triggers.QrtzFiredTriggersService/GetQrtzFiredTriggers" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateQrtzFiredTriggersBeanSvc<T: QrtzFiredTriggersBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: QrtzFiredTriggersBeanService>
-                        tonic::server::UnaryService<super::CreateQrtzFiredTriggersBeanRequest>
-                        for CreateQrtzFiredTriggersBeanSvc<T>
+                    struct GetQrtzFiredTriggersSvc<T: QrtzFiredTriggersService>(pub Arc<T>);
+                    impl<T: QrtzFiredTriggersService>
+                        tonic::server::UnaryService<super::GetQrtzFiredTriggersRequest>
+                        for GetQrtzFiredTriggersSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzFiredTriggersBean;
+                        type Response = super::QrtzFiredTriggers;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateQrtzFiredTriggersBeanRequest>,
+                            request: tonic::Request<super::GetQrtzFiredTriggersRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).create_qrtz_fired_triggers_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).get_qrtz_fired_triggers(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -530,7 +478,7 @@ pub mod qrtz_fired_triggers_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateQrtzFiredTriggersBeanSvc(inner);
+                        let method = GetQrtzFiredTriggersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -546,26 +494,23 @@ pub mod qrtz_fired_triggers_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_fired_triggers.QrtzFiredTriggersBeanService/UpdateQrtzFiredTriggersBean" => {
+                "/qrtz_fired_triggers.QrtzFiredTriggersService/CreateQrtzFiredTriggers" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateQrtzFiredTriggersBeanSvc<T: QrtzFiredTriggersBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: QrtzFiredTriggersBeanService>
-                        tonic::server::UnaryService<super::UpdateQrtzFiredTriggersBeanRequest>
-                        for UpdateQrtzFiredTriggersBeanSvc<T>
+                    struct CreateQrtzFiredTriggersSvc<T: QrtzFiredTriggersService>(pub Arc<T>);
+                    impl<T: QrtzFiredTriggersService>
+                        tonic::server::UnaryService<super::CreateQrtzFiredTriggersRequest>
+                        for CreateQrtzFiredTriggersSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzFiredTriggersBean;
+                        type Response = super::QrtzFiredTriggers;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateQrtzFiredTriggersBeanRequest>,
+                            request: tonic::Request<super::CreateQrtzFiredTriggersRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).update_qrtz_fired_triggers_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).create_qrtz_fired_triggers(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -576,7 +521,7 @@ pub mod qrtz_fired_triggers_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateQrtzFiredTriggersBeanSvc(inner);
+                        let method = CreateQrtzFiredTriggersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -592,26 +537,66 @@ pub mod qrtz_fired_triggers_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_fired_triggers.QrtzFiredTriggersBeanService/DeleteQrtzFiredTriggersBean" => {
+                "/qrtz_fired_triggers.QrtzFiredTriggersService/UpdateQrtzFiredTriggers" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteQrtzFiredTriggersBeanSvc<T: QrtzFiredTriggersBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: QrtzFiredTriggersBeanService>
-                        tonic::server::UnaryService<super::DeleteQrtzFiredTriggersBeanRequest>
-                        for DeleteQrtzFiredTriggersBeanSvc<T>
+                    struct UpdateQrtzFiredTriggersSvc<T: QrtzFiredTriggersService>(pub Arc<T>);
+                    impl<T: QrtzFiredTriggersService>
+                        tonic::server::UnaryService<super::UpdateQrtzFiredTriggersRequest>
+                        for UpdateQrtzFiredTriggersSvc<T>
+                    {
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::QrtzFiredTriggers;
+
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UpdateQrtzFiredTriggersRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut =
+                                async move { (*inner).update_qrtz_fired_triggers(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = UpdateQrtzFiredTriggersSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/qrtz_fired_triggers.QrtzFiredTriggersService/DeleteQrtzFiredTriggers" => {
+                    #[allow(non_camel_case_types)]
+                    struct DeleteQrtzFiredTriggersSvc<T: QrtzFiredTriggersService>(pub Arc<T>);
+                    impl<T: QrtzFiredTriggersService>
+                        tonic::server::UnaryService<super::DeleteQrtzFiredTriggersRequest>
+                        for DeleteQrtzFiredTriggersSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteQrtzFiredTriggersBeanRequest>,
+                            request: tonic::Request<super::DeleteQrtzFiredTriggersRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).delete_qrtz_fired_triggers_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).delete_qrtz_fired_triggers(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -622,7 +607,7 @@ pub mod qrtz_fired_triggers_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteQrtzFiredTriggersBeanSvc(inner);
+                        let method = DeleteQrtzFiredTriggersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -649,7 +634,7 @@ pub mod qrtz_fired_triggers_bean_service_server {
             }
         }
     }
-    impl<T: QrtzFiredTriggersBeanService> Clone for QrtzFiredTriggersBeanServiceServer<T> {
+    impl<T: QrtzFiredTriggersService> Clone for QrtzFiredTriggersServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -661,7 +646,7 @@ pub mod qrtz_fired_triggers_bean_service_server {
             }
         }
     }
-    impl<T: QrtzFiredTriggersBeanService> Clone for _Inner<T> {
+    impl<T: QrtzFiredTriggersService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -671,9 +656,9 @@ pub mod qrtz_fired_triggers_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: QrtzFiredTriggersBeanService> tonic::server::NamedService
-        for QrtzFiredTriggersBeanServiceServer<T>
+    impl<T: QrtzFiredTriggersService> tonic::server::NamedService
+        for QrtzFiredTriggersServiceServer<T>
     {
-        const NAME: &'static str = "qrtz_fired_triggers.QrtzFiredTriggersBeanService";
+        const NAME: &'static str = "qrtz_fired_triggers.QrtzFiredTriggersService";
     }
 }

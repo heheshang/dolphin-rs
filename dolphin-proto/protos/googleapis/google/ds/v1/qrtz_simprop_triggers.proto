@@ -10,7 +10,7 @@ import "google/protobuf/timestamp.proto";
 
 
 
-message QrtzSimpropTriggerBean {
+message QrtzSimpropTrigger {
 
     string sched_name=1;
     string trigger_name=2;
@@ -29,45 +29,45 @@ message QrtzSimpropTriggerBean {
 }
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
-service QrtzSimpropTriggerBeanService {
-  rpc ListQrtzSimpropTriggerBeans(ListQrtzSimpropTriggerBeansRequest) returns (ListQrtzSimpropTriggerBeansResponse) {
+service QrtzSimpropTriggerService {
+  rpc ListQrtzSimpropTriggers(ListQrtzSimpropTriggersRequest) returns (ListQrtzSimpropTriggersResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/QrtzSimpropTriggerBeans"
+      get: "/v1alpha1/QrtzSimpropTriggers"
     };
   }
 
-  rpc GetQrtzSimpropTriggerBean(GetQrtzSimpropTriggerBeanRequest) returns (QrtzSimpropTriggerBean) {
+  rpc GetQrtzSimpropTrigger(GetQrtzSimpropTriggerRequest) returns (QrtzSimpropTrigger) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=QrtzSimpropTriggerBeans/*}"
+      get: "/v1alpha1/{name=QrtzSimpropTriggers/*}"
     };
   }
 
-  rpc CreateQrtzSimpropTriggerBean(CreateQrtzSimpropTriggerBeanRequest) returns (QrtzSimpropTriggerBean) {
+  rpc CreateQrtzSimpropTrigger(CreateQrtzSimpropTriggerRequest) returns (QrtzSimpropTrigger) {
     option (google.api.http) = {
-      post: "/v1alpha1/QrtzSimpropTriggerBeans"
-      body: "QrtzSimpropTriggerBean"
+      post: "/v1alpha1/QrtzSimpropTriggers"
+      body: "QrtzSimpropTrigger"
     };
   }
 
-  rpc UpdateQrtzSimpropTriggerBean(UpdateQrtzSimpropTriggerBeanRequest) returns (QrtzSimpropTriggerBean) {
+  rpc UpdateQrtzSimpropTrigger(UpdateQrtzSimpropTriggerRequest) returns (QrtzSimpropTrigger) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{QrtzSimpropTriggerBean.name=QrtzSimpropTriggerBeans/*}"
-      body: "QrtzSimpropTriggerBean"
+      patch: "/v1alpha1/{QrtzSimpropTrigger.name=QrtzSimpropTriggers/*}"
+      body: "QrtzSimpropTrigger"
     };
   }
 
-  rpc DeleteQrtzSimpropTriggerBean(DeleteQrtzSimpropTriggerBeanRequest) returns (google.protobuf.Empty) {
+  rpc DeleteQrtzSimpropTrigger(DeleteQrtzSimpropTriggerRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=QrtzSimpropTriggerBeans/*}"
+      delete: "/v1alpha1/{name=QrtzSimpropTriggers/*}"
     };
   }
 }
 
-// message QrtzSimpropTriggerBean {
+// message QrtzSimpropTrigger {
 // ! This should be defined elsewhere
 // }
 
-message ListQrtzSimpropTriggerBeansRequest {
+message ListQrtzSimpropTriggersRequest {
 
 
   // The maximum number of items to return.
@@ -76,42 +76,42 @@ message ListQrtzSimpropTriggerBeansRequest {
  int32 page_num = 2;
 }
 
-message ListQrtzSimpropTriggerBeansResponse {
-  // The field name should match the noun "QrtzSimpropTriggerBean" in the method name.
+message ListQrtzSimpropTriggersResponse {
+  // The field name should match the noun "QrtzSimpropTrigger" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
-  repeated QrtzSimpropTriggerBean QrtzSimpropTriggerBeans = 1;
+  repeated QrtzSimpropTrigger QrtzSimpropTriggers = 1;
 
   // Token to retrieve the next page of results, or empty if there are no more results in the list.
   string next_page_token = 2;
 }
 
-message GetQrtzSimpropTriggerBeanRequest {
+message GetQrtzSimpropTriggerRequest {
   // The field will contain name of the resource requested.
   string name = 1;
 }
 
-message CreateQrtzSimpropTriggerBeanRequest {
-  // The parent resource name where the QrtzSimpropTriggerBean is to be created.
+message CreateQrtzSimpropTriggerRequest {
+  // The parent resource name where the QrtzSimpropTrigger is to be created.
   string parent = 1;
 
-  // The QrtzSimpropTriggerBean id to use for this QrtzSimpropTriggerBean.
-  string QrtzSimpropTriggerBean_id = 2;
+  // The QrtzSimpropTrigger id to use for this QrtzSimpropTrigger.
+  string QrtzSimpropTrigger_id = 2;
 
-  // The QrtzSimpropTriggerBean resource to create.
+  // The QrtzSimpropTrigger resource to create.
   // The field name should match the Noun in the method name.
-  QrtzSimpropTriggerBean QrtzSimpropTriggerBean = 3;
+  QrtzSimpropTrigger QrtzSimpropTrigger = 3;
 }
 
-message UpdateQrtzSimpropTriggerBeanRequest {
-  // The QrtzSimpropTriggerBean resource which replaces the resource on the server.
-  QrtzSimpropTriggerBean QrtzSimpropTriggerBean = 1;
+message UpdateQrtzSimpropTriggerRequest {
+  // The QrtzSimpropTrigger resource which replaces the resource on the server.
+  QrtzSimpropTrigger QrtzSimpropTrigger = 1;
 
   // The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
   // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message DeleteQrtzSimpropTriggerBeanRequest {
-  // The resource name of the QrtzSimpropTriggerBean to be deleted.
+message DeleteQrtzSimpropTriggerRequest {
+  // The resource name of the QrtzSimpropTrigger to be deleted.
   string name = 1;
 }

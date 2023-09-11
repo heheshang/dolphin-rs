@@ -2,7 +2,7 @@
 #[serde(rename_all = "snake_case")]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct QrtzCronTriggersBean {
+pub struct QrtzCronTriggers {
     #[prost(string, tag = "1")]
     pub sched_name: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
@@ -16,7 +16,7 @@ pub struct QrtzCronTriggersBean {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQrtzCronTriggersBeansRequest {
+pub struct ListQrtzCronTriggerssRequest {
     /// The maximum number of items to return.
     #[prost(int32, tag = "1")]
     pub page_size: i32,
@@ -25,42 +25,42 @@ pub struct ListQrtzCronTriggersBeansRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQrtzCronTriggersBeansResponse {
-    /// The field name should match the noun "QrtzCronTriggersBean" in the method name.
+pub struct ListQrtzCronTriggerssResponse {
+    /// The field name should match the noun "QrtzCronTriggers" in the method name.
     /// There will be a maximum number of items returned based on the page_size field in the request.
     #[prost(message, repeated, tag = "1")]
-    pub qrtz_cron_triggers_beans: ::prost::alloc::vec::Vec<QrtzCronTriggersBean>,
+    pub qrtz_cron_triggerss: ::prost::alloc::vec::Vec<QrtzCronTriggers>,
     /// Token to retrieve the next page of results, or empty if there are no more results in the list.
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetQrtzCronTriggersBeanRequest {
+pub struct GetQrtzCronTriggersRequest {
     /// The field will contain name of the resource requested.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateQrtzCronTriggersBeanRequest {
-    /// The parent resource name where the QrtzCronTriggersBean is to be created.
+pub struct CreateQrtzCronTriggersRequest {
+    /// The parent resource name where the QrtzCronTriggers is to be created.
     #[prost(string, tag = "1")]
     pub parent: ::prost::alloc::string::String,
-    /// The QrtzCronTriggersBean id to use for this QrtzCronTriggersBean.
+    /// The QrtzCronTriggers id to use for this QrtzCronTriggers.
     #[prost(string, tag = "2")]
-    pub qrtz_cron_triggers_bean_id: ::prost::alloc::string::String,
-    /// The QrtzCronTriggersBean resource to create.
+    pub qrtz_cron_triggers_id: ::prost::alloc::string::String,
+    /// The QrtzCronTriggers resource to create.
     /// The field name should match the Noun in the method name.
     #[prost(message, optional, tag = "3")]
-    pub qrtz_cron_triggers_bean: ::core::option::Option<QrtzCronTriggersBean>,
+    pub qrtz_cron_triggers: ::core::option::Option<QrtzCronTriggers>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateQrtzCronTriggersBeanRequest {
-    /// The QrtzCronTriggersBean resource which replaces the resource on the server.
+pub struct UpdateQrtzCronTriggersRequest {
+    /// The QrtzCronTriggers resource which replaces the resource on the server.
     #[prost(message, optional, tag = "1")]
-    pub qrtz_cron_triggers_bean: ::core::option::Option<QrtzCronTriggersBean>,
+    pub qrtz_cron_triggers: ::core::option::Option<QrtzCronTriggers>,
     /// The update mask applies to the resource. For the `google.protobuf.FieldMask` definition,
     /// see <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask>
     #[prost(message, optional, tag = "2")]
@@ -68,21 +68,21 @@ pub struct UpdateQrtzCronTriggersBeanRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeleteQrtzCronTriggersBeanRequest {
-    /// The resource name of the QrtzCronTriggersBean to be deleted.
+pub struct DeleteQrtzCronTriggersRequest {
+    /// The resource name of the QrtzCronTriggers to be deleted.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
-pub mod qrtz_cron_triggers_bean_service_client {
+pub mod qrtz_cron_triggers_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::{http::Uri, *};
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug, Clone)]
-    pub struct QrtzCronTriggersBeanServiceClient<T> {
+    pub struct QrtzCronTriggersServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl QrtzCronTriggersBeanServiceClient<tonic::transport::Channel> {
+    impl QrtzCronTriggersServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -93,7 +93,7 @@ pub mod qrtz_cron_triggers_bean_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> QrtzCronTriggersBeanServiceClient<T>
+    impl<T> QrtzCronTriggersServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -113,7 +113,7 @@ pub mod qrtz_cron_triggers_bean_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> QrtzCronTriggersBeanServiceClient<InterceptedService<T, F>>
+        ) -> QrtzCronTriggersServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -126,7 +126,7 @@ pub mod qrtz_cron_triggers_bean_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            QrtzCronTriggersBeanServiceClient::new(InterceptedService::new(inner, interceptor))
+            QrtzCronTriggersServiceClient::new(InterceptedService::new(inner, interceptor))
         }
 
         /// Compress requests with the given encoding.
@@ -164,35 +164,10 @@ pub mod qrtz_cron_triggers_bean_service_client {
             self
         }
 
-        pub async fn list_qrtz_cron_triggers_beans(
+        pub async fn list_qrtz_cron_triggerss(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListQrtzCronTriggersBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListQrtzCronTriggersBeansResponse>,
-            tonic::Status,
-        > {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_cron_triggers.QrtzCronTriggersBeanService/ListQrtzCronTriggersBeans",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_cron_triggers.QrtzCronTriggersBeanService",
-                "ListQrtzCronTriggersBeans",
-            ));
-            self.inner.unary(req, path, codec).await
-        }
-
-        pub async fn get_qrtz_cron_triggers_bean(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetQrtzCronTriggersBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzCronTriggersBean>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ListQrtzCronTriggerssRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListQrtzCronTriggerssResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -202,21 +177,20 @@ pub mod qrtz_cron_triggers_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_cron_triggers.QrtzCronTriggersBeanService/GetQrtzCronTriggersBean",
+                "/qrtz_cron_triggers.QrtzCronTriggersService/ListQrtzCronTriggerss",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_cron_triggers.QrtzCronTriggersBeanService",
-                "GetQrtzCronTriggersBean",
+                "qrtz_cron_triggers.QrtzCronTriggersService",
+                "ListQrtzCronTriggerss",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn create_qrtz_cron_triggers_bean(
+        pub async fn get_qrtz_cron_triggers(
             &mut self,
-            request: impl tonic::IntoRequest<super::CreateQrtzCronTriggersBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzCronTriggersBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::GetQrtzCronTriggersRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzCronTriggers>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -225,21 +199,20 @@ pub mod qrtz_cron_triggers_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_cron_triggers.QrtzCronTriggersBeanService/CreateQrtzCronTriggersBean",
+                "/qrtz_cron_triggers.QrtzCronTriggersService/GetQrtzCronTriggers",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_cron_triggers.QrtzCronTriggersBeanService",
-                "CreateQrtzCronTriggersBean",
+                "qrtz_cron_triggers.QrtzCronTriggersService",
+                "GetQrtzCronTriggers",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn update_qrtz_cron_triggers_bean(
+        pub async fn create_qrtz_cron_triggers(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateQrtzCronTriggersBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzCronTriggersBean>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::CreateQrtzCronTriggersRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzCronTriggers>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -248,19 +221,41 @@ pub mod qrtz_cron_triggers_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_cron_triggers.QrtzCronTriggersBeanService/UpdateQrtzCronTriggersBean",
+                "/qrtz_cron_triggers.QrtzCronTriggersService/CreateQrtzCronTriggers",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_cron_triggers.QrtzCronTriggersBeanService",
-                "UpdateQrtzCronTriggersBean",
+                "qrtz_cron_triggers.QrtzCronTriggersService",
+                "CreateQrtzCronTriggers",
             ));
             self.inner.unary(req, path, codec).await
         }
 
-        pub async fn delete_qrtz_cron_triggers_bean(
+        pub async fn update_qrtz_cron_triggers(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteQrtzCronTriggersBeanRequest>,
+            request: impl tonic::IntoRequest<super::UpdateQrtzCronTriggersRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzCronTriggers>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/qrtz_cron_triggers.QrtzCronTriggersService/UpdateQrtzCronTriggers",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new(
+                "qrtz_cron_triggers.QrtzCronTriggersService",
+                "UpdateQrtzCronTriggers",
+            ));
+            self.inner.unary(req, path, codec).await
+        }
+
+        pub async fn delete_qrtz_cron_triggers(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteQrtzCronTriggersRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -270,51 +265,48 @@ pub mod qrtz_cron_triggers_bean_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/qrtz_cron_triggers.QrtzCronTriggersBeanService/DeleteQrtzCronTriggersBean",
+                "/qrtz_cron_triggers.QrtzCronTriggersService/DeleteQrtzCronTriggers",
             );
             let mut req = request.into_request();
             req.extensions_mut().insert(GrpcMethod::new(
-                "qrtz_cron_triggers.QrtzCronTriggersBeanService",
-                "DeleteQrtzCronTriggersBean",
+                "qrtz_cron_triggers.QrtzCronTriggersService",
+                "DeleteQrtzCronTriggers",
             ));
             self.inner.unary(req, path, codec).await
         }
     }
 }
 /// Generated server implementations.
-pub mod qrtz_cron_triggers_bean_service_server {
+pub mod qrtz_cron_triggers_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with QrtzCronTriggersBeanServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with QrtzCronTriggersServiceServer.
     #[async_trait]
-    pub trait QrtzCronTriggersBeanService: Send + Sync + 'static {
-        async fn list_qrtz_cron_triggers_beans(
+    pub trait QrtzCronTriggersService: Send + Sync + 'static {
+        async fn list_qrtz_cron_triggerss(
             &self,
-            request: tonic::Request<super::ListQrtzCronTriggersBeansRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListQrtzCronTriggersBeansResponse>,
-            tonic::Status,
-        >;
-        async fn get_qrtz_cron_triggers_bean(
+            request: tonic::Request<super::ListQrtzCronTriggerssRequest>,
+        ) -> std::result::Result<tonic::Response<super::ListQrtzCronTriggerssResponse>, tonic::Status>;
+        async fn get_qrtz_cron_triggers(
             &self,
-            request: tonic::Request<super::GetQrtzCronTriggersBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzCronTriggersBean>, tonic::Status>;
-        async fn create_qrtz_cron_triggers_bean(
+            request: tonic::Request<super::GetQrtzCronTriggersRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzCronTriggers>, tonic::Status>;
+        async fn create_qrtz_cron_triggers(
             &self,
-            request: tonic::Request<super::CreateQrtzCronTriggersBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzCronTriggersBean>, tonic::Status>;
-        async fn update_qrtz_cron_triggers_bean(
+            request: tonic::Request<super::CreateQrtzCronTriggersRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzCronTriggers>, tonic::Status>;
+        async fn update_qrtz_cron_triggers(
             &self,
-            request: tonic::Request<super::UpdateQrtzCronTriggersBeanRequest>,
-        ) -> std::result::Result<tonic::Response<super::QrtzCronTriggersBean>, tonic::Status>;
-        async fn delete_qrtz_cron_triggers_bean(
+            request: tonic::Request<super::UpdateQrtzCronTriggersRequest>,
+        ) -> std::result::Result<tonic::Response<super::QrtzCronTriggers>, tonic::Status>;
+        async fn delete_qrtz_cron_triggers(
             &self,
-            request: tonic::Request<super::DeleteQrtzCronTriggersBeanRequest>,
+            request: tonic::Request<super::DeleteQrtzCronTriggersRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
     }
     /// Generated according to https://cloud.google.com/apis/design/standard_methods
     #[derive(Debug)]
-    pub struct QrtzCronTriggersBeanServiceServer<T: QrtzCronTriggersBeanService> {
+    pub struct QrtzCronTriggersServiceServer<T: QrtzCronTriggersService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -322,7 +314,7 @@ pub mod qrtz_cron_triggers_bean_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: QrtzCronTriggersBeanService> QrtzCronTriggersBeanServiceServer<T> {
+    impl<T: QrtzCronTriggersService> QrtzCronTriggersServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -375,9 +367,9 @@ pub mod qrtz_cron_triggers_bean_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for QrtzCronTriggersBeanServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for QrtzCronTriggersServiceServer<T>
     where
-        T: QrtzCronTriggersBeanService,
+        T: QrtzCronTriggersService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -395,67 +387,23 @@ pub mod qrtz_cron_triggers_bean_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/qrtz_cron_triggers.QrtzCronTriggersBeanService/ListQrtzCronTriggersBeans" => {
+                "/qrtz_cron_triggers.QrtzCronTriggersService/ListQrtzCronTriggerss" => {
                     #[allow(non_camel_case_types)]
-                    struct ListQrtzCronTriggersBeansSvc<T: QrtzCronTriggersBeanService>(pub Arc<T>);
-                    impl<T: QrtzCronTriggersBeanService>
-                        tonic::server::UnaryService<super::ListQrtzCronTriggersBeansRequest>
-                        for ListQrtzCronTriggersBeansSvc<T>
+                    struct ListQrtzCronTriggerssSvc<T: QrtzCronTriggersService>(pub Arc<T>);
+                    impl<T: QrtzCronTriggersService>
+                        tonic::server::UnaryService<super::ListQrtzCronTriggerssRequest>
+                        for ListQrtzCronTriggerssSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::ListQrtzCronTriggersBeansResponse;
+                        type Response = super::ListQrtzCronTriggerssResponse;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListQrtzCronTriggersBeansRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).list_qrtz_cron_triggers_beans(request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = ListQrtzCronTriggersBeansSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/qrtz_cron_triggers.QrtzCronTriggersBeanService/GetQrtzCronTriggersBean" => {
-                    #[allow(non_camel_case_types)]
-                    struct GetQrtzCronTriggersBeanSvc<T: QrtzCronTriggersBeanService>(pub Arc<T>);
-                    impl<T: QrtzCronTriggersBeanService>
-                        tonic::server::UnaryService<super::GetQrtzCronTriggersBeanRequest>
-                        for GetQrtzCronTriggersBeanSvc<T>
-                    {
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzCronTriggersBean;
-
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::GetQrtzCronTriggersBeanRequest>,
+                            request: tonic::Request<super::ListQrtzCronTriggerssRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut =
-                                async move { (*inner).get_qrtz_cron_triggers_bean(request).await };
+                                async move { (*inner).list_qrtz_cron_triggerss(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -466,7 +414,7 @@ pub mod qrtz_cron_triggers_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetQrtzCronTriggersBeanSvc(inner);
+                        let method = ListQrtzCronTriggerssSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -482,26 +430,22 @@ pub mod qrtz_cron_triggers_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_cron_triggers.QrtzCronTriggersBeanService/CreateQrtzCronTriggersBean" => {
+                "/qrtz_cron_triggers.QrtzCronTriggersService/GetQrtzCronTriggers" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateQrtzCronTriggersBeanSvc<T: QrtzCronTriggersBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: QrtzCronTriggersBeanService>
-                        tonic::server::UnaryService<super::CreateQrtzCronTriggersBeanRequest>
-                        for CreateQrtzCronTriggersBeanSvc<T>
+                    struct GetQrtzCronTriggersSvc<T: QrtzCronTriggersService>(pub Arc<T>);
+                    impl<T: QrtzCronTriggersService>
+                        tonic::server::UnaryService<super::GetQrtzCronTriggersRequest>
+                        for GetQrtzCronTriggersSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzCronTriggersBean;
+                        type Response = super::QrtzCronTriggers;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::CreateQrtzCronTriggersBeanRequest>,
+                            request: tonic::Request<super::GetQrtzCronTriggersRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).create_qrtz_cron_triggers_bean(request).await
-                            };
+                            let fut = async move { (*inner).get_qrtz_cron_triggers(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -512,7 +456,7 @@ pub mod qrtz_cron_triggers_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = CreateQrtzCronTriggersBeanSvc(inner);
+                        let method = GetQrtzCronTriggersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -528,26 +472,23 @@ pub mod qrtz_cron_triggers_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_cron_triggers.QrtzCronTriggersBeanService/UpdateQrtzCronTriggersBean" => {
+                "/qrtz_cron_triggers.QrtzCronTriggersService/CreateQrtzCronTriggers" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateQrtzCronTriggersBeanSvc<T: QrtzCronTriggersBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: QrtzCronTriggersBeanService>
-                        tonic::server::UnaryService<super::UpdateQrtzCronTriggersBeanRequest>
-                        for UpdateQrtzCronTriggersBeanSvc<T>
+                    struct CreateQrtzCronTriggersSvc<T: QrtzCronTriggersService>(pub Arc<T>);
+                    impl<T: QrtzCronTriggersService>
+                        tonic::server::UnaryService<super::CreateQrtzCronTriggersRequest>
+                        for CreateQrtzCronTriggersSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        type Response = super::QrtzCronTriggersBean;
+                        type Response = super::QrtzCronTriggers;
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UpdateQrtzCronTriggersBeanRequest>,
+                            request: tonic::Request<super::CreateQrtzCronTriggersRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).update_qrtz_cron_triggers_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).create_qrtz_cron_triggers(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -558,7 +499,7 @@ pub mod qrtz_cron_triggers_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UpdateQrtzCronTriggersBeanSvc(inner);
+                        let method = CreateQrtzCronTriggersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -574,26 +515,66 @@ pub mod qrtz_cron_triggers_bean_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/qrtz_cron_triggers.QrtzCronTriggersBeanService/DeleteQrtzCronTriggersBean" => {
+                "/qrtz_cron_triggers.QrtzCronTriggersService/UpdateQrtzCronTriggers" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteQrtzCronTriggersBeanSvc<T: QrtzCronTriggersBeanService>(
-                        pub Arc<T>,
-                    );
-                    impl<T: QrtzCronTriggersBeanService>
-                        tonic::server::UnaryService<super::DeleteQrtzCronTriggersBeanRequest>
-                        for DeleteQrtzCronTriggersBeanSvc<T>
+                    struct UpdateQrtzCronTriggersSvc<T: QrtzCronTriggersService>(pub Arc<T>);
+                    impl<T: QrtzCronTriggersService>
+                        tonic::server::UnaryService<super::UpdateQrtzCronTriggersRequest>
+                        for UpdateQrtzCronTriggersSvc<T>
+                    {
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::QrtzCronTriggers;
+
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UpdateQrtzCronTriggersRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut =
+                                async move { (*inner).update_qrtz_cron_triggers(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = UpdateQrtzCronTriggersSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/qrtz_cron_triggers.QrtzCronTriggersService/DeleteQrtzCronTriggers" => {
+                    #[allow(non_camel_case_types)]
+                    struct DeleteQrtzCronTriggersSvc<T: QrtzCronTriggersService>(pub Arc<T>);
+                    impl<T: QrtzCronTriggersService>
+                        tonic::server::UnaryService<super::DeleteQrtzCronTriggersRequest>
+                        for DeleteQrtzCronTriggersSvc<T>
                     {
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         type Response = ();
 
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::DeleteQrtzCronTriggersBeanRequest>,
+                            request: tonic::Request<super::DeleteQrtzCronTriggersRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).delete_qrtz_cron_triggers_bean(request).await
-                            };
+                            let fut =
+                                async move { (*inner).delete_qrtz_cron_triggers(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -604,7 +585,7 @@ pub mod qrtz_cron_triggers_bean_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = DeleteQrtzCronTriggersBeanSvc(inner);
+                        let method = DeleteQrtzCronTriggersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -631,7 +612,7 @@ pub mod qrtz_cron_triggers_bean_service_server {
             }
         }
     }
-    impl<T: QrtzCronTriggersBeanService> Clone for QrtzCronTriggersBeanServiceServer<T> {
+    impl<T: QrtzCronTriggersService> Clone for QrtzCronTriggersServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -643,7 +624,7 @@ pub mod qrtz_cron_triggers_bean_service_server {
             }
         }
     }
-    impl<T: QrtzCronTriggersBeanService> Clone for _Inner<T> {
+    impl<T: QrtzCronTriggersService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -653,9 +634,7 @@ pub mod qrtz_cron_triggers_bean_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: QrtzCronTriggersBeanService> tonic::server::NamedService
-        for QrtzCronTriggersBeanServiceServer<T>
-    {
-        const NAME: &'static str = "qrtz_cron_triggers.QrtzCronTriggersBeanService";
+    impl<T: QrtzCronTriggersService> tonic::server::NamedService for QrtzCronTriggersServiceServer<T> {
+        const NAME: &'static str = "qrtz_cron_triggers.QrtzCronTriggersService";
     }
 }

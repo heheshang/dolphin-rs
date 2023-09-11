@@ -1,52 +1,52 @@
-use super::service::DolphinRpcServer;
-use proto::ds_task_definition_log::ds_task_definition_log_bean_service_server::DsTaskDefinitionLogBeanService;
+use super::dao_service::DolphinRpcServer;
+use proto::ds_task_definition_log::ds_task_definition_log_service_server::DsTaskDefinitionLogService;
 
 
 #[tonic::async_trait]
-impl DsTaskDefinitionLogBeanService for DolphinRpcServer {
-    async fn list_ds_task_definition_log_beans(
+impl DsTaskDefinitionLogService for DolphinRpcServer {
+    async fn list_ds_task_definition_logs(
         &self,
-        _req: tonic::Request<proto::ds_task_definition_log::ListDsTaskDefinitionLogBeansRequest>,
+        _req: tonic::Request<proto::ds_task_definition_log::ListDsTaskDefinitionLogsRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_task_definition_log::ListDsTaskDefinitionLogBeansResponse>,
+        tonic::Response<proto::ds_task_definition_log::ListDsTaskDefinitionLogsResponse>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn get_ds_task_definition_log_bean(
+    async fn get_ds_task_definition_log(
         &self,
-        _req: tonic::Request<proto::ds_task_definition_log::GetDsTaskDefinitionLogBeanRequest>,
+        _req: tonic::Request<proto::ds_task_definition_log::GetDsTaskDefinitionLogRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_task_definition_log::DsTaskDefinitionLogBean>,
+        tonic::Response<proto::ds_task_definition_log::DsTaskDefinitionLog>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn create_ds_task_definition_log_bean(
+    async fn create_ds_task_definition_log(
         &self,
-        _req: tonic::Request<proto::ds_task_definition_log::CreateDsTaskDefinitionLogBeanRequest>,
+        _req: tonic::Request<proto::ds_task_definition_log::CreateDsTaskDefinitionLogRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_task_definition_log::DsTaskDefinitionLogBean>,
+        tonic::Response<proto::ds_task_definition_log::DsTaskDefinitionLog>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn update_ds_task_definition_log_bean(
+    async fn update_ds_task_definition_log(
         &self,
-        _req: tonic::Request<proto::ds_task_definition_log::UpdateDsTaskDefinitionLogBeanRequest>,
+        _req: tonic::Request<proto::ds_task_definition_log::UpdateDsTaskDefinitionLogRequest>,
     ) -> std::result::Result<
-        tonic::Response<proto::ds_task_definition_log::DsTaskDefinitionLogBean>,
+        tonic::Response<proto::ds_task_definition_log::DsTaskDefinitionLog>,
         tonic::Status,
     > {
         todo!()
     }
 
-    async fn delete_ds_task_definition_log_bean(
+    async fn delete_ds_task_definition_log(
         &self,
-        _req: tonic::Request<proto::ds_task_definition_log::DeleteDsTaskDefinitionLogBeanRequest>,
+        _req: tonic::Request<proto::ds_task_definition_log::DeleteDsTaskDefinitionLogRequest>,
     ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
         todo!()
     }
