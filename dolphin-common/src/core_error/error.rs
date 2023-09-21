@@ -1,13 +1,13 @@
 use std::str::FromStr;
 
-use crate::core_results::results::ApiResult;
+
 use axum::{
-    http::StatusCode,
+    http::Extensions,
     response::{IntoResponse, Response},
-    Json,
 };
 use serde::{Deserialize, Serialize};
-use tracing::{debug, error};
+
+use tracing::error;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum Error {
@@ -390,15 +390,11 @@ impl From<serde_json::Error> for Error {
 
 impl IntoResponse for Error {
     fn into_response(self) -> Response {
-        debug!("{:<12} - model::Error {self:?}", "INTO_RES");
-
-        // Create a placeholder Axum response.
-        let mut response = StatusCode::INTERNAL_SERVER_ERROR.into_response();
-
-        // Insert the Error into the response.
-        response.extensions_mut().insert(self);
-
-        response
+        error!("{:<12} - model::Error {self:?}", "INTO_RES");
+        let error: DolphinErrorInfo = self.into();
+        let mut ext = Extensions::new();
+        ext.insert(error);
+        ext.into_response()
     }
 }
 
@@ -1890,24 +1886,6 @@ impl core::fmt::Display for Error {
 impl std::error::Error for Error {}
 
 
-pub struct AppError(pub Error);
-
-impl IntoResponse for AppError {
-    fn into_response(self) -> Response {
-        match self.0 {
-            Error::SUCCESS => Json(ApiResult::build(Some(()))).into_response(),
-            _ => Json(ApiResult::new_with_err_status(Some(()), self.0)).into_response(),
-        }
-    }
-}
-
-impl<E> From<E> for AppError
-where E: Into<Error>
-{
-    fn from(err: E) -> Self {
-        Self(err.into())
-    }
-}
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DolphinErrorInfo {
     pub code: i32,

@@ -5,10 +5,12 @@ mod utils;
 mod web;
 
 mod tests;
-use axum::{routing::get, Router};
+use axum::{routing::get, Router, middleware};
 use std::{env, net::SocketAddr};
 use tracing::{info, Level};
 use web::routes_user;
+
+use crate::web::mw::mw_res_map::mw_response_map;
 async fn hello() -> &'static str {
     info!("hello world");
     "hello world"
@@ -34,9 +36,10 @@ async fn main() {
     info!("{:<12}->{}", "listen", addr);
     let route_all = Router::new()
         .merge(routes_user::routes())
-        .route("/api", get(hello));
+        .route("/api", get(hello))
+        .layer(middleware::map_response(mw_response_map));
     axum::Server::bind(&addr)
-        .serve(route_all.into_make_service())
+        .serve(route_all.into_make_service_with_connect_info::<SocketAddr>())
         .await
         .unwrap();
 }

@@ -1,17 +1,11 @@
-use std::net::SocketAddr;
+use std::{collections::HashMap, net::SocketAddr};
 
-use crate::{
-    cypt::security::get_authenticator,
-    web::bean::{request::ds_user_req::UserLoginInfoReq},
+use crate::{cypt::security::get_authenticator, web::bean::request::ds_user_req::UserLoginInfoReq};
+use axum::{extract::ConnectInfo, routing::post, Json, Router};
+use dolphin_common::{
+    core_error::error::Error,
+    core_results::results::{ApiResult, Result},
 };
-use axum::{
-    extract::ConnectInfo,
-    routing::post,
-    Json,
-    Router,
-};
-use dolphin_common::{core_error::error::Error, core_results::results::Result};
-use serde_json::{json, Value};
 use tracing::error;
 
 
@@ -24,7 +18,7 @@ pub fn routes() -> Router {
 pub async fn api_login_handler(
     ConnectInfo(addr): ConnectInfo<SocketAddr>,
     Json(payload): Json<UserLoginInfoReq>,
-) -> Result<Json<Value>> {
+) -> Result<ApiResult<HashMap<String, String>>> {
     let user_name = payload.user_name.clone();
     let user_password = payload.user_password.clone();
     if user_name.is_empty() {
@@ -38,12 +32,7 @@ pub async fn api_login_handler(
     get_authenticator()
         .authenticate(user_name, user_password, ip)
         .await
-        .map(|res| {
-            let session_id = res.get("session_id").unwrap();
-            Json(json!({
-            "session_id": session_id.to_string(),
-            }))
-        })
+        .map(|res| ApiResult::build(Some(res)))
         .map_err(|e| {
             error!("api_login_handler error: {:?}", e);
             e

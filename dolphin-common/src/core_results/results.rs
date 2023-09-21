@@ -1,4 +1,4 @@
-use crate::core_error::error::{DisplayErrorInfo, DolphinErrorInfo, Error};
+use crate::core_error::error::{DolphinErrorInfo, Error};
 use axum::{response::IntoResponse, Json};
 use serde::{Deserialize, Serialize};
 
@@ -24,16 +24,10 @@ pub type GrpcRequest<T> = tonic::Request<T>;
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct ApiResult<T> {
     pub data: Option<T>,
-    #[serde(skip)]
-    pub errmsg: DolphinErrorInfo,
-    #[serde(flatten)]
-    pub display: DisplayErrorInfo,
-    #[serde(skip)]
-    pub status: Error,
-    #[serde(skip)]
-    pub extra: Option<Vec<String>>,
-    failed: bool,
-    success: bool,
+    pub code: i32,
+    pub msg: String,
+    pub failed: bool,
+    pub success: bool,
 }
 
 impl<T> ApiResult<T> {
@@ -41,66 +35,23 @@ impl<T> ApiResult<T> {
         let errmsg = DolphinErrorInfo::default();
         Self {
             data,
-            status: Error::SUCCESS,
-            errmsg,
-            extra: None,
+            code: errmsg.code,
+            msg: errmsg.cn_msg,
             failed: false,
             success: true,
-            ..Default::default()
-        }
-    }
-
-    pub fn new_with_err_status(data: Option<T>, status: Error) -> Self {
-        Self {
-            data,
-            status,
-            failed: true,
-            success: false,
-            ..Default::default()
-        }
-    }
-
-    pub fn new_with_err_extra(data: Option<T>, status: Error, extra: Option<Vec<String>>) -> Self {
-        let error_info: DolphinErrorInfo = status.clone().into();
-
-        let code = error_info.code;
-        let cn_msg = match &extra {
-            Some(extra) => format_args(&error_info.cn_msg, extra.clone()),
-            None => error_info.cn_msg,
-        };
-
-        let en_msg = match &extra {
-            Some(extra) => format_args(&error_info.en_msg, extra.clone()),
-            None => error_info.en_msg,
-        };
-        let errmsg = DolphinErrorInfo {
-            code,
-            cn_msg,
-            en_msg,
-        };
-
-        Self {
-            data,
-            status,
-            failed: true,
-            success: false,
-            display: errmsg.clone().into(),
-            extra,
-            errmsg,
         }
     }
 }
 
 impl<T> Default for ApiResult<T> {
     fn default() -> Self {
+        let errmsg = DolphinErrorInfo::default();
         Self {
             data: None,
-            errmsg: DolphinErrorInfo::default(),
-            display: DolphinErrorInfo::default().into(),
-            extra: None,
+            code: errmsg.code,
             failed: false,
             success: true,
-            status: Error::SUCCESS,
+            msg: errmsg.cn_msg,
         }
     }
 }
@@ -113,21 +64,20 @@ where T: Serialize
         body.into_response()
     }
 }
-
-fn format_args(text: &str, args: Vec<String>) -> String {
-    let mut new_text = text.to_string();
-    let re = regex::Regex::new(r"\{(\d+)").unwrap();
-    for cap in re.captures_iter(text) {
-        let index = cap.get(1).unwrap().as_str().parse::<usize>().unwrap();
-        if args.len() <= index {
-            continue;
-        }
-        let ss = new_text.replace(&format!("{}{}{}", '{', index, '}'), &args[index]);
-        new_text = ss.clone();
-    }
-    new_text
-}
-
+// #[warn(dead_code)]
+// fn format_args(text: &str, args: Vec<String>) -> String {
+//     let mut new_text = text.to_string();
+//     let re = regex::Regex::new(r"\{(\d+)").unwrap();
+//     for cap in re.captures_iter(text) {
+//         let index = cap.get(1).unwrap().as_str().parse::<usize>().unwrap();
+//         if args.len() <= index {
+//             continue;
+//         }
+//         let ss = new_text.replace(&format!("{}{}{}", '{', index, '}'), &args[index]);
+//         new_text = ss.clone();
+//     }
+//     new_text
+// }
 #[cfg(test)]
 mod tests {
 
