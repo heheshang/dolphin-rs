@@ -1,11 +1,10 @@
 /target
 Cargo.lock
 /log
-/*/*/log/*
+
 /*/*/target/*
 /*/*/Cargo.lock
-/*/log/*
-/*/log
+/*/log/*.log
 /*/Cargo.lock
 /*/*/*.log
 */*/Cargo.lock

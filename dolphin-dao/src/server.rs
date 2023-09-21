@@ -11,7 +11,6 @@ pub use service::*;
 use crate::service::dao_service::DolphinRpcServer;
 
 
-
 #[tokio::main]
 async fn main() -> Result<()> {
     //let _addr: SocketAddr = "0.0.0.0:50051".parse()?;

@@ -1,8 +1,7 @@
 use super::dao_service::DolphinRpcServer;
 use dolphin_common::{
-    core_error::error::DolphinErrorInfo,
+    core_error::error::{DolphinErrorInfo, Error},
     core_results::results::{GrpcRequest, GrpcResponse},
-    core_status::app_status::AppStatus,
 };
 use entity::t_ds_session::{self, Model};
 use proto::ds_session::{
@@ -64,7 +63,7 @@ impl DsSessionService for DolphinRpcServer {
         match res {
             Some(v) => Ok(tonic::Response::new(v.into())),
             None => Err(tonic::Status::from_error(Box::<DolphinErrorInfo>::new(
-                AppStatus::LoginSessionFailed.into(),
+                Error::LoginSessionFailed.into(),
             ))),
         }
     }
@@ -110,7 +109,7 @@ impl DsSessionService for DolphinRpcServer {
             Ok(tonic::Response::new(()))
         } else {
             Err(tonic::Status::from_error(Box::<DolphinErrorInfo>::new(
-                AppStatus::LoginSessionFailed.into(),
+                Error::LoginSessionFailed.into(),
             )))
         }
     }
@@ -130,7 +129,7 @@ impl DsSessionService for DolphinRpcServer {
         match ds_session {
             Some(v) => Ok(tonic::Response::new(v.into())),
             None => Err(tonic::Status::from_error(Box::<DolphinErrorInfo>::new(
-                AppStatus::LoginSessionFailed.into(),
+                Error::LoginSessionFailed.into(),
             ))),
         }
     }
@@ -148,7 +147,7 @@ impl DsSessionService for DolphinRpcServer {
             .await
             .map_err(|_| {
                 tonic::Status::from_error(Box::<DolphinErrorInfo>::new(
-                    AppStatus::LoginSessionFailed.into(),
+                    Error::LoginSessionFailed.into(),
                 ))
             })?;
 

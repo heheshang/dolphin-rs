@@ -1,13 +1,25 @@
-use crate::{
-    core_error::error::{DisplayErrorInfo, DolphinErrorInfo},
-    core_status::app_status::AppStatus,
-};
+use crate::core_error::error::{DisplayErrorInfo, DolphinErrorInfo, Error};
 use axum::{response::IntoResponse, Json};
 use serde::{Deserialize, Serialize};
 
-pub type GrpcResponse<T> = Result<tonic::Response<T>, tonic::Status>;
+pub type Result<T> = core::result::Result<T, Error>;
+pub type GrpcResponse<T> = std::result::Result<tonic::Response<T>, tonic::Status>;
 pub type GrpcRequest<T> = tonic::Request<T>;
 
+
+// #[derive(Debug, Serialize, Deserialize, Clone)]
+// pub struct RespResult<T>(pub Result<T>);
+
+// impl<T> IntoResponse for RespResult<T>
+// where T: Serialize
+// {
+//     fn into_response(self) -> axum::response::Response {
+//         match self.0 {
+//             Ok(_) => todo!(),
+//             Err(_) => todo!(),
+//         }
+//     }
+// }
 #[serde_with::serde_as]
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct ApiResult<T> {
@@ -17,7 +29,7 @@ pub struct ApiResult<T> {
     #[serde(flatten)]
     pub display: DisplayErrorInfo,
     #[serde(skip)]
-    pub status: AppStatus,
+    pub status: Error,
     #[serde(skip)]
     pub extra: Option<Vec<String>>,
     failed: bool,
@@ -29,7 +41,7 @@ impl<T> ApiResult<T> {
         let errmsg = DolphinErrorInfo::default();
         Self {
             data,
-            status: AppStatus::SUCCESS,
+            status: Error::SUCCESS,
             errmsg,
             extra: None,
             failed: false,
@@ -38,7 +50,7 @@ impl<T> ApiResult<T> {
         }
     }
 
-    pub fn new_with_err_status(data: Option<T>, status: AppStatus) -> Self {
+    pub fn new_with_err_status(data: Option<T>, status: Error) -> Self {
         Self {
             data,
             status,
@@ -48,11 +60,7 @@ impl<T> ApiResult<T> {
         }
     }
 
-    pub fn new_with_err_extra(
-        data: Option<T>,
-        status: AppStatus,
-        extra: Option<Vec<String>>,
-    ) -> Self {
+    pub fn new_with_err_extra(data: Option<T>, status: Error, extra: Option<Vec<String>>) -> Self {
         let error_info: DolphinErrorInfo = status.clone().into();
 
         let code = error_info.code;
@@ -92,7 +100,7 @@ impl<T> Default for ApiResult<T> {
             extra: None,
             failed: false,
             success: true,
-            status: AppStatus::SUCCESS,
+            status: Error::SUCCESS,
         }
     }
 }

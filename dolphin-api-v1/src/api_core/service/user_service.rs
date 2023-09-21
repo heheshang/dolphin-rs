@@ -135,6 +135,6 @@ async fn client<T>() -> Result<
 mod tests {
     #[tokio::test]
     async fn test_query_user_by_name_password() {
-     eprintln!("test_query_user_by_name_password");
+        eprintln!("test_query_user_by_name_password");
     }
 }

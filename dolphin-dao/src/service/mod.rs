@@ -1,3 +1,4 @@
+pub mod dao_service;
 pub mod ds_access_token;
 pub mod ds_alert;
 pub mod ds_alert_plugin_instance;
@@ -57,4 +58,3 @@ pub mod qrtz_scheduler_state;
 pub mod qrtz_simple_triggers;
 pub mod qrtz_simprop_triggers;
 pub mod qrtz_triggers;
-pub mod dao_service;

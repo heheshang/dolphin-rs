@@ -1,8 +1,7 @@
 use super::dao_service::DolphinRpcServer;
 use dolphin_common::{
-    core_error::error::DolphinErrorInfo,
+    core_error::error::{DolphinErrorInfo, Error},
     core_results::results::{GrpcRequest, GrpcResponse},
-    core_status::app_status::AppStatus,
 };
 use entity::t_ds_user::{self};
 use proto::ds_user::{
@@ -33,9 +32,10 @@ impl DsUserService for DolphinRpcServer {
             .map_err(|_| tonic::Status::not_found("User not found"))?;
         match db_user {
             Some(v) => Ok(tonic::Response::new(v.into())),
-            None => Err(tonic::Status::from_error(Box::<DolphinErrorInfo>::new(
-                AppStatus::UserNotExist.into(),
-            ))),
+            None => {
+                let res: tonic::Status = Error::UserNotExist.into();
+                Err(res)
+            }
         }
     }
 
@@ -115,7 +115,7 @@ impl DsUserService for DolphinRpcServer {
         match db_user {
             Some(v) => Ok(tonic::Response::new(v.into())),
             None => Err(tonic::Status::from_error(Box::<DolphinErrorInfo>::new(
-                AppStatus::UserNotExist.into(),
+                Error::UserNotExist.into(),
             ))),
         }
     }

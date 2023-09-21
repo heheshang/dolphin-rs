@@ -1,4 +1,4 @@
-use proto::ds_user::DsUser;
+use dolphin_proto::ds_user::DsUser;
 use serde::{Deserialize, Serialize};
 use struct_convert::Convert;
 #[derive(Debug, Serialize, Deserialize, Convert)]

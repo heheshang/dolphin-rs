@@ -166,10 +166,7 @@ impl_from!(DsProjectModel, DsProject);
 impl_from!(DsQueueModel, DsQueue);
 impl_from!(DsRelationDatasourceUserModel, DsRelationDatasourceUser);
 impl_from!(DsRelationNamespaceUserModel, DsRelationNamespaceUser);
-impl_from!(
-    DsRelationProcessInstanceModel,
-    DsRelationProcessInstance
-);
+impl_from!(DsRelationProcessInstanceModel, DsRelationProcessInstance);
 impl_from!(DsRelationProjectUserModel, DsRelationProjectUser);
 impl_from!(DsRelationResourcesUserModel, DsRelationResourcesUser);
 impl_from!(DsRelationRuleExecuteSqlModel, DsRelationRuleExecuteSql);

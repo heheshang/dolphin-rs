@@ -56,9 +56,8 @@ pub trait Authenticator: Sync + Send {
                 match user_res.data {
                     Some(u) => match Flag::from_i32(u.state.unwrap_or(0)) {
                         Some(Flag::Yes) => ApiResult::build(Some(u)),
-                        Some(Flag::No) => {
-                            ApiResult::new_with_err_status(None, AppStatus::UserDisabled)
-                        }
+                        Some(Flag::No) =>
+                            ApiResult::new_with_err_status(None, AppStatus::UserDisabled),
                         None => ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed),
                     },
                     None => ApiResult::new_with_err_status(None, AppStatus::LoginSessionFailed),
@@ -107,25 +106,3 @@ impl Authenticator for LdapAuthenticator {
         todo!()
     }
 }
-
-// trait Product {}
-
-// trait Factory {
-//     fn new() -> Box<dyn Product>;
-// }
-
-// struct ConcreteFactory;
-
-// impl Factory for ConcreteFactory {
-//     fn new() -> Box<dyn Product> {
-//         Box::new(ConcreteProduct::new())
-//     }
-// }
-
-// struct ConcreteProduct;
-// impl ConcreteProduct {
-//     fn new() -> Self {
-//         ConcreteProduct {}
-//     }
-// }
-// impl Product for ConcreteProduct {}

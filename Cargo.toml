@@ -2,7 +2,6 @@
 resolver = "2"
 
 members = [
-    # ".",
     # "dolphin-alert",
     # "dolphin-api",
     # "dolphin-db",
@@ -11,7 +10,8 @@ members = [
     # "celery-demo",
     # "yaml_demo",
     # "rust-simple-code-layout",
-    "dolphin-api-v1",
+    # "dolphin-api-v1",
+    "dolphin-api-v2",
     "dolphin-dao",
     "dolphin-entity",
     "dolphin-proto",

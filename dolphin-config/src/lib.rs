@@ -1,5 +1,7 @@
-use std::env;
-use std::path::{Path, PathBuf};
+use std::{
+    env,
+    path::{Path, PathBuf},
+};
 
 pub mod api_config;
 pub mod dao_config;
@@ -20,7 +22,7 @@ fn glb_config_dir() -> PathBuf {
     // 获取当前工作目录
     let value = dotenvy::var("CURRENT_DIR");
     match value {
-        Ok(v) => { Path::new(&v).join("dolphin-config")}
+        Ok(v) => Path::new(&v).join("dolphin-config"),
         Err(_) => {
             let current_dir = env::current_dir().unwrap();
 
@@ -31,12 +33,16 @@ fn glb_config_dir() -> PathBuf {
             let full_path = current_dir.join(filename);
             // 将完整路径转换为字符串并打印
             let full_path_string = full_path.to_str().unwrap();
-            let path = full_path_string.split("dolphin-rs").collect::<Vec<_>>().first().unwrap().to_string();
+            let path = full_path_string
+                .split("dolphin-rs")
+                .collect::<Vec<_>>()
+                .first()
+                .unwrap()
+                .to_string();
 
             Path::new(&path).join("dolphin-rs").join("dolphin-config")
         }
     }
-
 }
 
 #[cfg(test)]
