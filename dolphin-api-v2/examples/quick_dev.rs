@@ -8,12 +8,15 @@ async fn main() -> Result<()> {
     // hc.do_get("/index.html").await?.print().await?;
 
     let req_login = hc.do_post(
-        "/api/login",
+        "/dolphinscheduler/login",
         json!({
             "userName": "admin",
             "userPassword": "dolphinscheduler123"
         }),
     );
     req_login.await?.print().await?;
+
+    let user_info = hc.do_get("/dolphinscheduler/get_user_info").await?;
+    user_info.print().await?;
     Ok(())
 }

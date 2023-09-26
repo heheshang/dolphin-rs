@@ -36,7 +36,7 @@ pub trait Authenticator: Sync + Send {
         let data = self.login(username, password, extra.clone()).await?;
         let session = session_service::create_ds_session(&data, &extra).await?;
         let mut map = HashMap::new();
-        map.insert("session_id".to_string(), session.id);
+        map.insert("sessionId".to_string(), session.id);
         return Ok(map);
     }
     async fn get_auth_user(&self, session_id: String) -> Result<DsUser> {

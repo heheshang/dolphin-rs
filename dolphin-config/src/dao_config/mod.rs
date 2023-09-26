@@ -27,7 +27,7 @@ pub struct Twitter {
 #[allow(unused)]
 pub struct Braintree {
     pub merchant_id: String,
-    pub public_key: String,
+    pub pub_key: String,
     pub private_key: String,
 }
 #[derive(Debug, Deserialize)]

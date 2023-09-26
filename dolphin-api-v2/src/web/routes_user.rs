@@ -1,22 +1,48 @@
 use std::{collections::HashMap, net::SocketAddr};
 
-use crate::{cypt::security::get_authenticator, web::bean::request::ds_user_req::UserLoginInfoReq};
-use axum::{extract::ConnectInfo, routing::post, Json, Router};
+use crate::{
+    ctx::Ctx,
+    cypt::security::get_authenticator,
+    log,
+    model,
+    web,
+    web::bean::request::ds_user_req::UserLoginInfoReq,
+};
+use axum::{
+    extract::ConnectInfo,
+    middleware,
+    routing::{get, post},
+    Json,
+    Router,
+};
 use dolphin_common::{
     core_error::error::Error,
     core_results::results::{ApiResult, Result},
 };
+use tower_cookies::Cookies;
 use tracing::error;
 
+use super::{
+    bean::{request::ds_user_req::UserInfoReq, response::ds_user_res::UserInfoRes},
+    mw::mw_auth::mw_ctx_require,
+};
 
 pub fn routes() -> Router {
-    Router::new()
-        .route("/api/login", post(api_login_handler))
-        .route("/api/logoff", post(api_logoff_handler))
+    let routes = Router::new()
+        .route("/logout", post(logout))
+        .route("/get_user_info", get(user_info));
+    let login = Router::new().route("/login", post(login));
+
+    let other = Router::new()
+        .nest("/dolphinscheduler", routes)
+        .route_layer(middleware::from_fn(mw_ctx_require));
+    Router::new().nest("/dolphinscheduler", login).merge(other)
 }
 
-pub async fn api_login_handler(
+
+pub async fn login(
     ConnectInfo(addr): ConnectInfo<SocketAddr>,
+    cookies: Cookies,
     Json(payload): Json<UserLoginInfoReq>,
 ) -> Result<ApiResult<HashMap<String, String>>> {
     let user_name = payload.user_name.clone();
@@ -32,10 +58,19 @@ pub async fn api_login_handler(
     get_authenticator()
         .authenticate(user_name, user_password, ip)
         .await
-        .map(|res| ApiResult::build(Some(res)))
+        .map(|res| {
+            web::set_token_cookie(&cookies, &res["sessionId"]).unwrap();
+            ApiResult::build(Some(res))
+        })
         .map_err(|e| {
             error!("api_login_handler error: {:?}", e);
             e
         })
 }
-pub async fn api_logoff_handler() {}
+pub async fn logout() {}
+
+pub async fn user_info(cookies: Cookies, ctx: Ctx) -> Result<ApiResult<UserInfoRes>> {
+    let user_id = ctx.user_id();
+    let user = model::user::service::_get_user(user_id).await?;
+    Ok(ApiResult::build(Some(UserInfoRes::from(user))))
+}

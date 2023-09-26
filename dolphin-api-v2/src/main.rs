@@ -1,3 +1,4 @@
+mod ctx;
 mod cypt;
 mod log;
 mod model;
@@ -5,12 +6,16 @@ mod utils;
 mod web;
 
 mod tests;
-use axum::{routing::get, Router, middleware};
+use crate::web::mw::{
+    mw_auth::mw_ctx_resolve,
+    mw_req_map::log_path_params,
+    mw_res_map::mw_response_map,
+};
+use axum::{middleware, routing::get, Router};
 use std::{env, net::SocketAddr};
+use tower_cookies::CookieManagerLayer;
 use tracing::{info, Level};
 use web::routes_user;
-
-use crate::web::mw::mw_res_map::mw_response_map;
 async fn hello() -> &'static str {
     info!("hello world");
     "hello world"
@@ -27,7 +32,7 @@ async fn main() {
         .with_target(true)
         .with_thread_names(true)
         .with_thread_ids(true)
-        .with_file(true)
+        // .with_file(true)
         .with_line_number(true)
         .with_env_filter(tracing_subscriber::EnvFilter::from_default_env())
         .init();
@@ -37,7 +42,10 @@ async fn main() {
     let route_all = Router::new()
         .merge(routes_user::routes())
         .route("/api", get(hello))
-        .layer(middleware::map_response(mw_response_map));
+        .layer(middleware::map_request(log_path_params))
+        .layer(middleware::map_response(mw_response_map))
+        .layer(middleware::from_fn(mw_ctx_resolve))
+        .layer(CookieManagerLayer::new());
     axum::Server::bind(&addr)
         .serve(route_all.into_make_service_with_connect_info::<SocketAddr>())
         .await
